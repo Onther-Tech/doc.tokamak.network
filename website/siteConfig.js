@@ -19,6 +19,10 @@ const siteConfig = {
       label: 'Getting Started'
     },
     {
+      doc: 'guides_manuals_how-to-make-request',
+      label: 'Manuals'
+    },
+    {
       page: 'help',
       label: 'Help'
     },
