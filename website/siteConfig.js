@@ -11,15 +11,15 @@ const siteConfig = {
   // Header links
   headerLinks: [
     {
-      doc: 'learn_basic',
+      doc: 'learn/basic/learn_basic_tokamak-network',
       label: 'Docs'
     },
     {
-      doc: 'guides_getting-started_how-to-open-testnet',
+      doc: 'guides/getting-started/guides_getting-started_how-to-open-testnet',
       label: 'Getting Started'
     },
     {
-      doc: 'guides_manuals_how-to-make-request',
+      doc: 'guides/manuals/guides_manuals_how-to-make-request',
       label: 'Manuals'
     },
     {
