@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Plasma-evm 사용자 메뉴얼 · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="# plasma-evm 일반인 사용법"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Plasma-evm 사용자 메뉴얼 · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/doc.tokamak.network/"/><meta property="og:description" content="# plasma-evm 일반인 사용법"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/doc.tokamak.network/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/doc.tokamak.network/js/scrollSpy.js"></script><link rel="stylesheet" href="/doc.tokamak.network/css/main.css"/><script src="/doc.tokamak.network/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/doc.tokamak.network/"><img class="logo" src="/doc.tokamak.network/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/doc.tokamak.network/docs/user-common" target="_self">Docs</a></li><li class=""><a href="/doc.tokamak.network/help" target="_self">Help</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>일반 사용자</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">일반 사용자</h3><ul class=""><li class="navListItem"><a class="navItem" href="/doc.tokamak.network/docs/user-common">일반 사용자 설명</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/doc.tokamak.network/docs/user-manual">사용자 메뉴얼</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">개발자</h3><ul class=""><li class="navListItem"><a class="navItem" href="/doc.tokamak.network/docs/developer-manual">개발자 메뉴얼</a></li><li class="navListItem"><a class="navItem" href="/doc.tokamak.network/docs/developer-contribute">기여자 메뉴얼</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Stake &amp; Delegate</h3><ul class=""><li class="navListItem"><a class="navItem" href="/doc.tokamak.network/docs/stake-delegate">Stake &amp; Delegate</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Plasma-evm 사용자 메뉴얼</h1></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="plasma-evm-일반인-사용법"></a><a href="#plasma-evm-일반인-사용법" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>plasma-evm 일반인 사용법</h1>
+<p>[TODO] 사용자가 사용하기 편하도록 UI를 변경해야</p>
+<ul>
+<li>TON - enter / exit / escape / undo only</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="enter--exit-request-생성-tx-메뉴얼"></a><a href="#enter--exit-request-생성-tx-메뉴얼" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Enter / Exit request 생성 TX 메뉴얼</h2>
+<p>사용자가 Plasma-evm Wallet을 사용하여 Rootchain contract에 Enter/Exit Tx 생성 해주는 방식으로 설명.</p>
+<p>이더리움 메인넷 또는 Rinkeby 테스트넷의 자산을 플라즈마 체인으로 옮기기 위해서는 Enter 트랜잭션을 생성하여야 합니다.</p>
+<p>다음은 <a href="https://wallet.tokamak.network">https://wallet.tokamak.network</a> 에 접속하여 Enter 트랜잭션을 생성하고 RootChain의 자산을 Plasma체인으로 옮기는 과정을 설명하도록 하겠습니다.</p>
+<h3><a class="anchor" aria-hidden="true" id="enter"></a><a href="#enter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ENTER</h3>
+<ol>
+<li><p>Plasma Wallet 접속</p>
+<p><img src="plasma%20evm/Untitled.png" alt="plasma%20evm/Untitled.png"></p></li>
+<li><p>Metamask 네트워크 선택 : RootChain[Mainn</p></li>
+<li><p>TODO: RootChain 컨트랙트 주소 입력 (혹은 선택)</p></li>
+<li><p>컨트렉트 선택 : EtherToken</p></li>
+<li><p>함수 선택 : swapFrometh + 전송 ETH 입력</p></li>
+<li><p>Metamask TX 전송.</p></li>
+<li><p>함수 선택 : getBalanceTrieKey + Key 저장.</p></li>
+<li><p>컨트렉트 선택 : rootchain</p></li>
+<li><p>startEnter 선택 + Input 값 입력 [TODO] _trieVlue 값 value로 대체.. 핵불편.</p></li>
+<li><p>Metamask TX 전송.</p></li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="exit"></a><a href="#exit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>EXIT</h3>
+<ol>
+<li><p>Plasma Wallet 접속.</p>
+<p><img src="plasma%20evm/Untitled.png" alt="plasma%20evm/Untitled.png"></p></li>
+<li><p>Metamask 네트워크 선택 : Plasma</p></li>
+<li><p>swapFrometh 선택 + 전송 ETH 입력</p></li>
+<li><p>Metamask TX 전송.</p></li>
+<li><p>함수 선택 : getBalanceTrieKey + Key 저장.</p></li>
+<li><p>컨트렉트 선택 : rootchain</p></li>
+<li><p>startExit 선택 + Input 값 입력 [TODO] _trieVlue 값 value로 대체.. 핵불편.</p></li>
+<li><p>Metamask TX 전송.</p></li>
+<li><p>[Optional] FinalizeBlock 함수 선택 TX 전송</p></li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="deposit-peth-and-get-stamina"></a><a href="#deposit-peth-and-get-stamina" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>deposit PETH and get STAMINA</h2>
+<p><strong>개요</strong></p>
+<p>Plasma-evm 체인별 MGP가 매우 상이하기때문에 Stamina contract의 Default 주소인 &quot;0xDead&quot; 에 대해서 minDeposit, recoveryEpochLength, withdrawalDelay 에 대해서 확인 해볼 필요성과 확인 방법에 대해서 기술. → 개념 정리 링크 대체 가능</p>
+<p><strong>GET PETH</strong></p>
+<ul>
+<li>접속 가능한 Endpoint (https:/wallet.faraday.tokamak.network) 을 시작포인트로 하여 Plasma-evm 내에 PETH를 STAMINA 컨트렉트에 대해 Deposit하여 STAMINA를 얻는 방법에 대해서 Step-by-Step으로 설명
+<ul>
+<li>3가지 타입의 PETH Base Asset // 개념 설명에서
+<ol>
+<li>EtherToken</li>
+<li>Requestable ERC20</li>
+<li>Requestable Wrapper ERC20</li>
+</ol></li>
+<li>Plasma Wallet에서 Enter Process</li>
+</ul></li>
+<li>Faraday Testnet의 경우 <a href="https://faucet.faraday.tokamak.network">https://faucet.faraday.tokamak.network</a> 를 통해서 PETH를 얻을 수 있음을 기술.</li>
+</ul>
+<p><strong>GET STAMINA -1- Self Staking Stamina</strong></p>
+<p>자기 자신의 PETH를 Staking 하여 Stamina를 얻을 수 있다</p>
+<ol>
+<li><p>Metamask Network 선택 : Faraday</p></li>
+<li><p>Plasma-Wallet의 S Dashboard 선택</p>
+<p><img src="plasma%20evm/Untitled%201.png" alt="plasma%20evm/Untitled%201.png"></p></li>
+<li><p>[Optional] Min Deposit 확인
+토카막 플라즈마 체인의 Operator 정책마다 다르므로 확인해보아야 한다. 해당 값 미만으로는 Stamina를 위한 PETH 전송이 불가능하다.</p>
+<p><img src="plasma%20evm/Untitled%202.png" alt="plasma%20evm/Untitled%202.png"></p></li>
+<li><p>Deposit 함수 선택</p>
+<p><img src="plasma%20evm/Untitled%203.png" alt="plasma%20evm/Untitled%203.png"></p></li>
+<li><p>Deposit 값 입력</p>
+<p><img src="plasma%20evm/Untitled%204.png" alt="plasma%20evm/Untitled%204.png"></p></li>
+<li><p>Tx 전송 및 생성된 Stamina 확인.</p></li>
+</ol>
+<p>[ TODO ] Step-by-Step 사진 등록</p>
+<p><strong>GET STAMINA -2- Get From Operator</strong></p>
+<p>토카막 플라즈마 체인을 운영하는 오퍼레이터마다 스테미나 정책이 다르다. Operator가 지원하는 Stamina 운영정책에 따라 Delegator로 지정 될 수 있다.</p>
+<p>Faraday Testnet의 경우 Delegator 등록 페이지를 따로 운영하고 있으며,
+아래는 Faraday Testnet 체인에서 사용할 수 있는 Stamina를 확인 하는 방법이다.</p>
+<ol>
+<li>Metamask Network 선택 : Faraday</li>
+<li>Input address에 자신의 Address를 입력하고 stamina를 get 한다.</li>
+</ol>
+<p><img src="plasma%20evm/Untitled%205.png" alt="plasma%20evm/Untitled%205.png"></p>
+<h2><a class="anchor" aria-hidden="true" id="public-testnetwork-구성품"></a><a href="#public-testnetwork-구성품" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Public (test)network 구성품</h2>
+<h2><a class="anchor" aria-hidden="true" id="endpoints-info"></a><a href="#endpoints-info" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Endpoints Info</h2>
+<ul>
+<li>wallet : <a href="https://wallet.tokamak.network">https://wallet.tokamak.network</a> [ TODO : Have to setup plama-evm wallet ]</li>
+<li>faucet : <a href="https://faucet.faraday.tokamak.network">https://faucet.faraday.tokamak.network</a></li>
+<li>explorer : <a href="https://explorer.faraday.tokamak.network">https://explorer.faraday.tokamak.network</a></li>
+<li>bootnodes : <a href="https://api.faraday.tokamak.network">https://api.faraday.tokamak.network</a></li>
+</ul>
+<hr>
+<h1><a class="anchor" aria-hidden="true" id="staking"></a><a href="#staking" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Staking</h1>
+<h2><a class="anchor" aria-hidden="true" id="how-to-stake-tons"></a><a href="#how-to-stake-tons" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to stake TONs?</h2>
+<h2><a class="anchor" aria-hidden="true" id="how-to-unstake-tons"></a><a href="#how-to-unstake-tons" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to unstake TONs?</h2>
+<h2><a class="anchor" aria-hidden="true" id="how-to-delegate-tons"></a><a href="#how-to-delegate-tons" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to delegate TONs?</h2>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/doc.tokamak.network/docs/user-common"><span class="arrow-prev">← </span><span>일반 사용자 설명</span></a><a class="docs-next button" href="/doc.tokamak.network/docs/developer-manual"><span>개발자 메뉴얼</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#enter--exit-request-생성-tx-메뉴얼">Enter / Exit request 생성 TX 메뉴얼</a><ul class="toc-headings"><li><a href="#enter">ENTER</a></li><li><a href="#exit">EXIT</a></li></ul></li><li><a href="#deposit-peth-and-get-stamina">deposit PETH and get STAMINA</a></li><li><a href="#public-testnetwork-구성품">Public (test)network 구성품</a></li><li><a href="#endpoints-info">Endpoints Info</a></li><li><a href="#how-to-stake-tons">How to stake TONs?</a></li><li><a href="#how-to-unstake-tons">How to unstake TONs?</a></li><li><a href="#how-to-delegate-tons">How to delegate TONs?</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/doc.tokamak.network/" class="nav-home"></a><div><h5>Docs</h5><a href="/doc.tokamak.network/docs/en/user-common">Common User</a></div><div><h5>Community</h5><a href="https://chat.toakamak.com/">Chat Tokemak</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/doc.tokamak.network/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2019 Onther Inc.</section></footer></div></body></html>
