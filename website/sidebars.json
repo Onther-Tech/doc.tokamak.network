@@ -1,5 +1,6 @@
 {
   "docs": {
-    "Getting Start": ["getting-start/getting-start"]
+    "일반 사용자": ["user-common", "user-manual"],
+    "개발자": ["developer-manual", "developer-contribute"]
   }
 }

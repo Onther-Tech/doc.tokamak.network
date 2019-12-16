@@ -2,15 +2,15 @@ const siteConfig = {
   title: 'Tokamak Network Documents',
   disableHeaderTitle: true,
   tagline: 'Plasma evm documents',
-  url: 'https://docs.tokamak.network',
-  baseUrl: '/', 
-  projectName: 'Tokamak Network',
-  organizationName: 'Onther inc',
+  url: 'https://onther-tech.github.io',
+  baseUrl: '/docs.tokamak.network/', 
+  projectName: 'docs.tokamak.network',
+  organizationName: 'onther-tech',
   
 
   // Header links
   headerLinks: [
-    {doc: 'getting-start/getting-start', label: 'Docs'},
+    {doc: 'user-common', label: 'Docs'},
     {page: 'help', label: 'Help'},
   ],
 
