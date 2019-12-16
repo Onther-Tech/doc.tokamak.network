@@ -3,15 +3,25 @@ const siteConfig = {
   disableHeaderTitle: true,
   tagline: 'Plasma evm documents',
   url: 'https://onther-tech.github.io',
-  baseUrl: '/docs.tokamak.network/', 
+  baseUrl: '/',
   projectName: 'docs.tokamak.network',
   organizationName: 'onther-tech',
-  
+
 
   // Header links
   headerLinks: [
-    {doc: 'user-common', label: 'Docs'},
-    {page: 'help', label: 'Help'},
+    {
+      doc: 'learn_basic',
+      label: 'Docs'
+    },
+    {
+      doc: 'guides_getting-started_how-to-open-testnet',
+      label: 'Getting Started'
+    },
+    {
+      page: 'help',
+      label: 'Help'
+    },
   ],
 
   scrollToTop:true,
