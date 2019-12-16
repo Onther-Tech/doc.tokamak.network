@@ -1,5 +1,5 @@
 ---
-id: cryptoeconomics-staking
+id: cryptoeconomics_staking
 title: Staking
 sidebar_label: Staking
 ---

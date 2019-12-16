@@ -1,5 +1,5 @@
 ---
-id: cryptoeconomics-ton
+id: cryptoeconomics_ton
 title: TON
 sidebar_label: TON
 ---

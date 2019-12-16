@@ -5,14 +5,18 @@
         "type": "subcategory",
         "label": "Basic",
         "ids": [
-          "learn_basic"
+          "learn/basic/learn_basic_tokamak-network",
+          "learn/basic/learn_basic_account-system",
+          "learn/basic/learn_basic_enter-and-exit",
+          "learn/basic/learn_basic_what-is-stamina",
+          "learn/basic/learn_basic_layer-2-solutions"
         ]
       },
       {
         "type": "subcategory",
         "label": "Advanced",
         "ids": [
-          "learn_advanced"
+          "learn/advanced/learn_advanced"
         ]
       }
     ],
@@ -21,26 +25,26 @@
         "type": "subcategory",
         "label": "Getting Started",
         "ids": [
-          "guides_getting-started_how-to-open-testnet",
-          "guides_getting-started_how-to-connect-public-network"
+          "guides/getting-started/guides_getting-started_how-to-open-testnet",
+          "guides/getting-started/guides_getting-started_how-to-connect-public-network"
         ]
       },
       {
         "type": "subcategory",
         "label": "Manuals",
         "ids": [
-          "guides_manuals_how-to-make-request",
-          "guides_manuals_how-to-manage-staked-ton",
-          "guides_manuals_how-to-manage-stamina"
+          "guides/manuals/guides_manuals_how-to-make-request",
+          "guides/manuals/guides_manuals_how-to-manage-staked-ton",
+          "guides/manuals/guides_manuals_how-to-manage-stamina"
         ]
       },
       "guides_apis_npm-plasma-evm-contracts"
     ],
     "Cryptoeconomics": [
-      "cryptoeconomics-ton",
-      "cryptoeconomics-stamina",
-      "cryptoeconomics-staking",
-      "cryptoeconomics-jackpot"
+      "cryptoeconomics/cryptoeconomics_ton",
+      "cryptoeconomics/cryptoeconomics_stamina",
+      "cryptoeconomics/cryptoeconomics_staking",
+      "cryptoeconomics/cryptoeconomics_jackpot"
     ]
   }
 }
