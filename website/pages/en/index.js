@@ -59,6 +59,7 @@ class HomeSplash extends React.Component {
           <PromoSection>
             <Button href={docUrl('user-common')}>User</Button>
             <Button href={docUrl('developer-manual')}>Developer</Button>
+            <Button href={docUrl('stake-delegate')}>Stake&Delegate</Button>
           </PromoSection>
         </div>
       </SplashContainer>

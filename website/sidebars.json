@@ -1,6 +1,7 @@
 {
   "docs": {
     "일반 사용자": ["user-common", "user-manual"],
-    "개발자": ["developer-manual", "developer-contribute"]
+    "개발자": ["developer-manual", "developer-contribute"],
+    "Stake & Delegate": ["stake-delegate"]
   }
 }
