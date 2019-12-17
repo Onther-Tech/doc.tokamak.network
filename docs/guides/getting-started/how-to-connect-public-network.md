@@ -8,9 +8,9 @@ Onther에서 운영하고 있는 Tokamak Testnet인 Faraday에 연결하는 노�
 
 모든 Tokamak Plasma 체인이 그러하듯 Faraday Testnet의 경우도 Operator 이외에 블록생성할 수 없도록 구성되어 있다. 따라서, 이 가이드에서는 Faraday Testnet에 연결된 Usernode(bootnode)를 생성하는 과정을 다룬다.
 
-Usernode를 구성하는 방법은 크게 두 가지로 자신의 컴퓨터 환경에서 직접 실행하는 [`Manual`](guides_getting-started_how-to-connect-public-network#Manual) 방식과 유틸리티인 puppeth를 사용하여 원격 머신에 설치되어 있는 docker를 기반으로 Usernode 컨테이너를 생성해주는 [`Puppeth`](guides_getting-started_how-to-connect-public-network#puppeth)를 방식이 있다.
+Usernode를 구성하는 방법은 크게 두 가지로 자신의 컴퓨터 환경에서 직접 실행하는 [`Manually`](guides_getting-started_how-to-connect-public-network#Manually) 방식과 유틸리티인 puppeth를 사용하여 원격 머신에 설치되어 있는 docker를 기반으로 Usernode 컨테이너를 생성해주는 [`Puppeth`](guides_getting-started_how-to-connect-public-network#puppeth)를 방식이 있다.
 
-## Manual
+## Manually
 로컬 환경은 Ubuntu 18.04 를 기준으로 작성되었다.
 
 ### Setup environment

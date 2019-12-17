@@ -445,7 +445,7 @@ Host 환경별로 Docker 설치에 관해서는 [외부 문서](https://docs.doc
         7. Dashboard - Website listing above web-services
     > 1
     
-    Which server do you want to interact with?
+  Which server do you want to interact with?
         1. onther@localhost
         2. Connect another server
     > 1
