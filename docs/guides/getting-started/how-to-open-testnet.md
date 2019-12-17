@@ -113,7 +113,7 @@ rootchain 으로 ganache 테스트체인을 사용하는 경우, ganache에서 �
 
 ### Manual
 [Setup rootchain](guides_getting-started_how-to-open-testnet#setup-rootchain) 과정을 통해서 rootchain이 실행되고 있어야 한다. 
-Operator 노드 실행시 JSON-RPC 사용하려면 `--rpc` flag와 더불어 `--allow-insecure-unlock` flag를 추가하여 실행 가능하다. 하지만 (가급적 보안을 위해) Operator 와 Usernode 를 구성한다.
+Operator 노드 실행시 JSON-RPC 사용하려면 `--rpc` flag를 사용하면 되지만, Operator 노드는 Operator 계정이 포함되어 있는 Keystore를 사용하므로  하지만 (가급적 보안을 위해) Operator 와 Usernode 를 구성한다.
 
 **Run Operator Node** 
 
@@ -284,7 +284,7 @@ Plasma-evm 에서 보다 편하게 노드를 구성할 수 있도록 도와주�
 **Deploy Rootchain contract And Generate genesis file**
 
 Puppeth를 실행하기 이전에 rootchain에 필요한 컨트렉트와 genesis 파일을 생성한다.
-[Manual](guides_getting-started_how-to-open-testnet#manual-way) 방법 과 동일하게 `deploy` 커맨드를 사용하여 Rootchain contract을 배포한후 Genesis 파일을 생성하는 스크립트를 작성한다.
+[Manual](guides_getting-started_how-to-open-testnet#manual) 방법 과 동일하게 `deploy` 커맨드를 사용하여 Rootchain contract을 배포한후 Genesis 파일을 생성하는 스크립트를 작성한다.
 
 ```script
 # deploy.rootchain.sh
@@ -478,7 +478,7 @@ Host 환경별로 Docker 설치에 관해서는 [외부 문서](https://docs.doc
     Building ethstats
     Step 1/2 : FROM puppeth/ethstats:latest
         ---> fb62abe59cb2
-    Step 2/2 : RUN echo 'module.exports = {trusted: ["54.180.128.41", "52.79.245.79", "13.125.10.20"], banned: [], reserved: ["yournode"]};' > lib/utils/config.js
+    Step 2/2 : RUN echo 'module.exports = {trusted: [], banned: [], reserved: ["yournode"]};' > lib/utils/config.js
         ---> Running in ac7e749c51f5
     Removing intermediate container ac7e749c51f5
         ---> 276dd2683d00
