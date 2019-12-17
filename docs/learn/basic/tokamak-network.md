@@ -16,4 +16,4 @@ sidebar_label: Tokamak Network
 제출하고, 이렇게 제출된 요약 증거를 바탕으로 플라즈마 블록에 문제가 생겼을 때 검증과정을 통해
 이를 바로잡을 수 있다.
 
-![What is Plasma](assets/learn__basic_what-is-plasma.png)
+![What is Plasma](assets/learn_basic_what-is-plasma.png)

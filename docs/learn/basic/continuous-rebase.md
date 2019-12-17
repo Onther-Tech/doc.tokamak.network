@@ -11,7 +11,7 @@ sidebar_label: Data Availability : Continuous Rebase
 토카막 플라즈마는 블록이 확정 되기까지 일정한 시간동안 데이터 가용성 여부를 확인할 수 있는 시간 버퍼를 두고 있으며, 이 기간 동안 유저들이 만들어낸 어떠한 탈출 요청(exit transaction)도 오퍼레이터는 모두 반영해야 하는 프로토콜상의 의무가 있다. 받아들여진 탈출 요청이 반영된 블록 이후의 블록(미확정 블록)의 내용은 탈출 요청이 반영된 블록을 기준으로 리베이스된다. 지속적 리베이스 모델은 유저들에게 항상 일정한 기간을 두고 항상 탈출할 수 있는 수단을 가지게 함으로써 데이터 불가용 상황을 극복한다.
 
 ## 사이클
-![continuous rebase](learn_basic_continuous-rebase.png)
+![continuous rebase](assets/learn_basic_continuous-rebase.png)
 
 1. **Pre-commit**: 오퍼레이터가 플라즈마 체인의 블록을 마이닝한 후 각 블록의 트랜잭션 루트(txRoot)를 제출한다.
 2. **DA check**: 사용자가 Pre-commit 과정의 DA check, 문제시 탈출 요청(Escape Request) 트랜잭션 제출한다.
