@@ -161,7 +161,7 @@ const siteConfig = {
     require('remarkable-admonitions')({ icon: 'svg-inline' }),
   ],
 
-  editUrl: 'https://github.com/onther-tech/doc.tokamak.network/edit/master/docs',
+  editUrl: 'https://github.com/onther-tech/doc.tokamak.network/edit/master/docs/',
 
   // Add custom scripts here that would be placed in <script> tags.
   scripts: ['https://buttons.github.io/buttons.js',
