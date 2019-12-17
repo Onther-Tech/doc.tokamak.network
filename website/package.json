@@ -12,7 +12,6 @@
     "docusaurus": "^1.14.3"
   },
   "dependencies": {
-    "remarkable-admonitions": "^0.2.1",
     "remarkable-katex": "^1.0.1"
   }
 }
