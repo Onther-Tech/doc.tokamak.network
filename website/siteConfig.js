@@ -6,12 +6,25 @@ const siteConfig = {
   baseUrl: '/doc.tokamak.network/', 
   projectName: 'doc.tokamak.network',
   organizationName: 'onther-tech',
-  
 
   // Header links
   headerLinks: [
-    {doc: 'user-common', label: 'Docs'},
-    {page: 'help', label: 'Help'},
+    {
+      doc: 'learn/basic/learn_basic_tokamak-network',
+      label: 'Docs'
+    },
+    {
+      doc: 'guides/getting-started/guides_getting-started_how-to-open-testnet',
+      label: 'Getting Started'
+    },
+    {
+      doc: 'guides/manuals/guides_manuals_how-to-make-request',
+      label: 'Manuals'
+    },
+    {
+      page: 'help',
+      label: 'Help'
+    },
   ],
 
   scrollToTop:true,
@@ -135,11 +148,20 @@ const siteConfig = {
     },
   },
 
+  docsSideNavCollapsible: true,
+
+  enableUpdateBy: true,
+
+  enableUpdateTime: true,
+
   markdownPlugins: [
     (md) => {
       md.use(require('remarkable-katex'));
     },
+    require('remarkable-admonitions')({ icon: 'svg-inline' }),
   ],
+
+  editUrl: 'https://github.com/onther-tech/doc.tokamak.network/edit/master/docs',
 
   // Add custom scripts here that would be placed in <script> tags.
   scripts: ['https://buttons.github.io/buttons.js',

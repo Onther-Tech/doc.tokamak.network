@@ -1,7 +1,57 @@
 {
   "docs": {
-    "일반 사용자": ["user-common", "user-manual"],
-    "개발자": ["developer-manual", "developer-contribute"],
-    "Stake & Delegate": ["stake-delegate"]
+    "Learn": [
+      {
+        "type": "subcategory",
+        "label": "Basic",
+        "ids": [
+          "learn/basic/learn_basic_tokamak-network",
+          "learn/basic/learn_basic_account-system",
+          "learn/basic/learn_basic_enter-and-exit",
+          "learn/basic/learn_basic_what-is-stamina",
+          "learn/basic/learn_basic_layer-2-solutions"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Advanced",
+        "ids": [
+          "learn/advanced/design-principles",
+          "learn/advanced/plasma-evm-architecture",
+          "learn/advanced/root-chain",
+          "learn/advanced/plasma-chain",
+          "learn/advanced/continuous-rebase",
+          "learn/advanced/plasma-evm-smart-contracts",
+          "learn/advanced/computation-challenge",
+          "learn/advanced/examples-and-best-practices"
+        ]
+      }
+    ],
+    "Guides": [
+      {
+        "type": "subcategory",
+        "label": "Getting Started",
+        "ids": [
+          "guides/getting-started/guides_getting-started_how-to-open-testnet",
+          "guides/getting-started/guides_getting-started_how-to-connect-public-network"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Manuals",
+        "ids": [
+          "guides/manuals/guides_manuals_how-to-make-request",
+          "guides/manuals/guides_manuals_how-to-manage-staked-ton",
+          "guides/manuals/guides_manuals_how-to-manage-stamina"
+        ]
+      },
+      "guides_apis_npm-plasma-evm-contracts"
+    ],
+    "Cryptoeconomics": [
+      "cryptoeconomics/cryptoeconomics_ton",
+      "cryptoeconomics/cryptoeconomics_stamina",
+      "cryptoeconomics/cryptoeconomics_staking",
+      "cryptoeconomics/cryptoeconomics_jackpot"
+    ]
   }
 }
