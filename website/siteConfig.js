@@ -7,7 +7,6 @@ const siteConfig = {
   projectName: 'docs.tokamak.network',
   organizationName: 'onther-tech',
 
-
   // Header links
   headerLinks: [
     {
@@ -149,11 +148,20 @@ const siteConfig = {
     },
   },
 
+  docsSideNavCollapsible: true,
+
+  enableUpdateBy: true,
+
+  enableUpdateTime: true,
+
   markdownPlugins: [
     (md) => {
       md.use(require('remarkable-katex'));
     },
+    require('remarkable-admonitions')({ icon: 'svg-inline' }),
   ],
+
+  editUrl: 'https://github.com/onther-tech/doc.tokamak.network/edit/master/docs',
 
   // Add custom scripts here that would be placed in <script> tags.
   scripts: ['https://buttons.github.io/buttons.js',
