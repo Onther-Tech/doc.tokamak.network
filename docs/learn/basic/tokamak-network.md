@@ -6,7 +6,7 @@ sidebar_label: Tokamak Network
 
 ## What is Tokamak Network?
 
-토카막 네트워크는 현재 구동되고 있는 이더리움 블록체인에 연결된 플라즈마 블록체인을 손쉽게 만들어 낼 수 있는 프로토콜이다. 이를 통해 베이스체인으로 사용되는 이더리움의 확장성(Scalability)을 높여 기존보다 더 다양한 탈중앙화 어플리케이션 개발 및 구동 환경을 구축할 수있다.
+토카막 네트워크는 현재 구동되고 있는 이더리움 블록체인에 연결된 플라즈마 블록체인을 손쉽게 만들어 낼 수 있는 프로토콜이다. 이를 통해 베이스체인(base chain)으로 사용되는 이더리움의 확장성(Scalability)을 높여 기존보다 더 다양한 탈중앙화 어플리케이션(DApp)을 개발할 수 있는 환경을 구축할 수있다.
 
 ![Tokamak Network Basic Architecture](assets/learn_basic_tokamak-architecture.png)
 
