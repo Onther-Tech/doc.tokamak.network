@@ -5,7 +5,7 @@ sidebar_label: How to open testnet
 ---
 Plasma-evm Private Network 구성에 대해 Ubuntu 18.04 를 기준으로 작성되었다.
 
-![Plasma-evm Private Testnet Architecture](assets/private-testnet.png)
+![Plasma-evm Private Testnet Architecture](assets/guides_private-testnet.png)
 
 ## Setup environment
 
