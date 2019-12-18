@@ -44,8 +44,7 @@
           "guides/manuals/guides_manuals_how-to-manage-staked-ton",
           "guides/manuals/guides_manuals_how-to-manage-stamina"
         ]
-      },
-      "guides_apis_npm-plasma-evm-contracts"
+      }
     ],
     "Cryptoeconomics": [
       "cryptoeconomics/cryptoeconomics_ton",
