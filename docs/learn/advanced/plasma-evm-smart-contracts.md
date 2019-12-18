@@ -38,6 +38,7 @@ Plasma EVM에서 사용하는 컨트랙트의 소스코드는 [여기](https://g
 `RootChainStorage`는 상태 변수만을 구현한 컨트랙트입니다. 중요한 상태 변수는 다음과 같습니다.
 
 <!-- Name | Type | Description 으로 테이블 만들기? -->
+
 - `address operator`: 자식 체인의 오퍼레이터 계정입니다. 다른 이더리움 계정으로 오퍼레이터 권한을 바꾸거나 블록 제출 권한, 양 체인의 Requestable 컨트랙트 주소 맵핑 권한을 관리합니다.
 - `address epochHandler`: `DELEGATECALL`을 통해 참조되는 `EpochHandler` 컨트랙트의 주소입니다.
 - `address submitHandler`: `DELEGATECALL`을 통해 참조되는 `SubmitHandler` 컨트랙트의 주소입니다.
