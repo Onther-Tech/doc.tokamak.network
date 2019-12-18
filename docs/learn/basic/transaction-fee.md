@@ -25,3 +25,6 @@ sidebar_label: Transaction Fee(Stamina)
 환불은 충전해 둔 스태미나를 다시 돌려받는 것이다. 충전해 둔 스태미나의 양이 과도하거나 더 이상 수수료 대납을 하기 원하지 않을 경우 하면 된다.
 
 스태미나는 일정시간이 지나면 회복된다. 적절한 양의 스태미나가 충전되어 있다면 스태미나를 다 사용할 때쯤  회복주기가 되어서 스태미나가 다시 가득차게 될 것이다.
+
+## 참고자료
+- [Economic Description of Tokamak Network and its Ecosystem - Kevin Jeong(정순형, 철학자)](https://youtu.be/gW7FCiBgBI4)

@@ -19,7 +19,7 @@ Plasma EVM에서 사용하는 컨트랙트의 소스코드는 [여기](https://g
 
 이 다이어그램에 나오는 컨트랙트는 다음의 기능을 합니다.
 
-### 1. `Data`
+## 1. `Data`
 `Data`는 Plasma EVM에서 사용하는 `Epoch`, `PlasmaBlock`, `Request`, `RequestBlock`, `Transaction` 등의 구조체와 관련 로직을 구현합니다. 특히 `Request`를 `RequestTransaction`으로 변환하거나 `RequestBlock`의 `transactionsRoot`를 계산하는 등 내부 로직들을 다룹니다. `Data`에서 관리하는 상수는 다음과 같습니다.
 
 - `address public constant NA = address(0)`
@@ -34,7 +34,7 @@ Plasma EVM에서 사용하는 컨트랙트의 소스코드는 [여기](https://g
 
   자식 체인의 요청 트랜잭션의 gas limit은 항상 100000입니다.
 
-### 2. `RootChainStorage`
+## 2. `RootChainStorage`
 `RootChainStorage`는 상태 변수만을 구현한 컨트랙트입니다. 중요한 상태 변수는 다음과 같습니다.
 
 <!-- Name | Type | Description 으로 테이블 만들기? -->
@@ -53,10 +53,10 @@ Plasma EVM에서 사용하는 컨트랙트의 소스코드는 [여기](https://g
 - `uint lastAppliedBlockNumber`: 마지막 요청을 반영한 Block Number 입니다.
 - `uint EROIdToFinalize`: 다음으로 반영할 `EROs`의 인덱스입니다.
 
-### 3. `RootChainEvent`
+## 3. `RootChainEvent`
 `RootChainEvent`는 `RootChain`의 이벤트만 구현한 컨트랙트입니다.
 
-### 4. `RootChainBase is RootChainStorage, RootChainEvent`
+## 4. `RootChainBase is RootChainStorage, RootChainEvent`
 `RootChainBase`는 상태 변수와 이벤트를 각각 `RootChainStorage`와 `RootChainEvent`를 통해 상속합니다. 또한 `EpochHandler`와 `SubmitHandler`로 `DELEGATECALL`을 실행하는 함수를 구현합니다.
 
 SubmitHandler
@@ -68,7 +68,7 @@ EpochHandler
 - `prepareNRE()`: `SubmitHandler`가 마지막 `ORB`를 제출할 때 호출하는 함수입니다.
 
 
-### 5. `SubmitHandler is RootChainBase`
+## 5. `SubmitHandler is RootChainBase`
 `SubmitHandler`는 `NRE` 혹은 `ORB`등 블록과 에퍽을 제출하는 로직을 구현한 컨트랙트입니다. 다음 에퍽으로 넘어가기 위하여 `EpochHandler`을 참조합니다. 아래 두 함수는 `Submitter` 역할을 가진 주소만 해당 함수를 호춣할 수 있습니다.
 
 - `submitNRE(uint _pos1, uint _pos2, bytes32 _epochStateRoot, bytes32 _epochTransactionsRoot, bytes32 _epochReceiptsRoot)`
@@ -79,13 +79,13 @@ EpochHandler
 
   `pos`은 "포크 넘버와 에퍽 넘버"를 각각 `uint128`로 형변환하여 합친 하나의 `uint256`입니다. `ORB` 제출의 경우 `RootChain`이 결정한 `EROs`의 인덱스와 그에 대응하는 요청 트랜잭션들의 머클 루트를 계산합니다. 이 계산된 머클 루트와 `_transactionsRoot`이 동일하지 않을 경우 reverted 됩니다.
 
-### 6. `EpochHandler is RootChainBase`
+## 6. `EpochHandler is RootChainBase`
 `EpochHandler`는 `NRE` 혹은 마지막 `ORB`를 제출할 경우 그 다음 에퍽으로 준비하는 로직을 구현한 컨트랙트입니다. `epochNumber`가 `n`인 `ORE`의 경우 `n-3`번 NRE를 제출한 순간 해당 ORE에 포함할 `Request`들의 목록을 확정합니다.
 
 - `prepareORE()`: `SubmitHandler`가 `NRE`를 제출할 때 호출하는 함수입니다.
 - `prepareNRE()`: `SubmitHandler`가 마지막 `ORB`를 제출할 때 호출하는 함수입니다.
 
-### 7. `RootChain is RootChainBase, MapperRole, SubmitterRole`
+## 7. `RootChain is RootChainBase, MapperRole, SubmitterRole`
 `RootChain`은 블록 및 에퍽 제출, 요청 생성, 챌린지, 블록 finalize 함수 및 컨트랙트 상태를 조회할 getter를 구현한 컨트랙트입니다. 양 체인의 `RequestableContract`을 연결하는 권한을 관리하기 위하여 `MapperRole`과, 블록 및 에퍽을 제출하는 권한을 관리하기 위하여 `SubmitterRole`을 상속합니다. `RootChain` 에서만 구현된 중요 함수는 다음과 같습니다.
 
 - `mapRequestableContractByOperator()`: 양 체인의 requestable contract의 주소를 맵핑하는 함수입니다. `Mapper` 역할을 가진 주소만 해당 함수를 호출할 수 있습니다.
