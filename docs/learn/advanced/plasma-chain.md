@@ -22,14 +22,14 @@ sidebar_label: Plasma Chain
 플라즈마 체인의 블록은 세가지 종류의 블록으로 구성된다.
 
 - 비요청블록(Non-Request Block; NRB)
-- 요청블록(Request Block; RB): Request(!insert_link Request and Request Transaction)들을 처리하는 블록, Enter & Exit이 처리된다.
+- 요청블록(Request Block; RB): [Request](plasma-chain#request-and-request-transaction)들을 처리하는 블록, Enter & Exit이 처리된다.
 - 탈출블록(Escape Block; EB): Escape Request(!insert_link Escape Request)를 처리하는 블록
 
 비요청블록은 기존의 일반적인 블록과 동일하다. 사용자들의 일반적인 트랜잭션들을 포함한다. 
 
 요청블록은 말 그대로 오직 요청(!insert_link Request and Request Transaction)만을 처리하는 블록이다. Enter 및 Exit 요청들이 처리된다. 
 
-탈출블록은 매우 특수한 상황에서만 생성되는 블록이다. Continuous Rebase(TODO: Link)의 경우 사용자들이 데이터 가용성을 확인하여 문제가 있을 경우 주기적으로 플라즈마 체인으로부터 탈출할 수 있는 기간을 제공하는데, 만약 이 때 사용자들이 탈출 요청을 루트체인 컨트랙트에 제출하게 되면 탈출 블록이 생성되게 된다.
+탈출블록은 매우 특수한 상황에서만 생성되는 블록이다. [Continuous Rebase](continuous-rebase)의 경우 사용자들이 데이터 가용성을 확인하여 문제가 있을 경우 주기적으로 플라즈마 체인으로부터 탈출할 수 있는 기간을 제공하는데, 만약 이 때 사용자들이 탈출 요청을 루트체인 컨트랙트에 제출하게 되면 탈출 블록이 생성되게 된다.
 
 에폭(Epoch)은 여러개의 블록을 포함하는 하나의 주기이다. 에폭도 블록의 종류에 따라 비요청에폭(Non-Request Epoch; NRE), 요청에폭(Request Epoch; RE), 탈출에폭(Escape Epoch; EE))으로 구분된다. 
 
@@ -49,9 +49,9 @@ sidebar_label: Plasma Chain
 
 ![simple rootchain](assets/learn_advanced_simple_rootchain.png)
 
-루트체인 컨트랙트는 위 그림과 같이 두 종료의 블록을 제출 받기 위해 주기적으로 Accept NRB, Accept RB 상태로 변경된다. Accept NRB는 오직 비요청블록만 제출될 수 있는 상태를 의미하며, Accept RB는 요청블록만 제출될 수 있는 상태를 의미한다. 오퍼레이터는 이렇게 루트체인 컨트랙트의 상태에 따라 요청블록 혹은 비요청블록을 제출해야 한다. 여기서 유의해야 할 점은 설명의 편의를 위해 Continuous Rebase(TODO: Link)에서 다루는 탈출 블록을 포함하지 않고 있다는 것이다.
+루트체인 컨트랙트는 위 그림과 같이 두 종료의 블록을 제출 받기 위해 주기적으로 Accept NRB, Accept RB 상태로 변경된다. Accept NRB는 오직 비요청블록만 제출될 수 있는 상태를 의미하며, Accept RB는 요청블록만 제출될 수 있는 상태를 의미한다. 오퍼레이터는 이렇게 루트체인 컨트랙트의 상태에 따라 요청블록 혹은 비요청블록을 제출해야 한다. 여기서 유의해야 할 점은 설명의 편의를 위해 [Continuous Rebase](continuous-rebase)에서 다루는 탈출 블록을 포함하지 않고 있다는 것이다.
 
-오퍼레이터는 블록을 제출할 때 세 종류의 머클루트(Merkle Root)값인 stateRoot, transactionsRoot, receiptsRoot를 제출한다. 단, transactionsRoot만 제출하는 것이 가능한 상황도 있는데, 자세한 내용은 Continuous Rebase(TODO: Link)에서 다룬다.
+오퍼레이터는 블록을 제출할 때 세 종류의 머클루트(Merkle Root)값인 stateRoot, transactionsRoot, receiptsRoot를 제출한다. 단, transactionsRoot만 제출하는 것이 가능한 상황도 있는데, 자세한 내용은 [Continuous Rebase](continuous-rebase)에서 다룬다.
 
 
 ## Request and Request Transaction
@@ -70,7 +70,7 @@ sidebar_label: Plasma Chain
 모든 요청은 다음과 같은 파라미터로 구성된다.
 
 - requestor: 요청을 제출한 어카운트
-- to: 루트체인에 배포된 요청가능한 컨트랙트(Reqeustable contract)(TODO: Link)의 주소
+- to: 루트체인에 배포된 [요청가능한 컨트랙트](plasma-chain#requestable-contract)(Requestable Contract)의 주소
 - trieKey: 요청의 식별자
 - trieValue: 요청의 값
 
@@ -126,7 +126,7 @@ interface Requestable {
 
 1. 사용자는 루트체인 컨트랙트로 RootChain.startExit()를 호출하는 트랜잭션을 전송한다.
 2. 진입요청과는 다르게 퇴장요청은 루트체인 컨트랙트에 즉각적으로 기록되고 요청 트랜잭션의 형태로 요청블록에 포함된다.
-3. 요청블록에에 대한 챌린지 기간이 종료된 이후 해당 퇴장요청에 대한 챌린지 기간이 시작된다. 만약 2의 요청 트랜잭션의 실행이 실패했다면 챌린저는 이에 대해 RootChain.challengeExit() 함수를 통해 챌린지(TODO: Link)할 수 있다.
+3. 요청블록에에 대한 챌린지 기간이 종료된 이후 해당 퇴장요청에 대한 챌린지 기간이 시작된다. 만약 2의 요청 트랜잭션의 실행이 실패했다면 챌린저는 이에 대해 RootChain.challengeExit() 함수를 통해 [챌린지](#challenge)할 수 있다.
 4. 만약 3에서 챌린지 기간이 챌린지 없이 종료되었다면 사용자는 RootChain.finalizeRequest()를 호출하여 퇴장요청을 완결(Finalize)하게 된다.\emph{Exit request}는 \emph{Finalize}된다. 이를 통해 퇴장요청은 루트체인에 배포된 요청가능한 컨트랙트에 요청을 반영하게 된다.
 
 핵심은 진입요청의 경우 먼저 루트체인에서 반영한 후에 플라즈마 체인에 반영하는 것이고, 퇴장요청의 경우 먼저 플라즈마 체인에서 반영하고 문제가 없을 경우에만 루트체인에 반영한다는 것이다.
@@ -166,5 +166,5 @@ postState = commitedStateRoots[i] = STF_{block}(preState, Block_i)
 ![verification game](assets/learn_advanced_verification_game.png)
 
 ### Verification Game
-TrueBit이 제안한 검증게임(Verification Game)의 마지막 단계는 이더리움에서 연산을 한 번 수행하고 실제 output과 예상 output을 비교하는 방법을 사용한다. Plasma EVM은 Ohalo Limited와 Parsec Labs에서 구현해 왔던 EVM 내부에서 EVM을 실행하는 스마트 컨트랙트인 solEVM(TODO: link)을 사용하여 연산 결과를 검증한다.
+TrueBit이 제안한 검증게임(Verification Game)의 마지막 단계는 이더리움에서 연산을 한 번 수행하고 실제 output과 예상 output을 비교하는 방법을 사용한다. Plasma EVM은 Ohalo Limited와 Parsec Labs에서 구현해 왔던 EVM 내부에서 EVM을 실행하는 스마트 컨트랙트인 [solEVM](https://github.com/Onther-Tech/solEVM)을 사용하여 연산 결과를 검증한다.
 
