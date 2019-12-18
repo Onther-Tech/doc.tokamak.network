@@ -4,7 +4,7 @@ title: Plasma EVM Architecture
 sidebar_label: Plasma EVM Architecture
 ---
 
-<!insert_figure eth2.0 architecture-like figure>
+(TODO: insert_figure eth2.0 architecture-like figure)
 
 
 Plasma EVM을 구성하는 핵심 요소는 루트체인(Root chain)과 이에 연결된 여러개의 플라즈마 체인(Plasma chain)들이다. 

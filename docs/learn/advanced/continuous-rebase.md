@@ -16,7 +16,8 @@ Rebase는 루트체인에 제출한 블록을 다른 블록 기준으로 다시 
 ## Cycles and Stages
 Plasma EVM은 Cycle이라는 하나의 큰 주기를 기준으로 작동된다. 하나의 Cycle은 총 4개의 Stage로 구성되며, 각 Stage는 Pre-commit, DA-check, Commit, Challenge이다.
 
-<!insert_figure cycles and stages>
+![cycle and stage](assets/learn_advanced_cycle.png)
+
 
 ### Pre-commit
 
@@ -24,7 +25,7 @@ Pre-commmit은 일종의 예비 제출 단계로, 오퍼레이터는 블록 마�
 
 transactionsRoot만을 루트체인에 제출하는 이유는 stateRoot와 receiptsRoot가 Rebase이후에 최종적으로 결정되기 때문이다. 반면 transactionsRoot를 제출해야 하는 이유는 해당 블록에 포함된 트랜잭션들이 무엇인지 알 수 있다면 해당 블록의 올바른 stateRoot도 알 수 있기 때문이다. 따라서 오퍼레이터에게서 루트체인 컨트랙트에 제출된 transactionRoot와 일치하는 블록 데이터를 전송받은 사용자는 이후 Commit단계에서 오퍼레이터가 데이터를 숨기고 잘못된 stateRoot를 제출하더라도 챌린지 할 수 있다.
 
-(TODO: insert_figure pre-commit)
+![pre commit](assets/learn_advanced_pre_commit.png)
 
 
 ### DA-check
@@ -34,13 +35,13 @@ DA-check는 사용자가 Pre-commit 단계에서 오퍼레이터가 전송한 �
 만약 해당 Cycle에서 진입을 하였다면 탈출 요청과 더불어 이러한 진입을 취소하기 위한 무효 요청을 제출하여 Cycle에 진입이 반영되는 것을 무효화해야 한다. 또한 기존에 퇴장을 신청한 경우도 이중으로 퇴장이 되는 것을 방지하기 위해 취소해야 한다.
 
 
-(TODO: insert_figure DA-check)
+![da check](assets/learn_advanced_da_check.png)
 
 
 ### Commit
 Commit은 오퍼레이터가 이전 Cycle의 마지막 블록에 DA-check에서 제출된 모든 요청들을 반영한 후 Pre-commit에서 제출한 블록들을 Rebase하는 과정이다. 이 과정에서 블록들의 모든 루트들이 제출된다.
 
-(TODO: insert_figure commit)
+![commit](assets/learn_advanced_commit.png)
 
 
 ### Challenge
@@ -48,7 +49,7 @@ Challenge단계에서 사용자들은 Commit 단계에서 제출된 블록이 �
 
 제출된 챌린지가 다수일 경우 챌린저가 승리하는 순간 다른 챌린지는 취소된다. 또한 챌린저가 승리한 경우 해당 Cycle의 Commit된 블록을 포함한 이후의 모든 블록들이 취소되며, 해당 Cycle은 DA Check단계로 되돌아간다. 
 
-(TODO: insert_figure challenge)
+![challenge](assets/learn_advanced_challenge.png)
 
 
 ### Finalize
@@ -85,18 +86,18 @@ Shutdown은 일종의 플라즈마 체인 폐쇄 절차이다. Shutdown이 되�
 
 ### Cycle
 지금까지 살펴본 하나의 Cycle의 동작과정은 다음 그림과 같이 나타낼 수 있다.
-(TODO: insert_figure continuouse-rebase)
 
+![rootchain](assets/learn_advanced_rootchain.png)
 
 
 ## Overlap of Cycle
 
 지금까지 논의한 것은 하나의 Cycle의 동작 과정이었다. 여러개의 Cycle이 맞물렸을 때는 이전 Cycle의 Challenge단계의 완료 여부와 관계 없이 다음 Cycle의 Pre-commit 단계가 시작될 수 있다.
 
-(TODO: insert_figure overlap-cycle)
-
 여러개의 Cycle이 맞물려 진행되기 위해서는 다음과 같은 조건이 충족되어야 한다.
 
 1. 현재 Cycle의 Pre-commit이 완료되는 즉시 다음 Cycle의 Pre-commit이 시작된다.
 2. 현재 Cycle의 Pre-commit이 완료되는 즉시 현재 Cycle의 DA-check가 시작된다.
 3. 현재 Cycle의 Commit은 이전 Cycle의 Commit 완료 이후에 시작될 수 있다.
+
+![overlap cycle](assets/learn_advanced_overlap_cycle.png)

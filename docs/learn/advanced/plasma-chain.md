@@ -47,7 +47,7 @@ sidebar_label: Plasma Chain
 
 요약하자면 비요청에폭 이후에는 요청에폭, 요청에폭 이후에는 비요청에폭이 오는 것이 기본적인 규칙이며, 요청은 바로 즉시 다음 요청 에폭에 포함되는 것이 아니라 그 다음 요청 에폭에 포함된다는 것이다.
 
-(TODO: Simple Rootchain 삽입)
+![simple rootchain](assets/learn_advanced_simple_rootchain.png)
 
 루트체인 컨트랙트는 위 그림과 같이 두 종료의 블록을 제출 받기 위해 주기적으로 Accept NRB, Accept RB 상태로 변경된다. Accept NRB는 오직 비요청블록만 제출될 수 있는 상태를 의미하며, Accept RB는 요청블록만 제출될 수 있는 상태를 의미한다. 오퍼레이터는 이렇게 루트체인 컨트랙트의 상태에 따라 요청블록 혹은 비요청블록을 제출해야 한다. 여기서 유의해야 할 점은 설명의 편의를 위해 Continuous Rebase(TODO: Link)에서 다루는 탈출 블록을 포함하지 않고 있다는 것이다.
 
@@ -74,12 +74,6 @@ sidebar_label: Plasma Chain
 - trieKey: 요청의 식별자
 - trieValue: 요청의 값
 
-emph{Request}은 사용자가 \emph{RootChain contract}에 트랜잭션을 보냄으로써 생성된다. \emph{Enter request}와 \emph{Exit request}은 \emph{RB}에 포함되며, \emph{Escape request}과 \emph{Undo request}은 \emph{EB}에 포함된다. \emph{Enter request}은 루트 체인에서 먼저 상태를 변경하고 \emph{Request} 트랜잭션(\emph{Request transaction})의 형태로 블록에 포함된다. \emph{Exit}, \emph{Escape}, 그리고 \emph{Undo request}의 경우 \emph{Request} 트랜잭션의 형태로 블록에 포함된 이후 루트 체인에서 반영된다. 만약 해당 \emph{Request} 트랜잭션이 실패(Reverted)되었다면 \emph{Exit Challenge}를 통해 루트 체인에서 반영되는 것을 방지할 수 있다.
-
-\emph{Request}을 반영할 수 있는 컨트랙트는 \emph{Requestable} 하며, \emph{Requestable} 컨트랙트의 특정 함수를 호출함으로써 루트 체인과 자식 체인에서 \emph{Request}을 반영할 수 있다. 각 컨트랙트 별로 \emph{Requestable} 인터페이스를 개별적으로 구현하여 이더리움이 지향하는 General-purpose computing platform 을 플라즈마화(Plasmafy) 할 수 있다.
-
-오퍼레이터는 \emph{RootChain contract}가 \emph{Request}을 생성할 수 있도록 각 체인의 \emph{Requestable} 컨트랙트의 주소를 사전에 연결해야한다. 단, 각 체인의 \emph{Requestable} 컨트랙트는 반드시 동일한 \emph{codeHash} 가져야 하며, 이는 두 컨트랙트가 같은 Storage 레이아웃을 갖는다는 것을 의미한다.
-
 
 ### Request Transaction
 요청은 플라즈마 체인에서 요청 트랜잭션(Request Transaction)의 형태로 반영된다. 요청 트랜잭션은 다음과 같이 구성된다.
@@ -95,7 +89,7 @@ emph{Request}은 사용자가 \emph{RootChain contract}에 트랜잭션을 보�
 ### Requestable Contract
 요청가능한 컨트랙트(Requestable Contract)는 말 그대로 요청을 반영할 수 있는 컨트랙트이다. 요청가능한 컨트랙트는 다음과 같은 인터페이스가 구현하여 모든 요청들을 반영할 수 있어야 한다.
 
-(TODO: 코드 포맷으로 변경)
+~~~
 interface Requestable {
   function applyEnter(bool isRootChain,uint256 requestId,address requestor,bytes32 trieKey,bytes trieValue)
     external returns (bool success);
@@ -109,12 +103,13 @@ interface Requestable {
   function applyUndo(bool isRootChain,uint256 requestId,address requestor,bytes32 trieKey,bytes trieValue)
     external returns (bool success);
 }
+~~~
 
 
 ### Apply Enter Request
 루트체인 컨트랙트는 다음과 같은 순서로 진입 요청을 각 체인에 배포된 요청가능한 컨트랙트에 반영한다.
 
-(TODO: insert enter figure)
+![apply enter](assets/learn_advanced_enter.png)
 
 1. 사용자는 루트체인 컨트랙트에 RootChain.startEnter()를 호출하는 트랜잭션을 전송한다.
 2. 루트체인 컨트랙트는 진입요청을 루트체인의 요청가능한 컨트랙트에 반영한다. 만약 이 과정에서 트랜잭션이 실패(reverted)된다면 진입요청은 생성되지 않는다.
@@ -127,7 +122,7 @@ interface Requestable {
 ### Apply Exit Request
 루트체인 컨트랙트는 다음과 같은 순서로 퇴장 요청을 각 체인에 배포된 요청가능한 컨트랙트에 반영한다.
 
-(TODO: insert exit figure)
+![apply exit](assets/learn_advanced_exit.png)
 
 1. 사용자는 루트체인 컨트랙트로 RootChain.startExit()를 호출하는 트랜잭션을 전송한다.
 2. 진입요청과는 다르게 퇴장요청은 루트체인 컨트랙트에 즉각적으로 기록되고 요청 트랜잭션의 형태로 요청블록에 포함된다.
@@ -138,6 +133,10 @@ interface Requestable {
 
 ### Apply Escape and Undo Request
 탈출요청과 무효요청은 퇴장요청과 동일한 방식으로 처리되지만, 요청 트랜잭션들이 요청 블록이 아닌 탈출 블록에서 처리된다는 점에서 차이가 있다.
+
+
+
+![request and challenge](assets/learn_advanced_request_and_challenge.png)
 
 
 ## Stamina
@@ -159,13 +158,13 @@ interface Requestable {
 ### Computation Challenge
 연산 챌린지(Computation Challenge)는 오퍼레이터가 제출한 모든 종류의 블록에 대해 트랜잭션이 올바르게 실행되지 않았을 경우 제출하는 챌린지이다. 오퍼레이터가 잘못된 stateRoot를 제출하면, blockData, preStateRoot, postStateRoot를 바탕으로 TrueBit-like Verification Game을 통해 챌린지 될 수 있다.
 
-
 preState = commitedStateRoots[i-1]
 postState = commitedStateRoots[i] = STF_{block}(preState, Block_i)
 
-RootChain contract에서 STF_{block}를 실행한 output과 이미 제출된 output을 비교하여 블록의 상태 전이가 올바르게 이루어졌는지 검증할 수 있다.
+위와 같이 정의할 때, RootChain contract에서 STF_{block}를 실행한 output과 이미 제출된 output을 비교하여 블록의 상태 전이가 올바르게 이루어졌는지 검증할 수 있다.
 
+![verification game](assets/learn_advanced_verification_game.png)
 
 ### Verification Game
-TrueBit은 outsource된 연산을 검증하기 위한 방법으로 Verification game을 제안했다. 그러나 TrueBit이 제안한 게임의 마지막 단계는 이더리움에서 연산을 한 번 수행하고 실제 output과 예상 output을 비교하는 방법을 사용한다. 우리는 Ohalo Limited와 Parsec Labs에서 구현해 왔던 EVM 내부에서 EVM을 실행하는 스마트 컨트랙트인 solEVM~\ref{ref:solevm}을 사용하여 연산 결과를 검증하고자 한다. 단, \href{https://hackmd.io/s/SkxNKAXU7}{수수료 위임 체인}을 사용하려면 수수료 위임 트랜잭션 실행 모델이 solEVM에 반영되어야 한다.
+TrueBit이 제안한 검증게임(Verification Game)의 마지막 단계는 이더리움에서 연산을 한 번 수행하고 실제 output과 예상 output을 비교하는 방법을 사용한다. Plasma EVM은 Ohalo Limited와 Parsec Labs에서 구현해 왔던 EVM 내부에서 EVM을 실행하는 스마트 컨트랙트인 solEVM(TODO: link)을 사용하여 연산 결과를 검증한다.
 
