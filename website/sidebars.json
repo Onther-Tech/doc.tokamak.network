@@ -16,7 +16,7 @@
         "type": "subcategory",
         "label": "Advanced",
         "ids": [
-          "learn/advanced/design-principles",
+          "learn/advanced/design-rationale",
           "learn/advanced/plasma-evm-architecture",
           "learn/advanced/root-chain",
           "learn/advanced/plasma-chain",
