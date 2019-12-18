@@ -29,3 +29,9 @@ sidebar_label: Interoperability : Enter & Exit
 1. 플라즈마 체인에 있는 요청가능한 토큰을 이더리움 체인으로 이전 하겠다는 퇴장 요청을 담은 트랜잭션을 전송한다.
 2. 해당 요청이 처리되면 플라즈마 체인에 있던 요청가능한 토큰이 이더리움 체인으로 이전 되며, 플라즈마 체인의 자산이 감소하고 이더리움 체인의 자산이 증가한다.
 3. 마지막으로, 요청가능한 토큰을 다시 ERC20 토큰으로 변경하면 퇴장 절차가 마무리된다.
+
+## 참고자료
+- [Plasma EVM(국문)](https://onther-tech.github.io/papers/tech-paper-kr.pdf)
+- [(영상)The Meaning of Requestable Smart Contract - 정순형(Kevin)](https://youtu.be/WQb008UBhiU)
+- [(영상)How to enter and exit in Tokamak network - Thomas Shin(신건우)](https://youtu.be/Zv-Pr3Lx6n4)
+- [(영상)누구나 쉽게 이해하는 PLASMA EVM](https://youtu.be/qWovBjf5wXI)

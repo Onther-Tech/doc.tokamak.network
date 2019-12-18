@@ -27,3 +27,6 @@ sidebar_label: Data Availability : Continuous Rebase
 유저들이 만들어낸 트랜잭션은 DA check, commit, challege 기간을 거쳐야지만 확정(finalize)된다. 따라서 트랜잭션을 발생시킨 후 해당 트랜잭션이 확정되기까지 일정한 기간을 기다려야 한다. 이는 마치 비트코인을 쓰는 사용자가 안정적인 트랜잭션 확정을 위해 적어도 6컨펌(약 60분)을 기다려야 하는 것과 비슷하다.
 
 하지만 모든 거래가 필요로 하는 안정성 수준이 같은 것은 아니다. 금액이 충분히 작다면 높은 수준의 거래 안정성이 요구되지 않다. 단적인 예로, 비트코인으로 소액을 결제하는 시스템은 6컨펌이 아닌 1컨펌 혹은 극소액 거래의 경우 0컨펌을 기준으로 삼기도 한다. 토카막 네트워크의 경우도 높은 수준의 안정성을 요하는 고액 거래를 다루는 Dapp의 경우는 DA check ~ Challenge의 과정을 모두 기다리는것이 바람직하지만, 소액거래의 경우 pre-commit과 동시에 이 트랜잭션을 인정해주는 모델도 가능하다.
+
+## 참고자료
+- [(영상)Data availability solution in plasma for Global State:Continuous Rebase-Aiden Park(박정원)](https://youtu.be/kRfgM4crCk0)
