@@ -37,7 +37,7 @@ GOPATH로 사용할 디렉토리를 생성하고 환경변수를 설정한다.
 
     재부팅시에도 해당 환경변수를 자동적으로 설정되도록 `.profile` 파일에 등록 해두는 것이 좋다.
     
-    ```shell
+    ```sh
     # ~/.profile
     ....
     
@@ -129,7 +129,7 @@ rootchain에 Operator Account의 잔고가 충분히 있어야 한다.
 
     Epoch : RootChain에 커밋할 Plasma 체인의 블록 갯수 이다. 4096의 경우 Plasma 체인의 4096블록 마다 rootchain에 1회 Tx를 전송한다.
 
-    ```scripts
+    ```sh
     #!/usr/bin/env bash
     
     OPERATOR_KEY="b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"
@@ -286,7 +286,7 @@ Plasma-evm 에서 보다 편하게 노드를 구성할 수 있도록 도와주�
 Puppeth를 실행하기 이전에 rootchain에 필요한 컨트렉트와 genesis 파일을 생성한다.
 [Manual](guides_getting-started_how-to-open-testnet#manual) 방법 과 동일하게 `deploy` 커맨드를 사용하여 Rootchain contract을 배포한후 Genesis 파일을 생성하는 스크립트를 작성한다.
 
-```script
+```sh
 # deploy.rootchain.sh
 #!/usr/bin bash
 
@@ -445,7 +445,7 @@ Host 환경별로 Docker 설치에 관해서는 [외부 문서](https://docs.doc
         7. Dashboard - Website listing above web-services
     > 1
     
-  Which server do you want to interact with?
+    Which server do you want to interact with?
         1. onther@localhost
         2. Connect another server
     > 1
@@ -502,7 +502,7 @@ Host 환경별로 Docker 설치에 관해서는 [외부 문서](https://docs.doc
     |             |               |          | Login secret                 | onther        |
     |             |               |          | Website address              | localhost     |
     |             |               |          | Website listener port        | 80            |
-    |             |               |          | ---------------------------- | -----[------- |
+    |             |               |          | ---------------------------- | ------------- |
     |             |               | nginx    | Shared listener port         | 80            |
     +-------------+---------------+----------+------------------------------+---------------+
     
@@ -600,7 +600,7 @@ What would you like to do? (default = stats)
 > 4
 
 1. Tear down Ethstats on onther@localhost
-2. Tear down Bootnode on onther@localhost
+2. Tear down Bootnode on onther@localhos
 3. Deploy new network component
 > 3
 
@@ -702,30 +702,35 @@ Creating tokamak_sealnode_1 ... done
 결과 화면은 아래와 같이 Puppeth에서 조회 된다.
 
 ```text
-+-------------+---------------+----------+------------------------------+----------------------------------+
-|   SERVER    |    ADDRESS    | SERVICE  |            CONFIG            |               VALUE              |
-+-------------+---------------+----------+------------------------------+----------------------------------+
-|   onther    | localhost     | sealnode | Data directory               | /home/ubuntu/.pls.oper           |
-|             |               |          | Ethstats username            | tokamak-operator                 |
-|             |               |          | Listener port                | 30307                            |
-|             |               |          | Peer count (all total)       | 512                              |
-|             |               |          | Peer count (light nodes)     | 256                              |
-|             |               |          | Root chain JSONRPC URL       | ws://127.0.0.1:8546              |
-|             |               |          | ---------------------------- | -------------------------------- |
-|             |               | bootnode | Data directory               | /home/ubuntu/.pls.user           |
-|             |               |          | Ethstats username            | tokamak-usernode                 |
-|             |               |          | JSONRPC HTTP port            | 8547                             |
-|             |               |          | JSONRPC VHOST                | localhost                        |
-|             |               |          | Listener port                | 30306                            |
-|             |               |          | Peer count (all total)       | 512                              |
-|             |               |          | Peer count (light nodes)     | 256                              |
-|             |               |          | Root chain JSONRPC URL       | ws://127.0.0.1:8546              |
-|             |               |          | ---------------------------- | -------------------------------- | 
-|             |               | ethstats | Banned addresses             |                                  |
-|             |               |          | Login secret                 | onther                           |
-|             |               |          | Website address              | localhost                        |
-|             |               |          | Website listener port        | 80                               |
-|             |               |          | ---------------------------- | -------------------------------- |
-|             |               | nginx    | Shared listener port         | 80                               |
-+-------------+---------------+----------+------------------------------+----------------------------------+
++-------------+---------------+----------+------------------------------+----------------------------------------------------+
+|   SERVER    |    ADDRESS    | SERVICE  |            CONFIG            |                        VALUE                       |
++-------------+---------------+----------+------------------------------+----------------------------------------------------+
+|   onther    | localhost     | sealnode | CHallenger account           | 0x3616be06d68dd22886505e9c2caaa9eca84564b8         |
+|             |               |          | Data directory               | /home/ubuntu/.pls.oper                             |
+|             |               |          | Ethstats username            | tokamak-operator                                   |
+|             |               |          | Gas ceil  (target maximum)   | 10.000 MGas                                        |
+|             |               |          | Gas floor (baseline target)  | 7.500 MGas                                         |
+|             |               |          | Gas price (minimum accepted) | 1.000 GWei                                         |
+|             |               |          | Listener port                | 30305                                              |
+|             |               |          | Operator account             | 0x71562b71999873DB5b286dF957af199Ec94617F7         |
+|             |               |          | Peer count (all total)       | 50                                                 |
+|             |               |          | Peer count (light nodes)     | 0                                                  |
+|             |               |          | Root chain JSONRPC URL       | ws://127.0.0.1:8546                                |
+|             |               |          | ---------------------------- | -------------------------------------------------- |
+|             |               | bootnode | Data directory               | /home/ubuntu/.pls.user                             |
+|             |               |          | Ethstats username            | tokamak-usernode                                   |
+|             |               |          | JSONRPC HTTP port            | 8547                                               |
+|             |               |          | JSONRPC VHOST                | localhost                                          |
+|             |               |          | Listener port                | 30306                                              |
+|             |               |          | Peer count (all total)       | 512                                                |
+|             |               |          | Peer count (light nodes)     | 256                                                |
+|             |               |          | Root chain JSONRPC URL       | ws://127.0.0.1:8546                                |
+|             |               |          | ---------------------------- | -------------------------------------------------- | 
+|             |               | ethstats | Banned addresses             |                                                    |
+|             |               |          | Login secret                 | onther                                             |
+|             |               |          | Website address              | localhost                                          |
+|             |               |          | Website listener port        | 80                                                 |
+|             |               |          | ---------------------------- | -------------------------------------------------- |
+|             |               | nginx    | Shared listener port         | 80                                                 |
++-------------+---------------+----------+------------------------------+----------------------------------------------------+
 ```
