@@ -76,7 +76,7 @@ Examples|LeapDAO, Plasma Group, Tokamak Network|zk-Rollup 등|Polkadot, Loom Net
 
 ## 롤업 모델과의 비교
 
-### 옵티미스틱 롤업(Optimistic Rollup)
+### 옵티미스틱 롤업
 
 #### 요약
 

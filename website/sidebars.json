@@ -1,9 +1,9 @@
 {
   "docs": {
-    "Learn": [
+    "배우기": [
       {
         "type": "subcategory",
-        "label": "Basic",
+        "label": "기초",
         "ids": [
           "learn/basic/tokamak-network",
           "learn/basic/enter-and-exit",
@@ -14,7 +14,7 @@
       },
       {
         "type": "subcategory",
-        "label": "Advanced",
+        "label": "고급",
         "ids": [
           "learn/advanced/design-principles",
           "learn/advanced/plasma-evm-architecture",
