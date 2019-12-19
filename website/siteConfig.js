@@ -14,7 +14,7 @@ const siteConfig = {
       label: 'Docs'
     },
     {
-      doc: 'guides/getting-started/guides_getting-started_how-to-open-testnet',
+      doc: 'guides/getting-started/how-to-open-private-testnet-rootchain',
       label: 'Getting Started'
     },
     {

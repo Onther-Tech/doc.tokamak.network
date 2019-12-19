@@ -7,11 +7,11 @@ sidebar_label: How to make request
 
  사용자가 Plasma-evm Wallet을 사용하여 Rootchain contract에 Enter/Exit Tx 생성 해주는 방식으로 설명.
 
-이더리움 메인넷 또는 Rinkeby 테스트넷의 자산을 플라즈마 체인으로 옮기기 위해서는 Enter 트랜잭션을 생성하여야 합니다.
+이더리움 메인넷 또는 Rinkeby 테스트넷의 자산을 자식체인으로 옮기기 위해서는 진입(Enter) 트랜잭션을 생성하여야 합니다.
 
 다음은 [https://wallet.tokamak.network](https://wallet.tokamak.network) 에 접속하여 Enter 트랜잭션을 생성하고 RootChain의 자산을 Plasma체인으로 옮기는 과정을 설명하도록 하겠습니다.
 
-### ENTER
+### 진입(ENTER)
 
 1. Plasma Wallet 접속
 2. Metamask 네트워크 선택 : RootChain[Mainn
@@ -24,7 +24,7 @@ sidebar_label: How to make request
 9. startEnter 선택 + Input 값 입력 [TODO] _trieVlue 값 value로 대체.. 핵불편.
 10. Metamask TX 전송.
 
-### EXIT
+### 퇴장(EXIT)
 
 1. Plasma Wallet 접속.
 2. Metamask 네트워크 선택 : Plasma
