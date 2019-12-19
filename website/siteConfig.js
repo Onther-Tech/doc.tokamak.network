@@ -10,7 +10,7 @@ const siteConfig = {
   // Header links
   headerLinks: [
     {
-      doc: 'learn/basic/learn_basic_tokamak-network',
+      doc: 'learn/basic/tokamak-network',
       label: 'Docs'
     },
     {
