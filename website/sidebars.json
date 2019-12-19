@@ -5,11 +5,11 @@
         "type": "subcategory",
         "label": "Basic",
         "ids": [
-          "learn/basic/learn_basic_tokamak-network",
-          "learn/basic/learn_basic_enter-and-exit",
-          "learn/basic/learn_basic_transaction-fee",
-          "learn/basic/learn_basic_what-continuous-rebase",
-          "learn/basic/learn_basic_layer-2-solutions"
+          "learn/basic/tokamak-network",
+          "learn/basic/enter-and-exit",
+          "learn/basic/transaction-fee",
+          "learn/basic/what-continuous-rebase",
+          "learn/basic/layer-2-solutions"
         ]
       },
       {
