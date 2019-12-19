@@ -27,30 +27,25 @@
         ]
       }
     ],
-    "Guides": [
+    "가이드": [
       {
         "type": "subcategory",
-        "label": "Getting Started",
+        "label": "프라이빗 테스트넷 시작하기",
         "ids": [
-          "guides/getting-started/guides_getting-started_how-to-open-testnet",
-          "guides/getting-started/guides_getting-started_how-to-connect-public-network"
+          "guides/getting-started/how-to-open-private-testnet-rootchain",
+          "guides/getting-started/how-to-open-private-testnet-manually",
+          "guides/getting-started/how-to-open-private-testnet-puppeth"
         ]
       },
       {
         "type": "subcategory",
-        "label": "Manuals",
+        "label": "퍼블릭 테스트넷 연결하기",
         "ids": [
-          "guides/manuals/guides_manuals_how-to-make-request",
-          "guides/manuals/guides_manuals_how-to-manage-staked-ton",
-          "guides/manuals/guides_manuals_how-to-manage-stamina"
+          "guides/getting-started/how-to-connect-public-testnet-prepare",
+          "guides/getting-started/how-to-connect-public-testnet-manually",
+          "guides/getting-started/how-to-connect-public-testnet-puppeth"
         ]
       }
-    ],
-    "Cryptoeconomics": [
-      "cryptoeconomics/cryptoeconomics_ton",
-      "cryptoeconomics/cryptoeconomics_stamina",
-      "cryptoeconomics/cryptoeconomics_staking",
-      "cryptoeconomics/cryptoeconomics_jackpot"
     ]
   }
 }
