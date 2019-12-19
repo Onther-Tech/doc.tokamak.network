@@ -46,16 +46,16 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 첼린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다. 특히, <U>첼린저 계정에 최소 0.5 ETH 이상이</U> 있어야 오퍼레이터 노드가 정상적으로 실행된다.
 
-만약 오퍼레이터 계정의 이더 잔고가 부족한 경우, 오퍼레이터는 루트체인에 Tx를 전송 할 수 없게 되어 플라즈마 체인이 멈출 수 있으므로 주의해야 한다.
+만약 오퍼레이터 계정의 이더 잔고가 부족한 경우, 오퍼레이터는 루트체인에 트랜젝션(Tx)를 전송 할 수 없게 되어 자식체인이 멈출 수 있으므로 주의해야 한다.
 
 ### 1. 루트체인 소스코드 받기
 
-    루트체인으로 사용할 `go-ethereum` 소스코드를 다운로드 받는다.
+루트체인으로 사용할 `go-ethereum` 소스코드를 다운로드 받는다.
 
-    ```bash
-    $ git clone github.com/Onther-Tech/go-ethereum
-    $ cd go-ethereum
-    ```
+```bash
+$ git clone github.com/Onther-Tech/go-ethereum
+$ cd go-ethereum
+```
 
 ### 2. 실행 스크립트 확인
 
@@ -99,8 +99,12 @@ make geth && build/bin/geth \
 
 ### 3. 루트체인 실행하기
 
-아래 명령어를 통해 `run.rootchain.sh` 스크립트를 실행하는 경우 프라이빗 네트워크에서 사용되는 루트체인이 구동된다.
+아래 명령어를 통해 `run.rootchain.sh` 스크립트를 실행하여 프라이빗 네트워크에서 사용되는 루트체인을 구동한다.
 
 ```bash
 go-ethereum$ bash run.rootchain.sh
 ```
+
+
+## 설정 완료 후 구조도
+![루트 체인 설정 완료후](assets/guides_private_testnet_rootchain.png)

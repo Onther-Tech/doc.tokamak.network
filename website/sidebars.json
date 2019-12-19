@@ -41,16 +41,11 @@
         "type": "subcategory",
         "label": "퍼블릭 테스트넷 연결하기",
         "ids": [
+          "guides/getting-started/how-to-connect-public-testnet-prepare",
           "guides/getting-started/how-to-connect-public-testnet-manually",
           "guides/getting-started/how-to-connect-public-testnet-puppeth"
         ]
       }
-    ],
-    "Cryptoeconomics": [
-      "cryptoeconomics/cryptoeconomics_ton",
-      "cryptoeconomics/cryptoeconomics_stamina",
-      "cryptoeconomics/cryptoeconomics_staking",
-      "cryptoeconomics/cryptoeconomics_jackpot"
     ]
   }
 }
