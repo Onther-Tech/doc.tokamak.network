@@ -19,7 +19,7 @@
           "learn/advanced/design-rationale",
           "learn/advanced/plasma-evm-architecture",
           "learn/advanced/root-chain",
-          "learn/advanced/plasma-chain",
+          "learn/advanced/child-chain",
           "learn/advanced/continuous-rebase",
           "learn/advanced/plasma-evm-smart-contracts",
           "learn/advanced/computation-challenge",
