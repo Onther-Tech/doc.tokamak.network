@@ -1,0 +1,492 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Puppeth 사용하여 프라이빗 테스트넷 설정하기 · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`Puppeth`란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램으로서 내부적으로 `Docker`를 사용한다.&lt;br&gt;"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Puppeth 사용하여 프라이빗 테스트넷 설정하기 · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="`Puppeth`란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램으로서 내부적으로 `Docker`를 사용한다.&lt;br&gt;"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>프라이빗 테스트넷 시작하기</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">배우기<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">기초</h4><ul><li class="navListItem"><a class="navItem" href="/docs/learn/basic/tokamak-network">토카막 네트워크</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/basic/enter-and-exit">상호운용성: 진입 &amp; 퇴장</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/basic/transaction-fee">편의성: 계정, 트랜잭션 수수료, 개발도구</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/basic/layer-2-solutions">비교: 다른 확장성 솔루션</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">고급</h4><ul><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/design-rationale">디자인 원칙</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/plasma-evm-architecture">Plasma EVM 아키텍처</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/root-chain">루트체인</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/child-chain">자식체인</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/plasma-evm-smart-contracts">Plasma EVM 스마트 컨트랙트</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/examples-and-best-practices">요청 가능한 컨트랙트 예제</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">가이드<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">프라이빗 테스트넷 시작하기</h4><ul><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-open-private-testnet-rootchain">루트체인 설정하기</a></li><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-open-private-testnet-manually">직접 설정하기</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/guides/getting-started/how-to-open-private-testnet-puppeth">Puppeth 사용하여 설정하기</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">퍼블릭 테스트넷 연결하기</h4><ul><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-connect-public-testnet-prepare">연결 준비하기</a></li><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-connect-public-testnet-manually">직접 연결하기</a></li><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-connect-public-testnet-puppeth">Puppeth 사용하여 연결하기</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/guides/public-testnets">퍼블릭 테스트넷 정보</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/doc.tokamak.network/edit/master/docs/guides/getting-started/how-to-open-private-testnet-puppeth.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Puppeth 사용하여 프라이빗 테스트넷 설정하기</h1></header><article><div><span><p><code>Puppeth</code>란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램으로서 내부적으로 <code>Docker</code>를 사용한다.<br>
+<code>plasma-evm</code>의 <code>Puppeth</code>는 토카막 노드를 쉽게 구성 할 수 있도록 추가된 기능이 탑재 되어 있다.</p>
+<p><code>Puppeth</code>를 사용하여 자식 체인을 설정하려면 직접 설치와 마찬가지로 사용가능한 루트체인이 필요하다.<br> 루트체인이 실행중이지 않고 있다면 <a href="how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0">루트체인 설정하기</a>를 먼저 진행한다.</p>
+<p>이 가이드에서는 <code>Puppeth</code>를 사용하여 원격 머신으로서 자신의 로컬 환경을 사용 한다.</p>
+<p><code>Puppeh</code>에서 사용되는 용어를 정리하면 아래와 같다.</p>
+<p><code>sealnode</code> : 오퍼레이터 노드, 블록을 생성하는 마이너 노드로 볼 수 있다.</p>
+<p><code>boodnode</code> : 사용자 노드, JSON-RPC를 통해 트랜잭션 정보를 받아 오퍼레이터 노드에 전달한고 오퍼레이터 노드에서 생성된 블록들을 동기화 한다.</p>
+<h2><a class="anchor" aria-hidden="true" id="puppeth-준비하기"></a><a href="#puppeth-준비하기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>Puppeth</code> 준비하기</h2>
+<blockquote>
+<p>루트체인으로 <code>ganache</code> 테스트체인을 사용하는 경우, <code>ganache</code> 실행시 생성된 계정을 오퍼레이터(Operator)와 첼린저(Challenger)로 사용하여야 한다.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="1-소스코드-다운로드-및-컴파일하기"></a><a href="#1-소스코드-다운로드-및-컴파일하기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. 소스코드 다운로드 및 컴파일하기</h3>
+<p><code>plasma-evm</code>에서 제공하는 <code>Puppeth</code>에는 여러 노드를 손쉽게 배포 할 수 있는 기능을 제공하고 있다. 아래 작업은 <a href="https://github.com/onther-tech/plasma-evm">https://github.com/onther-tech/plasma-evm</a> 기준으로 설명한다.</p>
+<p>만약 해당 리포지토리가 없다면 아래 명령어를 통해서 소스코드를 복제 하고 컴파일을 수행한다.</p>
+<pre><code class="hljs css language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/onther-tech/plasma-evm
+$ <span class="hljs-built_in">cd</span> plasma-evm &amp;&amp; make all
+</code></pre>
+<p>컴파일을 완료하면 <code>puppeth</code> 실행파일은 <code>plasma-evm/build/bin/</code> 에 위치한다.</p>
+<h3><a class="anchor" aria-hidden="true" id="2--루트체인-컨트렉트-배포하기"></a><a href="#2--루트체인-컨트렉트-배포하기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2.  루트체인 컨트렉트 배포하기</h3>
+<p><code>Puppeth</code>를 실행하기 이전에 자식체인과 연결될 루트체인 컨트렉트를 배포하고 해당 정보를 담은 <code>genesis</code> 파일을 생성한다.
+<br><a href="how-to-open-private-testnet-manually#1-%EB%A3%A8%ED%8A%B8%EC%B2%B4%EC%9D%B8-%EC%BB%A8%ED%8A%B8%EB%A0%89%ED%8A%B8-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">프라이빗 테스트넷 직접 설정하기 - 1. 루트체인 컨트렉트 배포하기</a> 와 동일하게 <code>deploy</code> 커맨드를 사용하여 루트체인 contract을 배포한후 <code>genesis.json</code> 파일을 생성하는 스크립트를 작성한다.</p>
+<blockquote>
+<p>해당 genesis.json 파일의 예시는 <a href="https://github.com/Onther-Tech/plasma-evm-networks/blob/master/faraday-testnet/faraday.json">faraday.json</a> 에서 확인할 수 있다.</p>
+</blockquote>
+<pre><code class="hljs css language-sh"><span class="hljs-comment"># deploy.rootchain.sh</span>
+<span class="hljs-meta">#!/usr/bin bash
+</span>
+OPERATOR_KEY=<span class="hljs-string">"b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"</span>
+KEY2=<span class="hljs-string">"78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a115"</span>
+KEY3=<span class="hljs-string">"067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc"</span>
+KEY4=<span class="hljs-string">"ae03e057a5b117295db86079ba4c8505df6074cdc54eec62f2050e677e5d4e66"</span>
+KEY5=<span class="hljs-string">"eda4515e1bc6c08e8606b51ffb6ffe70b3fe76781ed49872285e484064e3b634"</span>
+CHALLENGER_KEY=<span class="hljs-string">"78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a114"</span>
+
+DATADIR=pls.data
+OPERATOR=<span class="hljs-string">"0x71562b71999873DB5b286dF957af199Ec94617F7"</span>
+CHALLENGER=<span class="hljs-string">"0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8"</span>
+
+ROOTCHAIN_IP=localhost <span class="hljs-comment"># Onther Ropsten Geth Node IP.</span>
+
+<span class="hljs-comment"># Deploy contracts at rootchain</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Deploy rootchain contract and others"</span>
+make geth &amp;&amp; build/bin/geth \
+    --rootchain.url <span class="hljs-string">"ws://<span class="hljs-variable">$ROOTCHAIN_IP</span>:8546"</span> \
+    --operator.key <span class="hljs-variable">$OPERATOR_KEY</span> \
+    --datadir <span class="hljs-variable">$DATADIR</span> \
+    deploy <span class="hljs-string">"./genesis.json"</span> 16 <span class="hljs-literal">true</span> 4096 
+
+<span class="hljs-comment"># deploy params : chainID, isInitialAsset, Epochlength</span>
+<span class="hljs-comment"># you can checkout "$geth deploy --help" for more information</span>
+</code></pre>
+<p>위 스크립트를 저장하고 아래 명령어로 실행한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm$ bash deploy.rootchain.sh
+</code></pre>
+<p>생성된 <code>genesis.json</code> 파일은 동일하게 <code>plasma-evm</code> 폴더 내에 위치한다.</p>
+<h3><a class="anchor" aria-hidden="true" id="3-puppeth-실행하기"></a><a href="#3-puppeth-실행하기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. <code>Puppeth</code> 실행하기</h3>
+<p>puppeth를 실행하기 위해서는 <code>build/bin/puppeth</code> 명령어를 입력하여 실행한다. ( go1.13 버전을 사용하는 것을 추천한다)</p>
+<pre><code class="hljs css language-text">plasma-evm$ build/bin/puppeth
++-----------------------------------------------------------+
+| Welcome to puppeth, your Ethereum private network manager |
+|                                                           |
+| This tool lets you create a new Ethereum network down to  |
+| the genesis block, bootnodes, miners and ethstats servers |
+| without the hassle that it would normally entail.         |
+|                                                           |
+| Puppeth uses SSH to dial in to remote servers, and builds |
+| its network components out of Docker containers using the |
+| docker-compose toolset.                                   |
++-----------------------------------------------------------+
+
+Please specify a network name to administer (no spaces, hyphens or capital letters please)
+>
+</code></pre>
+<p>자신이 지정하고 싶은 임의의 네트워크 이름을 입력한다.
+입력한 <code>Network name</code> 은 네트워크를 식별하기 위해 <code>~/.puppeth/[network name]</code> 파일로 저장된다.
+다음 실행시 동일한 이름으로 입력하게 되면 해당 파일의 설정값을 불러온다.</p>
+<blockquote>
+<p>사용자 노드와 오퍼레이터 노드 설정시 불가피하게 재시작 하는 경우 동일한 <code>network name</code>을 입력하므로써 이전 상태 저장값을 불러 올 수 있다.</p>
+</blockquote>
+<p>사용자 노드와 오퍼레티어 노드 설정하는 방법에서는 계속해서 <code>puppeth</code> 실행화면에서 작업을 수행한다.</p>
+<h2><a class="anchor" aria-hidden="true" id="사용자-노드-설정하기"></a><a href="#사용자-노드-설정하기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사용자 노드 설정하기</h2>
+<p>사용자 노드의 <code>enode</code> 주소를 <code>Puppeth</code>에서 관리하므로 <a href="how-to-open-private-testnet-manually">프라이빗 테스트넷 직접 설정하는 법</a>과 다르게 사용자 노드를 먼저 설정한다.</p>
+<p>글의 맨처음 이야기 하였지만, <code>Puppeth</code>를 사용하기 위해서는 원격 머신에 Docker가 설치 되어 있어야 한다. 로컬 환경에 <code>Docker</code>가 설치 되어 있음을 전제 한다.
+호스트 머신 환경별 <code>Docker</code> 설치에 관해서는 <a href="https://docs.docker.com/install/#supported-platforms">외부 문서</a>를 참고한다.</p>
+<h3><a class="anchor" aria-hidden="true" id="1-genesis-파일-불러오기"></a><a href="#1-genesis-파일-불러오기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. <code>genesis</code> 파일 불러오기</h3>
+<p><code>Puppeth</code>를 통해서 노드들을 설정하기 위해서는 <code>genesis.json</code>파일이 필요하다.</p>
+<pre><code class="hljs css language-text">What would you like to do? (default = stats)
+    1. Show network stats
+    2. Configure new genesis
+    3. Track new remote server
+    4. Deploy network components
+> 2
+
+What would you like to do? (default = create)
+    1. Create new genesis from scratch
+    2. Import already existing genesis
+> 2
+
+Where's the genesis file? (local file or http/https url)
+> /home/ubuntu/plasma-evm/genesis.json
+</code></pre>
+<p><code>genesis.json</code> 파일이 제대로 임포트(import) 되는 경우 아래와 같은 메시지가 출력되고 초기 선택화면으로 돌아간다.</p>
+<pre><code class="hljs css language-text">INFO [12-12|05:45:32.124] Imported genesis block
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="2-리모트-머신-추가하기"></a><a href="#2-리모트-머신-추가하기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. 리모트 머신 추가하기</h3>
+<p>자신의 MacOS에 설치하는 경우라고 한다면 우선 원격 컴퓨터가 MacOS에 접근하도록 허용해 주어야 한다.
+이부분은 apple에서 제공하는 <a href="https://support.apple.com/ko-kr/guide/mac-help/mchlp1066/mac">macOS 사용 설명서</a> 부분을 참고한다.</p>
+<pre><code class="hljs css language-text">What would you like to do? (default = stats)
+    1. Show network stats
+    2. Configure new genesis
+    3. Track new remote server
+    4. Deploy network components
+> 3
+
+What is the remote server's address ([username[:identity]@]hostname[:port])?
+> onther@localhost
+
+The authenticity of host 'localhost:22 ([::1]:22)' can't be established.
+SSH key fingerprint is ff:00:ff:00:ff:00:ff:00:ff:00:ff:00:ff:00:ff:00 [MD5]
+Are you sure you want to continue connecting (yes/no)? yes
+What's the login password for Jin at onther@localhost? (won't be echoed)
+> [insert password of user]
+
+INFO [08-01|03:30:30.787] Starting remote server health-check      server=onther@localhost
++-------------+---------------+----------+-----------------------+---------------+
+|   SERVER    |    ADDRESS    | SERVICE  |        CONFIG         |     VALUE     |
++-------------+---------------+----------+-----------------------+---------------+
+|   onther    | localhost     |          |                       |               |
++-------------+---------------+----------+-----------------------+---------------+
+</code></pre>
+<blockquote>
+<p>IP 주소 대신 도메인(Domain) 주소를 입력하는 경우 생성되는 <code>Nginx</code>가 구문을 파싱하지 못한다. 따라서 IP 주소를 직접 넣어준다.</p>
+</blockquote>
+<p>SSH키 파일을 사용하는경우 <code>onther:onther_private.pem@localhost</code> 와 같은 형태로 입력하여 사용한다.</p>
+<h3><a class="anchor" aria-hidden="true" id="3-ethstats-컨테이터-배포하기"></a><a href="#3-ethstats-컨테이터-배포하기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. <code>Ethstats</code> 컨테이터 배포하기</h3>
+<p><code>Puppeth</code>에서 기본적으로 <code>ethstats</code>의 정보가 없는 경우 진행이 되지 않는다. 따라서 <code>ethstats</code> 노드를 먼저 배포해주어야 한다.</p>
+<pre><code class="hljs css language-text">+-------------+---------------+----------+-----------------------+---------------+
+|   SERVER    |    ADDRESS    | SERVICE  |        CONFIG         |     VALUE     |
++-------------+---------------+----------+-----------------------+---------------+
+|   onther    | localhost     |          |                       |               |
++-------------+---------------+----------+-----------------------+---------------+
+
+What would you like to do? (default = stats)
+    1. Show network stats
+    2. Manage existing genesis
+    3. Manage tracked machines
+    4. Deploy network components
+> 4
+
+What would you like to deploy? (recommended order)
+    1. Ethstats  - Network monitoring tool
+    2. Bootnode  - Entry point of the network
+    3. Sealer    - Full node minting new blocks
+    4. Explorer  - Chain analysis webservice
+    5. Wallet    - Browser wallet for quick sends
+    6. Faucet    - Crypto faucet to give away funds
+    7. Dashboard - Website listing above web-services
+> 1
+
+Which server do you want to interact with?
+    1. onther@localhost
+    2. Connect another server
+> 1
+
+Which port should ethstats listen on? (default = 80)
+> 80
+
+Allow sharing the port with other services (y/n)? (default = yes)
+> yes
+
+INFO [01-01|00:00:00.000] Deploying nginx reverse-proxy            server=localhost port=80
+Building nginx
+Step 1/1 : FROM jwilder/nginx-proxy
+    ---> 46fc9150cb48
+Successfully built 46fc9150cb48
+Successfully tagged faraday/nginx:latest
+Creating faraday_nginx_1 ...
+Creating faraday_nginx_1 ... done
+</code></pre>
+<p><code>Ethstats</code> 서버 연결을 위한 리버스 프록시(Reverse Proxy)가 먼저 구성된다. 계속해서 <code>Ethstats</code> 컨테이너를 생성하기 위해 도메인 주소(또는 IP 주소)과 비밀번호를 입력해준다.</p>
+<pre><code class="hljs css language-text">Proxy deployed, which domain to assign? (default = localhost)
+> localhost
+What should be the secret password for the API? (must not be empty)
+> onther
+
+Found orphan containers (faraday_nginx_1) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.
+Building ethstats
+Step 1/2 : FROM puppeth/ethstats:latest
+    ---> fb62abe59cb2
+Step 2/2 : RUN echo 'module.exports = {trusted: [], banned: [], reserved: ["yournode"]};' > lib/utils/config.js
+    ---> Running in ac7e749c51f5
+Removing intermediate container ac7e749c51f5
+    ---> 276dd2683d00
+Successfully built 276dd2683d00
+Successfully tagged faraday/ethstats:latest
+Creating faraday_ethstats_1 ...
+Creating faraday_ethstats_1 ... done
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="4-사용자-노드-컨테이너-배포하기"></a><a href="#4-사용자-노드-컨테이너-배포하기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. 사용자 노드 컨테이너 배포하기</h3>
+<p><code>Ethstats</code> 정보를 가지고 있어야 사용자 노드 컨테이너 생성이 가능하다. 따라서, 3번 과정을 먼저 수행해 주어야 한다.</p>
+<pre><code class="hljs css language-text">+-------------+---------------+----------+------------------------------+---------------+
+|   SERVER    |    ADDRESS    | SERVICE  |            CONFIG            |     VALUE     |
++-------------+---------------+----------+------------------------------+---------------+
+|   onther    | localhost     | ethstats | Banned addresses             |               |
+|             |               |          | Login secret                 | onther        |
+|             |               |          | Website address              | localhost     |
+|             |               |          | Website listener port        | 80            |
+|             |               |          | ---------------------------- | ------------- |
+|             |               | nginx    | Shared listener port         | 80            |
++-------------+---------------+----------+------------------------------+---------------+
+
+What would you like to do? (default = stats)
+    1. Show network stats
+    2. Manage existing genesis
+    3. Manage tracked machines
+    4. Deploy network components
+> 4
+
+What would you like to deploy? (recommended order)
+    1. Ethstats  - Network monitoring tool
+    2. Bootnode  - Entry point of the network
+    3. Sealer    - Full node minting new blocks
+    4. Explorer  - Chain analysis webservice
+    5. Wallet    - Browser wallet for quick sends
+    6. Faucet    - Crypto faucet to give away funds
+    7. Dashboard - Website listing above web-services
+> 2
+
+Which server do you want to interact with?
+    1. onther@localhost
+    2. Connect another server
+> 1
+
+What URL to listen on root chain JSONRPC?
+> ws://127.0.0.1:8546
+</code></pre>
+<p>루트체인 JSONRPC는 로컬 머신 에서 작동하고 있는 루트체인 웹소켓(websocket) 접속 주소를 적어준다.(<code>ws://127.0.0.1:8546</code>)</p>
+<pre><code class="hljs css language-text">Do you want expose HTTP JSONRPC endpoint (y/n)? (default=no)
+> y
+
+Which TCP port to expose? (default=8545)
+> 8547
+
+Which is virtual hostname? (default=localhost)
+> localhost
+</code></pre>
+<p>사용자가 노드에 접근하여 트랜젝션 보내려면 <code>HTTP JSONRPC endpoint</code> 를 <code>yes</code> 선택하여 반드시 열어주어야 한다.</p>
+<pre><code class="hljs">Where should data be stored on the remote machine?
+&gt; <span class="hljs-string">/home/ubuntu/.pls.user</span>
+
+Which TCP/UDP port to listen on? <span class="hljs-params">(<span class="hljs-attr">default</span> = 30305)</span>
+&gt; 30306
+
+How many peers to allow connecting? <span class="hljs-params">(<span class="hljs-attr">default</span> = 512)</span>
+&gt; 512
+
+How many light peers to allow connecting? <span class="hljs-params">(<span class="hljs-attr">default</span> = 256)</span>
+&gt; 256
+
+What should the node be called on the stats page?
+&gt; tokamak-usernode
+
+Building bootnode
+Step 1/4 : FROM onthertech/plasma-evm<span class="hljs-function">:latest</span>
+latest: Pulling from onthertech/plasma-evm
+Digest: sha256<span class="hljs-function">:aa8029de17fb3da6c390545df4e05abae109ec6a45f12ecb22a0e0063b1aa276</span>
+Status: Downloaded newer image for onthertech/plasma-evm<span class="hljs-function">:latest</span>
+    <span class="hljs-params">---</span>&gt; 1576e54d80ef
+Step 2/4 : ADD genesis.json <span class="hljs-string">/genesis.json</span>
+    <span class="hljs-params">---</span>&gt; 5c5992d4f1a2
+Step 3/4 : RUN   <span class="hljs-keyword">echo</span> $'geth <span class="hljs-params">--cache</span> 512 init <span class="hljs-params">--rootchain</span>.url ws:<span class="hljs-string">//127.0.0.1</span><span class="hljs-function">:8546</span> <span class="hljs-string">/genesis.json</span>' &gt; geth.sh &amp;&amp;   <span class="hljs-keyword">echo</span> $'exec geth <span class="hljs-params">--syncmode=</span><span class="hljs-string">"full"</span> <span class="hljs-params">--networkid</span> 16 <span class="hljs-params">--rootchain</span>.url ws:<span class="hljs-string">//127.0.0.1</span><span class="hljs-function">:8546</span> <span class="hljs-params">--rpc</span> <span class="hljs-params">--rpcaddr</span> \'0.0.0.0\' <span class="hljs-params">--rpcport</span> 8545 <span class="hljs-params">--rpcapi</span> eth,net,debug <span class="hljs-params">--rpccorsdomain</span> <span class="hljs-string">"*"</span> <span class="hljs-params">--rpcvhosts=localhost</span> <span class="hljs-params">--ws</span> <span class="hljs-params">--wsorigins</span> \'*\' <span class="hljs-params">--wsaddr</span> \'0.0.0.0\' <span class="hljs-params">--wsport</span> 8546 <span class="hljs-params">--cache</span> 512 <span class="hljs-params">--port</span> 30306 <span class="hljs-params">--nat</span> extip<span class="hljs-function">:localhost</span> <span class="hljs-params">--maxpeers</span> 512 <span class="hljs-params">--lightpeers=256</span> <span class="hljs-params">--lightserv=50</span> <span class="hljs-params">--ethstats</span> \'tokamak-mynode<span class="hljs-function">:onther</span>@localhost\'    <span class="hljs-params">--miner</span>.gastarget 0 <span class="hljs-params">--miner</span>.gaslimit 0 <span class="hljs-params">--miner</span>.gasprice 0' &gt;&gt; geth.sh
+    <span class="hljs-params">---</span>&gt; Running in 826cf2fe881a
+Removing intermediate container 826cf2fe881a
+    <span class="hljs-params">---</span>&gt; ed4330e0d27f
+Step 4/4 : ENTRYPOINT [<span class="hljs-string">"/bin/sh"</span>, <span class="hljs-string">"geth.sh"</span>]
+    <span class="hljs-params">---</span>&gt; Running in 49f1003114a2
+Removing intermediate container 49f1003114a2
+    <span class="hljs-params">---</span>&gt; 120072c6f2ee
+Successfully built 120072c6f2ee
+Successfully tagged tokamak/bootnode<span class="hljs-function">:latest</span>
+Creating tokamak_bootnode_1 <span class="hljs-string">...</span>
+Creating tokamak_bootnode_1 <span class="hljs-string">...</span> done
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="오퍼레이터-노드-설정하기"></a><a href="#오퍼레이터-노드-설정하기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터 노드 설정하기</h2>
+<p>자식체인의 블록을 생성하는 오퍼레이터 노드를 구성한다. <code>Puppeth</code>를 사용하여 오퍼레이터 노드 설정하기 이전에 <code>Ethstats</code> 와 사용자 노드(=<code>bootnode</code>) 가 미리 구성되어 있어야 한다.</p>
+<pre><code class="hljs css language-text">What would you like to do? (default = stats)
+1. Show network stats
+2. Manage existing genesis
+3. Manage tracked machines
+4. Deploy network components
+> 4
+
+1. Tear down Ethstats on onther@localhost
+2. Tear down Bootnode on onther@localhos
+3. Deploy new network component
+> 3
+
+What would you like to deploy? (recommended order)
+1. Ethstats  - Network monitoring tool
+2. Bootnode  - Entry point of the network
+3. Sealer    - Full node minting new blocks
+4. Explorer  - Chain analysis webservice
+5. Wallet    - Browser wallet for quick sends
+6. Faucet    - Crypto faucet to give away funds
+7. Dashboard - Website listing above web-services
+> 3
+
+Which server do you want to interact with?
+1. onther@localhost
+2. Connect another server
+> 1
+
+What URL to listen on root chain JSONRPC?
+> ws://127.0.0.1:8546
+</code></pre>
+<p>사용자 노드와 동일한 루트체인 <code>JSONRPC</code> 주소를 입력해준다.</p>
+<pre><code class="hljs css language-text">Do you want expose HTTP JSONRPC endpoint (y/n)? (default=no)
+> no
+
+Do you want expose WebSocket JSONRPC endpoint (y/n)? (default=no)
+> no
+
+Where should data be stored on the remote machine?
+> /home/ubuntu/.pls.oper
+
+Where should the ethash mining DAGs be stored on the remote machine?
+> /home/ubuntu/.pls.dag
+
+Which TCP/UDP port to listen on? (default = 30305)
+> 30307
+
+How many peers to allow connecting? (default = 50)
+> 50
+
+How many light peers to allow connecting? (default = 0)
+> 0
+
+What should the node be called on the stats page?
+> tokamak-operator
+</code></pre>
+<p><code>~ be stored on the remote machine?</code> 에서 입력하는 디렉토리 주소는 <code>Docker</code> 컨테이너와 호스트가 공유하는 디렉토리로서 호스트 머신에서도 접근이 가능하다.</p>
+<pre><code class="hljs">Please paste the operator<span class="hljs-symbol">'s</span> key JSON:
+&gt; {<span class="hljs-string">"address"</span>:<span class="hljs-string">"0x71562b71999873DB5b286dF957af199Ec94617F7"</span>,<span class="hljs-string">"crypto"</span>:{<span class="hljs-string">"cipher"</span>:<span class="hljs-string">"aes-128-ctr"</span>,<span class="hljs-string">"ciphertext"</span>:<span class="hljs-string">""</span>,<span class="hljs-string">"cipherparams"</span>:{<span class="hljs-string">"iv"</span>:<span class="hljs-string">"ad242d84297ce345ccb112aeef4c7260"</span>},<span class="hljs-string">"kdf"</span>:<span class="hljs-string">"scrypt"</span>,<span class="hljs-string">"kdfparams"</span>:{<span class="hljs-string">"dklen"</span>:<span class="hljs-number">32</span>,<span class="hljs-string">"n"</span>:<span class="hljs-number">262144</span>,<span class="hljs-string">"p"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"r"</span>:<span class="hljs-number">8</span>,<span class="hljs-string">"salt"</span>:<span class="hljs-string">""</span>},<span class="hljs-string">"mac"</span>:<span class="hljs-string">"0ff7dce77d97b028116ffc8b813cb9811427aa571943903a746a4209a8193e7d"</span>},<span class="hljs-string">"id"</span>:<span class="hljs-string">"f5b9dbf8-4015-4efa-8b1b-c31f5a657d82"</span>,<span class="hljs-string">"version"</span>:<span class="hljs-number">3</span>}
+
+What<span class="hljs-symbol">'s</span> the unlock password <span class="hljs-keyword">for</span> the account? (won<span class="hljs-symbol">'t</span> be echoed)
+&gt;
+
+Please paste the challenger<span class="hljs-symbol">'s</span> key JSON:
+&gt; {<span class="hljs-string">"address"</span>:<span class="hljs-string">"3616be06d68dd22886505e9c2caaa9eca84564b8"</span>,<span class="hljs-string">"crypto"</span>:{<span class="hljs-string">"cipher"</span>:<span class="hljs-string">"aes-128-ctr"</span>,<span class="hljs-string">"ciphertext"</span>:<span class="hljs-string">""</span>,<span class="hljs-string">"cipherparams"</span>:{<span class="hljs-string">"iv"</span>:<span class="hljs-string">"a6645d1042360127f00d3496e44e542e"</span>},<span class="hljs-string">"kdf"</span>:<span class="hljs-string">"scrypt"</span>,<span class="hljs-string">"kdfparams"</span>:{<span class="hljs-string">"dklen"</span>:<span class="hljs-number">32</span>,<span class="hljs-string">"n"</span>:<span class="hljs-number">262144</span>,<span class="hljs-string">"p"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"r"</span>:<span class="hljs-number">8</span>,<span class="hljs-string">"salt"</span>:<span class="hljs-string">""</span>},<span class="hljs-string">"mac"</span>:<span class="hljs-string">"1c8372bd858186872bd7d5558773b7e4c7f4c8ba90450228e5f7819cfec9dacf"</span>},<span class="hljs-string">"id"</span>:<span class="hljs-string">"dfd37a93-4dd4-4c2a-b65e-0077d185906a"</span>,<span class="hljs-string">"version"</span>:<span class="hljs-number">3</span>}
+
+What<span class="hljs-symbol">'s</span> the unlock password <span class="hljs-keyword">for</span> the account? (won<span class="hljs-symbol">'t</span> be echoed)
+&gt;
+</code></pre>
+<p>오퍼레이터와 첼린저 계정은 루트체인에 잔고(Balance)가 있는 계정을 사용해야 한다.</p>
+<pre><code class="hljs">What gas limit should empty blocks target (MGas)? (<span class="hljs-section">default</span> = <span class="hljs-number">7.500</span>)
+&gt; <span class="hljs-number">7.5</span>
+
+What gas limit should full blocks target (MGas)? (<span class="hljs-section">default</span> = <span class="hljs-number">10.000</span>)
+&gt; <span class="hljs-number">10</span>
+
+What gas price should the operator require (GWei)? (<span class="hljs-section">default</span> = <span class="hljs-number">1.000</span>)
+&gt; <span class="hljs-number">1</span>
+</code></pre>
+<p>나머지는 기본값을 사용한다.</p>
+<p>원하는 경우 <code>What gas limit should full blocks target?</code> 의 숫자를 높여 오퍼레이터 노드가 생성하는 블록에서 더 많은 트렌젝션을 처리 할 수 있도록 한다.</p>
+<pre><code class="hljs">Building sealnode
+Step 1/7 : FROM onthertech/plasma-evm<span class="hljs-function">:latest</span>
+latest: Pulling from onthertech/plasma-evm
+Digest: sha256<span class="hljs-function">:aa8029de17fb3da6c390545df4e05abae109ec6a45f12ecb22a0e0063b1aa276</span>
+Status: Downloaded newer image for onthertech/plasma-evm<span class="hljs-function">:latest</span>
+<span class="hljs-params">---</span>&gt; 1576e54d80ef
+Step 2/7 : ADD genesis.json <span class="hljs-string">/genesis.json</span>
+<span class="hljs-params">---</span>&gt; 1087509c762e
+Step 3/7 : ADD operator.json <span class="hljs-string">/operator.json</span>
+<span class="hljs-params">---</span>&gt; 714dd1c15216
+Step 4/7 : ADD challenger.json <span class="hljs-string">/challenger.json</span>
+<span class="hljs-params">---</span>&gt; b03d83cf4459
+Step 5/7 : ADD signer.pass <span class="hljs-string">/signer.pass</span>
+<span class="hljs-params">---</span>&gt; 2ba822bdd81b
+Step 6/7 : RUN   <span class="hljs-keyword">echo</span> $'geth <span class="hljs-params">--cache</span> 512 init <span class="hljs-params">--rootchain</span>.url ws:<span class="hljs-string">//127.0.0.1</span><span class="hljs-function">:8546</span> <span class="hljs-string">/genesis.json</span>' &gt; geth.sh &amp;&amp;   <span class="hljs-keyword">echo</span> 'mkdir -p <span class="hljs-string">/root/.ethereum/keystore/</span>' &gt;&gt; geth.sh &amp;&amp;   <span class="hljs-keyword">echo</span> 'cp <span class="hljs-string">/operator.json</span> <span class="hljs-string">/root/.ethereum/keystore/</span>' &gt;&gt; geth.sh &amp;&amp;  <span class="hljs-keyword">echo</span> 'cp <span class="hljs-string">/challenger.json</span> <span class="hljs-string">/root/.ethereum/keystore/</span>' &gt;&gt; geth.sh &amp;&amp;  <span class="hljs-keyword">echo</span> $'exec geth <span class="hljs-params">--syncmode=</span><span class="hljs-string">"full"</span> <span class="hljs-params">--networkid</span> 16 <span class="hljs-params">--rootchain</span>.url ws:<span class="hljs-string">//127.0.0.1</span><span class="hljs-function">:8546</span> <span class="hljs-params">--operator</span> 0x71562b71999873DB5b286dF957af199Ec94617F7 <span class="hljs-params">--rootchain</span>.challenger 0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8   <span class="hljs-params">--cache</span> 512 <span class="hljs-params">--port</span> 30305 <span class="hljs-params">--nat</span> extip<span class="hljs-function">:127.0.0.1</span> <span class="hljs-params">--maxpeers</span> 50  <span class="hljs-params">--ethstats</span> \'tokamak-operator<span class="hljs-function">:onther</span>@127.0.0.1\'   <span class="hljs-params">--unlock</span> 0x71562b71999873DB5b286dF957af199Ec94617F7,0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8 <span class="hljs-params">--password</span> <span class="hljs-string">/signer.pass</span> <span class="hljs-params">--mine</span> <span class="hljs-params">--miner</span>.gastarget 7500000 <span class="hljs-params">--miner</span>.gaslimit 10000000 <span class="hljs-params">--miner</span>.gasprice 1000000000' &gt;&gt; geth.sh
+<span class="hljs-params">---</span>&gt; Running in 9d7f43a35d30
+Removing intermediate container 9d7f43a35d30
+<span class="hljs-params">---</span>&gt; 30948ea415b2
+Step 7/7 : ENTRYPOINT [<span class="hljs-string">"/bin/sh"</span>, <span class="hljs-string">"geth.sh"</span>]
+<span class="hljs-params">---</span>&gt; Running in aba79252703b
+Removing intermediate container aba79252703b
+<span class="hljs-params">---</span>&gt; 0c3f6aa8d7ed
+Successfully built 0c3f6aa8d7ed
+Successfully tagged tokamak/sealnode<span class="hljs-function">:latest</span>
+Creating tokamak_sealnode_1 <span class="hljs-string">...</span>
+Creating tokamak_sealnode_1 <span class="hljs-string">...</span> done
+</code></pre>
+<p>오퍼레이터 노드가 정상적으로 배포되는 경우 위와 같은 결과가 출력된다.</p>
+<h3><a class="anchor" aria-hidden="true" id="배포한-컨테이너-확인"></a><a href="#배포한-컨테이너-확인" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>배포한 컨테이너 확인</h3>
+<p><code>Puppeth</code> 를 통해 로컬 환경을 원격 머신처럼 사용하여 <code>Ethstats</code>, <code>Bootnode</code>, <code>Nginx</code> 그리고 <code>Sealnode</code> 컨테이너를 생성하였다.</p>
+<p>은 아래와 같이 <code>Puppeth</code>에서 조회 된다.</p>
+<pre><code class="hljs css language-text">+-------------+---------------+----------+------------------------------+----------------------------------------------------+
+|   SERVER    |    ADDRESS    | SERVICE  |            CONFIG            |                        VALUE                       |
++-------------+---------------+----------+------------------------------+----------------------------------------------------+
+|   onther    | localhost     | sealnode | CHallenger account           | 0x3616be06d68dd22886505e9c2caaa9eca84564b8         |
+|             |               |          | Data directory               | /home/ubuntu/.pls.oper                             |
+|             |               |          | Ethstats username            | tokamak-operator                                   |
+|             |               |          | Gas ceil  (target maximum)   | 10.000 MGas                                        |
+|             |               |          | Gas floor (baseline target)  | 7.500 MGas                                         |
+|             |               |          | Gas price (minimum accepted) | 1.000 GWei                                         |
+|             |               |          | Listener port                | 30305                                              |
+|             |               |          | Operator account             | 0x71562b71999873DB5b286dF957af199Ec94617F7         |
+|             |               |          | Peer count (all total)       | 50                                                 |
+|             |               |          | Peer count (light nodes)     | 0                                                  |
+|             |               |          | Root chain JSONRPC URL       | ws://127.0.0.1:8546                                |
+|             |               |          | ---------------------------- | -------------------------------------------------- |
+|             |               | bootnode | Data directory               | /home/ubuntu/.pls.user                             |
+|             |               |          | Ethstats username            | tokamak-usernode                                   |
+|             |               |          | JSONRPC HTTP port            | 8547                                               |
+|             |               |          | JSONRPC VHOST                | localhost                                          |
+|             |               |          | Listener port                | 30306                                              |
+|             |               |          | Peer count (all total)       | 512                                                |
+|             |               |          | Peer count (light nodes)     | 256                                                |
+|             |               |          | Root chain JSONRPC URL       | ws://127.0.0.1:8546                                |
+|             |               |          | ---------------------------- | -------------------------------------------------- | 
+|             |               | ethstats | Banned addresses             |                                                    |
+|             |               |          | Login secret                 | onther                                             |
+|             |               |          | Website address              | localhost                                          |
+|             |               |          | Website listener port        | 80                                                 |
+|             |               |          | ---------------------------- | -------------------------------------------------- |
+|             |               | nginx    | Shared listener port         | 80                                                 |
++-------------+---------------+----------+------------------------------+----------------------------------------------------+
+</code></pre>
+<p><img src="/docs/assets/guides_private_testnet_puppeth.png" alt="Plasma-evm Private Testnet Architecture"></p>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-12-19 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/guides/getting-started/how-to-open-private-testnet-manually"><span class="arrow-prev">← </span><span>직접 설정하기</span></a><a class="docs-next button" href="/docs/guides/getting-started/how-to-connect-public-testnet-prepare"><span>연결 준비하기</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#puppeth-준비하기"><code>Puppeth</code> 준비하기</a><ul class="toc-headings"><li><a href="#1-소스코드-다운로드-및-컴파일하기">1. 소스코드 다운로드 및 컴파일하기</a></li><li><a href="#2--루트체인-컨트렉트-배포하기">2.  루트체인 컨트렉트 배포하기</a></li><li><a href="#3-puppeth-실행하기">3. <code>Puppeth</code> 실행하기</a></li></ul></li><li><a href="#사용자-노드-설정하기">사용자 노드 설정하기</a><ul class="toc-headings"><li><a href="#1-genesis-파일-불러오기">1. <code>genesis</code> 파일 불러오기</a></li><li><a href="#2-리모트-머신-추가하기">2. 리모트 머신 추가하기</a></li><li><a href="#3-ethstats-컨테이터-배포하기">3. <code>Ethstats</code> 컨테이터 배포하기</a></li><li><a href="#4-사용자-노드-컨테이너-배포하기">4. 사용자 노드 컨테이너 배포하기</a></li></ul></li><li><a href="#오퍼레이터-노드-설정하기">오퍼레이터 노드 설정하기</a><ul class="toc-headings"><li><a href="#배포한-컨테이너-확인">배포한 컨테이너 확인</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/learn/basic/tokamak-network">배우기</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">가이드</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2019 Onther Inc.</section></footer></div></body></html>
