@@ -3,8 +3,8 @@ const siteConfig = {
   disableHeaderTitle: true,
   tagline: 'Plasma evm documents',
   url: 'https://onther-tech.github.io',
-  baseUrl: '/doc.tokamak.network/', 
-  projectName: 'doc.tokamak.network',
+  baseUrl: '/',
+  projectName: 'docs.tokamak.network',
   organizationName: 'onther-tech',
 
   // Header links
@@ -46,7 +46,7 @@ const siteConfig = {
       "sans-serif"
     ]
   },
-  
+
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
   copyright: `Copyright © ${new Date().getFullYear()} Onther Inc.`,
   usePrism: ['python', 'solidity','jsx', 'go'],
