@@ -37,13 +37,16 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('user-common', this.props.language)}>
-              Common User
+            <a href={this.docUrl('learn/basic/tokamak-network')}>
+              배우기
+            </a>
+            <a href={this.docUrl('guides/getting-started/how-to-open-private-testnet-rootchain', this.props.language)}>
+              가이드
             </a>
           </div>
           <div>
             <h5>Community</h5>
-            <a href="https://chat.tokamak.com/">Chat Tokemak</a>
+            <a href="https://chat.tokamak.network/">Chat Tokemak</a>
             <a
               href="https://twitter.com/ontherinfo"
               target="_blank"
