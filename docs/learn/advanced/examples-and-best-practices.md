@@ -1,7 +1,7 @@
 ---
 id: examples-and-best-practices
-title: Requestable Contract Examples and Best Practices
-sidebar_label: Requestable Contract Examples and Best Practices
+title: 요청 가능한 컨트랙트 예제
+sidebar_label: 요청 가능한 컨트랙트 예제
 ---
 
 > Continuous Rebase는 아직 개발중으로 본 문서에서는 해당 기능이 빠진 컨트랙트 구현을 다룹니다.
@@ -278,7 +278,8 @@ contract TrackableCounter is BaseCounter, RequestableI {
 
 ERC20 토큰 컨트랙트의 경우 `balances[holder]` 변수에 대하여 [SimpleCounter](#simplecounter)와 [FreezableCounter](#freezablecounter) 방식 두 가지로 작성할 수 있습니다. `SimpleCounter` 방식은 자식 체인에서 발행된 토큰은 언제나 부모 체인으로 exit 될 수 있지만, `FreezableCounter` 방식은 언제나 exit 되는 토큰의 수량만큼 부모 체인에서 묶여있어야 합니다. 본 문서에선 `SimpleCounter` 방식만을 다룹니다.
 
-### RequestableSimpleToken - [github](https://github.com/Onther-Tech/requestable-simple-token/blob/master/contracts/RequestableSimpleToken.sol)
+### RequestableSimpleToken
+([github](https://github.com/Onther-Tech/requestable-simple-token/blob/master/contracts/RequestableSimpleToken.sol))
 
 `RequestableSimpleToken`는 `owner`가 토큰을 발행하고 일반 토큰 홀더가 자신의 토큰을 다른이에게 전송하거나 요청을 생성할 수 있는 컨트랙트입니다.
 
@@ -464,15 +465,15 @@ OpenZeppelin과 ds-token 기반의 requestable 토큰 컨트랙트는 다음에�
 
 
 
-### Requestable [CryptoKitties](https://github.com/cryptocopycats/awesome-cryptokitties)
+### Requestable CryptoKitties
 
 > 이 항목에 대한 자세한 설명은 [여기](https://medium.com/onther-tech/cryptokitties-in-plasma-574159c581dc)서 확인할 수 있습니다.
 
 ![](https://miro.medium.com/max/570/1*8GIz9Ovmdq-bQRMjQDkrIw.png)
 
-실제로 배포되는 컨트랙트는 `KittyCore`, `SaleClockAuction`, `SiringClockAuction`으로 ERC721 토큰으로서의 기능은 `KittyCore`가 담당합니다.
+[CryptoKitties](https://github.com/cryptocopycats/awesome-cryptokitties)에서 실제로 배포되는 컨트랙트는 `KittyCore`, `SaleClockAuction`, `SiringClockAuction`으로 ERC721 토큰으로서의 기능은 `KittyCore`가 담당합니다.
 
-[CryptoKitties](https://github.com/cryptocopycats/awesome-cryptokitties)의 상태변수에 대한 요청은 다음과 같은 방식으로 정리할 수 있습니다.
+CryptoKitties의 상태변수에 대한 요청은 다음과 같은 방식으로 정리할 수 있습니다.
 
 - `KittyAccessControll.paused`: only enter by anyone
 - `KittyAccessControll.ceoAddress`: only enter by anyone
@@ -510,9 +511,11 @@ OpenZeppelin과 ds-token 기반의 requestable 토큰 컨트랙트는 다음에�
 위 두 값들은 단순한 상수로 누구나 requestable 해야 합니다.
 
 
-## RequestableMultisig - [github](https://github.com/Onther-Tech/requestable-multisig)
+## RequestableMultisig
 
 > 이 예제는 실제 환경에서 사용하기 마시기 바랍니다.
+
+([github](https://github.com/Onther-Tech/requestable-multisig))
 
  `RequestableMultisig`는 [MultiSigWallet](https://github.com/gnosis/MultiSigWallet/blob/master/contracts/MultiSigWallet.sol)를 requestable하게 변경한 컨트랙트입니다.
 

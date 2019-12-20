@@ -18,11 +18,17 @@ Truebit과 유사한 검증게임은 오프체인에서 일어난 복잡한 연�
 
 Computation Challenge는 이러한 검증 게임을 자식 블록 체인의 state transition function을 오프체인 연산으로서 진행합니다.
 
-## What operator submits
+## What Operator Submits
 
-오퍼레이터는 블록의 1) 블록체인 state transition function 2) solevm execution state에 대한 연산 결과를 해시로 제출합니다. 에퍽의 연산 결과의 경우 각 블록들의 연산 결과를 binary merkle tree로 구성한 후 merkle root만을 제출합니다.
+오퍼레이터는 하나의 블록에 대하여 아래 두 가지 연산 결과를 해시로 제출합니다.
 
-## 1. Query-and-Respond
+1. **state transition function**: 부모 블록을 기준으로 검증할 블록의 트랜잭션들을 처리하고 블록 보상을 제공하는 것으로 끝나는 연산입니다.
+2. **solevm execution state**: 부모 블록을 기준으로 검증할 블록의 트랜잭션들을 **solEVM의 EVMRuntime**을 이용하여 처리한 연산입니다.
+
+
+에퍽의 경우 에퍽에 포함된 블록들의 두 가지 연산 결과들(해시들)의 바이너리 머클 루트를 제출합니다. 제출하는 연산은 다음과 같습니다.
+
+## Query and Respond
 
 검증 게임의 첫 번째 단계는 검증자가 자신이 알고있는 연산
 
