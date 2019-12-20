@@ -45,7 +45,8 @@
           "guides/getting-started/how-to-connect-public-testnet-manually",
           "guides/getting-started/how-to-connect-public-testnet-puppeth"
         ]
-      }
+      },
+      "guides/public-testnets"
     ]
   }
 }
