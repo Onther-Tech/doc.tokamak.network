@@ -56,6 +56,11 @@ class HomeSplash extends React.Component {
       <SplashContainer>
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
+          <PromoSection>
+          {/* <Button href={docUrl('getting-start/getting-start')}>Doc</Button> */}
+          <Button href={docUrl('guides/getting-started/how-to-open-private-testnet-rootchain')}>Getting Started</Button>
+          {/* <Button href={docUrl('getting-start/getting-start')}>Manuals</Button> */}
+          </PromoSection>
         </div>
       </SplashContainer>
     );
@@ -81,29 +86,25 @@ class Index extends React.Component {
       </Container>
     );
 
-    const Description = () => (
-      <Block id='description'>
+    const Learn = () => (
+      <Block id='basic_block'>
         {[
           {
+            image: "img/index_basic.png",
             content:
-              'This is not The fusion reactor, ' +
-              'but It also well contained Plasma!',
-            image: `${baseUrl}img/tokamak_still-min.jpg`,
-            title: 'Tokamak is',
+              '토카막 네트워크와 확장성 솔루션에 대한<br>' +
+              '기본 개념을 익혀보세요.',
+            title: 'Basic',
+            link: 'https://docs.tokamak.network'
           },
-        ]}
-      </Block>
-    );
-
-    const Token = () => (
-      <Block id="Token">
-        {[
           {
+            image: "img/index_advance.png",
             content:
-              'It is used as an incentive to correctly decentralize the Tokamak Plasma Chain.' +
-              'The service operator must deposit TON to open the Plasma Chain. If the chain properly runs, this deposit will gradually increase.' +
-              'However, if there is a technical issue in the chain and someone who finds problem raises an issue, and then, the deposit as a reward will go to that person (challenger).',
-            title: 'Where Is Tokamak Network Token Used?',
+              '루트체인, 플라즈마EVM, 리베이스,<br>' +
+              '요청가능 컨트랙트 등 고급 개념을<br>' +
+              '익혀보세요.',
+            title: 'Advance',
+            link: 'https://docs.tokamak.network'
           },
         ]}
       </Block>
@@ -113,8 +114,7 @@ class Index extends React.Component {
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
-          <Description />
-          <Token />
+          <Learn />
         </div>
       </div>
     );
