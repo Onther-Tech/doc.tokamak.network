@@ -20,7 +20,9 @@
           "learn/advanced/plasma-evm-architecture",
           "learn/advanced/root-chain",
           "learn/advanced/child-chain",
-          "learn/advanced/continuous-rebase"
+          "learn/advanced/continuous-rebase",
+          "learn/advanced/plasma-evm-smart-contracts",
+          "learn/advanced/examples-and-best-practices"
         ]
       }
     ],
