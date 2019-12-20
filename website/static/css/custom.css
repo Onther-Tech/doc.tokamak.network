@@ -22,11 +22,15 @@
 
 @media only screen and (min-width: 1500px) {
 }
+
 div.mainContainer div.blockImage {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 0 0 0;
+  width: 200px !important;
 }
+
 
 div.mainContainer div.blockImage > a > img {
   width: 140px;

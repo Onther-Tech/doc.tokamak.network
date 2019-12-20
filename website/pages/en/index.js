@@ -81,30 +81,27 @@ class Index extends React.Component {
         <div className="mainContainer">
 
           <Container
-            padding={['bottom', 'top']}
+            // padding={['bottom', 'top']}
             background={props.background}
           >
             <GridBlock
               align="center"
               // layout={props.layout}
-              layout="twoColumn"
+              // layout="twoColumn"
               contents={[
                 {
-                  image: "/img/index_basic.png",
-                  content:
-                    '토카막 네트워크와 확장성 솔루션에 대한<br>' +
-                    '기본 개념을 익혀보세요.',
                   title: 'Basic',
-                  imageLink: baseUrl + 'docs/learn/basic/tokamak-network'
+                  image: "/img/index_basic.png",
+                  imageLink: '/docs/learn/basic/tokamak-network',
+                  // imageAlign	: 'center',
+                  content: '토카막 네트워크와 확장성 솔루션에 대한 기본 개념을 익혀보세요.',
                 },
                 {
-                  image: "/img/index_advance.png",
-                  content:
-                    '루트체인, 플라즈마EVM, 리베이스,<br>' +
-                    '요청가능 컨트랙트 등 고급 개념을<br>' +
-                    '익혀보세요.',
                   title: 'Advance',
-                  imageLink: baseUrl + 'docs/learn/advanced/design-rationale'
+                  image: "/img/index_advance.png",
+                  imageLink: '/docs/learn/advanced/design-rationale',
+                  // imageAlign	: 'center',
+                  content: '루트체인, 플라즈마EVM, 리베이스, 요청가능 컨트랙트 등 고급 개념을 익혀보세요.',
                 },
               ]}
             />
