@@ -91,15 +91,15 @@ class Index extends React.Component {
               contents={[
                 {
                   title: 'Basic',
-                  image: "/img/index_basic.png",
-                  imageLink: '/docs/learn/basic/tokamak-network',
+                  image: baseUrl + "/img/index_basic.png",
+                  imageLink: baseUrl + '/docs/learn/basic/tokamak-network',
                   // imageAlign	: 'center',
                   content: '토카막 네트워크와 확장성 솔루션에 대한 기본 개념을 익혀보세요.',
                 },
                 {
                   title: 'Advanced',
-                  image: "/img/index_advance.png",
-                  imageLink: '/docs/learn/advanced/design-rationale',
+                  image: baseUrl + "/img/index_advance.png",
+                  imageLink: baseUrl + '/docs/learn/advanced/design-rationale',
                   // imageAlign	: 'center',
                   content: '루트체인, 플라즈마EVM, 리베이스, 요청가능 컨트랙트 등 고급 개념을 익혀보세요.',
                 },
