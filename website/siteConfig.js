@@ -17,14 +17,6 @@ const siteConfig = {
       doc: 'guides/getting-started/how-to-open-private-testnet-rootchain',
       label: 'Getting Started'
     },
-    {
-      doc: 'guides/manuals/guides_manuals_how-to-make-request',
-      label: 'Manuals'
-    },
-    {
-      page: 'help',
-      label: 'Help'
-    },
   ],
 
   scrollToTop:true,
