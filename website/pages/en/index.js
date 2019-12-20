@@ -69,52 +69,46 @@ class HomeSplash extends React.Component {
 
 class Index extends React.Component {
   render() {
-    const {config: siteConfig, language = ''} = this.props;
+    const props = this.props;
+
+    const {config: siteConfig, language = ''} = props;
     const langPart = `${language ? `${language}/` : ''}`;
     const {baseUrl} = siteConfig;
-
-    const Block = props => (
-      <Container
-        padding={['bottom', 'top']}
-        id={props.id}
-        background={props.background}>
-        <GridBlock
-          align="center"
-          contents={props.children}
-          layout={props.layout}
-        />
-      </Container>
-    );
-
-    const Learn = () => (
-      <Block id='basic_block'>
-        {[
-          {
-            image: "img/index_basic.png",
-            content:
-              '토카막 네트워크와 확장성 솔루션에 대한<br>' +
-              '기본 개념을 익혀보세요.',
-            title: 'Basic',
-            link: 'https://docs.tokamak.network'
-          },
-          {
-            image: "img/index_advance.png",
-            content:
-              '루트체인, 플라즈마EVM, 리베이스,<br>' +
-              '요청가능 컨트랙트 등 고급 개념을<br>' +
-              '익혀보세요.',
-            title: 'Advance',
-            link: 'https://docs.tokamak.network'
-          },
-        ]}
-      </Block>
-    );
 
     return (
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
-          <Learn />
+
+          <Container
+            padding={['bottom', 'top']}
+            background={props.background}
+          >
+            <GridBlock
+              align="center"
+              // layout={props.layout}
+              layout="twoColumn"
+              contents={[
+                {
+                  image: "/img/index_basic.png",
+                  content:
+                    '토카막 네트워크와 확장성 솔루션에 대한<br>' +
+                    '기본 개념을 익혀보세요.',
+                  title: 'Basic',
+                  imageLink: baseUrl + 'docs/learn/basic/tokamak-network'
+                },
+                {
+                  image: "/img/index_advance.png",
+                  content:
+                    '루트체인, 플라즈마EVM, 리베이스,<br>' +
+                    '요청가능 컨트랙트 등 고급 개념을<br>' +
+                    '익혀보세요.',
+                  title: 'Advance',
+                  imageLink: baseUrl + 'docs/learn/advanced/design-rationale'
+                },
+              ]}
+            />
+          </Container>
         </div>
       </div>
     );
