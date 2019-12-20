@@ -11,12 +11,13 @@ golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm �
 
 ### 1. golang 설치하기(go 1.13.4)
 
-    go 실행파일은 `/usr/local/` 경로 아래 위치하게 된다.
-    ```bash
-    ~$ wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
-    ~$ tar -xvf go1.13.4.linux-amd64.tar.gz
-    ~$ mv go /usr/local
-    ```
+go 실행파일은 `/usr/local/` 경로 아래 위치하게 된다.
+
+```bash
+~$ wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
+~$ tar -xvf go1.13.4.linux-amd64.tar.gz
+~$ mv go /usr/local
+```
 
 ### 3. GOPATH && GOROOT 설정하기
 
