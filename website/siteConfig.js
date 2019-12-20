@@ -3,7 +3,7 @@ const siteConfig = {
   disableHeaderTitle: true,
   tagline: 'Plasma evm documents',
   url: 'https://onther-tech.github.io',
-  baseUrl: '/docs.tokamak.network/',
+  baseUrl: '/',
   projectName: 'docs.tokamak.network',
   organizationName: 'onther-tech',
 

@@ -97,7 +97,7 @@ class Index extends React.Component {
                   content: '토카막 네트워크와 확장성 솔루션에 대한 기본 개념을 익혀보세요.',
                 },
                 {
-                  title: 'Advance',
+                  title: 'Advanced',
                   image: baseUrl + "/img/index_advance.png",
                   imageLink: baseUrl + '/docs/learn/advanced/design-rationale',
                   // imageAlign	: 'center',
