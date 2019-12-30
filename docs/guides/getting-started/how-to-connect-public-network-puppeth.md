@@ -8,13 +8,13 @@ sidebar_label: Puppeth 사용하여 연결하기
 
 ## `puppeth` 준비 및 실행하기
 
-> 루트체인으로 `Rinkeby` 테스트넷을 사용하므로 `Rinkeby` 테스트넷에서 오퍼레이터(Operator)와 첼린저(Challenger)의 계정에 이더리움 잔고(Balance)가 필요하다.
- 
+> 루트체인으로 `Rinkeby` 테스트넷을 사용하므로 `Rinkeby` 테스트넷에서 오퍼레이터(Operator)와 챌린저(Challenger)의 계정에 이더리움 잔고(Balance)가 필요하다.
+
 ### 소스코드 다운로드 및 컴파일하기
 
 `plasma-evm`에서 제공하는 `Puppeth`에는 여러 노드를 손쉽게 배포 할 수 있는 기능을 제공하고 있다. 아래 작업은 [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm) 기준으로 설명한다.
 
-만약 해당 리포지토리가 없다면 아래 명령어를 통해서 소스코드를 복제 하고 컴파일을 수행한다.
+만약 해당 저장소가 없다면 아래 명령어를 통해서 소스코드를 복제 하고 컴파일을 수행한다.
 
 ```bash
 $ git clone https://github.com/onther-tech/plasma-evm
@@ -61,7 +61,7 @@ Please specify a network name to administer (no spaces, hyphens or capital lette
     `Puppeth`를 통해서 페러데이 테스트넷 사용자 노드를 연결하기 위해 오퍼레이터 노드의 `genesis` 파일이 필요하다.
 
     `github` 에 업로드되어 있는 `faraday.json` 파일을 사용한다.
-    
+
     ```text
     What would you like to do? (default = stats)
         1. Show network stats
@@ -69,12 +69,12 @@ Please specify a network name to administer (no spaces, hyphens or capital lette
         3. Track new remote server
         4. Deploy network components
     > 2
-    
+
     What would you like to do? (default = create)
         1. Create new genesis from scratch
         2. Import already existing genesis
     > 2
-    
+
     Where's the genesis file? (local file or http/https url)
     > https://raw.githubusercontent.com/Onther-Tech/plasma-evm-networks/master/faraday-testnet/faraday.json
     ```
@@ -84,7 +84,7 @@ Please specify a network name to administer (no spaces, hyphens or capital lette
     ```text
     INFO [12-12|05:45:32.124] Imported genesis block
     ```
-    
+
 ### 2. 리모트 머신 추가하기
 
 `Puppeth`를 통해 사용자 노드를 배포하기 위해서는 원격 리모트 머신에 `Docker`가 설치되어 있어야한다.
@@ -189,7 +189,7 @@ Creating faraday_ethstats_1 ... done
 ```
 
 ### 4. 사용자 노드 컨테이너 배포하기
-    
+
 오퍼레이터 외에 사용하는 노드들을 Bootnode(또는 Usernode)라고 한다. 기능적으로 마이닝을 할 수 없는 노드이다. Ethstats 정보를 가지고 있어야 Deploy가 가능하다.
 
 3번 과정을 먼저 수행해 주어야 한다.
@@ -262,7 +262,7 @@ Which is virtual hostname? (default=localhost)
 |             |               |          | Peer count (all total)       | 512                              |
 |             |               |          | Peer count (light nodes)     | 256                              |
 |             |               |          | Root chain JSONRPC URL       | ws://127.0.0.1:8546              |
-|             |               |          | ---------------------------- | -------------------------------- | 
+|             |               |          | ---------------------------- | -------------------------------- |
 |             |               | ethstats | Banned addresses             |                                  |
 |             |               |          | Login secret                 | onther                           |
 |             |               |          | Website address              | localhost                        |
