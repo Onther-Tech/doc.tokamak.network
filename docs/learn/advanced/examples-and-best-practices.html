@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>요청 가능한 컨트랙트 예제 · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&gt; Continuous Rebase는 아직 개발중으로 본 문서에서는 해당 기능이 빠진 컨트랙트 구현을 다룹니다."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="요청 가능한 컨트랙트 예제 · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="&gt; Continuous Rebase는 아직 개발중으로 본 문서에서는 해당 기능이 빠진 컨트랙트 구현을 다룹니다."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>요청 가능한 컨트랙트 예제 · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&gt; Continuous Rebase는 아직 개발중으로 본 문서에서는 해당 기능이 빠진 컨트랙트 구현을 다루고 있다."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="요청 가능한 컨트랙트 예제 · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="&gt; Continuous Rebase는 아직 개발중으로 본 문서에서는 해당 기능이 빠진 컨트랙트 구현을 다루고 있다."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
         document.addEventListener('DOMContentLoaded', function() {
           addBackToTop(
             {"zIndex":100}
@@ -61,10 +61,10 @@
               }
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/learn/advanced/examples-and-best-practices.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">요청 가능한 컨트랙트 예제</h1></header><article><div><span><blockquote>
-<p>Continuous Rebase는 아직 개발중으로 본 문서에서는 해당 기능이 빠진 컨트랙트 구현을 다룹니다.</p>
+<p>Continuous Rebase는 아직 개발중으로 본 문서에서는 해당 기능이 빠진 컨트랙트 구현을 다루고 있다.</p>
 </blockquote>
 <h2><a class="anchor" aria-hidden="true" id="counter"></a><a href="#counter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Counter</h2>
-<p>단순히 숫자가 증가만 하는 카운터 컨트랙트를 살펴봅시다. 우선 기본적인 기능을 하는 <code>BaseCounter</code> 컨트랙트부터 Requestable 기능을 추가할 것입니다. 이 항목의 구성은 각 예시에서 발생하는 문제점들에 따라 점차 개선하는 방식으로 진행됩니다.</p>
+<p>단순히 숫자가 증가만 하는 카운터 컨트랙트를 먼저 살펴보자. 이 문서는 우선 기본적인 기능을 하는 <code>BaseCounter</code> 컨트랙트부터 요청 가능한(Requestable) 기능을 추가하고, 각 예시에서 발생하는 문제점들을 점차 개선하는 방식으로 서술되어 있다.</p>
 <h3><a class="anchor" aria-hidden="true" id="basecounter"></a><a href="#basecounter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>BaseCounter</h3>
 <pre><code class="hljs css language-solidity">pragma solidity ^<span class="hljs-number">0.4</span><span class="hljs-number">.24</span>;
 
@@ -85,10 +85,10 @@ contract BaseCounter {
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="simplecounter"></a><a href="#simplecounter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SimpleCounter</h3>
-<p>먼저 가장 간단하게 Requestable을 고려한다면 상태 변수 <code>n</code>을 enter 혹은 exit 요청에 따라 증감시키는 구조입니다. 컨트랙트는 아래와 같은 방식으로 동작합니다.</p>
+<p>먼저 가장 간단하게 Requestable을 고려한다면 상태 변수 <code>n</code>을 enter 혹은 exit 요청에 따라 증감시킬 수 있다. 컨트랙트는 아래와 같은 방식으로 동작한다.</p>
 <p><img src="https://i.imgur.com/GQaEylR.png" alt=""></p>
 <!-- A yellow box means that the counter() has increased the status variable n by 1, a red box means entering the request changes n, and a green box means exiting the request changes n. -->
-<p><em>노란색 네모</em>는 <code>counter()</code> 함수로 <code>n</code>이 1씩 증가하는 것, <em>빨간색 네모</em>는 enter 요청으로 변경된 <code>n</code>의 값을, <em>초록색 네모</em>는 exit 요청으로 변경된 <code>n</code>의 값을 가리킵니다.</p>
+<p><em>노란색 네모</em>는 <code>counter()</code> 함수로 <code>n</code>이 1씩 증가하는 것, <em>빨간색 네모</em>는 enter 요청으로 변경된 <code>n</code>의 값을, <em>초록색 네모</em>는 exit 요청으로 변경된 <code>n</code>의 값을 가리킨다.</p>
 <pre><code class="hljs css language-solidity">pragma solidity ^<span class="hljs-number">0.4</span><span class="hljs-number">.24</span>;
 
 <span class="hljs-keyword">import</span> {SimpleDecode} <span class="hljs-keyword">from</span> "../lib/SimpleDecode.sol";
@@ -161,10 +161,10 @@ contract SimpleCounter <span class="hljs-keyword">is</span> BaseCounter, Request
 }
 </code></pre>
 <!-- However, SimpleCounter may decrease with variable n due to enter and exit. If this is not desired, you can implement counter contract as below. -->
-<p><code>SimpleCounter</code>는 <code>n</code>을 각 요청에 따라 증감시킵니다. 이 경우 총 카운터를 계산하기 위하여 양 체인의 두 컨트랙트를 모두 참조해야합니다. 또한 <code>n</code>이 감소하는 카운터가 바람직한지 고려해야합니다. 이 두가지를 고려한다면 단순히 한 쪽 체인에서만 카운터가 동작할 수 있도록 할 수 있습니다.</p>
+<p><code>SimpleCounter</code>는 <code>n</code>을 각 요청에 따라 증감시킨다. 이 경우 총 카운터를 계산하기 위하여 양 체인의 두 컨트랙트를 모두 참조해야 한다. 또한 <code>n</code>이 감소하는 카운터가 바람직한지 고려해야한다. 이 두가지를 활용하면 한 쪽 체인에서만 카운터를 동작시키는 것이 가능하다.</p>
 <h3><a class="anchor" aria-hidden="true" id="freezablecounter"></a><a href="#freezablecounter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>FreezableCounter</h3>
 <!-- Enter and exit can be applied after freezing the contracts in each chain. FreezableCounter can be avoided if the number decreases through the request method after freezing. -->
-<p>자식 체인에서는 기본적으로 카운터가 멈춰있는 상태로 시작합니다. 루트 체인에서 enter 요청이 생성될 경우 루트 체인의 카운터가 동작을 멈추고 요청이 반영된 순간 자식 체인의 카운터가 동작합니다. exit 요청의 경우 자식 체인의 카운터를 멈추고 부모 체인의 카운터를 동작시킵니다. 이를 통해 <code>n</code>이 감소하는 것을 막을 수 있습니다.</p>
+<p>자식 체인에서는 기본적으로 카운터가 멈춰있는 상태로 시작한다. 루트 체인에서 enter 요청이 생성될 경우 루트 체인의 카운터가 동작을 멈추고 요청이 반영된 순간 자식 체인의 카운터가 동작한다. exit 요청의 경우 자식 체인의 카운터를 멈추고 부모 체인의 카운터를 동작시킨다. 이를 통해 <code>n</code>이 감소하는 것을 막을 수 있다.</p>
 <p><img src="https://i.imgur.com/IDHhZRs.png" alt=""></p>
 <pre><code class="hljs css language-solidity">pragma solidity ^<span class="hljs-number">0.4</span><span class="hljs-number">.24</span>;
 
@@ -238,11 +238,11 @@ contract FreezableCounter is BaseCounter, RequestableI {
 }
 </code></pre>
 <!-- However, the challenge period exists until exit is applied in root chain, for this freeze counter, all counters in each chain are frozen before the end of this challenge period. The enter is relatively short, but both are frozen. Therefore, to prevent this, the state variable used for enter and the state variable used for exit must be different. -->
-<p>이 구현체의 경우 가장 큰 문제는 exit 요청이 부모 체인에 반영될 때 블록과 요청에 대햔 챌린지 기간을 가진다는 점입니다. 따라서 exit 요청이 finalize되기 전에는 양 체인의 모든 카운터가 멈춰있는 상태입니다. 또한 한 체인의 동작을 멈출 수 밖에 없기에 <code>FreezableCounter</code>에 대해 enter 혹은 exit 요청을 보내는 것은 특정 어카운트만 수행할 수 있도록 권한을 줘야한다는 단점이 있습니다. 이를 방지하기 위하여 &quot;요청으로 인해 <code>n</code>이 얼마나 변경 되었는가&quot;를 별도의 상태 변수로 관리해야 합니다.</p>
+<p>이 구현체의 경우 가장 큰 문제는 exit 요청이 부모 체인에 반영될 때 블록과 요청에 대햔 챌린지 기간을 가진다는 점이다. 따라서 exit 요청이 finalize되기 전에는 양 체인의 모든 카운터가 멈춰있는 상태가 된다. 또한 한 체인의 동작을 멈출 수 밖에 없기에 <code>FreezableCounter</code>에 대해 enter 혹은 exit 요청을 보내는 것은 특정 어카운트만 수행할 수 있도록 권한을 주어야 하는 단점이 있다. 이를 방지하기 위하여 &quot;요청으로 인해 <code>n</code>이 얼마나 변경 되었는가&quot;를 별도의 상태 변수로 관리해야 한다.</p>
 <h3><a class="anchor" aria-hidden="true" id="trackablecounter"></a><a href="#trackablecounter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TrackableCounter</h3>
 <!-- TrackableCounter checks whether enter and exit is possible through a separate state variable requestableN in enter in the root chain and exit in child chain, reduces the value, and increases n in exit in the root chain and enter in the child chain. Both operations can prevent the reduction of n and apply only the correct enter and exit. -->
-<p><code>TrackableCounter</code>는 다른 체인에 값을 전달할 수 있는가를 별도의 상태변수 <code>requestableN</code>을 통해 관리합니다. <code>counter()</code>는 기존의 <code>n</code>과 <code>requestableN</code>를 동시에 증가시키며, 부모 체인에서의 enter(혹은 자식 체인에서의 exit)의 경우 해당 체인에서는 <code>requestableN</code>만 감소시킵니다. 또한 이 요청이 다른 체인에 적용될 때는 <code>n</code>만 증가시킵니다. 부모 체인에서의 exit(혹은 자식 체인에서의 enter)의 경우는 반대로 수행합니다.</p>
-<p>상태 변수를 1개 더 사용하고 컨트랙트 구현에 다소 복잡해지는 것과 <code>n</code>이 감소하는 경우를 trade-off 합니다.</p>
+<p><code>TrackableCounter</code>는 다른 체인에 값을 전달할 수 있는가를 별도의 상태변수 <code>requestableN</code>을 통해 관리한다. <code>counter()</code>는 기존의 <code>n</code>과 <code>requestableN</code>를 동시에 증가시키며, 부모 체인에서의 enter(혹은 자식 체인에서의 exit)의 경우 해당 체인에서는 <code>requestableN</code>만 감소시킨다. 또한 이 요청이 다른 체인에 적용될 때는 <code>n</code>만 증가시킨다. 부모 체인에서의 exit(혹은 자식 체인에서의 enter)의 경우는 이를 반대로 수행한다.</p>
+<!-- 상태 변수를 1개 더 사용하고 컨트랙트 구현에 다소 복잡해지는 것과 `n`이 감소하는 경우는 상충(trade-off) 합니다. -->
 <p><img src="https://i.imgur.com/CZ6DnAG.png" alt=""></p>
 <pre><code class="hljs css language-solidity"><span class="hljs-attr">pragma</span> <span class="hljs-string">solidity ^0.4.24;</span>
 
@@ -302,10 +302,10 @@ contract FreezableCounter is BaseCounter, RequestableI {
 <span class="hljs-attr">}</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="token"></a><a href="#token" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Token</h2>
-<p>ERC20 토큰 컨트랙트의 경우 <code>balances[holder]</code> 변수에 대하여 <a href="#simplecounter">SimpleCounter</a>와 <a href="#freezablecounter">FreezableCounter</a> 방식 두 가지로 작성할 수 있습니다. <code>SimpleCounter</code> 방식은 자식 체인에서 발행된 토큰은 언제나 부모 체인으로 exit 될 수 있지만, <code>FreezableCounter</code> 방식은 언제나 exit 되는 토큰의 수량만큼 부모 체인에서 묶여있어야 합니다. 본 문서에선 <code>SimpleCounter</code> 방식만을 다룹니다.</p>
+<p>ERC20 토큰 컨트랙트의 경우 <code>balances[holder]</code> 변수에 대하여 <a href="#simplecounter">SimpleCounter</a>와 <a href="#freezablecounter">FreezableCounter</a> 방식 두 가지로 작성할 수 있다. <code>SimpleCounter</code> 방식은 자식 체인에서 발행된 토큰은 언제나 부모 체인으로 exit 될 수 있지만, <code>FreezableCounter</code> 방식은 언제나 exit 되는 토큰의 수량만큼 부모 체인에서 묶여있어야 한다. 본 문서에선 <code>SimpleCounter</code> 방식만을 다루고 있다.</p>
 <h3><a class="anchor" aria-hidden="true" id="requestablesimpletoken"></a><a href="#requestablesimpletoken" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RequestableSimpleToken</h3>
 <p>(<a href="https://github.com/Onther-Tech/requestable-simple-token/blob/master/contracts/RequestableSimpleToken.sol">github</a>)</p>
-<p><code>RequestableSimpleToken</code>는 <code>owner</code>가 토큰을 발행하고 일반 토큰 홀더가 자신의 토큰을 다른이에게 전송하거나 요청을 생성할 수 있는 컨트랙트입니다.</p>
+<p><code>RequestableSimpleToken</code>는 <code>owner</code>가 토큰을 발행하고 일반 토큰 홀더가 자신의 토큰을 다른이에게 전송하거나 요청을 생성할 수 있는 컨트랙트다.</p>
 <pre><code class="hljs css language-solidity">contract RequestableSimpleToken <span class="hljs-keyword">is</span> Ownable, RequestableI {
   <span class="hljs-keyword">using</span> SafeMath <span class="hljs-keyword">for</span> *;
 
@@ -480,18 +480,18 @@ contract FreezableCounter is BaseCounter, RequestableI {
   }
 }
 </code></pre>
-<p>OpenZeppelin과 ds-token 기반의 requestable 토큰 컨트랙트는 다음에서 확인할 수 있습니다.</p>
+<p>OpenZeppelin과 ds-token 기반의 requestable 토큰 컨트랙트는 다음에서 확인할 수 있다.</p>
 <ul>
 <li><a href="https://github.com/Onther-Tech/requestable-erc20-wrapper-token/blob/master/contracts/RequestableERC20Wrapper.sol">RequestableERC20WrapperToken</a></li>
 <li><a href="https://github.com/Onther-Tech/requestable-ds-wrapper-token">requestable-ds-wrapper-token</a></li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="requestable-cryptokitties"></a><a href="#requestable-cryptokitties" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Requestable CryptoKitties</h3>
 <blockquote>
-<p>이 항목에 대한 자세한 설명은 <a href="https://medium.com/onther-tech/cryptokitties-in-plasma-574159c581dc">여기</a>서 확인할 수 있습니다.</p>
+<p>이 항목에 대한 자세한 설명은 <a href="https://medium.com/onther-tech/cryptokitties-in-plasma-574159c581dc">여기</a>서 확인할 수 있다.</p>
 </blockquote>
 <p><img src="https://miro.medium.com/max/570/1*8GIz9Ovmdq-bQRMjQDkrIw.png" alt=""></p>
-<p><a href="https://github.com/cryptocopycats/awesome-cryptokitties">CryptoKitties</a>에서 실제로 배포되는 컨트랙트는 <code>KittyCore</code>, <code>SaleClockAuction</code>, <code>SiringClockAuction</code>으로 ERC721 토큰으로서의 기능은 <code>KittyCore</code>가 담당합니다.</p>
-<p>CryptoKitties의 상태변수에 대한 요청은 다음과 같은 방식으로 정리할 수 있습니다.</p>
+<p><a href="https://github.com/cryptocopycats/awesome-cryptokitties">CryptoKitties</a>에서 실제로 배포되는 컨트랙트는 <code>KittyCore</code>, <code>SaleClockAuction</code>, <code>SiringClockAuction</code>으로 ERC721 토큰으로서의 기능은 <code>KittyCore</code>가 담당한다.</p>
+<p>CryptoKitties의 상태변수에 대한 요청은 다음과 같은 방식으로 정리할 수 있다.</p>
 <ul>
 <li><code>KittyAccessControll.paused</code>: only enter by anyone</li>
 <li><code>KittyAccessControll.ceoAddress</code>: only enter by anyone</li>
@@ -499,43 +499,43 @@ contract FreezableCounter is BaseCounter, RequestableI {
 <li><code>KittyAccessControll.cooAddress</code>: only enter by anyone</li>
 <li><code>KittyBreeding.autoBirthFee</code>: only enter by anyone</li>
 </ul>
-<p>위 변수들은 루트체인에서 자식체인으로 enter 만 허용함으로서 권한을 일방향으로 강제할 수 있습니다.</p>
+<p>위 변수들은 루트체인에서 자식체인으로 enter 만 허용함으로서 권한을 일방향으로 강제할 수 있다.</p>
 <ul>
 <li><code>KittyBase.kitties</code>: enter or exit by anyone</li>
 <li><code>KittyBase.kittyIndexToOwner</code>: enter and exit by kitty owner</li>
 </ul>
-<p>개별 키티의 데이터를 가지고있는 kitties 변수는 누구나 request할 수 있도록 허용하며, 해당 키티의 소유자만이 소유권에 대한 request를 만들 수 있어야 합니다.</p>
+<p>개별 키티의 데이터를 가지고있는 kitties 변수는 누구나 request할 수 있도록 허용하며, 해당 키티의 소유자만이 소유권에 대한 request를 만들 수 있어야 한다.</p>
 <ul>
 <li><code>KittyBase.kittyIndexToApproved</code>: non-requestable.</li>
 <li><code>KittyBase.ownershipTokenCount</code>: non-requestable.</li>
 <li><code>KittyBase.sireAllowedToAddress</code>: non-requestable</li>
 </ul>
-<p>위 변수들은 transfer() 함수에서 소유권의 이전과 함께 삭제되는 값들입니다. 직접적인 request 대상이 되지 않습니다.</p>
+<p>위 변수들은 transfer() 함수에서 소유권의 이전과 함께 삭제되는 값들이다. 직접적인 request 대상이 되지 않는다.</p>
 <ul>
 <li><code>KittyBreeding.pregnantKitties</code>: Pregenent Kitty Ownership Request enter / exit 시 증감</li>
 </ul>
-<p>임신한 키티의 소유권을 다른 체인으로 이동시킬 때 증감시킵니다.</p>
+<p>임신한 키티의 소유권을 다른 체인으로 이동시킬 때 증감시킨다.</p>
 <ul>
 <li><code>KittyBase.saleAuction</code>: non-requestable. set by CEO</li>
 <li><code>KittyBase.siringAuction</code>: non-requestable. set by CEO</li>
 <li><code>KittyBreeding.geneScience</code>: non-requestable. set by CEO</li>
 <li><code>KittyCore.newContractAddress</code>: non-requestable. set by CEO</li>
 </ul>
-<p>외부 컨트랙트의 주소들은 오직 CEO만 설정 가능하기에 requestable 하지 않습니다.</p>
+<p>외부 컨트랙트의 주소들은 오직 CEO만 설정 가능하기에 requestable 하지 않다.</p>
 <ul>
 <li><code>KittyMinting.promoCreatedCount</code>: only enter by anyone</li>
 <li><code>KittyMinting.gen0CreatedCount</code>: only enter by anyone</li>
 </ul>
-<p>위 두 값들은 단순한 상수로 누구나 requestable 해야 합니다.</p>
+<p>위 두 값들은 단순한 상수로 누구나 requestable 해야 한다.</p>
 <h2><a class="anchor" aria-hidden="true" id="requestablemultisig"></a><a href="#requestablemultisig" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RequestableMultisig</h2>
 <blockquote>
-<p>이 예제는 실제 환경에서 사용하기 마시기 바랍니다.</p>
+<p>이 예제를 실제 환경에서 사용하기 위해서는 추가적인 테스트가 필요하다.</p>
 </blockquote>
 <p>(<a href="https://github.com/Onther-Tech/requestable-multisig">github</a>)</p>
-<p><code>RequestableMultisig</code>는 <a href="https://github.com/gnosis/MultiSigWallet/blob/master/contracts/MultiSigWallet.sol">MultiSigWallet</a>를 requestable하게 변경한 컨트랙트입니다.</p>
-<p><code>RequestableMultisig</code>는 멀티 시그 컨트랙트가 보낼 트랜잭션 데이터를 <code>Transaction</code> 구조체와 <code>transactions</code> 변수로 관리합니다. 그리고 해당 트랜잭션에 대한 서명을 <code>confirmations</code> 변수로 수집한 후 이것이 정족수(<code>_required</code>)를 넘으면 실행됩니다. out-of-gas와 같은 에러가 발생할 경우 다시 실행이 가능하며, 올바르기 실행된 경우 <code>executed</code> 변수에 결과를 반영합니다. 따라서 <code>RequestableMultisig</code>의 요청은 다음으로 나누어집니다.</p>
+<p><code>RequestableMultisig</code>는 <a href="https://github.com/gnosis/MultiSigWallet/blob/master/contracts/MultiSigWallet.sol">MultiSigWallet</a>를 requestable하게 변경한 컨트랙트다.</p>
+<p><code>RequestableMultisig</code>는 멀티 시그 컨트랙트가 보낼 트랜잭션 데이터를 <code>Transaction</code> 구조체와 <code>transactions</code> 변수로 관리한다. 그리고 해당 트랜잭션에 대한 서명을 <code>confirmations</code> 변수로 수집한 후 이것이 정족수(<code>_required</code>)를 넘으면 실행된다. out-of-gas와 같은 에러가 발생할 경우 다시 실행이 가능하며, 올바르기 실행된 경우 <code>executed</code> 변수에 결과를 반영한다. <code>RequestableMultisig</code>의 요청은 다음으로 나누어진다.</p>
 <h3><a class="anchor" aria-hidden="true" id="1-transactions"></a><a href="#1-transactions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. <code>transactions</code></h3>
-<p><code>trieValue</code>는 RLP 인코딩된 Transaction 데이터입니다. 이 요청은 단순하게 양 체인간의 데이터를 동일하게 유지하는 기능을 합니다. <code>submitTransaction</code> 함수가 트랜잭션 데이터를 등록하고 confirm을 하는데, 이 요청은 confirm 과정을 제외하고 순수하게 데이터만 등록합니다. 이는 <code>owner</code>만이 <code>submitTransaction</code>를 호출할 수 있다는 점과 차이를 가집니다.</p>
+<p><code>trieValue</code>는 RLP 인코딩된 Transaction 데이터이고, 이 요청은 단순하게 양 체인간의 데이터를 동일하게 유지하는 기능을 한다. <code>submitTransaction</code> 함수가 트랜잭션 데이터를 등록하고 confirm을 하는데, 이 요청은 confirm 과정을 제외하고 순수하게 데이터만 등록한다. 다만 이에 대한 호출은 <code>owner</code>만이 할 수 있다.</p>
 <pre><code class="hljs css language-solidity"><span class="hljs-constructor">_handleTransaction(<span class="hljs-params">isRootChain</span>, <span class="hljs-params">isExit</span>, <span class="hljs-params">toTransaction</span>(<span class="hljs-params">trieValue</span>)</span>);
 
 <span class="hljs-keyword">function</span> <span class="hljs-constructor">_handleTransaction(<span class="hljs-params">bool</span> <span class="hljs-params">isRootChain</span>, <span class="hljs-params">bool</span> <span class="hljs-params">isExit</span>, Transaction <span class="hljs-params">memory</span> <span class="hljs-params">transaction</span>)</span> internal {
@@ -556,7 +556,7 @@ contract FreezableCounter is BaseCounter, RequestableI {
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="2-executed"></a><a href="#2-executed" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. <code>executed</code></h3>
-<p>한 쪽 체인에서 실행된 트랜잭션은 다른 체인에서 동일하게 실행되어선 안됩니다. <code>executed</code> 변수에 대한 요청은 실행된 트랜잭션에 대해 중복으로 처리되는 것읆 방지합니다.</p>
+<p>한 쪽 체인에서 실행된 트랜잭션은 다른 체인에서 동일하게 실행되어선 안된다. <code>executed</code> 변수에 대한 요청은 실행된 트랜잭션에 대해 중복으로 처리되는 것을 방지한다.</p>
 <pre><code class="hljs css language-solidity"><span class="hljs-constructor">_handleExecuted(<span class="hljs-params">isExit</span>, <span class="hljs-params">trieValue</span>.<span class="hljs-params">toBytes32</span>()</span>);
 
 <span class="hljs-keyword">function</span> <span class="hljs-constructor">_handleExecuted(<span class="hljs-params">bool</span> <span class="hljs-params">isExit</span>, <span class="hljs-params">bytes32</span> <span class="hljs-params">transactionId</span>)</span>
@@ -569,7 +569,7 @@ contract FreezableCounter is BaseCounter, RequestableI {
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="3-new--revoked-confirmations"></a><a href="#3-new--revoked-confirmations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. New / Revoked <code>confirmations</code></h3>
-<p><code>confirmTransaction</code> 함수에 대응하는 &quot;새로운 <code>confirmations</code> 변수에 대한 요청&quot;은 <code>owner</code>의 새로운 confirm을 다른 체인에 반영하는 요청입니다. 이는 실행되지 않은 트랜잭션에 대해서 <code>executed</code>에 대한 요청과 마찬가지로 confirm을 통한 트랜잭션의 실행을 방지합니다.</p>
+<p><code>confirmTransaction</code> 함수에 대응하는 &quot;새로운 <code>confirmations</code> 변수에 대한 요청&quot;은 <code>owner</code>의 새로운 confirm을 다른 체인에 반영하는 요청이다. 이는 실행되지 않은 트랜잭션에 대해서 <code>executed</code>에 대한 요청과 마찬가지로 confirm을 통한 트랜잭션의 실행을 방지한다.</p>
 <pre><code class="hljs">_handleNewConfirmation(isRootChain, isExit, requestor, trieValue.toBytes32());
 
 <span class="hljs-keyword">function</span> _handleNewConfirmation(
@@ -599,7 +599,7 @@ contract FreezableCounter is BaseCounter, RequestableI {
   }
 }
 </code></pre>
-<p><code>revokeConfirmation</code> 함수에 대응하는 &quot;제거된 <code>confirmations</code> 변수에 대한 요청&quot;은 이전과 반대의 기능을 합니다.</p>
+<p><code>revokeConfirmation</code> 함수에 대응하는 &quot;제거된 <code>confirmations</code> 변수에 대한 요청&quot;은 이전과 반대의 기능을 한다.</p>
 <pre><code class="hljs">_handleRevokedConfirmation(isRootChain, isExit, requestor, trieValue.toBytes32());
 
 <span class="hljs-keyword">function</span> _handleRevokedConfirmation(
@@ -629,10 +629,10 @@ contract FreezableCounter is BaseCounter, RequestableI {
 }
 </code></pre>
 <blockquote>
-<p>&quot;새로운 <code>confirmations</code> 변수에 대한 요청&quot;과 제거된 <code>confirmations</code> 변수에 대한 요청은 별도의 <code>trieKey</code>로 반드시 구분지을 필요는 없습니다. 두 개의 요청을 하나의 요청으로 축소시키고, <code>trieValue</code>를 <code>RLP.encode(transactionId, isNew)</code>와 같은 방식으로 사용할 수 도 있습니다.</p>
+<p>&quot;새로운 <code>confirmations</code> 변수에 대한 요청&quot;과 제거된 <code>confirmations</code> 변수에 대한 요청은 별도의 <code>trieKey</code>로 반드시 구분지을 필요는 없다. 두 개의 요청을 하나의 요청으로 축소시키고, <code>trieValue</code>를 <code>RLP.encode(transactionId, isNew)</code>와 같은 방식으로 사용할 수 도 있다.</p>
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="4-new--removed-owners"></a><a href="#4-new--removed-owners" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. New / Removed <code>owners</code></h3>
-<p>새로운 <code>owner</code> 혹은 제거된 <code>owner</code>에 대한 요청입니다.</p>
+<p>새로운 <code>owner</code> 혹은 제거된 <code>owner</code>에 대한 요청.</p>
 <pre><code class="hljs">  <span class="hljs-keyword">function</span> <span class="hljs-constructor">_handleNewOwner(<span class="hljs-params">bool</span> <span class="hljs-params">isRootChain</span>, <span class="hljs-params">bool</span> <span class="hljs-params">isExit</span>, <span class="hljs-params">address</span> <span class="hljs-params">owner</span>)</span> internal {
     <span class="hljs-keyword">if</span> (isRootChain<span class="hljs-operator"> &amp;&amp; </span>!isExit<span class="hljs-operator"> || </span>!isRootChain<span class="hljs-operator"> &amp;&amp; </span>isExit) {
       require(isOwner<span class="hljs-literal">[<span class="hljs-identifier">owner</span>]</span>);
@@ -649,4 +649,4 @@ contract FreezableCounter is BaseCounter, RequestableI {
     }
   }
 </code></pre>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-12-20 by 4000D</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/learn/advanced/plasma-evm-smart-contracts"><span class="arrow-prev">← </span><span>Plasma EVM 스마트 컨트랙트</span></a><a class="docs-next button" href="/docs/guides/getting-started/how-to-open-private-testnet-rootchain"><span>루트체인 설정하기</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#counter">Counter</a><ul class="toc-headings"><li><a href="#basecounter">BaseCounter</a></li><li><a href="#simplecounter">SimpleCounter</a></li><li><a href="#freezablecounter">FreezableCounter</a></li><li><a href="#trackablecounter">TrackableCounter</a></li></ul></li><li><a href="#token">Token</a><ul class="toc-headings"><li><a href="#requestablesimpletoken">RequestableSimpleToken</a></li><li><a href="#requestable-cryptokitties">Requestable CryptoKitties</a></li></ul></li><li><a href="#requestablemultisig">RequestableMultisig</a><ul class="toc-headings"><li><a href="#1-transactions">1. <code>transactions</code></a></li><li><a href="#2-executed">2. <code>executed</code></a></li><li><a href="#3-new--revoked-confirmations">3. New / Revoked <code>confirmations</code></a></li><li><a href="#4-new--removed-owners">4. New / Removed <code>owners</code></a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/learn/basic/tokamak-network">배우기</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">가이드</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2019 Onther Inc.</section></footer></div></body></html>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-12-30 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/learn/advanced/plasma-evm-smart-contracts"><span class="arrow-prev">← </span><span>Plasma EVM 스마트 컨트랙트</span></a><a class="docs-next button" href="/docs/guides/getting-started/how-to-open-private-testnet-rootchain"><span>루트체인 설정하기</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#counter">Counter</a><ul class="toc-headings"><li><a href="#basecounter">BaseCounter</a></li><li><a href="#simplecounter">SimpleCounter</a></li><li><a href="#freezablecounter">FreezableCounter</a></li><li><a href="#trackablecounter">TrackableCounter</a></li></ul></li><li><a href="#token">Token</a><ul class="toc-headings"><li><a href="#requestablesimpletoken">RequestableSimpleToken</a></li><li><a href="#requestable-cryptokitties">Requestable CryptoKitties</a></li></ul></li><li><a href="#requestablemultisig">RequestableMultisig</a><ul class="toc-headings"><li><a href="#1-transactions">1. <code>transactions</code></a></li><li><a href="#2-executed">2. <code>executed</code></a></li><li><a href="#3-new--revoked-confirmations">3. New / Revoked <code>confirmations</code></a></li><li><a href="#4-new--removed-owners">4. New / Removed <code>owners</code></a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/learn/basic/tokamak-network">배우기</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">가이드</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2019 Onther Inc.</section></footer></div></body></html>
