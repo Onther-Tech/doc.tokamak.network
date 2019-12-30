@@ -4,15 +4,13 @@ title: Puppeth 사용하여 퍼블릭 테스트넷 연결하기
 sidebar_label: Puppeth 사용하여 연결하기
 ---
 
-`plasma-evm` 에서 제공하는 노드 배포 유틸리티 프로그램인 `puppeth`를 통해 사용자 노드를 연결한다.
+`plasma-evm` 에서 제공하는 노드 배포 유틸리티 프로그램인 `Puppeth`를 통해 사용자 노드를 설정 한다.
 
-## `puppeth` 준비 및 실행하기
-
-> 루트체인으로 `Rinkeby` 테스트넷을 사용하므로 `Rinkeby` 테스트넷에서 오퍼레이터(Operator)와 챌린저(Challenger)의 계정에 이더리움 잔고(Balance)가 필요하다.
+## `Puppeth` 준비 및 실행하기
 
 ### 소스코드 다운로드 및 컴파일하기
 
-`plasma-evm`에서 제공하는 `Puppeth`에는 여러 노드를 손쉽게 배포 할 수 있는 기능을 제공하고 있다. 아래 작업은 [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm) 기준으로 설명한다.
+`plasma-evm`에서 제공하는 `Puppeth`는 여러 노드를 손쉽게 배포 할 수 있는 기능을 제공하고 있다. 아래 과정은 [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm) 기준으로 설명한다.
 
 만약 해당 저장소가 없다면 아래 명령어를 통해서 소스코드를 복제 하고 컴파일을 수행한다.
 
@@ -21,11 +19,11 @@ $ git clone https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm && make all
 ```
 
-컴파일을 완료하면 `puppeth` 실행파일은 `plasma-evm/build/bin/` 에 위치한다.
+컴파일이 정상적으로 완료되면, `puppeth` 실행파일은 `plasma-evm/build/bin/` 에 위치한다.
 
-### `puppeth` 실행하기
+### `Puppeth` 실행하기
 
-컴파일을 완료하면 실행파일은 `plasma-evm/build/bin/` 에 위치한다. puppeth를 실행하기 위해서는 `build/bin/puppeth` 명령어를 입력하여 실행한다. ( go1.13 버전을 사용하는 것을 추천한다)
+ `puppeth`를 실행하기 위해 `build/bin/puppeth` 명령어를 입력하여 실행한다.
 
 ```text
 plasma-evm$ build/bin/puppeth
@@ -45,49 +43,50 @@ Please specify a network name to administer (no spaces, hyphens or capital lette
 >
 ```
 
-자신이 지정하고 싶은 임의의 네트워크 이름을 입력한다.
-입력한 `Network name` 은 네트워크를 식별하기 위해 `~/.puppeth/[network name]` 파일로 저장된다.
-다음 실행시 동일한 이름으로 입력하게 되면 해당 파일의 설정값을 불러온다.
+자신이 설정하고 싶은 임의의 `NETWORK NAME`을 입력한다.
+입력한 `NETWORK NAME` 은 `Puppeth`가 네트워크 설정을 구별하기 위해 `~/.puppeth/<NETWORK NAME>` 파일로 저장된다.
+`Puppeth` 실행시 입력한 `NETWORK NAME`과 동일한 이름의 파일이 `~/.puppeth/` 에 위치하고 있으면, 해당 파일에 저장된 설정값을 불러온다.
 
-> 사용자 노드와 오퍼레이터 노드 설정시 불가피하게 재시작 하는 경우 동일한 `network name`을 입력하므로써 이전 상태 저장값을 불러 올 수 있다.
+>  불가피하게 `puppeth` 종료 / 재시작 하는 경우 동일한 `NETWORK NAME`을 입력하여 마지막으로 저장된 상태를 불러 올 수 있다.
 
-사용자 노드 설정하는 방법에서는 계속해서 `puppeth` 실행화면에서 작업을 수행한다.
+다음, [페러데이 사용자 노드 연결하기](how-to-connect-public-testnet-puppeth#%ED%8E%98%EB%9F%AC%EB%8D%B0%EC%9D%B4-%EC%82%AC%EC%9A%A9%EC%9E%90-%EB%85%B8%EB%93%9C-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0)는 계속해서 `puppeth` 실행화면 내에서 작업을 수행한다.
 
 ## 페러데이 사용자 노드 연결하기
 
-
 ### 1. `genesis` 설정하기
 
-    `Puppeth`를 통해서 페러데이 테스트넷 사용자 노드를 연결하기 위해 오퍼레이터 노드의 `genesis` 파일이 필요하다.
+페러데이 테스트넷 사용자 노드를 연결하기 위해서는 오퍼레이터 노드의 `genesis` 파일이 필요하다.
 
-    `github` 에 업로드되어 있는 `faraday.json` 파일을 사용한다.
+해당 `genesis` 파일은 [github.com/onther-tech/plasma-evm-networks](https://github.com/Onther-Tech/plasma-evm-networks/tree/master/faraday-testnet) 의 [`faraday.json`](https://github.com/Onther-Tech/plasma-evm-networks/blob/master/faraday-testnet/faraday.json)를 통해 확인 할 수 있다.
 
-    ```text
-    What would you like to do? (default = stats)
-        1. Show network stats
-        2. Configure new genesis
-        3. Track new remote server
-        4. Deploy network components
-    > 2
+`puppeth`는 `genesis` 파일을 http를 통해 불러 올 수 있다. 따라서,  `github` 에 업로드되어 있는 `faraday.json` 파일을 사용한다.
 
-    What would you like to do? (default = create)
-        1. Create new genesis from scratch
-        2. Import already existing genesis
-    > 2
+```text
+What would you like to do? (default = stats)
+    1. Show network stats
+    2. Configure new genesis
+    3. Track new remote server
+    4. Deploy network components
+> 2
 
-    Where's the genesis file? (local file or http/https url)
-    > https://raw.githubusercontent.com/Onther-Tech/plasma-evm-networks/master/faraday-testnet/faraday.json
-    ```
+What would you like to do? (default = create)
+    1. Create new genesis from scratch
+    2. Import already existing genesis
+> 2
 
-    제대로 import  되는 경우 아래와 같은 메시지가 출력되고 초기 선택화면으로 돌아간다.
+Where's the genesis file? (local file or http/https url)
+> https://raw.githubusercontent.com/Onther-Tech/plasma-evm-networks/master/faraday-testnet/faraday.json
+```
 
-    ```text
-    INFO [12-12|05:45:32.124] Imported genesis block
-    ```
+정상적으로 `genesis` 파일이 임포트(Import)되면 아래와 같은 메시지가 출력되고 `puppeth` 초기 선택화면으로 돌아간다.
+
+```text
+INFO [12-12|05:45:32.124] Imported genesis block
+```
 
 ### 2. 리모트 머신 추가하기
 
-`Puppeth`를 통해 사용자 노드를 배포하기 위해서는 원격 리모트 머신에 `Docker`가 설치되어 있어야한다.
+`Puppeth`를 통해 사용자 노드를 배포하기 위해서는 리모트 머신에 `Docker`가 설치되어 있어야한다.
 
 ```text
 What would you like to do? (default = stats)
@@ -113,13 +112,13 @@ INFO [08-01|03:30:30.787] Starting remote server health-check      server=onther
 |   onther    | localhost     |          |                       |               |
 +-------------+---------------+----------+-----------------------+---------------+
 ```
-> IP address 대신 Domain을 입력하는 경우 Nginx가 구문을 파싱하지 못한다. 따라서 원격 머신의 IP 를 직접 넣어준다.
+> IP 주소 대신 도메인 주소(e.g. user@tokamak.network)를 입력하는 경우, 정상적으로 진행되나 Nginx가 구문을 파싱하지 못하여 에러가 발생한다. 따라서 리모트 머신의 IP 주소를 사용한다.
 
-> 키 파일을 사용하는경우 `onther:onther_private.pem@localhost` 와 같은 형태로 입력하여 사용한다.
+> 리모트 머신 접속을 위해 인증서-키 파일을 사용하는경우 `onther:onther_private.pem@localhost` 와 같은 형태로 입력하여 사용한다.
 
 ### 3. `Ethstats` 컨테이너 배포하기
 
-`Puppeth`에서 기본적으로 `ethstats`의 정보가 없는 경우 진행이 되지 않는다. 따라서 `ethstats` 노드를 먼저 배포해주어야 한다
+`Puppeth`는 `Ethstats`의 컨테이너 정보가 없는 경우 다른 노드 배포가 진행 되지 않는다. 따라서 `Ethstats` 노드를 가장 먼저 배포해주어야 한다.
 
 ```text
 +-------------+---------------+----------+-----------------------+---------------+
@@ -166,7 +165,7 @@ Creating faraday_nginx_1 ...
 Creating faraday_nginx_1 ... done
 ```
 
-`Ethstats` 서버 연결을 위한 리버스 프록시(Reverse Proxy)가 먼저 구성된다. 계속해서 `Ethstats` 컨테이너를 생성하기 위해 도메인 주소(또는 IP 주소)과 비밀번호를 입력해준다
+`Ethstats` 서버 연결을 위한 리버스 프록시(Reverse Proxy)가 먼저 구성된다. 계속해서 `Ethstats` 컨테이너를 생성하기 위해 `Ethstats`가 사용할 도메인 주소(또는 IP 주소)과 비밀번호를 입력한다.
 
 ```text
 Proxy deployed, which domain to assign? (default = localhost)
@@ -190,9 +189,11 @@ Creating faraday_ethstats_1 ... done
 
 ### 4. 사용자 노드 컨테이너 배포하기
 
-오퍼레이터 외에 사용하는 노드들을 Bootnode(또는 Usernode)라고 한다. 기능적으로 마이닝을 할 수 없는 노드이다. Ethstats 정보를 가지고 있어야 Deploy가 가능하다.
+`Puppeth`내에서 `Bootnode`는 사용자 노드를 말한다.
 
-3번 과정을 먼저 수행해 주어야 한다.
+그리고 사용자 노드는 `Ethstats` 정보를 가지고 있어야 배포가 가능하다.
+
+따라서, [3. Ethstats 컨테이너 배포하기](how-to-connect-public-testnet-puppeth#3-ethstats-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0)를 먼저 수행해 주어야 한다.
 
 ```text
 +-------------+---------------+----------+------------------------------+---------------+
@@ -229,11 +230,11 @@ Which server do you want to interact with?
 > 1
 
 What URL to listen on root chain JSONRPC?
-> wss://rinkeby.infura.io/ws/v3/[PROJECT ID]
+> wss://rinkeby.infura.io/ws/v3/< PROJECT ID >
 ```
 
-rootchain JSONRPC는 Infura에서 제공하고 있는 Rinkeby Testnet 을 입력해준다.
-Infura 계정이 없는 경우 [Run User Node](guides_getting-started_how-to-connect-public-network#run-user-node)에서 `1. Get rootchain Endpoint` 를 수행하여 접속가능한 URL 을 얻는다.
+`~root chain JSONRPC`는 `Infura` 에서 제공하고 있는 `Rinkeby Testnet` 주소를 사용한다.
+접속 가능한 `Infura`의 `Rinkeby Testnet` 주소가 없는 경우 [퍼블릭 테스트넷 연결 준비하기](how-to-connect-public-testnet-prepare)에 ["Rinkeby 루트체인 접속 주소 생성하기"](how-to-connect-public-testnet-prepare#rinkeby-%EB%A3%A8%ED%8A%B8%EC%B2%B4%EC%9D%B8-%EC%A0%91%EC%86%8D-%EC%A3%BC%EC%86%8C-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)를 수행하여 접속가능한 주소를 얻는다.
 
 ```text
 Do you want expose HTTP JSONRPC endpoint (y/n)? (default=no)
@@ -248,7 +249,7 @@ Which is virtual hostname? (default=localhost)
 
 ## 페러데이 사용자 노드 컨테이너
 
-사용자 노드가 정상적으로 배포된 경우 아래와 같은 `Puppeth` 화면을 보게 된다가
+사용자 노드가 정상적으로 배포된 경우 아래와 같은 `Puppeth` 화면을 보게 된다.
 
 ```text
 +-------------+---------------+----------+------------------------------+----------------------------------+
