@@ -1,6 +1,6 @@
 ---
 id: how-to-connect-public-testnet-prepare
-title: 퍼블릿 테스트넷 연결 준비하기
+title: 퍼블릭 테스트넷 연결 준비하기
 sidebar_label: 연결 준비하기
 ---
 
