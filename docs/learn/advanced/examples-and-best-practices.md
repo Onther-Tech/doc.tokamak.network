@@ -116,7 +116,7 @@ contract SimpleCounter is BaseCounter, RequestableI {
 
 <!-- However, SimpleCounter may decrease with variable n due to enter and exit. If this is not desired, you can implement counter contract as below. -->
 
-`SimpleCounter`는 `n`을 각 요청에 따라 증감시킨다. 이 경우 총 카운터를 계산하기 위하여 양 체인의 두 컨트랙트를 모두 참조해야한다. 또한 `n`이 감소하는 카운터가 바람직한지 고려해야한다. 이 두가지를 활용하면 한 쪽 체인에서만 카운터를 동작시키는 것이 가능하다.
+`SimpleCounter`는 `n`을 각 요청에 따라 증감시킨다. 이 경우 총 카운터를 계산하기 위하여 양 체인의 두 컨트랙트를 모두 참조해야 한다. 또한 `n`이 감소하는 카운터가 바람직한지 고려해야한다. 이 두가지를 활용하면 한 쪽 체인에서만 카운터를 동작시키는 것이 가능하다.
 
 ### FreezableCounter
 

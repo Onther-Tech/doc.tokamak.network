@@ -38,7 +38,7 @@ Plasma EVM에서 사용하는 컨트랙트의 소스코드는 [여기](https://g
 
 <!-- Name | Type | Description 으로 테이블 만들기? -->
 
-- `address operator`: 자식 체인의 오퍼레이터 계정입. 다른 이더리움 계정으로 오퍼레이터 권한을 바꾸거나 블록 제출 권한, 양 체인의 Requestable 컨트랙트 주소 맵핑 권한을 관리한다.
+- `address operator`: 자식 체인의 오퍼레이터 계정. 다른 이더리움 계정으로 오퍼레이터 권한을 바꾸거나 블록 제출 권한, 양 체인의 Requestable 컨트랙트 주소 맵핑 권한을 관리한다.
 - `address epochHandler`: `DELEGATECALL`을 통해 참조되는 `EpochHandler` 컨트랙트의 주소.
 - `address submitHandler`: `DELEGATECALL`을 통해 참조되는 `SubmitHandler` 컨트랙트의 주소.
 - `address etherToken`: 자식 체인의 PETH에 대응하는 루트 체인의 *ERC20* 토큰 컨트랙트.
