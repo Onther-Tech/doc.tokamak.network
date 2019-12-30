@@ -1,6 +1,6 @@
 ---
 id: how-to-open-private-testnet-rootchain
-title: 프라이빗 테스트넷 루트체인 설정하기 
+title: 프라이빗 테스트넷 루트체인 설정하기
 sidebar_label: 루트체인 설정하기
 ---
 Ubuntu 18.04 를 기준으로 작성되었다.
@@ -11,7 +11,7 @@ golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm �
 
 ### 1. golang 설치하기(go 1.13.4)
 
-go 실행파일은 `/usr/local/` 경로 아래 위치하게 된다.
+go 실행파일은 `/usr/local/` 경로 아래 위치한다.
 
 ```bash
 ~$ wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
@@ -43,11 +43,11 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 ## 부모 체인 설정하기
 
-이더리움 테스트 체인인 ganache 또한 루트체인으로 사용할 수 있으나, 편의상 스크립트가 설정되어 있는 `onther-tech/go-ethereum` 를 사용한다.
+이더리움 테스트 체인인 ganache 또한 루트체인으로 사용할 수 있으나, 실습 목적으로는 스크립트가 설정되어 있는 `onther-tech/go-ethereum` 를 사용하는 것이 더욱 편리하다.
 
-루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 첼린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다. 특히, <U>첼린저 계정에 최소 0.5 ETH 이상이</U> 있어야 오퍼레이터 노드가 정상적으로 실행된다.
+루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 챌린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다. 특히, <U>챌린저 계정에 최소 0.5 ETH 이상이</U> 있어야 오퍼레이터 노드가 정상적으로 실행된다.
 
-만약 오퍼레이터 계정의 이더 잔고가 부족한 경우, 오퍼레이터는 루트체인에 트랜젝션(Tx)를 전송 할 수 없게 되어 자식체인이 멈출 수 있으므로 주의해야 한다.
+만약 오퍼레이터 계정의 이더 잔고가 부족한 경우, 오퍼레이터는 루트체인에 트랜잭션을 전송 할 수 없게 되어 자식체인이 멈추게 된다.
 
 ### 1. 루트체인 소스코드 받기
 
@@ -92,15 +92,15 @@ make geth && build/bin/geth \
     --wsport 8546
 ```
 
-위 스크립트를 통해 생성되는 오퍼레이터와 첼린저 계정 정보는 다음과 같다.
+위 스크립트를 통해 생성되는 오퍼레이터와 챌린저 계정 정보는 다음과 같다.
 
-오퍼레이터 : 0x71562b71999873DB5b286dF957af199Ec94617F7
+- 오퍼레이터 : 0x71562b71999873DB5b286dF957af199Ec94617F7
 
-첼린저 : 0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8
+- 챌린저 : 0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8
 
 ### 3. 루트체인 실행하기
 
-아래 명령어를 통해 `run.rootchain.sh` 스크립트를 실행하여 프라이빗 네트워크에서 사용되는 루트체인을 구동한다.
+아래 명령어는 `run.rootchain.sh` 스크립트를 실행하여 로컬 네트워크에서 동작하는 루트체인을 구동시킨다.
 
 ```bash
 go-ethereum$ bash run.rootchain.sh
