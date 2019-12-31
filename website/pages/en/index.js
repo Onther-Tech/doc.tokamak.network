@@ -90,18 +90,19 @@ class Index extends React.Component {
               // layout="twoColumn"
               contents={[
                 {
-                  title: 'Basic',
+                  title: `[Basic](${siteConfig.baseUrl}${siteConfig.docsUrl}/learn/basic/tokamak-network.html)`,
                   image: "/img/index_basic.png",
                   imageLink: '/docs/learn/basic/tokamak-network',
                   // imageAlign	: 'center',
-                  content: '토카막 네트워크와 확장성 솔루션에 대한 기본 개념을 익혀보세요.',
+                  content: `[토카막 네트워크와 확장성 솔루션에 대한 기본 개념을 익혀보세요.](${siteConfig.baseUrl}${siteConfig.docsUrl}/learn/basic/tokamak-network.html)`,
                 },
                 {
-                  title: 'Advanced',
+                  title: `[Advanced](${siteConfig.baseUrl}${siteConfig.docsUrl}/learn/advanced/design-rationale)`,
                   image: "/img/index_advance.png",
                   imageLink: '/docs/learn/advanced/design-rationale',
                   // imageAlign	: 'center',
-                  content: '루트체인, 플라즈마EVM, 리베이스, 요청가능 컨트랙트 등 고급 개념을 익혀보세요.',
+                  content: `[루트체인, 플라즈마EVM, 리베이스, 요청가능 컨트랙트 등 고급 개념을 익혀보세요.](${siteConfig.baseUrl}${siteConfig.docsUrl}/learn/advanced/design-rationale)`,
+                  
                 },
               ]}
             />
