@@ -6,6 +6,7 @@ const siteConfig = {
   baseUrl: '/',
   projectName: 'docs.tokamak.network',
   organizationName: 'onther-tech',
+  cname: 'docs.tokamak.network',
 
   // Header links
   headerLinks: [
