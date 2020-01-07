@@ -1,7 +1,7 @@
 ---
 id: how-to-open-private-testnet-rootchain
 title: 프라이빗 테스트넷 루트체인 설정하기
-sidebar_label: 루트체인 설정하기
+sidebar_label: 루트체인 설정
 ---
 Ubuntu 18.04 를 기준으로 작성되었다.
 
@@ -41,7 +41,7 @@ export GOPATH=$HOME/plasma
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
 
-## 부모 체인 설정하기
+## 루트 체인 설정하기
 
 이더리움 테스트 체인인 ganache 또한 루트체인으로 사용할 수 있으나, 실습 목적으로는 스크립트가 설정되어 있는 `onther-tech/go-ethereum` 를 사용하는 것이 더욱 편리하다.
 
