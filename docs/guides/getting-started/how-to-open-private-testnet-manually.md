@@ -7,6 +7,7 @@ sidebar_label: 직접 설정
 자식 체인을 설정하려면 로컬 환경에서 루트체인이 실행되고 있는 환경에서 진행해야 하므로, 루트체인이 실행중이지 않고 있다면 [루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)를 먼저 진행한다.
 
 ## 오퍼레이터 노드 설정
+
 [루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0) 수행하였음을 전재로 한다.
 
 만약, 루트체인으로 ganache 테스트체인을 사용하고 싶은경우 ganache에서 생성된 계정을 오퍼레이터와 챌린저로 사용하여야 한다.
