@@ -49,7 +49,7 @@ Please specify a network name to administer (no spaces, hyphens or capital lette
 
 >  불가피하게 `puppeth` 종료 / 재시작 하는 경우 동일한 `NETWORK NAME`을 입력하여 마지막으로 저장된 상태를 불러 올 수 있다.
 
-다음, [페러데이 사용자 노드 연결](how-to-connect-public-testnet-puppeth#%ED%8E%98%EB%9F%AC%EB%8D%B0%EC%9D%B4-%EC%82%AC%EC%9A%A9%EC%9E%90-%EB%85%B8%EB%93%9C-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0)는 계속해서 `puppeth` 실행화면 내에서 작업을 수행한다.
+다음, [페러데이 사용자 노드 연결](how-to-connect-public-testnet-puppeth#페러데이-사용자-노드-연결)는 계속해서 `puppeth` 실행화면 내에서 작업을 수행한다.
 
 ## 페러데이 사용자 노드 연결
 
@@ -193,7 +193,7 @@ Creating faraday_ethstats_1 ... done
 
 그리고 사용자 노드는 `Ethstats` 정보를 가지고 있어야 배포가 가능하다.
 
-따라서, [3. Ethstats 컨테이너 배포](how-to-connect-public-testnet-puppeth#3-ethstats-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0)를 먼저 수행해 주어야 한다.
+따라서, [3. Ethstats 컨테이너 배포](how-to-connect-public-testnet-puppeth#3-ethstats-컨테이너-배포)를 먼저 수행해 주어야 한다.
 
 ```text
 +-------------+---------------+----------+------------------------------+---------------+
@@ -234,7 +234,7 @@ What URL to listen on root chain JSONRPC?
 ```
 
 `~root chain JSONRPC`는 `Infura` 에서 제공하고 있는 `Rinkeby Testnet` 주소를 사용한다.
-접속 가능한 `Infura`의 `Rinkeby Testnet` 주소가 없는 경우 [퍼블릭 테스트넷 연결 준비](how-to-connect-public-testnet-prepare)에 ["Rinkeby 루트체인 접속 주소 생성"](how-to-connect-public-testnet-prepare#rinkeby-%EB%A3%A8%ED%8A%B8%EC%B2%B4%EC%9D%B8-%EC%A0%91%EC%86%8D-%EC%A3%BC%EC%86%8C-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)를 수행하여 접속가능한 주소를 얻는다.
+접속 가능한 `Infura`의 `Rinkeby Testnet` 주소가 없는 경우 [퍼블릭 테스트넷 연결 준비](how-to-connect-public-testnet-prepare)에 ["Rinkeby 루트체인 접속 주소 생성"](how-to-connect-public-testnet-prepare#rinkeby-루트체인-접속-주소-생성)를 수행하여 접속가능한 주소를 얻는다.
 
 ```text
 Do you want expose HTTP JSONRPC endpoint (y/n)? (default=no)

@@ -4,11 +4,11 @@ title: 프라이빗 테스트넷 자식 체인 직접 설정
 sidebar_label: 직접 설정
 ---
 
-자식 체인을 설정하려면 로컬 환경에서 루트체인이 실행되고 있는 환경에서 진행해야 하므로, 루트체인이 실행중이지 않고 있다면 [루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)를 먼저 진행한다.
+자식 체인을 설정하려면 로컬 환경에서 루트체인이 실행되고 있는 환경에서 진행해야 하므로, 루트체인이 실행중이지 않고 있다면 [루트체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정)를 먼저 진행한다.
 
 ## 오퍼레이터 노드 설정
 
-[루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0) 수행하였음을 전재로 한다.
+[루트체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정) 수행하였음을 전재로 한다.
 
 만약, 루트체인으로 ganache 테스트체인을 사용하고 싶은경우 ganache에서 생성된 계정을 오퍼레이터와 챌린저로 사용하여야 한다.
 
@@ -97,7 +97,8 @@ Repeat passphrase:
 plasma-evm$ echo > "<Passphrase for operator keystore file>" > signer.pass
 ```
 
-오퍼레이터 노드 실행시 앞으로 설정해 줄 사용자노드(Usernode)의 `enode` 주소를 먼저 설정해 주도록 한다. (아래 `bootnodes` 플래그에 사용되는 주소는 [사용자 노드 생성하기](how-to-open-private-testnet-manually#%EC%82%AC%EC%9A%A9%EC%9E%90-%EB%85%B8%EB%93%9C-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0) 의 [`bootkey` 생성하기](how-to-open-private-testnet-manually#3-bootkey-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0) 를 통해 생성되는 주소와 같다.)
+오퍼레이터 노드 실행시 앞으로 설정해 줄 사용자노드(Usernode)의 `enode` 주소를 먼저 설정해 주도록 한다. (아래 `bootnodes` 플래그에 사용되는 주소는 [사용자 노드 설정](how-to-open-private-testnet-manually#사용자-노드-설정) 의 [`bootkey` 생성](how-to-open-private-testnet-manually#2-bootkey-생성) 를 통해 생성되는 주소와 같다.)
+
 ```bash
 plasma-evm$ build/bin/geth \
     --datadir ./chaindata \
@@ -125,7 +126,7 @@ plasma-evm$ build/bin/geth \
 ### 1. 초기화
 
 `--rootchain.url` 플래그 입력 인자로 루트체인 컨트렉트가 배포된 루트체인 접속 주소(URL)를 입력한다.<br>
-여기서는 [부모 체인 설정](how-to-open-private-testnet-rootchain#2-%EC%8B%A4%ED%96%89-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%ED%99%95%EC%9D%B8) 를 통해 실행하고 있는 루트체인의 접속 주소를 사용한다.
+여기서는 [루트 체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정) 실행 후, 로컬 환경의 루트체인 접속 주소를 사용한다.
 
 ```bash
 plasma-evm$ build/bin/geth init \
@@ -133,7 +134,7 @@ plasma-evm$ build/bin/geth init \
             --rootchain.url ws://localhost:8546 \
             genesis.json
 ```
-> 오퍼레이터 [노드 초기화시](how-to-open-private-testnet-manually#2-%EC%B4%88%EA%B8%B0%ED%99%94-%ED%95%98%EA%B8%B0) 사용한 `genesis.json` 파일을 사용한다.
+> 오퍼레이터 설정 - [3. 초기화](how-to-open-private-testnet-manually#3-초기화)에서 사용한 `genesis.json` 파일을 사용한다.
 
 ### 2. `bootkey` 생성
 

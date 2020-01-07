@@ -26,7 +26,7 @@ plasma-evm$ build/bin/geth init \
 
 ### 2. 사용자 노드 실행
 
-반드시 [1. 초기화](how-to-connect-public-testnet-manually#2-%EC%B4%88%EA%B8%B0%ED%99%94-%ED%95%98%EA%B8%B0)에서 `datadir`로 지정해준 값을 사용한다. <br> 이 예시에서는 `plasma-evm/chaindata` 에 체인데이터가 저장된다.
+반드시 [1. 초기화](how-to-connect-public-testnet-manually#1-초기화)에서 `datadir`로 지정해준 값을 사용한다. <br> 이 예시에서는 `plasma-evm/chaindata` 에 체인데이터가 저장된다.
 
 ```bash
 plasma-evm$ build/bin/geth \

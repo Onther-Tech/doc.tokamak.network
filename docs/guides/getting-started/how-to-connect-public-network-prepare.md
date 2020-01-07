@@ -10,7 +10,7 @@ sidebar_label: 연결 준비
 
 사용자 노드를 구성 위해서 다음의 두가지 방법 중 하나를 택할 수 있다.
 1. [로컬 환경에서 직접 실행하는 방법 (퍼블릿 테스트넷 직접 연결)](how-to-connect-public-testnet-manually)
-2. [`puppeth`를 사용하여 실행하는 방법 (Puppeth 사용하여 퍼블릭 테스트넷 연결)](how-to-connect-public-testnet-manually)
+2. [`puppeth`를 사용하여 실행하는 방법 (Puppeth 사용하여 퍼블릭 테스트넷 연결)](how-to-connect-public-testnet-puppeth)
 
 ## 로컬 환경 설정
 

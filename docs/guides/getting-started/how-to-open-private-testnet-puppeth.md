@@ -4,7 +4,7 @@ title: Puppeth 사용하여 프라이빗 테스트넷 설정하기
 sidebar_label: Puppeth 사용하여 루트-자식체인 설정
 ---
 
-`Puppeth`란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램이다. `plasma-evm`의 `Puppeth`는 토카막 노드를 쉽게 구성 할 수 있도록 추가된 기능이 탑재 되어 있다. `Puppeth`를 사용하여 자식 체인을 설정하려면 이미 구동중인 루트체인이 필요하다. 테스트로 쓸 루트체인이 필요하다면 [루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)를 먼저 진행하고 이 가이드 문서를 진행하는 것이 바람직하다.
+`Puppeth`란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램이다. `plasma-evm`의 `Puppeth`는 토카막 노드를 쉽게 구성 할 수 있도록 추가된 기능이 탑재 되어 있다. `Puppeth`를 사용하여 자식 체인을 설정하려면 이미 구동중인 루트체인이 필요하다. 테스트로 쓸 루트체인이 필요하다면 [루트체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정)를 먼저 진행하고 이 가이드 문서를 진행하는 것이 바람직하다.
 
 이 가이드는 `Puppeth`를 사용하여 특정한 루트체인에 연결된 토카막 자식체인을 배포하는 과정을 담고 있다.
 
@@ -31,7 +31,7 @@ $ cd plasma-evm && make all
 
 ### 2.  루트체인 컨트렉트 배포
 
-`Puppeth`를 실행하기 이전에 자식체인과 연결될 루트체인 컨트렉트를 배포하고 해당 정보를 담은 `genesis` 파일을 생성한다. [프라이빗 테스트넷 직접 설정 - 1. 루트체인 컨트렉트 배포](how-to-open-private-testnet-manually#1-%EB%A3%A8%ED%8A%B8%EC%B2%B4%EC%9D%B8-%EC%BB%A8%ED%8A%B8%EB%A0%89%ED%8A%B8-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0) 와 같이 `deploy` 커맨드를 사용하여 루트체인 contract을 배포한후 `genesis.json` 파일을 생성하는 스크립트를 작성한다.
+`Puppeth`를 실행하기 이전에 자식체인과 연결될 루트체인 컨트렉트를 배포하고 해당 정보를 담은 `genesis` 파일을 생성한다. [프라이빗 테스트넷 직접 설정 - 2. 루트체인 컨트렉트 배포](how-to-open-private-testnet-manually#2-루트체인-컨트렉트-배포) 와 같이 `deploy` 커맨드를 사용하여 루트체인 contract을 배포한후 `genesis.json` 파일을 생성하는 스크립트를 작성한다.
 
 > 해당 genesis.json 파일의 예시는 [faraday.json](https://github.com/Onther-Tech/plasma-evm-networks/blob/master/faraday-testnet/faraday.json) 에서 확인할 수 있다.
 
