@@ -21,9 +21,9 @@ $ cd plasma-evm
 plasma-evm$ make geth
 ```
 
-### 2. 루트체인 컨트렉트 배포
+### 2. 루트체인 컨트랙트 배포
 
-루트체인 컨트렉트 배포 커맨드인 `deploy`에 대한 설명이다.
+루트체인 컨트랙트 배포 커맨드인 `deploy`에 대한 설명이다.
 
 `deploy` 커맨드의 입력인자는 <출력할 genesis 파일 이름>, <체인아이디(CHAINID)>, <프리 에셋(PRE-ASSET)>, <에폭(EPOCH)>.
 
@@ -146,7 +146,7 @@ plasma-evm$ build/bin/geth \
 
 ### 1. 초기화
 
-`--rootchain.url` 플래그 입력 인자로 루트체인 컨트렉트가 배포된 루트체인 접속 주소(URL)를 입력한다.
+`--rootchain.url` 플래그 입력 인자로 루트체인 컨트랙트가 배포된 루트체인 접속 주소(URL)를 입력한다.
 
 [루트 체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정) 통해 실행중인 루트체인 접속 주소를 사용한다.
 
