@@ -1,12 +1,12 @@
 ---
 id: how-to-connect-public-testnet-manually
-title: 퍼블릿 테스트넷 직접 연결하기
-sidebar_label: 직접 연결하기
+title: 퍼블릿 테스트넷 직접 연결
+sidebar_label: 직접 연결
 ---
 
 ## 페러데이 사용자 노드
 
-### 1. 초기화 하기
+### 1. 초기화
 
 페러데이 사용자 노드를 시작하기 위해, 초기화(Initialize) 하려면 페러데이 테스트넷의 `genesis` 파일이 필요하다.
 해당 `genesis` 파일은 [github.com/onther-tech/plasma-evm-networks](https://github.com/Onther-Tech/plasma-evm-networks/tree/master/faraday-testnet) 의 [`faraday.json`](https://github.com/Onther-Tech/plasma-evm-networks/blob/master/faraday-testnet/faraday.json)를 통해 확인 할 수 있다.
@@ -26,7 +26,7 @@ plasma-evm$ build/bin/geth init \
 
 ### 2. 사용자 노드 실행
 
-반드시 [1. 초기화 하기](how-to-connect-public-testnet-manually#2-%EC%B4%88%EA%B8%B0%ED%99%94-%ED%95%98%EA%B8%B0)에서 `datadir`로 지정해준 값을 사용한다. <br> 이 예시에서는 `plasma-evm/chaindata` 에 체인데이터가 저장된다.
+반드시 [1. 초기화](how-to-connect-public-testnet-manually#2-%EC%B4%88%EA%B8%B0%ED%99%94-%ED%95%98%EA%B8%B0)에서 `datadir`로 지정해준 값을 사용한다. <br> 이 예시에서는 `plasma-evm/chaindata` 에 체인데이터가 저장된다.
 
 ```bash
 plasma-evm$ build/bin/geth \

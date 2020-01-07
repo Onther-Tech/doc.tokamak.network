@@ -1,16 +1,16 @@
 ---
 id: how-to-connect-public-testnet-prepare
-title: 퍼블릭 테스트넷 연결 준비하기
-sidebar_label: 연결 준비하기
+title: 퍼블릭 테스트넷 연결 준비
+sidebar_label: 연결 준비
 ---
 
 페러데이(Faraday)는 온더에서 운영하고 있는 토카막 플라즈마의 공개 테스트 네트워크다.
 
 모든 토카막 자식체인과 같이 페러데이 테스트넷도 오퍼레이터(Operator)만 자식체인의 블록을 생성할 수 있다. 이 가이드는 페러데이 테스트넷에 연결된 사용자 노드를 설정하는 방법에 대해 다루고 있다.
 
-사용자 노드를 구성하기 위해서 다음의 두가지 방법 중 하나를 택할 수 있다.
-1. [로컬 환경에서 직접 실행하는 방법 (퍼블릿 테스트넷 직접 연결하기)](how-to-connect-public-testnet-manually)
-2. [`puppeth`를 사용하여 실행하는 방법 (Puppeth 사용하여 퍼블릭 테스트넷 연결하기)](how-to-connect-public-testnet-manually)
+사용자 노드를 구성 위해서 다음의 두가지 방법 중 하나를 택할 수 있다.
+1. [로컬 환경에서 직접 실행하는 방법 (퍼블릿 테스트넷 직접 연결)](how-to-connect-public-testnet-manually)
+2. [`puppeth`를 사용하여 실행하는 방법 (Puppeth 사용하여 퍼블릭 테스트넷 연결)](how-to-connect-public-testnet-manually)
 
 ## 로컬 환경 설정
 
@@ -53,7 +53,7 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 만약, `Infura` 계정이 없다면 [infura.io](https://infura.io/) 회원가입을 통해 접속 주소(URL)를 얻을 수 있다.
 
-### `Rinkeby` 루트체인 접속 주소 생성하기
+### `Rinkeby` 루트체인 접속 주소 생성
 
 사이트 가입이 완료된 경우, `Dashboard`의 `"CREATE NEW PROJECT"` 를 클릭하여 프로젝트를 생성한다.
 
