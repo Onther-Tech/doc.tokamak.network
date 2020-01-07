@@ -3,8 +3,6 @@ id: how-to-open-private-testnet-rootchain
 title: 프라이빗 테스트넷 루트체인 설정
 sidebar_label: 루트체인 설정
 ---
-Ubuntu 18.04 를 기준으로 작성되었다.
-
 ## 로컬 환경 설정
 
 운영체제는 Ubuntu 18.04 환경을 기준으로 한다.
@@ -51,7 +49,7 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 ### 루트체인 소스코드 다운로드
 
-루트체인으로 사용할 `go-ethereum` 소스코드를 다운로드 받는다.
+루트체인으로 사용할 `go-ethereum`의 소스코드를 다운로드 받는다.
 
 ```bash
 $ git clone github.com/Onther-Tech/go-ethereum
