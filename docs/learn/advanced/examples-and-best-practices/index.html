@@ -66,99 +66,99 @@
 <h2><a class="anchor" aria-hidden="true" id="counter"></a><a href="#counter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Counter</h2>
 <p>단순히 숫자가 증가만 하는 카운터 컨트랙트를 먼저 살펴보자. 이 문서는 우선 기본적인 기능을 하는 <code>BaseCounter</code> 컨트랙트부터 요청 가능한(Requestable) 기능을 추가하고, 각 예시에서 발생하는 문제점들을 점차 개선하는 방식으로 서술되어 있다.</p>
 <h3><a class="anchor" aria-hidden="true" id="basecounter"></a><a href="#basecounter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>BaseCounter</h3>
-<pre><code class="hljs css language-solidity">pragma solidity ^<span class="hljs-number">0.4</span><span class="hljs-number">.24</span>;
+<pre><code class="hljs css language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.4.24</span><span class="token punctuation">;</span>
 
 
-contract BaseCounter {
-  <span class="hljs-keyword">uint</span> n;
+<span class="token keyword">contract</span> <span class="token class-name">BaseCounter</span> <span class="token punctuation">{</span>
+  <span class="token builtin">uint</span> n<span class="token punctuation">;</span>
 
-  event Counted(<span class="hljs-keyword">uint</span> _n);
+  <span class="token keyword">event</span> <span class="token function">Counted</span><span class="token punctuation">(</span><span class="token builtin">uint</span> _n<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">count</span><span class="hljs-params">()</span> <span class="hljs-title">external</span> </span>{
-    n++;
-    emit Counted(n);
-  }
+  <span class="token keyword">function</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token punctuation">{</span>
+    n<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">emit</span> <span class="token function">Counted</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> <span class="hljs-title">external</span> <span class="hljs-title">view</span> <span class="hljs-title">returns</span> <span class="hljs-params">(uint)</span> </span>{
-    <span class="hljs-keyword">return</span> n;
-  }
-}
+  <span class="token keyword">function</span> <span class="token function">getCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">view</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">uint</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="simplecounter"></a><a href="#simplecounter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SimpleCounter</h3>
 <p>먼저 가장 간단하게 Requestable을 고려한다면 상태 변수 <code>n</code>을 enter 혹은 exit 요청에 따라 증감시킬 수 있다. 컨트랙트는 아래와 같은 방식으로 동작한다.</p>
 <p><img src="https://i.imgur.com/GQaEylR.png" alt=""></p>
 <!-- A yellow box means that the counter() has increased the status variable n by 1, a red box means entering the request changes n, and a green box means exiting the request changes n. -->
 <p><em>노란색 네모</em>는 <code>counter()</code> 함수로 <code>n</code>이 1씩 증가하는 것, <em>빨간색 네모</em>는 enter 요청으로 변경된 <code>n</code>의 값을, <em>초록색 네모</em>는 exit 요청으로 변경된 <code>n</code>의 값을 가리킨다.</p>
-<pre><code class="hljs css language-solidity">pragma solidity ^<span class="hljs-number">0.4</span><span class="hljs-number">.24</span>;
+<pre><code class="hljs css language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.4.24</span><span class="token punctuation">;</span>
 
-<span class="hljs-keyword">import</span> {SimpleDecode} <span class="hljs-keyword">from</span> "../lib/SimpleDecode.sol";
-<span class="hljs-keyword">import</span> {RequestableI} <span class="hljs-keyword">from</span> "../lib/RequestableI.sol";
-<span class="hljs-keyword">import</span> {BaseCounter} <span class="hljs-keyword">from</span> "./BaseCounter.sol";
-<span class="hljs-keyword">import</span> {SafeMath} <span class="hljs-keyword">from</span> "openzeppelin-solidity/contracts/math/SafeMath.sol";
+<span class="token keyword">import</span> <span class="token punctuation">{</span>SimpleDecode<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"../lib/SimpleDecode.sol"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>RequestableI<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"../lib/RequestableI.sol"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>BaseCounter<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"./BaseCounter.sol"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>SafeMath<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"openzeppelin-solidity/contracts/math/SafeMath.sol"</span><span class="token punctuation">;</span>
 
 
-/// @<span class="hljs-keyword">notice</span> A request can decrease `n`. But, <span class="hljs-keyword">is</span> it right <span class="hljs-keyword">to</span> decrease the count?
-contract SimpleCounter <span class="hljs-keyword">is</span> BaseCounter, RequestableI {
-  // SimpleDecode library <span class="hljs-keyword">to</span> decode trieValue.
-  <span class="hljs-keyword">using</span> SimpleDecode <span class="hljs-keyword">for</span> bytes;
-  <span class="hljs-keyword">using</span> SafeMath <span class="hljs-keyword">for</span> *;
+<span class="token comment">/// @notice A request can decrease `n`. But, is it right to decrease the count?</span>
+<span class="token keyword">contract</span> <span class="token class-name">SimpleCounter</span> <span class="token keyword">is</span> BaseCounter<span class="token punctuation">,</span> RequestableI <span class="token punctuation">{</span>
+  <span class="token comment">// SimpleDecode library to decode trieValue.</span>
+  <span class="token keyword">using</span> <span class="token class-name">SimpleDecode</span> <span class="token keyword">for</span> <span class="token builtin">bytes</span><span class="token punctuation">;</span>
+  <span class="token keyword">using</span> <span class="token class-name">SafeMath</span> <span class="token keyword">for</span> <span class="token operator">*</span><span class="token punctuation">;</span>
 
-  // trie key <span class="hljs-keyword">for</span> state variable `n`.
-  bytes32 <span class="hljs-keyword">constant</span> <span class="hljs-built_in">public</span> TRIE_KEY_N = <span class="hljs-number">0x00</span>;
+  <span class="token comment">// trie key for state variable `n`.</span>
+  <span class="token builtin">bytes32</span> <span class="token keyword">constant</span> <span class="token keyword">public</span> TRIE_KEY_N <span class="token operator">=</span> <span class="token number">0x00</span><span class="token punctuation">;</span>
 
-  // address <span class="hljs-keyword">of</span> RootChain contract.
-  address <span class="hljs-built_in">public</span> rootchain;
+  <span class="token comment">// address of RootChain contract.</span>
+  <span class="token builtin">address</span> <span class="token keyword">public</span> rootchain<span class="token punctuation">;</span>
 
-  <span class="hljs-keyword">mapping</span> (uint =&gt; <span class="hljs-type">bool</span>) appliedRequests;
+  <span class="token keyword">mapping</span> <span class="token punctuation">(</span><span class="token builtin">uint</span> <span class="token operator">=></span> <span class="token builtin">bool</span><span class="token punctuation">)</span> appliedRequests<span class="token punctuation">;</span>
 
-  constructor(address _rootchain) {
-    rootchain = _rootchain;
-  }
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">address</span> _rootchain<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    rootchain <span class="token operator">=</span> _rootchain<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-keyword">function</span> applyRequestInRootChain(
-    <span class="hljs-type">bool</span> isExit,
-    uint256 requestId,
-    address requestor,
-    bytes32 trieKey,
-    bytes trieValue
-  ) <span class="hljs-keyword">external</span> <span class="hljs-keyword">returns</span> (<span class="hljs-type">bool</span> success) {
-    require(!appliedRequests[requestId]);
-    require(msg.sender == rootchain);
+  <span class="token keyword">function</span> <span class="token function">applyRequestInRootChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender <span class="token operator">==</span> rootchain<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // <span class="hljs-keyword">only</span> accept request <span class="hljs-keyword">for</span> `n`.
-    require(trieKey == TRIE_KEY_N);
+    <span class="token comment">// only accept request for `n`.</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>trieKey <span class="token operator">==</span> TRIE_KEY_N<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="hljs-keyword">if</span> (isExit) {
-      n = n.<span class="hljs-keyword">add</span>(trieValue.toUint());
-    } <span class="hljs-keyword">else</span> {
-      n = n.sub(trieValue.toUint());
-    }
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    appliedRequests[requestId] = <span class="hljs-keyword">true</span>;
-  }
+    appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-keyword">function</span> applyRequestInChildChain(
-    <span class="hljs-type">bool</span> isExit,
-    uint256 requestId,
-    address requestor,
-    bytes32 trieKey,
-    bytes trieValue
-  ) <span class="hljs-keyword">external</span> <span class="hljs-keyword">returns</span> (<span class="hljs-type">bool</span> success) {
-    require(!appliedRequests[requestId]);
-    require(msg.sender == address(<span class="hljs-number">0</span>));
+  <span class="token keyword">function</span> <span class="token function">applyRequestInChildChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender <span class="token operator">==</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // <span class="hljs-keyword">only</span> accept request <span class="hljs-keyword">for</span> `n`.
-    require(trieKey == TRIE_KEY_N);
+    <span class="token comment">// only accept request for `n`.</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>trieKey <span class="token operator">==</span> TRIE_KEY_N<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="hljs-keyword">if</span> (isExit) {
-      n = n.sub(trieValue.toUint());
-    } <span class="hljs-keyword">else</span> {
-      n = n.<span class="hljs-keyword">add</span>(trieValue.toUint());
-    }
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    appliedRequests[requestId] = <span class="hljs-keyword">true</span>;
-  }
-}
+    appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <!-- However, SimpleCounter may decrease with variable n due to enter and exit. If this is not desired, you can implement counter contract as below. -->
 <p><code>SimpleCounter</code>는 <code>n</code>을 각 요청에 따라 증감시킨다. 이 경우 총 카운터를 계산하기 위하여 양 체인의 두 컨트랙트를 모두 참조해야 한다. 또한 <code>n</code>이 감소하는 카운터가 바람직한지 고려해야한다. 이 두가지를 활용하면 한 쪽 체인에서만 카운터를 동작시키는 것이 가능하다.</p>
@@ -166,76 +166,76 @@ contract SimpleCounter <span class="hljs-keyword">is</span> BaseCounter, Request
 <!-- Enter and exit can be applied after freezing the contracts in each chain. FreezableCounter can be avoided if the number decreases through the request method after freezing. -->
 <p>자식 체인에서는 기본적으로 카운터가 멈춰있는 상태로 시작한다. 루트 체인에서 enter 요청이 생성될 경우 루트 체인의 카운터가 동작을 멈추고 요청이 반영된 순간 자식 체인의 카운터가 동작한다. exit 요청의 경우 자식 체인의 카운터를 멈추고 부모 체인의 카운터를 동작시킨다. 이를 통해 <code>n</code>이 감소하는 것을 막을 수 있다.</p>
 <p><img src="https://i.imgur.com/IDHhZRs.png" alt=""></p>
-<pre><code class="hljs css language-solidity">pragma solidity ^<span class="hljs-number">0.4</span><span class="hljs-number">.24</span>;
+<pre><code class="hljs css language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.4.24</span><span class="token punctuation">;</span>
 
-<span class="hljs-params">...</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
 
-<span class="hljs-comment">/// @notice Both contract may be frozen at the same time. Is it right?</span>
-contract FreezableCounter is BaseCounter, RequestableI {
-  <span class="hljs-params">...</span>
+<span class="token comment">/// @notice Both contract may be frozen at the same time. Is it right?</span>
+<span class="token keyword">contract</span> <span class="token class-name">FreezableCounter</span> <span class="token keyword">is</span> BaseCounter<span class="token punctuation">,</span> RequestableI <span class="token punctuation">{</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
-  <span class="hljs-comment">// freeze counter before make request.</span>
-  bool <span class="hljs-keyword">public</span> <span class="hljs-keyword">frozen</span>;
+  <span class="token comment">// freeze counter before make request.</span>
+  <span class="token builtin">bool</span> <span class="token keyword">public</span> frozen<span class="token punctuation">;</span>
 
-  constructor(address _rootchain) {
-    rootchain = _rootchain;
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">address</span> _rootchain<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    rootchain <span class="token operator">=</span> _rootchain<span class="token punctuation">;</span>
 
-    <span class="hljs-comment">// Counter in child chain is frozen at first.</span>
-    <span class="hljs-keyword">if</span> (_rootchain == address(<span class="hljs-number">0</span>)) {
-      <span class="hljs-keyword">frozen</span> = <span class="hljs-literal">true</span>;
-    }
-  }
+    <span class="token comment">// Counter in child chain is frozen at first.</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>_rootchain <span class="token operator">==</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      frozen <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 
-  function freeze() external returns (bool success) {
-    <span class="hljs-keyword">frozen</span> = <span class="hljs-literal">true</span>;
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-  }
+  <span class="token keyword">function</span> <span class="token function">freeze</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    frozen <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  function applyRequestInRootChain(
-    bool isExit,
-    uint256 requestId,
-    address requestor,
-    bytes32 trieKey,
-    <span class="hljs-built_in">bytes</span> trieValue
-  ) external returns (bool success) {
-    <span class="hljs-params">...</span>
-    <span class="hljs-keyword">require</span>(<span class="hljs-keyword">frozen</span>);
+  <span class="token keyword">function</span> <span class="token function">applyRequestInRootChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>frozen<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="hljs-params">...</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
-    <span class="hljs-keyword">if</span> (isExit) {
-      <span class="hljs-keyword">frozen</span> = <span class="hljs-literal">false</span>;
-      n = trieValue.toUint();
-    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-keyword">require</span>(n == trieValue.toUint());
-    }
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      frozen <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+      n <span class="token operator">=</span> trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">require</span><span class="token punctuation">(</span>n <span class="token operator">==</span> trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="hljs-params">...</span>
-  }
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token punctuation">}</span>
 
-  function applyRequestInChildChain(
-    bool isExit,
-    uint256 requestId,
-    address requestor,
-    bytes32 trieKey,
-    <span class="hljs-built_in">bytes</span> trieValue
-  ) external returns (bool success) {
-    <span class="hljs-params">...</span>
-    <span class="hljs-keyword">require</span>(<span class="hljs-keyword">frozen</span>);
+  <span class="token keyword">function</span> <span class="token function">applyRequestInChildChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>frozen<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="hljs-params">...</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
-    <span class="hljs-keyword">if</span> (isExit) {
-      <span class="hljs-keyword">require</span>(n == trieValue.toUint());
-    } <span class="hljs-keyword">else</span> {
-      n = trieValue.toUint();
-      <span class="hljs-keyword">frozen</span> = <span class="hljs-literal">false</span>;
-    }
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">require</span><span class="token punctuation">(</span>n <span class="token operator">==</span> trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      frozen <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="hljs-params">...</span>
-  }
-}
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <!-- However, the challenge period exists until exit is applied in root chain, for this freeze counter, all counters in each chain are frozen before the end of this challenge period. The enter is relatively short, but both are frozen. Therefore, to prevent this, the state variable used for enter and the state variable used for exit must be different. -->
 <p>이 구현체의 경우 가장 큰 문제는 exit 요청이 부모 체인에 반영될 때 블록과 요청에 대햔 챌린지 기간을 가진다는 점이다. 따라서 exit 요청이 finalize되기 전에는 양 체인의 모든 카운터가 멈춰있는 상태가 된다. 또한 한 체인의 동작을 멈출 수 밖에 없기에 <code>FreezableCounter</code>에 대해 enter 혹은 exit 요청을 보내는 것은 특정 어카운트만 수행할 수 있도록 권한을 주어야 하는 단점이 있다. 이를 방지하기 위하여 &quot;요청으로 인해 <code>n</code>이 얼마나 변경 되었는가&quot;를 별도의 상태 변수로 관리해야 한다.</p>
@@ -244,241 +244,241 @@ contract FreezableCounter is BaseCounter, RequestableI {
 <p><code>TrackableCounter</code>는 다른 체인에 값을 전달할 수 있는가를 별도의 상태변수 <code>requestableN</code>을 통해 관리한다. <code>counter()</code>는 기존의 <code>n</code>과 <code>requestableN</code>를 동시에 증가시키며, 부모 체인에서의 enter(혹은 자식 체인에서의 exit)의 경우 해당 체인에서는 <code>requestableN</code>만 감소시킨다. 또한 이 요청이 다른 체인에 적용될 때는 <code>n</code>만 증가시킨다. 부모 체인에서의 exit(혹은 자식 체인에서의 enter)의 경우는 이를 반대로 수행한다.</p>
 <!-- 상태 변수를 1개 더 사용하고 컨트랙트 구현에 다소 복잡해지는 것과 `n`이 감소하는 경우는 상충(trade-off) 합니다. -->
 <p><img src="https://i.imgur.com/CZ6DnAG.png" alt=""></p>
-<pre><code class="hljs css language-solidity"><span class="hljs-attr">pragma</span> <span class="hljs-string">solidity ^0.4.24;</span>
+<pre><code class="hljs css language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.4.24</span><span class="token punctuation">;</span>
 
-<span class="hljs-attr">...</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
-<span class="hljs-attr">contract</span> <span class="hljs-string">TrackableCounter is BaseCounter, RequestableI {</span>
-  <span class="hljs-attr">...</span>
+<span class="token keyword">contract</span> <span class="token class-name">TrackableCounter</span> <span class="token keyword">is</span> BaseCounter<span class="token punctuation">,</span> RequestableI <span class="token punctuation">{</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
-  <span class="hljs-meta">//</span> <span class="hljs-string">previous count before enter request in root chain and exit request in child chain.</span>
-  <span class="hljs-attr">uint</span> <span class="hljs-string">public requestableN;</span>
+  <span class="token comment">// previous count before enter request in root chain and exit request in child chain.</span>
+  <span class="token builtin">uint</span> <span class="token keyword">public</span> requestableN<span class="token punctuation">;</span>
 
-  <span class="hljs-attr">...</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
-  <span class="hljs-meta">///</span> <span class="hljs-string">@dev override BaseCounter.count function.</span>
-  <span class="hljs-attr">function</span> <span class="hljs-string">count() external {</span>
-    <span class="hljs-attr">requestableN++;</span>
-    <span class="hljs-attr">n++;</span>
-    <span class="hljs-attr">emit</span> <span class="hljs-string">Counted(n);</span>
-  <span class="hljs-attr">}</span>
+  <span class="token comment">/// @dev override BaseCounter.count function.</span>
+  <span class="token keyword">function</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token punctuation">{</span>
+    requestableN<span class="token operator">++</span><span class="token punctuation">;</span>
+    n<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">emit</span> <span class="token function">Counted</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-attr">function</span> <span class="hljs-string">applyRequestInRootChain(</span>
-    <span class="hljs-attr">bool</span> <span class="hljs-string">isExit,</span>
-    <span class="hljs-attr">uint256</span> <span class="hljs-string">requestId,</span>
-    <span class="hljs-attr">address</span> <span class="hljs-string">requestor,</span>
-    <span class="hljs-attr">bytes32</span> <span class="hljs-string">trieKey,</span>
-    <span class="hljs-attr">bytes</span> <span class="hljs-string">trieValue</span>
-  <span class="hljs-meta">)</span> <span class="hljs-string">external returns (bool success) {</span>
-    <span class="hljs-attr">...</span>
+  <span class="token keyword">function</span> <span class="token function">applyRequestInRootChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
-    <span class="hljs-attr">uint</span> <span class="hljs-string">_n = trieValue.toUint()</span>
-    <span class="hljs-attr">if</span> <span class="hljs-string">(isExit) {</span>
-      <span class="hljs-attr">n</span> = <span class="hljs-string">n.add(_n);</span>
-    <span class="hljs-meta">}</span> <span class="hljs-string">else {</span>
-      <span class="hljs-attr">requestableN</span> = <span class="hljs-string">requestableN.sub(_n);</span>
-    <span class="hljs-attr">}</span>
+    <span class="token builtin">uint</span> _n <span class="token operator">=</span> trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>_n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      requestableN <span class="token operator">=</span> requestableN<span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>_n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="hljs-attr">...</span>
-  <span class="hljs-attr">}</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-attr">function</span> <span class="hljs-string">applyRequestInChildChain(</span>
-    <span class="hljs-attr">bool</span> <span class="hljs-string">isExit,</span>
-    <span class="hljs-attr">uint256</span> <span class="hljs-string">requestId,</span>
-    <span class="hljs-attr">address</span> <span class="hljs-string">requestor,</span>
-    <span class="hljs-attr">bytes32</span> <span class="hljs-string">trieKey,</span>
-    <span class="hljs-attr">bytes</span> <span class="hljs-string">trieValue</span>
-  <span class="hljs-meta">)</span> <span class="hljs-string">external returns (bool success) {</span>
-    <span class="hljs-attr">...</span>
+  <span class="token keyword">function</span> <span class="token function">applyRequestInChildChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
-    <span class="hljs-attr">if</span> <span class="hljs-string">(isExit) {</span>
-      <span class="hljs-attr">requestableN</span> = <span class="hljs-string">requestableN.sub(_n);</span>
-    <span class="hljs-meta">}</span> <span class="hljs-string">else {</span>
-      <span class="hljs-attr">n</span> = <span class="hljs-string">n.add(_n);</span>
-    <span class="hljs-attr">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      requestableN <span class="token operator">=</span> requestableN<span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>_n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>_n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="hljs-attr">...</span>
-  <span class="hljs-attr">}</span>
-<span class="hljs-attr">}</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="token"></a><a href="#token" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Token</h2>
 <p>ERC20 토큰 컨트랙트의 경우 <code>balances[holder]</code> 변수에 대하여 <a href="#simplecounter">SimpleCounter</a>와 <a href="#freezablecounter">FreezableCounter</a> 방식 두 가지로 작성할 수 있다. <code>SimpleCounter</code> 방식은 자식 체인에서 발행된 토큰은 언제나 부모 체인으로 exit 될 수 있지만, <code>FreezableCounter</code> 방식은 언제나 exit 되는 토큰의 수량만큼 부모 체인에서 묶여있어야 한다. 본 문서에선 <code>SimpleCounter</code> 방식만을 다루고 있다.</p>
 <h3><a class="anchor" aria-hidden="true" id="requestablesimpletoken"></a><a href="#requestablesimpletoken" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RequestableSimpleToken</h3>
 <p>(<a href="https://github.com/Onther-Tech/requestable-simple-token/blob/master/contracts/RequestableSimpleToken.sol">github</a>)</p>
 <p><code>RequestableSimpleToken</code>는 <code>owner</code>가 토큰을 발행하고 일반 토큰 홀더가 자신의 토큰을 다른이에게 전송하거나 요청을 생성할 수 있는 컨트랙트다.</p>
-<pre><code class="hljs css language-solidity">contract RequestableSimpleToken <span class="hljs-keyword">is</span> Ownable, RequestableI {
-  <span class="hljs-keyword">using</span> SafeMath <span class="hljs-keyword">for</span> *;
+<pre><code class="hljs css language-solidity"><span class="token keyword">contract</span> <span class="token class-name">RequestableSimpleToken</span> <span class="token keyword">is</span> Ownable<span class="token punctuation">,</span> RequestableI <span class="token punctuation">{</span>
+  <span class="token keyword">using</span> <span class="token class-name">SafeMath</span> <span class="token keyword">for</span> <span class="token operator">*</span><span class="token punctuation">;</span>
 
-  <span class="hljs-comment">// `owner` is stored at bytes32(0).</span>
-  <span class="hljs-comment">// address owner; from Ownable</span>
+  <span class="token comment">// `owner` is stored at bytes32(0).</span>
+  <span class="token comment">// address owner; from Ownable</span>
 
-  <span class="hljs-comment">// `totalSupply` is stored at bytes32(1).</span>
-  <span class="hljs-keyword">uint</span> <span class="hljs-keyword">public</span> totalSupply;
+  <span class="token comment">// `totalSupply` is stored at bytes32(1).</span>
+  <span class="token builtin">uint</span> <span class="token keyword">public</span> totalSupply<span class="token punctuation">;</span>
 
-  <span class="hljs-comment">// `balances[addr]` is stored at keccak256(bytes32(addr), bytes32(2)).</span>
-  mapping(address =&gt; <span class="hljs-keyword">uint</span>) <span class="hljs-keyword">public</span> balances;
+  <span class="token comment">// `balances[addr]` is stored at keccak256(bytes32(addr), bytes32(2)).</span>
+  <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token operator">=></span> <span class="token builtin">uint</span><span class="token punctuation">)</span> <span class="token keyword">public</span> balances<span class="token punctuation">;</span>
 
-  <span class="hljs-comment">// requests</span>
-  mapping(<span class="hljs-keyword">uint</span> =&gt; <span class="hljs-keyword">bool</span>) appliedRequests;
+  <span class="token comment">// requests</span>
+  <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">uint</span> <span class="token operator">=></span> <span class="token builtin">bool</span><span class="token punctuation">)</span> appliedRequests<span class="token punctuation">;</span>
 
-  bytes32 constant <span class="hljs-keyword">public</span> KEY_OWNER         = <span class="hljs-number">0x0000000000000000000000000000000000000000000000000000000000000000</span>;
-  bytes32 constant <span class="hljs-keyword">public</span> KEY_TOTAL_SUPPLY  = <span class="hljs-number">0x0000000000000000000000000000000000000000000000000000000000000001</span>;
-  bytes32 constant <span class="hljs-keyword">public</span> PERFIX_BALANCES   = <span class="hljs-number">0x0000000000000000000000000000000000000000000000000000000000000002</span>;
+  <span class="token builtin">bytes32</span> <span class="token keyword">constant</span> <span class="token keyword">public</span> KEY_OWNER         <span class="token operator">=</span> <span class="token number">0x0000000000000000000000000000000000000000000000000000000000000000</span><span class="token punctuation">;</span>
+  <span class="token builtin">bytes32</span> <span class="token keyword">constant</span> <span class="token keyword">public</span> KEY_TOTAL_SUPPLY  <span class="token operator">=</span> <span class="token number">0x0000000000000000000000000000000000000000000000000000000000000001</span><span class="token punctuation">;</span>
+  <span class="token builtin">bytes32</span> <span class="token keyword">constant</span> <span class="token keyword">public</span> PERFIX_BALANCES   <span class="token operator">=</span> <span class="token number">0x0000000000000000000000000000000000000000000000000000000000000002</span><span class="token punctuation">;</span>
 
-  <span class="hljs-comment">/* Events */</span>
-  <span class="hljs-function"><span class="hljs-keyword">event</span> <span class="hljs-title">Transfer</span>(<span class="hljs-params">address _from, address _to, <span class="hljs-keyword">uint</span> _value</span>)</span>;
-  <span class="hljs-function"><span class="hljs-keyword">event</span> <span class="hljs-title">Mint</span>(<span class="hljs-params">address _to, <span class="hljs-keyword">uint</span> _value</span>)</span>;
-  <span class="hljs-function"><span class="hljs-keyword">event</span> <span class="hljs-title">Requested</span>(<span class="hljs-params"><span class="hljs-keyword">bool</span> _isExit, address _requestor, bytes32 _trieKey, bytes _trieValue</span>)</span>;
+  <span class="token comment">/* Events */</span>
+  <span class="token keyword">event</span> <span class="token function">Transfer</span><span class="token punctuation">(</span><span class="token builtin">address</span> _from<span class="token punctuation">,</span> <span class="token builtin">address</span> _to<span class="token punctuation">,</span> <span class="token builtin">uint</span> _value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">event</span> <span class="token function">Mint</span><span class="token punctuation">(</span><span class="token builtin">address</span> _to<span class="token punctuation">,</span> <span class="token builtin">uint</span> _value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">event</span> <span class="token function">Requested</span><span class="token punctuation">(</span><span class="token builtin">bool</span> _isExit<span class="token punctuation">,</span> <span class="token builtin">address</span> _requestor<span class="token punctuation">,</span> <span class="token builtin">bytes32</span> _trieKey<span class="token punctuation">,</span> <span class="token builtin">bytes</span> _trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="hljs-function">function <span class="hljs-title">transfer</span>(<span class="hljs-params">address _to, <span class="hljs-keyword">uint</span> _value</span>) <span class="hljs-keyword">public</span></span> {
-    balances[msg.sender] = balances[msg.sender].sub(_value);
-    balances[_to] = balances[_to].<span class="hljs-keyword">add</span>(_value);
+  <span class="token keyword">function</span> <span class="token function">transfer</span><span class="token punctuation">(</span><span class="token builtin">address</span> _to<span class="token punctuation">,</span> <span class="token builtin">uint</span> _value<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token punctuation">{</span>
+    balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">=</span> balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>_value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    balances<span class="token punctuation">[</span>_to<span class="token punctuation">]</span> <span class="token operator">=</span> balances<span class="token punctuation">[</span>_to<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>_value<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="hljs-function">emit <span class="hljs-title">Transfer</span>(<span class="hljs-params">msg.sender, _to, _value</span>)</span>;
-  }
+    <span class="token keyword">emit</span> <span class="token function">Transfer</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> _to<span class="token punctuation">,</span> _value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-function">function <span class="hljs-title">mint</span>(<span class="hljs-params">address _to, <span class="hljs-keyword">uint</span> _value</span>) <span class="hljs-keyword">public</span> onlyOwner</span> {
-    totalSupply = totalSupply.<span class="hljs-keyword">add</span>(_value);
-    balances[_to] = balances[_to].<span class="hljs-keyword">add</span>(_value);
+  <span class="token keyword">function</span> <span class="token function">mint</span><span class="token punctuation">(</span><span class="token builtin">address</span> _to<span class="token punctuation">,</span> <span class="token builtin">uint</span> _value<span class="token punctuation">)</span> <span class="token keyword">public</span> onlyOwner <span class="token punctuation">{</span>
+    totalSupply <span class="token operator">=</span> totalSupply<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>_value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    balances<span class="token punctuation">[</span>_to<span class="token punctuation">]</span> <span class="token operator">=</span> balances<span class="token punctuation">[</span>_to<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>_value<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="hljs-function">emit <span class="hljs-title">Mint</span>(<span class="hljs-params">_to, _value</span>)</span>;
-    <span class="hljs-function">emit <span class="hljs-title">Transfer</span>(<span class="hljs-params">address(<span class="hljs-number">0</span></span>), _to, _value)</span>;
-  }
+    <span class="token keyword">emit</span> <span class="token function">Mint</span><span class="token punctuation">(</span>_to<span class="token punctuation">,</span> _value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">emit</span> <span class="token function">Transfer</span><span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> _to<span class="token punctuation">,</span> _value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-comment">// User can get the trie key of one's balance and make an enter request directly.</span>
-  <span class="hljs-function">function <span class="hljs-title">getBalanceTrieKey</span>(<span class="hljs-params">address who</span>) <span class="hljs-keyword">public</span> pure <span class="hljs-title">returns</span> (<span class="hljs-params">bytes32</span>)</span> {
-    <span class="hljs-keyword">return</span> keccak256(abi.encodePacked(bytes32(bytes20(who)), PERFIX_BALANCES));
-  }
+  <span class="token comment">// User can get the trie key of one's balance and make an enter request directly.</span>
+  <span class="token keyword">function</span> <span class="token function">getBalanceTrieKey</span><span class="token punctuation">(</span><span class="token builtin">address</span> who<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">pure</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bytes32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">keccak256</span><span class="token punctuation">(</span>abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span><span class="token builtin">bytes32</span><span class="token punctuation">(</span><span class="token builtin">bytes20</span><span class="token punctuation">(</span>who<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> PERFIX_BALANCES<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-function">function <span class="hljs-title">applyRequestInRootChain</span>(<span class="hljs-params">
-    <span class="hljs-keyword">bool</span> isExit,
-    uint256 requestId,
-    address requestor,
-    bytes32 trieKey,
-    bytes calldata trieValue
-  </span>) external <span class="hljs-title">returns</span> (<span class="hljs-params"><span class="hljs-keyword">bool</span> success</span>)</span> {
-    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> adpot RootChain</span>
-    <span class="hljs-comment">// require(msg.sender == address(rootchain));</span>
+  <span class="token keyword">function</span> <span class="token function">applyRequestInRootChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> <span class="token keyword">calldata</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO: adpot RootChain</span>
+    <span class="token comment">// require(msg.sender == address(rootchain));</span>
 
-    require(!appliedRequests[requestId]);
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="hljs-keyword">if</span> (isExit) {
-      <span class="hljs-keyword">if</span> (KEY_OWNER == trieKey) {
-        <span class="hljs-comment">// only owner (in child chain) can exit `owner` variable.</span>
-        <span class="hljs-comment">// but it is checked in applyRequestInChildChain and exitChallenge.</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_OWNER <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// only owner (in child chain) can exit `owner` variable.</span>
+        <span class="token comment">// but it is checked in applyRequestInChildChain and exitChallenge.</span>
 
-        <span class="hljs-comment">// set requestor as owner in root chain.</span>
-        _transferOwnership(requestor);
-      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (KEY_TOTAL_SUPPLY == trieKey) {
-        <span class="hljs-comment">// no one can exit `totalSupply` variable.</span>
-        <span class="hljs-comment">// but do nothing to return true.</span>
-      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (getBalanceTrieKey(requestor) == trieKey) {
-        <span class="hljs-comment">// this checks trie key equals to `balances[requestor]`.</span>
-        <span class="hljs-comment">// only token holder can exit one's token.</span>
-        <span class="hljs-comment">// exiting means moving tokens from child chain to root chain.</span>
-        balances[requestor] += decodeTrieValue(trieValue);
-      } <span class="hljs-keyword">else</span> {
-        <span class="hljs-comment">// cannot exit other variables.</span>
-        <span class="hljs-comment">// but do nothing to return true.</span>
-      }
-    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-comment">// apply enter</span>
-      <span class="hljs-keyword">if</span> (KEY_OWNER == trieKey) {
-        <span class="hljs-comment">// only owner (in root chain) can enter `owner` variable.</span>
-        require(owner() == requestor);
-        <span class="hljs-comment">// do nothing in root chain</span>
-      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (KEY_TOTAL_SUPPLY == trieKey) {
-        <span class="hljs-comment">// no one can enter `totalSupply` variable.</span>
-        revert();
-      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (getBalanceTrieKey(requestor) == trieKey) {
-        <span class="hljs-comment">// this checks trie key equals to `balances[requestor]`.</span>
-        <span class="hljs-comment">// only token holder can enter one's token.</span>
-        <span class="hljs-comment">// entering means moving tokens from root chain to child chain.</span>
-        require(balances[requestor] &gt;= decodeTrieValue(trieValue));
-        balances[requestor] -= decodeTrieValue(trieValue);
-      } <span class="hljs-keyword">else</span> {
-        <span class="hljs-comment">// cannot apply request on other variables.</span>
-        revert();
-      }
-    }
+        <span class="token comment">// set requestor as owner in root chain.</span>
+        <span class="token function">_transferOwnership</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_TOTAL_SUPPLY <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// no one can exit `totalSupply` variable.</span>
+        <span class="token comment">// but do nothing to return true.</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getBalanceTrieKey</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span> <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// this checks trie key equals to `balances[requestor]`.</span>
+        <span class="token comment">// only token holder can exit one's token.</span>
+        <span class="token comment">// exiting means moving tokens from child chain to root chain.</span>
+        balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// cannot exit other variables.</span>
+        <span class="token comment">// but do nothing to return true.</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// apply enter</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_OWNER <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// only owner (in root chain) can enter `owner` variable.</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token function">owner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> requestor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// do nothing in root chain</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_TOTAL_SUPPLY <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// no one can enter `totalSupply` variable.</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getBalanceTrieKey</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span> <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// this checks trie key equals to `balances[requestor]`.</span>
+        <span class="token comment">// only token holder can enter one's token.</span>
+        <span class="token comment">// entering means moving tokens from root chain to child chain.</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span>balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// cannot apply request on other variables.</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    appliedRequests[requestId] = <span class="hljs-literal">true</span>;
+    appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 
-    <span class="hljs-function">emit <span class="hljs-title">Requested</span>(<span class="hljs-params">isExit, requestor, trieKey, trieValue</span>)</span>;
+    <span class="token keyword">emit</span> <span class="token function">Requested</span><span class="token punctuation">(</span>isExit<span class="token punctuation">,</span> requestor<span class="token punctuation">,</span> trieKey<span class="token punctuation">,</span> trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> adpot RootChain</span>
-    <span class="hljs-comment">// setRequestApplied(requestId);</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-  }
+    <span class="token comment">// TODO: adpot RootChain</span>
+    <span class="token comment">// setRequestApplied(requestId);</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-comment">// this is only called by NULL_ADDRESS in child chain</span>
-  <span class="hljs-comment">// when i) exitRequest is initialized by startExit() or</span>
-  <span class="hljs-comment">//     ii) enterRequest is initialized</span>
-  <span class="hljs-function">function <span class="hljs-title">applyRequestInChildChain</span>(<span class="hljs-params">
-    <span class="hljs-keyword">bool</span> isExit,
-    uint256 requestId,
-    address requestor,
-    bytes32 trieKey,
-    bytes calldata trieValue
-  </span>) external <span class="hljs-title">returns</span> (<span class="hljs-params"><span class="hljs-keyword">bool</span> success</span>)</span> {
-    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> adpot child chain</span>
-    <span class="hljs-comment">// require(msg.sender == NULL_ADDRESS);</span>
-    require(!appliedRequests[requestId]);
+  <span class="token comment">// this is only called by NULL_ADDRESS in child chain</span>
+  <span class="token comment">// when i) exitRequest is initialized by startExit() or</span>
+  <span class="token comment">//     ii) enterRequest is initialized</span>
+  <span class="token keyword">function</span> <span class="token function">applyRequestInChildChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> <span class="token keyword">calldata</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO: adpot child chain</span>
+    <span class="token comment">// require(msg.sender == NULL_ADDRESS);</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="hljs-keyword">if</span> (isExit) {
-      <span class="hljs-keyword">if</span> (KEY_OWNER == trieKey) {
-        <span class="hljs-comment">// only owner (in child chain) can exit `owner` variable.</span>
-        require(owner() == requestor);
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_OWNER <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// only owner (in child chain) can exit `owner` variable.</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token function">owner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> requestor<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        <span class="hljs-comment">// do nothing when exit `owner` in child chain</span>
-      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (KEY_TOTAL_SUPPLY == trieKey) {
-        <span class="hljs-comment">// no one can exit `totalSupply` variable.</span>
-        revert();
-      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (getBalanceTrieKey(requestor) == trieKey) {
-        <span class="hljs-comment">// this checks trie key equals to `balances[tokenHolder]`.</span>
-        <span class="hljs-comment">// only token holder can exit one's token.</span>
-        <span class="hljs-comment">// exiting means moving tokens from child chain to root chain.</span>
+        <span class="token comment">// do nothing when exit `owner` in child chain</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_TOTAL_SUPPLY <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// no one can exit `totalSupply` variable.</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getBalanceTrieKey</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span> <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// this checks trie key equals to `balances[tokenHolder]`.</span>
+        <span class="token comment">// only token holder can exit one's token.</span>
+        <span class="token comment">// exiting means moving tokens from child chain to root chain.</span>
 
-        <span class="hljs-comment">// revert provides a proof for `exitChallenge`.</span>
-        require(balances[requestor] &gt;= decodeTrieValue(trieValue));
+        <span class="token comment">// revert provides a proof for `exitChallenge`.</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span>balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        balances[requestor] -= decodeTrieValue(trieValue);
-      } <span class="hljs-keyword">else</span> { <span class="hljs-comment">// cannot exit other variables.</span>
-        revert();
-      }
-    } <span class="hljs-keyword">else</span> { <span class="hljs-comment">// apply enter</span>
-      <span class="hljs-keyword">if</span> (KEY_OWNER == trieKey) {
-        <span class="hljs-comment">// only owner (in root chain) can make enterRequest of `owner` variable.</span>
-        <span class="hljs-comment">// but it is checked in applyRequestInRootChain.</span>
+        balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token comment">// cannot exit other variables.</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token comment">// apply enter</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_OWNER <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// only owner (in root chain) can make enterRequest of `owner` variable.</span>
+        <span class="token comment">// but it is checked in applyRequestInRootChain.</span>
 
-        _transferOwnership(requestor);
-      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (KEY_TOTAL_SUPPLY == trieKey) {
-        <span class="hljs-comment">// no one can enter `totalSupply` variable.</span>
-      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (getBalanceTrieKey(requestor) == trieKey) {
-        <span class="hljs-comment">// this checks trie key equals to `balances[tokenHolder]`.</span>
-        <span class="hljs-comment">// only token holder can enter one's token.</span>
-        <span class="hljs-comment">// entering means moving tokens from root chain to child chain.</span>
-        balances[requestor] += decodeTrieValue(trieValue);
-      } <span class="hljs-keyword">else</span> {
-        <span class="hljs-comment">// cannot apply request on other variables.</span>
-        revert();
-      }
-    }
+        <span class="token function">_transferOwnership</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_TOTAL_SUPPLY <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// no one can enter `totalSupply` variable.</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getBalanceTrieKey</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span> <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// this checks trie key equals to `balances[tokenHolder]`.</span>
+        <span class="token comment">// only token holder can enter one's token.</span>
+        <span class="token comment">// entering means moving tokens from root chain to child chain.</span>
+        balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// cannot apply request on other variables.</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    appliedRequests[requestId] = <span class="hljs-literal">true</span>;
+    appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 
-    <span class="hljs-function">emit <span class="hljs-title">Requested</span>(<span class="hljs-params">isExit, requestor, trieKey, trieValue</span>)</span>;
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-  }
+    <span class="token keyword">emit</span> <span class="token function">Requested</span><span class="token punctuation">(</span>isExit<span class="token punctuation">,</span> requestor<span class="token punctuation">,</span> trieKey<span class="token punctuation">,</span> trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-function">function <span class="hljs-title">decodeTrieValue</span>(<span class="hljs-params">bytes memory trieValue</span>) <span class="hljs-keyword">public</span> pure <span class="hljs-title">returns</span> (<span class="hljs-params"><span class="hljs-keyword">uint</span> v</span>)</span> {
-    require(trieValue.length == <span class="hljs-number">0x20</span>);
+  <span class="token keyword">function</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span><span class="token builtin">bytes</span> <span class="token keyword">memory</span> trieValue<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">pure</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">uint</span> v<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">0x20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    assembly {
-       v := mload(<span class="hljs-keyword">add</span>(trieValue, <span class="hljs-number">0x20</span>))
-    }
-  }
-}
+    <span class="token keyword">assembly</span> <span class="token punctuation">{</span>
+       v <span class="token operator">:=</span> <span class="token function">mload</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">,</span> <span class="token number">0x20</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>OpenZeppelin과 ds-token 기반의 requestable 토큰 컨트랙트는 다음에서 확인할 수 있다.</p>
 <ul>
@@ -536,117 +536,117 @@ contract FreezableCounter is BaseCounter, RequestableI {
 <p><code>RequestableMultisig</code>는 멀티 시그 컨트랙트가 보낼 트랜잭션 데이터를 <code>Transaction</code> 구조체와 <code>transactions</code> 변수로 관리한다. 그리고 해당 트랜잭션에 대한 서명을 <code>confirmations</code> 변수로 수집한 후 이것이 정족수(<code>_required</code>)를 넘으면 실행된다. out-of-gas와 같은 에러가 발생할 경우 다시 실행이 가능하며, 올바르기 실행된 경우 <code>executed</code> 변수에 결과를 반영한다. <code>RequestableMultisig</code>의 요청은 다음으로 나누어진다.</p>
 <h3><a class="anchor" aria-hidden="true" id="1-transactions"></a><a href="#1-transactions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. <code>transactions</code></h3>
 <p><code>trieValue</code>는 RLP 인코딩된 Transaction 데이터이고, 이 요청은 단순하게 양 체인간의 데이터를 동일하게 유지하는 기능을 한다. <code>submitTransaction</code> 함수가 트랜잭션 데이터를 등록하고 confirm을 하는데, 이 요청은 confirm 과정을 제외하고 순수하게 데이터만 등록한다. 다만 이에 대한 호출은 <code>owner</code>만이 할 수 있다.</p>
-<pre><code class="hljs css language-solidity"><span class="hljs-constructor">_handleTransaction(<span class="hljs-params">isRootChain</span>, <span class="hljs-params">isExit</span>, <span class="hljs-params">toTransaction</span>(<span class="hljs-params">trieValue</span>)</span>);
+<pre><code class="hljs css language-solidity"><span class="token function">_handleTransaction</span><span class="token punctuation">(</span>isRootChain<span class="token punctuation">,</span> isExit<span class="token punctuation">,</span> <span class="token function">toTransaction</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="hljs-keyword">function</span> <span class="hljs-constructor">_handleTransaction(<span class="hljs-params">bool</span> <span class="hljs-params">isRootChain</span>, <span class="hljs-params">bool</span> <span class="hljs-params">isExit</span>, Transaction <span class="hljs-params">memory</span> <span class="hljs-params">transaction</span>)</span> internal {
-  bytes32 transactionId = hash(transaction);
+<span class="token keyword">function</span> <span class="token function">_handleTransaction</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span> <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span> Transaction <span class="token keyword">memory</span> transaction<span class="token punctuation">)</span> <span class="token keyword">internal</span> <span class="token punctuation">{</span>
+  <span class="token builtin">bytes32</span> transactionId <span class="token operator">=</span> <span class="token function">hash</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="hljs-comment">// transaction check</span>
-  <span class="hljs-comment">//                          isRootChain == true       isRootChain == false</span>
-  <span class="hljs-comment">//                       +--------------------------------------------------</span>
-  <span class="hljs-comment">//     enter request     |  must be added         |  must not be added</span>
-  <span class="hljs-comment">//     exit request      |  must not be added     |  must be added</span>
+  <span class="token comment">// transaction check</span>
+  <span class="token comment">//                          isRootChain == true       isRootChain == false</span>
+  <span class="token comment">//                       +--------------------------------------------------</span>
+  <span class="token comment">//     enter request     |  must be added         |  must not be added</span>
+  <span class="token comment">//     exit request      |  must not be added     |  must be added</span>
 
-  <span class="hljs-keyword">if</span> (isRootChain<span class="hljs-operator"> &amp;&amp; </span>!isExit<span class="hljs-operator"> || </span>!isRootChain<span class="hljs-operator"> &amp;&amp; </span>isExit) {
-    require(transactions<span class="hljs-literal">[<span class="hljs-identifier">transactionId</span>]</span>.added);
-  } <span class="hljs-keyword">else</span> {
-    require(!transactions<span class="hljs-literal">[<span class="hljs-identifier">transactionId</span>]</span>.added);
-    add<span class="hljs-constructor">Transaction(<span class="hljs-params">transaction</span>.<span class="hljs-params">destination</span>, <span class="hljs-params">transaction</span>.<span class="hljs-params">value</span>, <span class="hljs-params">transaction</span>.<span class="hljs-params">data</span>)</span>;
-  }
-}
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>isRootChain <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>isRootChain <span class="token operator">&amp;&amp;</span> isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>transactions<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">.</span>added<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>transactions<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">.</span>added<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">addTransaction</span><span class="token punctuation">(</span>transaction<span class="token punctuation">.</span>destination<span class="token punctuation">,</span> transaction<span class="token punctuation">.</span>value<span class="token punctuation">,</span> transaction<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="2-executed"></a><a href="#2-executed" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. <code>executed</code></h3>
 <p>한 쪽 체인에서 실행된 트랜잭션은 다른 체인에서 동일하게 실행되어선 안된다. <code>executed</code> 변수에 대한 요청은 실행된 트랜잭션에 대해 중복으로 처리되는 것을 방지한다.</p>
-<pre><code class="hljs css language-solidity"><span class="hljs-constructor">_handleExecuted(<span class="hljs-params">isExit</span>, <span class="hljs-params">trieValue</span>.<span class="hljs-params">toBytes32</span>()</span>);
+<pre><code class="hljs css language-solidity"><span class="token function">_handleExecuted</span><span class="token punctuation">(</span>isExit<span class="token punctuation">,</span> trieValue<span class="token punctuation">.</span><span class="token function">toBytes32</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="hljs-keyword">function</span> <span class="hljs-constructor">_handleExecuted(<span class="hljs-params">bool</span> <span class="hljs-params">isExit</span>, <span class="hljs-params">bytes32</span> <span class="hljs-params">transactionId</span>)</span>
-  internal
-{
-  <span class="hljs-comment">// short circuit if transaction is already executed for exit request.</span>
-  require(!isExit<span class="hljs-operator"> || </span>!executed<span class="hljs-literal">[<span class="hljs-identifier">transactionId</span>]</span>);
-  executed<span class="hljs-literal">[<span class="hljs-identifier">transactionId</span>]</span> = <span class="hljs-literal">true</span>;
-  emit <span class="hljs-constructor">ExecutionAdded(<span class="hljs-params">transactionId</span>)</span>;
-}
+<span class="token keyword">function</span> <span class="token function">_handleExecuted</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isExit<span class="token punctuation">,</span> <span class="token builtin">bytes32</span> transactionId<span class="token punctuation">)</span>
+  <span class="token keyword">internal</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// short circuit if transaction is already executed for exit request.</span>
+  <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>executed<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  executed<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token keyword">emit</span> <span class="token function">ExecutionAdded</span><span class="token punctuation">(</span>transactionId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="3-new--revoked-confirmations"></a><a href="#3-new--revoked-confirmations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. New / Revoked <code>confirmations</code></h3>
 <p><code>confirmTransaction</code> 함수에 대응하는 &quot;새로운 <code>confirmations</code> 변수에 대한 요청&quot;은 <code>owner</code>의 새로운 confirm을 다른 체인에 반영하는 요청이다. 이는 실행되지 않은 트랜잭션에 대해서 <code>executed</code>에 대한 요청과 마찬가지로 confirm을 통한 트랜잭션의 실행을 방지한다.</p>
-<pre><code class="hljs">_handleNewConfirmation(isRootChain, isExit, requestor, trieValue.toBytes32());
+<pre><code class="hljs css language-solidity"><span class="token function">_handleNewConfirmation</span><span class="token punctuation">(</span>isRootChain<span class="token punctuation">,</span> isExit<span class="token punctuation">,</span> requestor<span class="token punctuation">,</span> trieValue<span class="token punctuation">.</span><span class="token function">toBytes32</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="hljs-keyword">function</span> _handleNewConfirmation(
-  bool isRootChain,
-  bool isExit,
-  address requestor,
-  bytes32 transactionId
-)
-  internal
-  notExecuted(transactionId)
-{
-  <span class="hljs-regexp">//</span> check ownership <span class="hljs-keyword">for</span> <span class="hljs-keyword">exit</span> request.
-  require(!isExit || isOwner[requestor]);
+<span class="token keyword">function</span> <span class="token function">_handleNewConfirmation</span><span class="token punctuation">(</span>
+  <span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span>
+  <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+  <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+  <span class="token builtin">bytes32</span> transactionId
+<span class="token punctuation">)</span>
+  <span class="token keyword">internal</span>
+  <span class="token function">notExecuted</span><span class="token punctuation">(</span>transactionId<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// check ownership for exit request.</span>
+  <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>isExit <span class="token operator">||</span> isOwner<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="hljs-regexp">//</span> confirmation check
-  <span class="hljs-regexp">//</span>                          isRootChain == true       isRootChain == false
-  <span class="hljs-regexp">//</span>                       +--------------------------------------------------
-  <span class="hljs-regexp">//</span>     enter request     |  must be confirmed      |  must not be confirmed
-  <span class="hljs-regexp">//</span>     <span class="hljs-keyword">exit</span> request      |  must not be confirmed  |  must be confirmed
-  <span class="hljs-keyword">if</span> (isRootChain &amp;&amp; !isExit || !isRootChain &amp;&amp; isExit) {
-    require(confirmations[transactionId][requestor]);
-    confirmations[transactionId][requestor] = false;
-  } <span class="hljs-keyword">else</span> {
-    require(!confirmations[transactionId][requestor]);
-    confirmations[transactionId][requestor] = true;
-    emit Confirmation(requestor, transactionId);
-  }
-}
+  <span class="token comment">// confirmation check</span>
+  <span class="token comment">//                          isRootChain == true       isRootChain == false</span>
+  <span class="token comment">//                       +--------------------------------------------------</span>
+  <span class="token comment">//     enter request     |  must be confirmed      |  must not be confirmed</span>
+  <span class="token comment">//     exit request      |  must not be confirmed  |  must be confirmed</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>isRootChain <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>isRootChain <span class="token operator">&amp;&amp;</span> isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">emit</span> <span class="token function">Confirmation</span><span class="token punctuation">(</span>requestor<span class="token punctuation">,</span> transactionId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p><code>revokeConfirmation</code> 함수에 대응하는 &quot;제거된 <code>confirmations</code> 변수에 대한 요청&quot;은 이전과 반대의 기능을 한다.</p>
-<pre><code class="hljs">_handleRevokedConfirmation(isRootChain, isExit, requestor, trieValue.toBytes32());
+<pre><code class="hljs css language-solidity"><span class="token function">_handleRevokedConfirmation</span><span class="token punctuation">(</span>isRootChain<span class="token punctuation">,</span> isExit<span class="token punctuation">,</span> requestor<span class="token punctuation">,</span> trieValue<span class="token punctuation">.</span><span class="token function">toBytes32</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="hljs-keyword">function</span> _handleRevokedConfirmation(
-  bool isRootChain,
-  bool isExit,
-  address requestor,
-  bytes32 transactionId
-)
-  internal
-  notExecuted(transactionId)
-{
-  <span class="hljs-regexp">//</span> check ownership <span class="hljs-keyword">for</span> <span class="hljs-keyword">exit</span> request.
-  require(!isExit || isOwner[requestor]);
+<span class="token keyword">function</span> <span class="token function">_handleRevokedConfirmation</span><span class="token punctuation">(</span>
+  <span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span>
+  <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+  <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+  <span class="token builtin">bytes32</span> transactionId
+<span class="token punctuation">)</span>
+  <span class="token keyword">internal</span>
+  <span class="token function">notExecuted</span><span class="token punctuation">(</span>transactionId<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// check ownership for exit request.</span>
+  <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>isExit <span class="token operator">||</span> isOwner<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="hljs-regexp">//</span> confirmation check
-  <span class="hljs-regexp">//</span>                          isRootChain == true       isRootChain == false
-  <span class="hljs-regexp">//</span>                       +--------------------------------------------------
-  <span class="hljs-regexp">//</span>     enter request     |  must be not confirmed  |  must be confirmed
-  <span class="hljs-regexp">//</span>     <span class="hljs-keyword">exit</span> request      |  must be confirmed      |  must not be confirmed
-  <span class="hljs-keyword">if</span> (isRootChain &amp;&amp; !isExit || !isRootChain &amp;&amp; isExit) {
-    require(!confirmations[transactionId][requestor]);
-  } <span class="hljs-keyword">else</span> {
-    require(confirmations[transactionId][requestor]);
-    confirmations[transactionId][requestor] = false;
-    emit Revocation(requestor, transactionId);
-  }
-}
+  <span class="token comment">// confirmation check</span>
+  <span class="token comment">//                          isRootChain == true       isRootChain == false</span>
+  <span class="token comment">//                       +--------------------------------------------------</span>
+  <span class="token comment">//     enter request     |  must be not confirmed  |  must be confirmed</span>
+  <span class="token comment">//     exit request      |  must be confirmed      |  must not be confirmed</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>isRootChain <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>isRootChain <span class="token operator">&amp;&amp;</span> isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">emit</span> <span class="token function">Revocation</span><span class="token punctuation">(</span>requestor<span class="token punctuation">,</span> transactionId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <blockquote>
 <p>&quot;새로운 <code>confirmations</code> 변수에 대한 요청&quot;과 제거된 <code>confirmations</code> 변수에 대한 요청은 별도의 <code>trieKey</code>로 반드시 구분지을 필요는 없다. 두 개의 요청을 하나의 요청으로 축소시키고, <code>trieValue</code>를 <code>RLP.encode(transactionId, isNew)</code>와 같은 방식으로 사용할 수 도 있다.</p>
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="4-new--removed-owners"></a><a href="#4-new--removed-owners" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. New / Removed <code>owners</code></h3>
 <p>새로운 <code>owner</code> 혹은 제거된 <code>owner</code>에 대한 요청.</p>
-<pre><code class="hljs">  <span class="hljs-keyword">function</span> <span class="hljs-constructor">_handleNewOwner(<span class="hljs-params">bool</span> <span class="hljs-params">isRootChain</span>, <span class="hljs-params">bool</span> <span class="hljs-params">isExit</span>, <span class="hljs-params">address</span> <span class="hljs-params">owner</span>)</span> internal {
-    <span class="hljs-keyword">if</span> (isRootChain<span class="hljs-operator"> &amp;&amp; </span>!isExit<span class="hljs-operator"> || </span>!isRootChain<span class="hljs-operator"> &amp;&amp; </span>isExit) {
-      require(isOwner<span class="hljs-literal">[<span class="hljs-identifier">owner</span>]</span>);
-    } <span class="hljs-keyword">else</span> {
-      this.add<span class="hljs-constructor">Owner(<span class="hljs-params">owner</span>)</span>;
-    }
-  }
+<pre><code class="hljs css language-solidity">  <span class="token keyword">function</span> <span class="token function">_handleNewOwner</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span> <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span> <span class="token builtin">address</span> owner<span class="token punctuation">)</span> <span class="token keyword">internal</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isRootChain <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>isRootChain <span class="token operator">&amp;&amp;</span> isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">require</span><span class="token punctuation">(</span>isOwner<span class="token punctuation">[</span>owner<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addOwner</span><span class="token punctuation">(</span>owner<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 
-  <span class="hljs-keyword">function</span> <span class="hljs-constructor">_handleRemovedOwner(<span class="hljs-params">bool</span> <span class="hljs-params">isRootChain</span>, <span class="hljs-params">bool</span> <span class="hljs-params">isExit</span>, <span class="hljs-params">address</span> <span class="hljs-params">owner</span>)</span> internal {
-    <span class="hljs-keyword">if</span> (isRootChain<span class="hljs-operator"> &amp;&amp; </span>!isExit<span class="hljs-operator"> || </span>!isRootChain<span class="hljs-operator"> &amp;&amp; </span>isExit) {
-      require(!isOwner<span class="hljs-literal">[<span class="hljs-identifier">owner</span>]</span>);
-    } <span class="hljs-keyword">else</span> {
-      this.remove<span class="hljs-constructor">Owner(<span class="hljs-params">owner</span>)</span>;
-    }
-  }
+  <span class="token keyword">function</span> <span class="token function">_handleRemovedOwner</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span> <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span> <span class="token builtin">address</span> owner<span class="token punctuation">)</span> <span class="token keyword">internal</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isRootChain <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>isRootChain <span class="token operator">&amp;&amp;</span> isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>isOwner<span class="token punctuation">[</span>owner<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">removeOwner</span><span class="token punctuation">(</span>owner<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 </code></pre>
 </span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-12-30 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/learn/advanced/plasma-evm-smart-contracts"><span class="arrow-prev">← </span><span>Plasma EVM 스마트 컨트랙트</span></a><a class="docs-next button" href="/docs/guides/getting-started/how-to-open-private-testnet-rootchain"><span>루트체인 설정</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#counter">Counter</a><ul class="toc-headings"><li><a href="#basecounter">BaseCounter</a></li><li><a href="#simplecounter">SimpleCounter</a></li><li><a href="#freezablecounter">FreezableCounter</a></li><li><a href="#trackablecounter">TrackableCounter</a></li></ul></li><li><a href="#token">Token</a><ul class="toc-headings"><li><a href="#requestablesimpletoken">RequestableSimpleToken</a></li><li><a href="#requestable-cryptokitties">Requestable CryptoKitties</a></li></ul></li><li><a href="#requestablemultisig">RequestableMultisig</a><ul class="toc-headings"><li><a href="#1-transactions">1. <code>transactions</code></a></li><li><a href="#2-executed">2. <code>executed</code></a></li><li><a href="#3-new--revoked-confirmations">3. New / Revoked <code>confirmations</code></a></li><li><a href="#4-new--removed-owners">4. New / Removed <code>owners</code></a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/learn/basic/tokamak-network">배우기</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">가이드</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
