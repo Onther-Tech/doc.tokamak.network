@@ -566,7 +566,7 @@ function _handleExecuted(bool isExit, bytes32 transactionId)
 ### 3. New / Revoked `confirmations`
 `confirmTransaction` 함수에 대응하는 "새로운 `confirmations` 변수에 대한 요청"은 `owner`의 새로운 confirm을 다른 체인에 반영하는 요청이다. 이는 실행되지 않은 트랜잭션에 대해서 `executed`에 대한 요청과 마찬가지로 confirm을 통한 트랜잭션의 실행을 방지한다.
 
-```
+```solidity
 _handleNewConfirmation(isRootChain, isExit, requestor, trieValue.toBytes32());
 
 function _handleNewConfirmation(
@@ -599,7 +599,7 @@ function _handleNewConfirmation(
 
 `revokeConfirmation` 함수에 대응하는 "제거된 `confirmations` 변수에 대한 요청"은 이전과 반대의 기능을 한다.
 
-```
+```solidity
 _handleRevokedConfirmation(isRootChain, isExit, requestor, trieValue.toBytes32());
 
 function _handleRevokedConfirmation(
@@ -635,7 +635,7 @@ function _handleRevokedConfirmation(
 
 새로운 `owner` 혹은 제거된 `owner`에 대한 요청.
 
-```
+```solidity
   function _handleNewOwner(bool isRootChain, bool isExit, address owner) internal {
     if (isRootChain && !isExit || !isRootChain && isExit) {
       require(isOwner[owner]);
