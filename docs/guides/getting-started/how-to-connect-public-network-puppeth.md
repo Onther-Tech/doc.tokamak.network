@@ -10,20 +10,22 @@ sidebar_label: Puppeth 사용하여 연결
 
 ### 소스코드 다운로드 및 컴파일
 
-`plasma-evm`에서 제공하는 `Puppeth`는 여러 노드를 손쉽게 배포 할 수 있는 기능을 제공하고 있다. 아래 과정은 [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm) 기준으로 설명한다.
+`Puppeth`란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램이다. `plasma-evm`의 `Puppeth`는 토카막 노드를 쉽게 구성 할 수 있다.
 
-만약 해당 저장소가 없다면 아래 명령어를 통해서 소스코드를 복제 하고 컴파일을 수행한다.
+아래 과정은 [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm) 기준으로 설명한다.
+
+아래 명령어를 실행하여 소스코드를 복제 하고 `Puppeth` 실행 파일을 컴파일 한다.
 
 ```bash
 $ git clone https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm && make all
 ```
 
-컴파일이 정상적으로 완료되면, `puppeth` 실행파일은 `plasma-evm/build/bin/` 에 위치한다.
+컴파일을 마치면 `puppeth` 실행파일이 `plasma-evm/build/bin/` 에 생성된다.
 
 ### `Puppeth` 실행
 
- `puppeth`를 실행하기 위해 `build/bin/puppeth` 명령어를 입력하여 실행한다.
+ `build/bin/puppeth` 명령어를 입력하여 실행한다.
 
 ```text
 plasma-evm$ build/bin/puppeth
@@ -43,13 +45,12 @@ Please specify a network name to administer (no spaces, hyphens or capital lette
 >
 ```
 
-자신이 설정하고 싶은 임의의 `NETWORK NAME`을 입력한다.
-입력한 `NETWORK NAME` 은 `Puppeth`가 네트워크 설정을 구별하기 위해 `~/.puppeth/<NETWORK NAME>` 파일로 저장된다.
-`Puppeth` 실행시 입력한 `NETWORK NAME`과 동일한 이름의 파일이 `~/.puppeth/` 에 위치하고 있으면, 해당 파일에 저장된 설정값을 불러온다.
+자신이 정하고 싶은 임의의 `NETWORK NAME`을 입력한다. 
+입력한 `NETWORK NAME`은 `Puppeth`가 네트워크를 식별하기 위해 `~/.puppeth/<NETWORK NAME>` 파일로 저장된다.
 
->  불가피하게 `puppeth` 종료 / 재시작 하는 경우 동일한 `NETWORK NAME`을 입력하여 마지막으로 저장된 상태를 불러 올 수 있다.
+> `Puppeth`를 시작할때 이전에 사용한 `NETWORK NAME`을 입력하면 저장된 설정 값이 적용된다.
 
-다음, [페러데이 사용자 노드 연결](how-to-connect-public-testnet-puppeth#페러데이-사용자-노드-연결)는 계속해서 `puppeth` 실행화면 내에서 작업을 수행한다.
+다음, [페러데이 사용자 노드 연결](how-to-connect-public-testnet-puppeth#페러데이-사용자-노드-연결)는 계속해서 `Puppeth` 실행화면 내에서 작업을 수행한다.
 
 ## 페러데이 사용자 노드 연결
 
@@ -57,9 +58,11 @@ Please specify a network name to administer (no spaces, hyphens or capital lette
 
 페러데이 테스트넷 사용자 노드를 연결하기 위해서는 오퍼레이터 노드의 `genesis` 파일이 필요하다.
 
-해당 `genesis` 파일은 [github.com/onther-tech/plasma-evm-networks](https://github.com/Onther-Tech/plasma-evm-networks/tree/master/faraday-testnet) 의 [`faraday.json`](https://github.com/Onther-Tech/plasma-evm-networks/blob/master/faraday-testnet/faraday.json)를 통해 확인 할 수 있다.
+`Puppeth`는 http를 통해 `genesis` 파일을 불러 올 수 있다.
 
-`puppeth`는 `genesis` 파일을 http를 통해 불러 올 수 있다. 따라서,  `github` 에 업로드되어 있는 `faraday.json` 파일을 사용한다.
+따라서,  `github` 에 업로드되어 있는 `faraday.json` 파일을 `genesis` 파일로 사용한다.
+
+해당 `genesis` 파일은 [github.com/onther-tech/plasma-evm-networks](https://github.com/Onther-Tech/plasma-evm-networks/tree/master/faraday-testnet) 의 [`faraday.json`](https://github.com/Onther-Tech/plasma-evm-networks/blob/master/faraday-testnet/faraday.json)를 통해 확인 할 수 있다.
 
 ```text
 What would you like to do? (default = stats)
@@ -78,7 +81,7 @@ Where's the genesis file? (local file or http/https url)
 > https://raw.githubusercontent.com/Onther-Tech/plasma-evm-networks/master/faraday-testnet/faraday.json
 ```
 
-정상적으로 `genesis` 파일이 임포트(Import)되면 아래와 같은 메시지가 출력되고 `puppeth` 초기 선택화면으로 돌아간다.
+정상적으로 `genesis` 파일이 임포트(Import)되면 아래와 같은 메시지가 출력되고 `Puppeth` 초기 선택화면으로 돌아간다.
 
 ```text
 INFO [12-12|05:45:32.124] Imported genesis block
@@ -86,7 +89,10 @@ INFO [12-12|05:45:32.124] Imported genesis block
 
 ### 2. 리모트 머신 추가
 
-`Puppeth`를 통해 사용자 노드를 배포하기 위해서는 리모트 머신에 `Docker`가 설치되어 있어야한다.
+`Puppeth`를 사용하기 위해서는 원격 머신에 `Docker`가 설치 되어 있어야 한다.
+호스트 머신 환경별 `Docker` 설치에 관해서는 [외부 문서](https://docs.docker.com/install/#supported-platforms)를 참고한다.
+
+`Puppeth` 화면에서 로컬 환경을 리모트 머신으로서 추가한다.
 
 ```text
 What would you like to do? (default = stats)
@@ -112,9 +118,9 @@ INFO [08-01|03:30:30.787] Starting remote server health-check      server=onther
 |   onther    | localhost     |          |                       |               |
 +-------------+---------------+----------+-----------------------+---------------+
 ```
-> IP 주소 대신 도메인 주소(e.g. user@tokamak.network)를 입력하는 경우, 정상적으로 진행되나 Nginx가 구문을 파싱하지 못하여 에러가 발생한다. 따라서 리모트 머신의 IP 주소를 사용한다.
+> IP 주소 대신 도메인(Domain) 주소를 입력하는 경우, 리버스 프록시(Reverse Proxy) 서버로 사용되는 Nginx가 도메인 구문을 파싱하지 못한다. 따라서 IP 주소를 직접 넣어준다.
 
-> 리모트 머신 접속을 위해 인증서-키 파일을 사용하는경우 `onther:onther_private.pem@localhost` 와 같은 형태로 입력하여 사용한다.
+SSH키 파일을 사용하는경우 `onther:onther_private.pem@localhost` 와 같은 형태로 입력하여 사용한다.
 
 ### 3. `Ethstats` 컨테이너 배포
 
@@ -189,11 +195,7 @@ Creating faraday_ethstats_1 ... done
 
 ### 4. 사용자 노드 컨테이너 배포
 
-`Puppeth`내에서 `Bootnode`는 사용자 노드를 말한다.
-
-그리고 사용자 노드는 `Ethstats` 정보를 가지고 있어야 배포가 가능하다.
-
-따라서, [3. Ethstats 컨테이너 배포](how-to-connect-public-testnet-puppeth#3-ethstats-컨테이너-배포)를 먼저 수행해 주어야 한다.
+`Ethstats` 정보가 있어야 사용자 노드 컨테이너 생성이 가능하다. 따라서, [3. Ethstats 컨테이터 배포](how-to-connect-public-testnet-puppeth#3-ethstats-컨테이너-배포)를 반드시 먼저 수행한다.
 
 ```text
 +-------------+---------------+----------+------------------------------+---------------+
@@ -233,8 +235,8 @@ What URL to listen on root chain JSONRPC?
 > wss://rinkeby.infura.io/ws/v3/< PROJECT ID >
 ```
 
-`~root chain JSONRPC`는 `Infura` 에서 제공하고 있는 `Rinkeby Testnet` 주소를 사용한다.
-접속 가능한 `Infura`의 `Rinkeby Testnet` 주소가 없는 경우 [퍼블릭 테스트넷 연결 준비](how-to-connect-public-testnet-prepare)에 ["Rinkeby 루트체인 접속 주소 생성"](how-to-connect-public-testnet-prepare#rinkeby-루트체인-접속-주소-생성)를 수행하여 접속가능한 주소를 얻는다.
+`~root chain JSONRPC`는 `Infura` 에서 제공하고 있는 `Rinkeby Testnet` 노드의 주소를 사용한다.
+접속 가능한 `Rinkeby Testnet` 노드가 없는 경우, [퍼블릭 테스트넷 연결 준비](how-to-connect-public-testnet-prepare)에 ["Rinkeby 루트체인 접속 주소 생성"](how-to-connect-public-testnet-prepare#rinkeby-루트체인-접속-주소-생성)를 수행하여 접속가능한 주소를 얻는다.
 
 ```text
 Do you want expose HTTP JSONRPC endpoint (y/n)? (default=no)
