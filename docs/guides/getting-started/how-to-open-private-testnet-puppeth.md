@@ -1,43 +1,47 @@
 ---
 id: how-to-open-private-testnet-puppeth
 title: Puppeth 사용하여 프라이빗 테스트넷 설정하기
-sidebar_label: Puppeth 사용하여 부모-자식체인 설정
+sidebar_label: Puppeth 사용하여 루트-자식체인 설정
 ---
 
-`Puppeth`란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램이다. `plasma-evm`의 `Puppeth`는 토카막 노드를 쉽게 구성 할 수 있도록 추가된 기능이 탑재 되어 있다. `Puppeth`를 사용하여 자식 체인을 설정하려면 이미 구동중인 루트체인이 필요하다. 테스트로 쓸 루트체인이 필요하다면 [루트체인 설정하기](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)를 먼저 진행하고 이 가이드 문서를 진행하는 것이 바람직하다.
+이 가이드는 `Puppeth`를 사용하여 루트체인에 연결된 토카막 자식체인을 배포하는 과정을 다룬다
 
-이 가이드는 `Puppeth`를 사용하여 특정한 루트체인에 연결된 토카막 자식체인을 배포하는 과정을 담고 있다.
+`Puppeth`란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램이다. `plasma-evm`의 `Puppeth`는 토카막 노드를 쉽게 구성 할 수 있는 기능이 추가되었다. `Puppeth`를 사용하여 자식 체인을 설정하려면 구동중인 루트체인이 필요하다. 동작중인 루트체인이 없다면 [프라이빗 테스트넷 루트체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정)을 먼저 진행 한다.
 
-시작 하기 전에, `Puppeth`에서 사용되는 용어를 먼저 정리하면 아래와 같다.
+`Puppeth`에서 사용되는 용어를 먼저 정리하면 아래와 같다.
 
-- `sealnode` : 오퍼레이터 노드, 블록을 생성하는 마이너 노드로 볼 수 있다.
+- `sealnode` : 오퍼레이터 노드, 블록을 생성하는 마이너 노드.
 
-- `boodnode` : 사용자 노드, JSON-RPC를 통해 트랜잭션 정보를 받아 오퍼레이터 노드에 전달한고 오퍼레이터 노드에서 생성된 블록들을 동기화 한다.
+- `boodnode` : 사용자 노드, 트랜잭션을 오퍼레이터 노드에 전달하고 오퍼레이터 노드 동기화.
 
-## `Puppeth` 준비하기
+## `Puppeth` 준비
 
-> 루트체인으로 `ganache` 테스트체인을 사용하는 경우, `ganache` 실행시 생성된 계정을 오퍼레이터(Operator)와 챌린저(Challenger)로 지정해 사용하여야 한다.
+> 루트체인으로 `ganache` 테스트체인을 사용하는 경우, `ganache` 실행시 생성된 계정을 오퍼레이터와 챌린저로 사용한다.
 
-### 1. 소스코드 다운로드 및 컴파일하기
+### 1. 소스코드 다운로드 및 컴파일
 
-`plasma-evm`이 제공하는 `Puppeth`를 이용하면 여러 노드를 손쉽게 배포 할 수 있다. 아래 작업은 [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm) 기준으로 진행된다. 먼저 다음 명령어를 통해서 소스코드를 복제하고 `plasma-evm`을 컴파일을 진행한다.
+ [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm) 기준으로 진행된다. 
+ 
+ 다음 명령어를 통해서 소스코드를 복제하고 `plasma-evm`을 컴파일을 진행한다.
 
 ```bash
 $ git clone https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm && make all
 ```
 
-컴파일을 마치면 `puppeth` 실행파일은 `plasma-evm/build/bin/` 에 위치하게 된다.
+컴파일을 마치면 `puppeth` 실행파일이 `plasma-evm/build/bin/` 에 생성된다.
 
-### 2.  루트체인 컨트렉트 배포하기
+### 2.  루트체인 컨트랙트 배포
 
-`Puppeth`를 실행하기 이전에 자식체인과 연결될 루트체인 컨트렉트를 배포하고 해당 정보를 담은 `genesis` 파일을 생성한다. [프라이빗 테스트넷 직접 설정하기 - 1. 루트체인 컨트렉트 배포하기](how-to-open-private-testnet-manually#1-%EB%A3%A8%ED%8A%B8%EC%B2%B4%EC%9D%B8-%EC%BB%A8%ED%8A%B8%EB%A0%89%ED%8A%B8-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0) 와 같이 `deploy` 커맨드를 사용하여 루트체인 contract을 배포한후 `genesis.json` 파일을 생성하는 스크립트를 작성한다.
+`Puppeth`를 실행하기 전에, 자식체인이 사용할 루트체인 컨트랙트를 배포하고 해당 정보를 담은 `genesis` 파일을 생성한다. [프라이빗 테스트넷 직접 설정 - 2. 루트체인 컨트랙트 배포](how-to-open-private-testnet-manually#2-루트체인-컨트랙트-배포) 와 같이 `deploy` 커맨드를 사용하여 루트체인 컨트랙트 배포 후 `genesis.json` 파일을 생성한다.
 
 > 해당 genesis.json 파일의 예시는 [faraday.json](https://github.com/Onther-Tech/plasma-evm-networks/blob/master/faraday-testnet/faraday.json) 에서 확인할 수 있다.
 
+아래 커맨드로 `deploy.rootchain.sh` 스크립트 파일을 생성한다.
+
 ```sh
-# deploy.rootchain.sh
-#!/usr/bin bash
+plasma-evm$ cat > deploy.rootchain.sh << EOF
+#!/bin/bash
 
 OPERATOR_KEY="b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"
 KEY2="78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a115"
@@ -54,27 +58,29 @@ ROOTCHAIN_IP=localhost # Onther Ropsten Geth Node IP.
 
 # Deploy contracts at rootchain
 echo "Deploy rootchain contract and others"
-make geth && build/bin/geth \
-    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \
-    --operator.key $OPERATOR_KEY \
-    --datadir $DATADIR \
+make geth && build/bin/geth \\
+    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \\
+    --operator.key $OPERATOR_KEY \\
+    --datadir $DATADIR \\
     deploy "./genesis.json" 16 true 4096
 
 # deploy params : chainID, isInitialAsset, Epochlength
 # you can checkout "$geth deploy --help" for more information
+EOF
 ```
 
-위 스크립트를 저장하고 아래 명령어로 실행한다.
+아래 명령어로 `deploy.rootchain.sh` 실행한다.
 
 ```bash
 plasma-evm$ bash deploy.rootchain.sh
 ```
-생성된 `genesis.json` 파일은 동일하게 `plasma-evm` 폴더 내에 자리잡게 된다.
+
+생성된 `genesis.json` 파일은 `plasma-evm` 폴더에 위치한다.
 
 
-### 3. `Puppeth` 실행하기
+### 3. `Puppeth` 실행
 
-puppeth를 실행하기 위해서 `build/bin/puppeth` 명령어를 입력한다.( go1.13 버전을 사용하는 것을 추천한다)
+`build/bin/puppeth` 명령어로 `puppeth`를 실행한다.
 
 ```text
 plasma-evm$ build/bin/puppeth
@@ -94,24 +100,23 @@ Please specify a network name to administer (no spaces, hyphens or capital lette
 >
 ```
 
-자신이 지정하고 싶은 임의의 네트워크 이름을 입력한다.
-입력한 `Network name` 은 네트워크를 식별하기 위해 `~/.puppeth/<network name>` 파일로 저장된다.
-다음 실행시 동일한 이름으로 입력하게 되면 해당 파일의 설정값을 불러온다.
+자신이 정하고 싶은 임의의 `NETWORK NAME`을 입력한다.
+입력한 `NETWORK NAME` 은 `Puppeth`가 네트워크를 식별하기 위해 `~/.puppeth/<NETWORK NAME>` 파일로 저장된다.
 
-> 사용자 노드와 오퍼레이터 노드 설정시 불가피하게 재시작 하는 경우 동일한 `network name`을 입력하므로써 이전 상태 저장값을 불러 올 수 있다.
+> `Puppeth`를 시작할때 이전에 사용한 `NETWORK NAME`을 입력하면 저장된 설정 값이 적용된다.
 
-사용자 노드와 오퍼레티어 노드 설정하는 방법에서는 계속해서 `puppeth` 실행화면에서 작업을 수행한다.
+아래 [사용자 노드](how-to-open-private-testnet-puppeth)와 [오퍼레이터 노드 설정]((how-to-open-private-testnet-puppeth#오퍼레이터-노드-설정)) 과정은 `puppeth` 실행화면에서 작업을 수행한다.
 
-##  사용자 노드 설정하기
+## 사용자 노드 설정
 
-사용자 노드의 `enode` 주소를 `Puppeth`에서 관리하므로 [프라이빗 테스트넷 직접 설정하는 법](how-to-open-private-testnet-manually)과 다르게 사용자 노드를 먼저 설정한다.
+사용자 노드의 `enode` 주소는 `Puppeth`에서 관리 되어 오퍼레이터 노드 설정시 사용된다. 따라서, [프라이빗 테스트넷 직접 설정](how-to-open-private-testnet-manually)과 달리 오퍼레이터 노드 보다 사용자 노드를 먼저 설정한다.
 
-`Puppeth`를 사용하기 위해서는 원격 머신에 Docker가 설치 되어 있어야 한다. 로컬 환경에 `Docker`가 설치 되어 있음을 전제 한다.
+`Puppeth`를 사용하기 위해서는 원격 머신에 `Docker`가 설치 되어 있어야 한다. 이 가이드에서는 로컬 환경에 `Docker`가 설치 되어 있음을 전제 한다.
 호스트 머신 환경별 `Docker` 설치에 관해서는 [외부 문서](https://docs.docker.com/install/#supported-platforms)를 참고한다.
 
-### 1. `genesis` 파일 불러오기
+### 1. `genesis` 파일 설정
 
-`Puppeth`를 이용해 노드들을 설정하기 위해서는 `genesis.json`파일이 필요하다.
+`Puppeth`를 이용해 노드들을 설정하기 위해서 [Puppeth 준비 - 2. 루트체인 컨트랙트 배포](how-to-open-private-testnet-puppeth#2--루트체인-컨트랙트-배포)를 통해 생성한 `genesis.json` 파일이 필요하다.
 
 ```text
 What would you like to do? (default = stats)
@@ -127,7 +132,7 @@ What would you like to do? (default = create)
 > 2
 
 Where's the genesis file? (local file or http/https url)
-> /home/ubuntu/plasma-evm/genesis.json
+> plasma-evm/genesis.json
 ```
 
 `genesis.json` 파일이 제대로 임포트(import) 되는 경우 아래와 같은 메시지가 출력되고 초기 선택화면으로 돌아간다.
@@ -136,10 +141,12 @@ Where's the genesis file? (local file or http/https url)
 INFO [12-12|05:45:32.124] Imported genesis block
 ```
 
-### 2. 리모트 머신 추가하기
+### 2. 리모트 머신 추가
 
-만약 MacOS 환경에 설치하고자 한다면, 원격 컴퓨터가 MacOS에 접근을 허용해야 한다.
-이부분은 apple에서 제공하는 [macOS 사용 설명서](https://support.apple.com/ko-kr/guide/mac-help/mchlp1066/mac) 부분을 참고한다.
+만약 MacOS 환경에 설치하고자 한다면, MacOS 운영체제 원격 로그인을 허용해야 한다.
+이부분은 apple에서 제공하는 [macOS 사용 설명서 - Mac에서 원격 로그인 설정하기](https://support.apple.com/ko-kr/guide/mac-help/mchlp1066/mac) 부분을 참고한다.
+
+`Puppeth` 화면에서 로컬 환경을 리모트 머신으로서 추가한다.
 
 ```text
 What would you like to do? (default = stats)
@@ -166,13 +173,13 @@ INFO [08-01|03:30:30.787] Starting remote server health-check      server=onther
 +-------------+---------------+----------+-----------------------+---------------+
 ```
 
-> IP 주소 대신 도메인(Domain) 주소를 입력하는 경우 생성되는 `Nginx`가 구문을 파싱하지 못한다. 따라서 IP 주소를 직접 넣어준다.
+> IP 주소 대신 도메인(Domain) 주소를 입력하는 경우, 리버스 프록시(Reverse Proxy) 서버로 사용되는 `Nginx`가 도메인 구문을 파싱하지 못한다. 따라서 IP 주소를 직접 넣어준다.
 
-SSH키 파일을 사용하는경우 `onther:onther_private.pem@localhost` 와 같은 형태로 입력하여 사용한다.
+SSH키 파일을 사용하는경우 `onther:onther_private.pem@localhost` 와 같은 형태로 입력한다.
 
-### 3. `Ethstats` 컨테이터 배포하기
+### 3. `Ethstats` 컨테이터 배포
 
-`Puppeth`는 `ethstats`에 관한 정보가 없는 경우 실행이 되지 않는다. 따라서 `ethstats` 노드를 먼저 배포해야 한다.
+`Puppeth`는 `ethstats`에 관한 정보가 없는 경우 실행 되지 않는다. 따라서 `ethstats` 노드를 먼저 배포해야 한다.
 
 ```text
 +-------------+---------------+----------+-----------------------+---------------+
@@ -219,7 +226,7 @@ Creating faraday_nginx_1 ...
 Creating faraday_nginx_1 ... done
 ```
 
-`Ethstats` 서버 연결을 위한 리버스 프록시(Reverse Proxy)가 먼저 구성된다. 계속해서 `Ethstats` 컨테이너를 생성하기 위해 도메인 주소(또는 IP 주소)와 비밀번호를 입력해준다.
+`Ethstats` 서버 연결을 위한 리버스 프록시가 먼저 구성된다. 계속해서 `Ethstats` 컨테이너를 생성하기 위해 도메인 주소(또는 IP 주소)와 비밀번호를 입력해준다.
 
 ```text
 Proxy deployed, which domain to assign? (default = localhost)
@@ -241,9 +248,9 @@ Creating faraday_ethstats_1 ...
 Creating faraday_ethstats_1 ... done
 ```
 
-### 4. 사용자 노드 컨테이너 배포하기
+### 4. 사용자 노드 컨테이너 배포
 
-`Ethstats` 정보를 가지고 있어야 사용자 노드 컨테이너 생성이 가능하다. 따라서, 3번 과정을 먼저 수행해야 한다.
+`Ethstats` 정보가 있어야 사용자 노드 컨테이너 생성이 가능하다. 따라서, [3. Ethstats 컨테이터 배포](how-to-open-private-testnet-puppeth#3-ethstats-컨테이터-배포)를 반드시 먼저 수행한다.
 
 ```text
 +-------------+---------------+----------+------------------------------+---------------+
@@ -283,7 +290,7 @@ What URL to listen on root chain JSONRPC?
 > ws://127.0.0.1:8546
 ```
 
-루트체인 JSONRPC에 로컬 머신에서 작동중인 루트체인 웹소켓(websocket) 주소를 적어준다.(`ws://127.0.0.1:8546`)
+`~root chain JSONRPC`에 입력 값으로 루트체인 웹소켓(websocket) 주소를 적어준다.( e.g `ws://127.0.0.1:8546`)
 
 ```text
 Do you want expose HTTP JSONRPC endpoint (y/n)? (default=no)
@@ -296,7 +303,7 @@ Which is virtual hostname? (default=localhost)
 > localhost
 ```
 
-사용자가 노드에 접근해 트랜잭션 보내려면 `HTTP JSONRPC endpoint` 콘솔에 `yes`를 선택해야 한다.
+사용자가 해당 노드에 접근하도록 `HTTP JSONRPC endpoint` 콘솔에 `yes`를 입력 한다.
 
 ```
 Where should data be stored on the remote machine?
@@ -336,8 +343,10 @@ Creating tokamak_bootnode_1 ...
 Creating tokamak_bootnode_1 ... done
 ```
 
-## 오퍼레이터 노드 설정하기
-자식체인의 블록을 생성하는 오퍼레이터 노드를 구성한다. `Puppeth`를 사용하여 오퍼레이터 노드 설정하기 이전에 `Ethstats`과 사용자 노드(=`bootnode`)가 미리 구성되어 있어야 한다.
+나머지는 기본값을 입력하고, `Ethstats`에서 보여질 사용자 노드의 이름으로 `tokamak-usernode`로 입력한다.
+
+## 오퍼레이터 노드 설정
+자식체인의 블록을 생성하는 오퍼레이터 노드를 설정한다. `Puppeth`를 사용하여 오퍼레이터 노드 설정하기 이전에 `Ethstats`과 사용자 노드(=`bootnode`)가 미리 구성되어 있어야 한다.
 
 ```text
 What would you like to do? (default = stats)
@@ -371,7 +380,7 @@ What URL to listen on root chain JSONRPC?
 > ws://127.0.0.1:8546
 ```
 
-사용자 노드와 동일한 루트체인 `JSONRPC` 주소를 입력한다.
+사용자 노드와 동일한 루트체인 웹소켓(websocket) 주소를 입력한다.
 
 ```text
 Do you want expose HTTP JSONRPC endpoint (y/n)? (default=no)
@@ -399,7 +408,7 @@ What should the node be called on the stats page?
 > tokamak-operator
 ```
 
-`~ be stored on the remote machine?` 에서 입력하는 디렉토리 주소는 `Docker` 컨테이너와 호스트가 공유하는 디렉토리로서 호스트 머신에서도 접근이 가능하다.
+`~ be stored on the remote machine?` 에서 입력하는 디렉토리 주소는 `Docker` 컨테이너와 호스트가 공유하는 디렉토리로, 호스트 머신에서 접근이 가능하다.
 
 ```
 Please paste the operator's key JSON:
@@ -430,7 +439,7 @@ What gas price should the operator require (GWei)? (default = 1.000)
 
 나머지는 기본값을 사용한다.
 
-필요한 경우 `What gas limit should full blocks target?`의 값를 높여 오퍼레이터 노드가 생성하는 블록에서 더 많은 트랜잭션을 처리 할 수 있도록 한다.
+> `What gas limit should full blocks target?`의 값를 높여 오퍼레이터 노드가 생성하는 블록에서 더 많은 트랜잭션을 처리 할 수 있도록 한다.
 
 ```
 Building sealnode
@@ -463,10 +472,9 @@ Creating tokamak_sealnode_1 ... done
 
 오퍼레이터 노드가 정상적으로 배포되는 경우 위와 같은 결과가 출력된다.
 
-
 ### 배포한 컨테이너 확인
 
-`Puppeth`를 통해 로컬 환경에 `Ethstats`, `Bootnode`, `Nginx` 그리고 `Sealnode` 컨테이너를 생성하였다.
+`Puppeth`를 통해 `Ethstats`, `Bootnode`, `Nginx` 그리고 `Sealnode` 컨테이너가 생성되었다.
 
 `Puppeth`에서의 컨테이너 조회 결과는 다음과 같다.
 
