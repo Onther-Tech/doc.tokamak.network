@@ -18,6 +18,14 @@ sidebar_label: 연결 준비
 
 golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm 컴파일 가능한 환경을 만든다.
 
+### 시스템 업데이트 및 필수 패키지 설치
+
+아래 명령어로 컴파일 환경을 설정한다.
+
+```shell
+~$ sudo apt-get update && sudo apt-get install tar wget make git build-essential -y
+```
+
 ### golang 환경 설정
 
 아래 명령어를 순차적으로 실행하여, go 실행파일을 `/usr/local/` 경로 아래 위치하게 한다.
