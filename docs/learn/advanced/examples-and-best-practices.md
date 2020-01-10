@@ -34,7 +34,7 @@ contract BaseCounter {
 
 먼저 가장 간단하게 Requestable을 고려한다면 상태 변수 `n`을 enter 혹은 exit 요청에 따라 증감시킬 수 있다. 컨트랙트는 아래와 같은 방식으로 동작한다.
 
-![](https://i.imgur.com/GQaEylR.png)
+![SimpleCounter](assets/learn_advanced_examples_SimpleCounter.png)
 
 <!-- A yellow box means that the counter() has increased the status variable n by 1, a red box means entering the request changes n, and a green box means exiting the request changes n. -->
 
@@ -124,7 +124,7 @@ contract SimpleCounter is BaseCounter, RequestableI {
 
 자식 체인에서는 기본적으로 카운터가 멈춰있는 상태로 시작한다. 루트 체인에서 enter 요청이 생성될 경우 루트 체인의 카운터가 동작을 멈추고 요청이 반영된 순간 자식 체인의 카운터가 동작한다. exit 요청의 경우 자식 체인의 카운터를 멈추고 부모 체인의 카운터를 동작시킨다. 이를 통해 `n`이 감소하는 것을 막을 수 있다.
 
-![](https://i.imgur.com/IDHhZRs.png)
+![FreezableCounter](assets/learn_advanced_examples_FreezableCounter.png)
 
 ```solidity
 pragma solidity ^0.4.24;
@@ -212,7 +212,7 @@ contract FreezableCounter is BaseCounter, RequestableI {
 
 <!-- 상태 변수를 1개 더 사용하고 컨트랙트 구현에 다소 복잡해지는 것과 `n`이 감소하는 경우는 상충(trade-off) 합니다. -->
 
-![](https://i.imgur.com/CZ6DnAG.png)
+![TrackableCounter](assets/learn_advanced_examples_TrackableCounter.png)
 
 
 ```solidity
@@ -469,7 +469,7 @@ OpenZeppelin과 ds-token 기반의 requestable 토큰 컨트랙트는 다음에�
 
 > 이 항목에 대한 자세한 설명은 [여기](https://medium.com/onther-tech/cryptokitties-in-plasma-574159c581dc)서 확인할 수 있다.
 
-![](https://miro.medium.com/max/570/1*8GIz9Ovmdq-bQRMjQDkrIw.png)
+![RequestableCryptoKitties](assets/learn_advanced_examples_RequestableCryptoKitties.png)
 
 [CryptoKitties](https://github.com/cryptocopycats/awesome-cryptokitties)에서 실제로 배포되는 컨트랙트는 `KittyCore`, `SaleClockAuction`, `SiringClockAuction`으로 ERC721 토큰으로서의 기능은 `KittyCore`가 담당한다.
 

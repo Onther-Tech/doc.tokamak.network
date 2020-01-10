@@ -12,7 +12,7 @@ Plasma EVM에서 사용하는 컨트랙트의 소스코드는 [여기](https://g
 
 ## 컨트랙트 다이어그램
 
-![](https://i.imgur.com/UEngaR2.png)
+![Contract_Diagram](assets/learn_advanced_plasma-evm-contracts.png)
 
 *네모*는 컨트랙트 구현체, *실선*은 상속 관계, *검은색 점선*은 `CALL`을 통한 참조 관계, *빨간색 점선*은 `DELEGATECALL`을 통한 참조 관계, *파란색 점선*은 라이브러리 참조를 가리킨다. *초록색 네모*는 네트워크에 실제 배포되는 컨트랙트를 의미한다. `RootChain` 컨트랙트의 사이즈가 크기 때문에  `EpochHandler`와 `SubmitHandler`로 로직을 분리하고 `DELEGATECALL`을 통해 로직을 분리한 핸들러 컨트랙트로 연결한다.
 
