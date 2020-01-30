@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "prismjs": "^1.18.0",
-    "remarkable-katex": "^1.0.1"
+    "remarkable-katex": "sifnoc/remarkable-katex"
   }
 }
