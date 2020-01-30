@@ -26,7 +26,7 @@
       },
       {
         "type": "subcategory",
-        "label": "경제",
+        "label": "토큰경제",
         "ids": [
           "learn/economics/ton",
           "learn/economics/child-chain",
