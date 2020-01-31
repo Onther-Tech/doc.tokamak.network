@@ -22,7 +22,7 @@ sidebar_label: 트랜잭션 수수료 정책
 
 
 ### 예치와 인출
-스태미나를 사용하는 가장 쉬운 방법은 TON을 예치하는 것이다. 예치한 TON의 양에 따라 스태미나가 생성되고, 이를 위임하여 사용할 수 있다. 스태미나를 더 이상 사용하지 않을 경우 다시 TON을 인출할 수 있다. 단, 이미 사용되고 있는 스태미나에 대해서는 인출할 수 없다. 다만, 예외적으로 자식체인에서 공격행위가 감지된 경우 인출할 수 있으나 이는 탈출 요청을 통해 이뤄지게 되므로, 해당 TON은 재사용에 일정 기간 제약이 주어지게 된다.
+스태미나를 사용하는 가장 쉬운 방법은 TON을 예치하는 것이다. 예치한 TON의 양에 따라 스태미나가 생성되고, 이를 위임하여 사용할 수 있다. 스태미나를 더 이상 사용하지 않을 경우 다시 TON을 인출할 수 있다. 단, 이미 사용되고 있는 스태미나 생성을 위해 예치된 TON에 대해서는 인출할 수 없다. 다만, 예외적으로 자식체인에서 공격행위가 감지된 경우 인출할 수 있으나 이는 탈출 요청을 통해 이뤄지게 되므로, 해당 TON은 재사용에 일정 기간 제약이 주어지게 된다.
 
 
 ### 위임
@@ -46,7 +46,6 @@ $Stamina= GasLimit * MGP$
 ## 참고자료
 - [EVM Compatible Transaction Fee(GAS) Delegated Execution Architecture for Plasma Chain](https://ethresear.ch/t/evm-compatible-transaction-fee-gas-delegated-execution-architecture-for-plasma-chain/3106)
 - [Token Velocity Problem](https://www.coindesk.com/blockchain-token-velocity-problem)
-- [Transaction Fee Economics](https://vitalik.ca/files/Transaction%20fee%20economics.pdf)
 - [Fixed Fee virsus unit pricing for information goods](http://www.dtc.umn.edu/~odlyzko/doc/price.war.pdf)
 - [Microeconomic Analysis of Gas Price Mechanism and Migitation](https://hackmd.io/oe-bT8GcRvCc7vBgeOJyLw?both)
 - [Ethereum Gas Price Analysis](https://medium.com/onther-tech/ethereum-gas-price-analysis-b70080e2e0d7)
