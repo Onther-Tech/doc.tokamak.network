@@ -23,6 +23,19 @@
           "learn/advanced/plasma-evm-smart-contracts",
           "learn/advanced/examples-and-best-practices"
         ]
+      },
+      {
+        "type": "subcategory",
+        "label": "토큰경제",
+        "ids": [
+          "learn/economics/ton",
+          "learn/economics/child-chain",
+          "learn/economics/token-supply",
+          "learn/economics/powerton",
+          "learn/economics/tx-fee",
+          "learn/economics/challenge",
+          "learn/economics/glossary"
+        ]
       }
     ],
     "가이드": [
