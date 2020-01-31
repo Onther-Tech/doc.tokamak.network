@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>TON · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## TON이란?"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="TON · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="## TON이란?"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>토큰경제</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">배우기<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">기초</h4><ul><li class="navListItem"><a class="navItem" href="/docs/learn/basic/tokamak-network">토카막 네트워크</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/basic/enter-and-exit">상호운용성: 진입 &amp; 퇴장</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/basic/transaction-fee">편의성: 계정, 트랜잭션 수수료, 개발도구</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/basic/layer-2-solutions">비교: 다른 확장성 솔루션</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">고급</h4><ul><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/design-rationale">디자인 원칙</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/plasma-evm-architecture">Plasma EVM 아키텍처</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/root-chain">루트체인</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/child-chain">자식체인</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/plasma-evm-smart-contracts">Plasma EVM 스마트 컨트랙트</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/advanced/examples-and-best-practices">요청 가능한 컨트랙트 예제</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">토큰경제</h4><ul><li class="navListItem navListItemActive"><a class="navItem" href="/docs/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/economics/child-chain">자식체인과 스테이킹</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/economics/token-supply">토큰 공급과 분배</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/economics/powerton">파워톤</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/economics/tx-fee">트랜잭션 수수료 정책</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/economics/challenge">챌린지</a></li><li class="navListItem"><a class="navItem" href="/docs/learn/economics/glossary">파라미터 정리</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">가이드<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">프라이빗 테스트넷 시작하기</h4><ul><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-open-private-testnet-rootchain">루트체인 설정</a></li><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-open-private-testnet-manually">자식체인 설정</a></li><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-open-private-testnet-puppeth">Puppeth 사용하여 부모-자식체인 설정</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">퍼블릭 테스트넷 연결하기</h4><ul><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-connect-public-testnet-prepare">연결 준비하기</a></li><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-connect-public-testnet-manually">직접 연결하기</a></li><li class="navListItem"><a class="navItem" href="/docs/guides/getting-started/how-to-connect-public-testnet-puppeth">Puppeth 사용하여 연결하기</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/guides/public-testnets">퍼블릭 테스트넷 정보</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/learn/economics/ton.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">TON</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="ton이란"></a><a href="#ton이란" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TON이란?</h2>
+<p>TON은 토카막 네트워크의 native token으로 이더리움(Ethereum)에서의 이더(Ether)와 같이 네트워크 자체에서 통용되는 토큰이다.</p>
+<p>TON의 단위는 두개로 가장 큰 단위인 TON은 소수점 18번째 자리까지 사용가능하며, 가장 낮은 단위인 Poon은 소수점이 없다. 이러한 소수점을 기준으로 TON은 비트코인의 bitcoin 이나 이더리움의 ether와 유사하고, Poon은 비트코인의 사토시(satoshi) 혹은 이더리움의 wei와 유사하다.</p>
+<table>
+<thead>
+<tr><th>Unit</th><th style="text-align:center">Decimal Places</th></tr>
+</thead>
+<tbody>
+<tr><td>Poon</td><td style="text-align:center">0</td></tr>
+<tr><td>TON</td><td style="text-align:center">18</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="ton은-어디에-사용되는가"></a><a href="#ton은-어디에-사용되는가" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TON은 어디에 사용되는가?</h2>
+<p>TON은 토카막 네트워크에서 다양한 용도로 사용되며, 크게 i)네트워크를 구성하는 자식체인을 올바르게 동작시키기 위한 보증금의 역할을 하거나, ii)자식체인 내에서 트랜잭션 수수료를 부담하는 용도로 사용하거나, iii)파워톤(PowerTON) 게임에 참여하는데 사용될 수 있다.</p>
+<h3><a class="anchor" aria-hidden="true" id="스테이킹staking"></a><a href="#스테이킹staking" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>스테이킹(Staking)</h3>
+<p>TON은 토카막 네트워크에서 자식체인을 배포하고 이를 루트체인에 연결하기 위한 용도로 사용된다. 자식체인을 운영하는 오퍼레이터(operator)는 반드시 일정 금액 이상의 TON을 예치하여야 자식체인을 토카막 네트워크에 연결할 수 있다.</p>
+<h3><a class="anchor" aria-hidden="true" id="파워톤"></a><a href="#파워톤" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>파워톤</h3>
+<p>TON은 토카막 네트워크 자체에서 운영되는 파워톤 게임에 참여하는데 사용된다. 파워톤은 스테이킹을 통해 발행되지 않은 시뇨리지의 일부를 이용하여 진행되는 게임으로, TON을 통해서만 참여가 가능하다.</p>
+<h3><a class="anchor" aria-hidden="true" id="스태미나"></a><a href="#스태미나" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>스태미나</h3>
+<p>TON은 자식체인의 트랜잭션 수수료를 부담하기 위해 사용될 수 있다. 토카막 네트워크의 모든 자식체인에서는 TON을 예치하여 트랜잭션 수수료로 사용될 수 있는 스태미나(Stamina)를 생성할 수 있다. 스태미나는 기존의 수수료와 달리 사용 후 완전히 소멸되지 않고 일정 기간 이후 재충전되며, 제3자에게 위임할 수 있다는 특징을 갖는다.</p>
+<h3><a class="anchor" aria-hidden="true" id="챌린지"></a><a href="#챌린지" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>챌린지</h3>
+<p>TON은 토카막 네트워크의 자식체인들이 모두 올바르게 동작하도록 암호경제학적 유인을 제공하기 위해 사용된다. 토카막 네트워크에 참여하는 구성원들은 특정한 행동을 하기 위해 일정 금액 이상의 TON을 예치하여야 하며, 사전에 정해진 규칙에 반하는 행동을 하였을 경우 챌린지(challenge)를 당할 수 있다. 챌린지가 성공하면 위반자의 예치금은 몰수되며, 챌린저(challenger)에게 전체 혹은 일부 금액이 보상으로 주어지며 나머지 금액은 모두 삭감된다.</p>
+<h2><a class="anchor" aria-hidden="true" id="staking-delegating-and-commit"></a><a href="#staking-delegating-and-commit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Staking, Delegating and Commit</h2>
+<p><strong>스테이킹(staking)</strong>은 일정량의 TON을 예치하는 행위이다. 스테이킹은 오퍼레이터가 되어 자식체인을 운영하고 이에 대한 보상인 토큰 시뇨리지를 받기 위한 근거가 된다.</p>
+<p><strong>언스테이킹(unstaking)</strong>은 스테이킹된 TON의 일부 혹은 전부를 인출하는 행위이다.</p>
+<p><strong>델리게이팅(delegating)</strong>은 이미 TON을 스테이킹한 다른 사용자에게 TON을 위임하여 예치하는 행위이다. 델리게이팅은 토큰 시뇨리지를 받기 위한 근거는 되지만, 자식체인을 운영할 수 있는 자격요건과는 관계가 없다. 델리게이팅된 TON은 이후 TON의 추가발행을 결정하는 기준이 되는 스테이킹된 TON의 양을 계산할 때 이에 합산된다.</p>
+<p><strong>언델리게이팅(undelegating)</strong>은 델리게이팅한 TON을 인출하는 행위이다.</p>
+<p><strong>커밋(commit)</strong>은 자식체인의 블록의 요약본을 루트체인에 제출하여 기록하는 것으로, 추가발행되는 토큰을 보상으로 받을 수 있는 단위가 되는 행위이다. 커밋은 기존 블록체인에서의 블록 마이닝 혹은 검증작업과 유사한 작업으로 볼 수 있다.</p>
+<p><strong>진입(enter)</strong>은 루트체인에서 자식체인으로 자산이나 상태를 옮기는 행위이다. TON을 진입하는 경우, 그 금액의 일부가 델리게이팅과 같이 해당 자식체인에 스테이킹된 TON의 양을 계산할 때 합산된다.</p>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-1-31 by aiden0505</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/learn/advanced/examples-and-best-practices"><span class="arrow-prev">← </span><span>요청 가능한 컨트랙트 예제</span></a><a class="docs-next button" href="/docs/learn/economics/child-chain"><span>자식체인과 스테이킹</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#ton이란">TON이란?</a></li><li><a href="#ton은-어디에-사용되는가">TON은 어디에 사용되는가?</a><ul class="toc-headings"><li><a href="#스테이킹staking">스테이킹(Staking)</a></li><li><a href="#파워톤">파워톤</a></li><li><a href="#스태미나">스태미나</a></li><li><a href="#챌린지">챌린지</a></li></ul></li><li><a href="#staking-delegating-and-commit">Staking, Delegating and Commit</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/learn/basic/tokamak-network">배우기</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">가이드</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
