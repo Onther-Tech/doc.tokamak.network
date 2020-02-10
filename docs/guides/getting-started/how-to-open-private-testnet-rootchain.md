@@ -27,7 +27,7 @@ GOPATH로 사용할 디렉토리를 생성하고 환경변수를 설정한다.
 ~$ export GOROOT=/usr/local/go
 ~$ mkdir -p $HOME/plasma
 ~$ export GOPATH=$HOME/plasma
-~$ export PATH=$GOPATH/bin:$GOROOT/bin:$PAT
+~$ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
 
 재부팅시에도 해당 환경변수를 자동적으로 설정되도록 `~/.profile` 파일에 환경변수를 등록 해두는 것이 좋다.
