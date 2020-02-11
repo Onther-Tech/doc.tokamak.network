@@ -10,7 +10,7 @@ Of course, all users who enter the child chain have incentives to keep an eye ou
 
 
 ## Staking
-Operators who run child chains connected to Tokamak Network must stake more than $D_{min}. Sum of operator's self-staked TON and delegated TON is the total staked amount, $d^{o}$ in the operator's account. $d^{o}$ is the total reward given to the challenger if the challenge is proven true. Users using child chains also must deposit $ED$ when exiting the chain. This will be used as a reward for the exit challenge if the user have requested an invalid exit.
+Operators who run child chains connected to Tokamak Network must stake more than $D_{min}$. Sum of operator's self-staked TON and delegated TON is the total staked amount, $d^{o}$ in the operator's account. $d^{o}$ is the total reward given to the challenger if the challenge is proven true. Users using child chains also must deposit $ED$ when exiting the chain. This will be used as a reward for the exit challenge if the user have requested an invalid exit.
 
 Also, challengers must deposit $CD$ to challenge others. If the challenger loses the challenge, $CD$ can be offered as a reward to the one who has been challenged.
 
