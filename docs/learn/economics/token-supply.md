@@ -1,61 +1,62 @@
 ---
 id: token-supply
-title: 토큰 공급과 분배
-sidebar_label: 토큰 공급과 분배
+title: Token Supply and Distribution
+sidebar_label: Token Supply and Distribution
 ---
 
-TON의 모든 공급은 초기발행량과 추가발행인 시뇨리지(seigniorage)로 이루어진다. 시뇨리지는 TON을 스테이킹한 오퍼레이터가 커밋을 수행할 때마다 발행되며, 그 양은 항상 스테이킹된 TON의 양과 기간에 비례해서 결정된다. 시뇨리지의 분배 또한 스테이킹한 TON의 양과 기간에 따라 이루어진다.
+The total supply of TON is initial issued amount plus additional issued TONs which is commit reward. New TONs are issued every time the operator commits a block, and the amount is determined proportion to the amount and duration of staked TON. 
 
-## 토큰 공급
 
-### 원칙
-TON의 공급(발행)과 관련된 모든 정책은 다음 원칙에 근거하고 있다.
+## Token Supply
 
-1. 매년 고정량이 추가 발행된다.
-2. 추가 발행량은 전체발행량 중 스테이킹된 TON의 비율과 기간에 비례하며, 스테이킹된 TON의 비율이 100% 미만이거나, 스테이킹된 기간이 최대값이 아니라면 원칙 1에서 제시된 발행량보다 낮게 발행된다.
-3. 원칙 2에 따른 미발행분의 일부는 스테이킹 게임의 상금으로 사용된다. (이는 [파워톤](powerton)에서 자세히 다룬다)
+### Principles
+All policies related to the supply of TON are based on the following principles:
 
-### 공급
-TON의 최초 발행량은 $IS$이며, TON의 연간 최대 시뇨리지는 $S_{y} = IS*IR_{y}$이다. 하지만 원칙 2에 명시된 것처럼 스테이킹된 TON의 양과 기간에 따라 연간 실제 시뇨리지인 $s_{y}$는 상이할 수 있다. $s_{y}$는 다음과 같이 계산된다.
+1. A fixed amount is issued every year.
+2. The amount of new TONs issued is proportional to the amount of staked TON and its period. If the staked TON is less than the total amount of TON in the chain, or the staking period is shorter than the maximum value, there will be less TONs issued than the amount in #1.
+3. The unissued amount in #2 will be used as prize money for the PowerTON game (check details in [PowerTON])
+
+### Supply
+Initial issued amount is $IS$ and maximum commit reward every year is denoted to $S_{y} = IS*IR_{y}$. However, depending on the amount and duration of the staked TONs, as specified in principle 2, the actual amount issued annually, $s_{y}$, may vary. $s_{y}$ is calculated as follows:
 
 $s_{y} = \sum_{i=1}^{N_{y}}\cfrac{td_{i}}{ts_{i}} * S_{b}$
 
-#### 표기
-* $IS$ : 최초 발행량
-* $IR_{y}$ : 연간 목표 인플레이션율
-* $S_{y}  = IS*IR_{y}$ : 연간 최대 시뇨리지
-* $s_{y}$ : 실질 연간 시뇨리지
-* $S_{b}$ : 루트체인 블록당 최대 시뇨리지
-* $N_{y}$ : 루트체인에서 1년간 생성되는 총 블록의 수
-* $ts_{t}$ : 시점 $t$의 총 발행량
-* $td_{t}$ : 시점 $t$에 스테이킹된 TON의 총량
+#### Notation
+* $IS$ : Initial issued amount
+* $IR_{y}$ : Annual target inflation Rate
+* $S_{y} = IS*IR_{y}$ : Annual maximum commit reward
+* $s_{y}$ : Annual actual commit reward
+* $S_{b}$ : Annual maximum commit reward per block of root chain
+* $N_{y}$ : Total number of blocks in root chain for a year
+* $ts_{t}$ : Total issued amount in $t$
+* $td_{t}$ : Total staked amount in $t$
 
-$s_{y}$는 해당 기간 동안 스테이킹된 TON의 양과 기간에 따라 $0\leq{s_{y}}\leq{S_{y}}$의 값을 가질 수 있다. **원칙 2** 에 따라 $td_{t}$이 $ts_{t}$에 가까울수록, 또 오랜 기간 동안 스테이킹이 될수록 $s_{y}$는 $S_{y}$에 근접하게 된다. 반대의 경우에 $s_{y}$는 0에 가까워지게 될 것이다.
+$s_{y}$ can have a value of $0\leq{s_{y}}\leq{S_{y}}$ depending on the staked amount and its duration. **In accordance with principle 2**, the closer $td_{t}$ is to $ts_{t}$, and the longer it is staked, the closer $s_{y}$ is to $S_{y}$. In the opposite case, $s_{y}$ will be close to zero.
 
-여기서 유의해야 할 점은 시간을 계산의 기준이 실제 시간이 아니라 루트체인의 블록 단위라는 것이다. 예를 들어 연간이라는 시간 기준도 블록 높이로 계산되기 때문에 1년이라는 시간과 정확히 일치하지 않을 수 있다.
+Note that the criterion for calculating duration is not the actual time but the block of the root chain. For example, one year may also be inconsistent with the actual time because it is calculated as the block height.
 
-## 토큰 분배
+## Token Distribution
 
-### 원칙
-앞서 다룬 $s_{y}$의 분배는 다음과 같은 원칙을 기준으로 이루어진다.
+### Principles
+$s_{y}$ is distributed according to the following principles:
 
-1. 스테이킹한 TON의 양이 많을수록 더 많은 시뇨리지 보상을 받아야 한다.
-2. 스테이킹한 TON의 기간이 길수록 더 많은 시뇨리지 보상을 받아야 한다.
+1. The larger the staked amount of TON, the more the commit reward.
+2. The longer the duration of staked TON, the more the commit reward.
 
-스테이킹 모델을 사용하는 대부분의 블록체인에서 시뇨리지를 분배하는 핵심 기준 중 하나는 바로 마이닝 혹은 검증작업을 얼마나 많이 수행했는가이다. 하지만 토카막 네트워크의 경우 기존의 마이닝(검증)작업에 대응하는 커밋의 수행 횟수를 주요한 분배 기준으로 고려하지 않는다. 그 이유는 플라즈마의 특성상 커밋이라는 행위가 실질적으로 네트워크에 기여하는 행위인지 명확히 판단하는 것이 쉽지 않기 때문이다. 예를 들어 시뇨리지 보상만을 목적으로 의미없는 루트값을 제출할 수 있으므로, 커밋의 수만을 가지고 그 기여도를 판단하기는 어렵다. 또한 실질적으로 네트워크에 기여하는 커밋이라 하더라도 커밋의 수를 기준으로 그 우열을 판단할 수는 없다. 이러한 이유로 인해 시뇨리지의 분배 기준에 **'커밋의 수'** 는 고려하지 않는다.
+One of the key criteria for distributing reward in most blockchains using staking model is the count of performed validation tasks. However, for Tokamak Network, the number of commits similar to mining (validation) is not considered as a critical criterion. The reason is because it is not easy to determine whether commits are an act of contributing to the network due to the nature of Plasma. For example, it is challenging to measure contribution with only the number of commits since meaningless empty blocks can be submitted solely to get commit reward. Also, few commits that actually contribute to the network can be more meaningful than lots of commits. For this reason, **'Number of commits'** is not considered in the distribution criteria of the commit reward.
 
-### 시뇨리지 분배
-위 두가지 원칙을 근거로 하여 $s_{y}$의 분배 공식을 도출할 수 있다. staker가 k부터 t시점까지 받을 수 있는 시뇨리지의 양은 다음과 같이 계산된다.
+### Distribution of Commit Reward
+Based on the two distribution principles, a formula of $s_{y}$ can be derived. The amount of commit reward the staker can get from $k$ to $t$ is calculated as follows.
 
 $s_{k,t}^{staker} = \sum_{i=k}^{t}\cfrac{d_{i}^{staker}}{ts_{i}}*S_{b}$
 
-#### 표기
-* $s_{k,t}^{staker}$ : 시점 $k$부터 $t$ 까지 staker가 받을 수 있는 시뇨리지 보상
-* $d_{t}^{staker}$ : 시점 $t$에 staker 계정에 스테이킹된 TON의 총량
+#### Notation
+* $s_{k,t}^{staker}$ : Commit reward of staker from $k$ to $t$
+* $d_{t}^{staker}$ : Total amount of TON staked to staker account at $t$
 
 
-### 예시
-다음은 시뇨리지 보상 시뮬레이션에 대한 간단한 예시이다.
+### Example
+The following is a simple example of commit reward simulation.
 
 | Parameters | Value |
 |:----------:|:-----:|
