@@ -112,7 +112,7 @@ plasma-evm$ build/bin/geth \
     --maxpeers 50 \
     --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
     --password signer.pass \
-    --bootnodes "enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30307"
+    --bootnodes "enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30307" \
     --mine \
     --miner.gastarget 7500000 \
     --miner.gaslimit 10000000
