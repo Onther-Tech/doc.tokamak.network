@@ -11,11 +11,11 @@
       },
       "guides/getting-started/how-to-connect-public-testnet-prepare": {
         "title": "Prepare connect public testnet",
-        "sidebar_label": "prepare connection"
+        "sidebar_label": "Prepare connection"
       },
       "guides/getting-started/how-to-connect-public-testnet-puppeth": {
-        "title": "Puppeth 사용하여 퍼블릭 테스트넷 연결하기",
-        "sidebar_label": "Puppeth 사용하여 연결하기"
+        "title": "Connect Public Testnet with Puppeth",
+        "sidebar_label": "Connect with Puppeth"
       },
       "guides/getting-started/how-to-open-private-testnet-manually": {
         "title": "프라이빗 테스트넷 자식 체인 직접 설정하기",
@@ -28,6 +28,10 @@
       "guides/getting-started/how-to-open-private-testnet-rootchain": {
         "title": "프라이빗 테스트넷 루트체인 설정하기",
         "sidebar_label": "루트체인 설정"
+      },
+      "guides/guides_apis_npm-plasma-evm-contracts": {
+        "title": "npm plasma-evm-contracts",
+        "sidebar_label": "npm plasma-evm-contracts"
       },
       "guides/manuals/guides_manuals_how-to-make-request": {
         "title": "How to make request",
@@ -42,8 +46,8 @@
         "sidebar_label": "How to manage STAMINA"
       },
       "guides/public-testnets": {
-        "title": "Public Testnet Information",
-        "sidebar_label": "Public Testnet Information"
+        "title": "토카막 퍼블릭 테스트넷 정보",
+        "sidebar_label": "퍼블릭 테스트넷 정보"
       },
       "learn/advanced/child-chain": {
         "title": "자식체인",
@@ -82,8 +86,8 @@
         "sidebar_label": "루트체인"
       },
       "learn/basic/enter-and-exit": {
-        "title": "interoperability: Enter & Exit",
-        "sidebar_label": "interoperability: Enter & Exit"
+        "title": "상호운용성: 진입 & 퇴장",
+        "sidebar_label": "상호운용성: 진입 & 퇴장"
       },
       "learn/basic/layer-2-solutions": {
         "title": "비교: 다른 확장성 솔루션",

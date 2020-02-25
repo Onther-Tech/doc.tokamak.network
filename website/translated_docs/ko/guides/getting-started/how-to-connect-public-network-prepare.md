@@ -1,7 +1,7 @@
 ---
 id: how-to-connect-public-testnet-prepare
-title: 퍼블릭 테스트넷 연결 준비하기
-sidebar_label: 연결 준비하기
+title: Prepare connect public testnet
+sidebar_label: Prepare connection
 ---
 
 페러데이(Faraday)는 온더(Onther)에서 운영하고 있는 토카막 테스트넷(Tokamak Testnet)의 이름이다.

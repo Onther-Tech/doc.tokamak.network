@@ -128,19 +128,7 @@
       "learn/economics/tx-fee": {
         "title": "트랜잭션 수수료 정책",
         "sidebar_label": "트랜잭션 수수료 정책"
-      },
-      "Learn": [
-        {
-          "type": "subcategory",
-          "label": "Basic",
-          "ids": [
-            "learn/basic/tokamak-network",
-            "learn/basic/enter-and-exit",
-            "learn/basic/transaction-fee",
-            "learn/basic/layer-2-solutions"
-          ]
-        }
-      ]
+      }
     },
     "links": {
       "Docs": "Docs",
