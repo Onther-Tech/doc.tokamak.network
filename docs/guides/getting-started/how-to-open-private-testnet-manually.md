@@ -7,7 +7,7 @@ sidebar_label: 자식체인 설정
 자식 체인을 설정하려면 로컬 환경에서 루트체인이 실행되고 있는 환경에서 진행해야 하므로, <br> 루트체인이 실행중이지 않고 있다면 [루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)를 먼저 진행한다.
 
 ## 오퍼레이터 노드 설정하기
-[루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0) 수행하였음을 전재로 한다.
+[루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0) 수행하였음을 전제로 한다.
 
 만약, 루트체인으로 ganache 테스트체인을 사용하고 싶은경우 ganache에서 생성된 계정을 오퍼레이터와 챌린저로 사용하여야 한다.
 
@@ -66,7 +66,10 @@ make geth && build/bin/geth \
 `deploy` 커맨드를 통해 생성한 `genesis.json` 파일은 `plasma-evm` 디렉토리 내에 위치하고 있으므로 특별히 `genesis.json` 파일경로를 지정할 필요가 없다.
 
 ```bash
-plasama-evm$ geth init
+plasma-evm$ build/bin/geth init \
+            --datadir ./chaindata-oper \
+            --rootchain.url ws://localhost:8546 \
+            genesis.json
 ```
 
 ### 4. 오퍼레이터 계정 키스토어 생성하기
@@ -93,13 +96,13 @@ Repeat passphrase:
 아래 커맨드를 통해서 `singer.pass` 파일을 생성해 준다(이때 `"` 는 제외 한다).
 
 ```bash
-plasma-evm$ echo > "<Passphrase for operator keystore file>" > signer.pass
+plasma-evm$ echo "<Passphrase for operator keystore file>" > signer.pass
 ```
 
 오퍼레이터 노드 실행시 앞으로 설정해 줄 사용자노드(Usernode)의 `enode` 주소를 먼저 설정해 주도록 한다. (아래 `bootnodes` 플래그에 사용되는 주소는 [사용자 노드 생성하기](how-to-open-private-testnet-manually#%EC%82%AC%EC%9A%A9%EC%9E%90-%EB%85%B8%EB%93%9C-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0) 의 [`bootkey` 생성하기](how-to-open-private-testnet-manually#3-bootkey-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0) 를 통해 생성되는 주소와 같다.)
 ```bash
 plasma-evm$ build/bin/geth \
-    --datadir ./chaindata \
+    --datadir ./chaindata-oper \
     --syncmode="full" \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
@@ -128,7 +131,7 @@ plasma-evm$ build/bin/geth \
 
 ```bash
 plasma-evm$ build/bin/geth init \
-            --datadir ./chaindata \
+            --datadir ./chaindata-user \
             --rootchain.url ws://localhost:8546 \
             genesis.json
 ```
@@ -151,7 +154,7 @@ plasma-evm$ echo "e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7
 
 ```bash
 plasma-evm$ build/bin/geth \
-    --datadir ./chaindata \
+    --datadir ./chaindata-user \
     --syncmode="full" \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
