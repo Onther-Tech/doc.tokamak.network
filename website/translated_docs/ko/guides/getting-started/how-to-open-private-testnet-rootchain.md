@@ -9,14 +9,15 @@ Ubuntu 18.04 를 기준으로 작성되었다.
 
 golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm 컴파일 가능한 환경을 만든다.
 
-### 1. golang 설치하기(go 1.13.4)
+### 1. golang(go 1.13.4) 설치 및 컴파일 환경설정
 
-go 실행파일은 `/usr/local/` 경로 아래 위치한다.
+아래 명령어를 순차적으로 실행하여, go 실행파일을 `/usr/local/` 경로 아래 위치하게 한다.
 
 ```bash
+~$ sudo apt-get update && sudo apt-get install make build-essential -y
 ~$ wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
 ~$ tar -xvf go1.13.4.linux-amd64.tar.gz
-~$ mv go /usr/local
+~$ sudo mv go /usr/local
 ```
 
 ### 3. GOPATH && GOROOT 설정하기
@@ -54,8 +55,8 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 루트체인으로 사용할 `go-ethereum` 소스코드를 다운로드 받는다.
 
 ```bash
-$ git clone github.com/Onther-Tech/go-ethereum
-$ cd go-ethereum
+~$ git clone https://github.com/Onther-Tech/go-ethereum
+~$ cd go-ethereum
 ```
 
 ### 2. 실행 스크립트 확인
