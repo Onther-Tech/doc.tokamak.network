@@ -88,7 +88,7 @@ make geth && build/bin/geth \
     --miner.gasprice "10" \
     --rpc \
     --rpcport 8545 \
-    --rpcapi eth,debug,net\
+    --rpcapi eth,debug,net \
     --ws \
     --wsport 8546
 ```
