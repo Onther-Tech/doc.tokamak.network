@@ -84,7 +84,7 @@ plasma-evm$ bash deploy.local.sh
 
 ```bash
 
-plasma-evm$ build/bin/geth init \
+plasma-evm$ build/bin/geth --nousb init \
             --datadir ./chaindata-oper \
             --rootchain.url ws://localhost:8546 \
             genesis.json
@@ -125,6 +125,7 @@ plasma-evm$ echo "<Passphrase for operator keystore file>" > signer.pass
 
 ```bash
 plasma-evm$ build/bin/geth \
+    --nousb \
     --datadir ./chaindata-oper \
     --syncmode="full" \
     --networkid 16 \
@@ -156,7 +157,7 @@ plasma-evm$ build/bin/geth \
 [루트 체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정) 통해 실행중인 루트체인 접속 주소를 사용한다.
 
 ```bash
-plasma-evm$ build/bin/geth init \
+plasma-evm$ build/bin/geth --nousb init \
             --datadir ./chaindata-user \
             --rootchain.url ws://localhost:8546 \
             genesis.json
@@ -179,6 +180,7 @@ plasma-evm$ echo "e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7
 
 ```bash
 plasma-evm$ build/bin/geth \
+    --nousb \
     --datadir ./chaindata-user \
     --syncmode="full" \
     --networkid 16 \
