@@ -12,12 +12,6 @@ sidebar_label: 연결 준비
 1. [로컬 환경에서 직접 실행하는 방법 (퍼블릿 테스트넷 직접 연결)](how-to-connect-public-testnet-manually)
 2. [`puppeth`를 사용하여 실행하는 방법 (Puppeth 사용하여 퍼블릭 테스트넷 연결)](how-to-connect-public-testnet-puppeth)
 
-## 로컬 환경 설정
-
-운영체제는 Ubuntu 18.04 환경을 기준으로 한다.
-
-golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm 컴파일 가능한 환경을 만든다.
-
 ### 시스템 업데이트 및 필수 패키지 설치
 
 아래 명령어로 컴파일 환경을 설정한다.
@@ -33,7 +27,7 @@ golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm �
 ```bash
 ~$ wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
 ~$ tar -xvf go1.13.4.linux-amd64.tar.gz
-~$ mv go /usr/local
+~$ sudo mv go /usr/local
 ```
 
 GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 설정한다.
@@ -42,7 +36,7 @@ GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 설정한다.
 ~$ export GOROOT=/usr/local/go
 ~$ mkdir -p $HOME/plasma
 ~$ export GOPATH=$HOME/plasma
-~$ export PATH=$GOPATH/bin:$GOROOT/bin:$PAT
+~$ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
 
 부팅시에 위의 환경변수가 자동으로 설정되도록 하려면, `~/.profile` 파일에 환경변수를 등록 해두는 것이 좋다.

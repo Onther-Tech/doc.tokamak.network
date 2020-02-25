@@ -7,6 +7,7 @@ sidebar_label: 자식체인 설정
 루트체인이 구동되고 있는 환경에서 자식 체인을 실행해야 하므로, [루트체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정)을 먼저 진행한다.
 
 ## 오퍼레이터 노드 설정
+[루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0) 수행하였음을 전제로 한다.
 
 > 루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 챌린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다.
 특히, 챌린저 계정에 최소 0.5 ETH 이상이 있어야 오퍼레이터 노드가 정상적으로 실행된다.
@@ -82,7 +83,11 @@ plasma-evm$ bash deploy.local.sh
 아래 명령어를 통해 체인데이터를 초기화한다.
 
 ```bash
-plasama-evm$ geth init --datadir pls.data
+
+plasma-evm$ build/bin/geth init \
+            --datadir ./chaindata-oper \
+            --rootchain.url ws://localhost:8546 \
+            genesis.json
 ```
 
 ### 4. 오퍼레이터 계정 키스토어 생성
@@ -120,7 +125,7 @@ plasma-evm$ echo "<Passphrase for operator keystore file>" > signer.pass
 
 ```bash
 plasma-evm$ build/bin/geth \
-    --datadir ./chaindata \
+    --datadir ./chaindata-oper \
     --syncmode="full" \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
@@ -130,7 +135,7 @@ plasma-evm$ build/bin/geth \
     --maxpeers 50 \
     --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
     --password signer.pass \
-    --bootnodes "enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30307"
+    --bootnodes "enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30307" \
     --mine \
     --miner.gastarget 7500000 \
     --miner.gaslimit 10000000
@@ -152,7 +157,7 @@ plasma-evm$ build/bin/geth \
 
 ```bash
 plasma-evm$ build/bin/geth init \
-            --datadir ./chaindata \
+            --datadir ./chaindata-user \
             --rootchain.url ws://localhost:8546 \
             genesis.json
 ```
@@ -174,7 +179,7 @@ plasma-evm$ echo "e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7
 
 ```bash
 plasma-evm$ build/bin/geth \
-    --datadir ./chaindata \
+    --datadir ./chaindata-user \
     --syncmode="full" \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \

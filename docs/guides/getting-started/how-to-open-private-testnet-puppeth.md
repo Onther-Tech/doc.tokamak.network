@@ -6,7 +6,7 @@ sidebar_label: Puppeth 사용하여 루트-자식체인 설정
 
 이 가이드는 `Puppeth`를 사용하여 루트체인에 연결된 토카막 자식체인을 배포하는 과정을 다룬다
 
-`Puppeth`란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램이다. `plasma-evm`의 `Puppeth`는 토카막 노드를 쉽게 구성 할 수 있는 기능이 추가되었다. `Puppeth`를 사용하여 자식 체인을 설정하려면 구동중인 루트체인이 필요하다. 동작중인 루트체인이 없다면 [프라이빗 테스트넷 루트체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정)을 먼저 진행 한다.
+`Puppeth`란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램이다. `plasma-evm`의 `Puppeth`는 토카막 노드를 쉽게 구성 할 수 있도록 추가된 기능이 탑재 되어 있다. `Puppeth`를 사용하여 자식 체인을 설정하려면 이미 구동중인 루트체인이 필요하다. 테스트로 쓸 루트체인이 필요하다면 [루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)를 먼저 진행하고 이 가이드 문서를 진행하는 것이 바람직하다.
 
 `Puppeth`에서 사용되는 용어를 먼저 정리하면 아래와 같다.
 
@@ -20,7 +20,7 @@ sidebar_label: Puppeth 사용하여 루트-자식체인 설정
 
 ### 1. 소스코드 다운로드 및 컴파일
 
- [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm) 기준으로 진행된다. 
+ [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm) 기준으로 진행된다.
  
  다음 명령어를 통해서 소스코드를 복제하고 `plasma-evm`을 컴파일을 진행한다.
 

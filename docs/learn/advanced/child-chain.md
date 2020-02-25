@@ -91,7 +91,7 @@ sidebar_label: 자식체인
 ### 요청가능한 컨트랙트
 **요청가능한 컨트랙트(requestable contract)**는 말 그대로 요청을 반영할 수 있는 컨트랙트로, 루트체인과 자식체인에 동일하게 배포된다. 요청가능한 컨트랙트는 다음과 같은 인터페이스가 구현하여 모든 요청들을 반영할 수 있어야 한다. 
 
-```
+```solidity
 interface Requestable {
   function applyEnter(bool isRootChain,uint256 requestId,address requestor,bytes32 trieKey,bytes trieValue)
     external returns (bool success);

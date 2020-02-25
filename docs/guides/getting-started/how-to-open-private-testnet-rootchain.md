@@ -27,6 +27,7 @@ golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm �
 ~$ sudo mv go /usr/local
 ```
 
+GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 
 GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 설정한다.
 
 ```bash
@@ -60,8 +61,8 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 루트체인으로 사용할 `go-ethereum`의 소스코드를 다운로드 받는다.
 
 ```bash
-$ git clone https://github.com/Onther-Tech/go-ethereum
-$ cd go-ethereum
+~$ git clone https://github.com/Onther-Tech/go-ethereum
+~$ cd go-ethereum
 ```
 
 ### 루트체인 실행 스크립트 확인
@@ -92,7 +93,7 @@ make geth && build/bin/geth \
     --miner.gasprice "10" \
     --rpc \
     --rpcport 8545 \
-    --rpcapi eth,debug,net\
+    --rpcapi eth,debug,net \
     --ws \
     --wsport 8546
 ```
