@@ -86,16 +86,19 @@ KEY3="ae03e057a5b117295db86079ba4c8505df6074cdc54eec62f2050e677e5d4e66";
 
 
 make geth && build/bin/geth \
-    --dev \
-    --dev.period 1 \
-    --dev.faucetkey "$OPERATOR_PRIV_KEY,$KEY0,$KEY1,$KEY2,$KEY3,$CHALLENGER_KEY" \
-    --miner.gastarget 7500000 \
-    --miner.gasprice "10" \
-    --rpc \
-    --rpcport 8545 \
-    --rpcapi eth,debug,net \
-    --ws \
-    --wsport 8546
+  --dev \
+  --dev.period 1 \
+  --dev.faucetkey "$OPERATOR_PRIV_KEY,$KEY0,$KEY1,$KEY2,$KEY3,$CHALLENGER_KEY" \
+  --rpc \
+  --rpcport 8545 \
+  --rpcapi eth,debug,net \
+  --rpcaddr 0.0.0.0 \
+  --ws \
+  --wsport 8546 \
+  --wsaddr 0.0.0.0 \
+  --wsapi eth,debug,net \
+  --miner.gastarget 7500000 \
+  --miner.gasprice "10"
 ```
 
 위 스크립트로 실행되는 루트체인의 계정정보는 다음과 같다.
