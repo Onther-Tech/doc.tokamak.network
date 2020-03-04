@@ -1,7 +1,7 @@
 ---
 id: how-to-open-private-testnet-puppeth
-title: Puppeth 사용하여 프라이빗 테스트넷 설정하기
-sidebar_label: Puppeth 사용하여 부모-자식체인 설정
+title: Setup Private Testnet With Puppeth
+sidebar_label: Setup with Puppeth
 ---
 
 `Puppeth`란 이더리움 노드 배포를 쉽게 할 수 있는 유틸리티 프로그램이다. `plasma-evm`의 `Puppeth`는 토카막 노드를 쉽게 구성 할 수 있도록 추가된 기능이 탑재 되어 있다. `Puppeth`를 사용하여 자식 체인을 설정하려면 이미 구동중인 루트체인이 필요하다. 테스트로 쓸 루트체인이 필요하다면 [루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)를 먼저 진행하고 이 가이드 문서를 진행하는 것이 바람직하다.
@@ -10,9 +10,12 @@ sidebar_label: Puppeth 사용하여 부모-자식체인 설정
 
 시작 하기 전에, `Puppeth`에서 사용되는 용어를 먼저 정리하면 아래와 같다.
 
-- `sealnode` : 오퍼레이터 노드, 블록을 생성하는 마이너 노드로 볼 수 있다.
 
-- `boodnode` : 사용자 노드, JSON-RPC를 통해 트랜잭션 정보를 받아 오퍼레이터 노드에 전달한고 오퍼레이터 노드에서 생성된 블록들을 동기화 한다.
+`Puppeth`에서 사용되는 용어를 먼저 정리하면 아래와 같다.
+
+- `sealnode` : 오퍼레이터 노드, 블록을 생성하는 마이너 노드.
+
+- `boodnode` : 사용자 노드, 트랜잭션을 오퍼레이터 노드에 전달하고 오퍼레이터 노드 동기화.
 
 ## `Puppeth` 준비하기
 

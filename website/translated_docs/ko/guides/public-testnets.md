@@ -1,7 +1,7 @@
 ---
 id: public-testnets
-title: 토카막 퍼블릭 테스트넷 정보
-sidebar_label: 퍼블릭 테스트넷 정보
+title: Tokamak Public Testnet Information 
+sidebar_label: Public Testnet Information
 ---
 
 온더(Onther Inc)에서 운영하고 있는 토카막 네트워크의 테스트체인인 페러데이(Faraday) 테스트넷 구성 및 접속 정보이다.

@@ -1,19 +1,18 @@
 ---
 id: how-to-connect-public-testnet-manually
 title: How to connect public testnet menually
-sidebar_label: Connect Menually
+sidebar_label: Menually
 ---
 
-## 페러데이 사용자 노드
+## Faraday User Node
 
-### 1. 초기화 하기
+### 1. Initialization
 
-페러데이 사용자 노드를 시작하기 위해, 초기화(Initialize) 하려면 페러데이 테스트넷의 `genesis` 파일이 필요하다.
-해당 `genesis` 파일은 [github.com/onther-tech/plasma-evm-networks](https://github.com/Onther-Tech/plasma-evm-networks/tree/master/faraday-testnet) 의 [`faraday.json`](https://github.com/Onther-Tech/plasma-evm-networks/blob/master/faraday-testnet/faraday.json)를 통해 확인 할 수 있다.
+For starting Faraday user node, you need to have `genesis` file to initialize. You can find `genesis` file in [`faraday.json`](https://github.com/Onther-Tech/plasma-evm-networks/blob/master/faraday-testnet/faraday.json) at [github.com/onther-tech/plasma-evm-networks](https://github.com/Onther-Tech/plasma-evm-networks/tree/master/faraday-testnet).
 
-`rootchain.url`은 `Rinkeby` 테스트넷 웹소켓 접속주소(websocket Endpoint)를 사용한다.
+`rootchain.url` is websocket address of `Rinkeby` testnet.
 
-아래 커맨드를 통해서 `genesis` 파일을 초기화 시켜준다.
+Initialize user node with following command.
 
 ```bash
 plasma-evm$ build/bin/geth init \
@@ -22,15 +21,17 @@ plasma-evm$ build/bin/geth init \
             https://raw.githubusercontent.com/Onther-Tech/plasma-evm-networks/master/faraday-testnet/faraday.json
 ```
 
-`--datadir` 플래그를 통해서 체인데이터가 저장될 위치를 설정할 수 있다. **이 경로는 plasma-evm 실행시 동일해야 한다.**
+You can set location of chain data with `--datadir` flag. **This path must be same as in running plasma-evm**.
 
-### 2. 사용자 노드 실행
+### 2. Run User Node
 
-반드시 [1. 초기화 하기](how-to-connect-public-testnet-manually#2-%EC%B4%88%EA%B8%B0%ED%99%94-%ED%95%98%EA%B8%B0)에서 `datadir`로 지정해준 값을 사용한다. <br> 이 예시에서는 `plasma-evm/chaindata` 에 체인데이터가 저장된다.
+You should use same `datadir` as in [1. Initialization](how-to-connect-public-testnet-manually#1-initialization).
+
+Start user node with following command.
 
 ```bash
 plasma-evm$ build/bin/geth \
-    --datadir ./chaindata \
+    --datadir ./chaindata-user \
     --syncmode="full" \
     --networkid 16 \
     --rootchain.url wss://rinkeby.infura.io/ws/v3/<PROJECT ID> \
@@ -49,8 +50,10 @@ plasma-evm$ build/bin/geth \
     --maxpeers 50
 ```
 
-> `--syncmode` 가 `full` 이어야 노드간 블록이 동기화 된다.
+Chain data of user node will be stored on `plasma-evm/chaindata`.
 
-> 만약, `JSON-RPC` 접속 가능한 상태에서 `keystore`를 추가하여 사용하고 싶은 경우 사용자 노드 실행시 `--allow-insecure-unlock` 를 추가하여 실행한다.
+> You must set `--syncmode` to `full` for synchronizing blocks with other nodes.
 
-페러데이 테스트넷 네트워크 상태는 [여기](http://ethstats.faraday.tokamak.network/)에서 확인 가능하다.
+> If you want to use both `rpc` and `keystore`, add `--allow-insecure-unlock` to the command.
+
+You can check status of Faraday testnet in [here](http://ethstats.faraday.tokamak.network/).
