@@ -50,8 +50,8 @@
         "sidebar_label": "퍼블릭 테스트넷 정보"
       },
       "learn/advanced/child-chain": {
-        "title": "자식체인",
-        "sidebar_label": "자식체인"
+        "title": "Child Chain",
+        "sidebar_label": "Child Chain"
       },
       "learn/advanced/computation-challenge": {
         "title": "Computation Challenge",
@@ -62,16 +62,16 @@
         "sidebar_label": "Continuous Rebase"
       },
       "learn/advanced/design-rationale": {
-        "title": "디자인 원칙",
-        "sidebar_label": "디자인 원칙"
+        "title": "Design Rationale",
+        "sidebar_label": "Design Rationale"
       },
       "learn/advanced/examples-and-best-practices": {
         "title": "요청 가능한 컨트랙트 예제",
         "sidebar_label": "요청 가능한 컨트랙트 예제"
       },
       "learn/advanced/plasma-evm-architecture": {
-        "title": "Plasma EVM 아키텍처",
-        "sidebar_label": "Plasma EVM 아키텍처"
+        "title": "Plasma EVM Architecture",
+        "sidebar_label": "Plasma EVM Architecture"
       },
       "learn/advanced/plasma-evm-client": {
         "title": "Plasma EVM Client",
@@ -86,20 +86,19 @@
         "sidebar_label": "루트체인"
       },
       "learn/basic/enter-and-exit": {
-        "title": "상호운용성: 진입 & 퇴장",
-        "sidebar_label": "상호운용성: 진입 & 퇴장"
+        "title": "Interoperability - Enter & Exit",
+        "sidebar_label": "Interoperability"
       },
       "learn/basic/layer-2-solutions": {
-        "title": "비교: 다른 확장성 솔루션",
-        "sidebar_label": "비교: 다른 확장성 솔루션"
+        "title": "learn/basic/layer-2-solutions"
       },
       "learn/basic/tokamak-network": {
-        "title": "토카막 네트워크",
-        "sidebar_label": "토카막 네트워크"
+        "title": "Tokamak Network",
+        "sidebar_label": "Tokamak Network"
       },
       "learn/basic/transaction-fee": {
-        "title": "편의성: 계정, 트랜잭션 수수료, 개발도구",
-        "sidebar_label": "편의성: 계정, 트랜잭션 수수료, 개발도구"
+        "title": "Convenience: Account, Transaction Fee, Development Tool",
+        "sidebar_label": "Convenience"
       },
       "learn/economics/challenge": {
         "title": "챌린지",
