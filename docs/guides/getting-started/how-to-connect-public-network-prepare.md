@@ -12,7 +12,7 @@ You can take either way of below to setup user node.
 1. [Connect to public testnet in local environment](how-to-connect-public-testnet-manually)
 2. [Connect to public testnet with `Puppeth`](how-to-connect-public-testnet-puppeth)
 
-### System update and install required packages
+## System update and install required packages
 
 Setup compilement environment with following command.
 
