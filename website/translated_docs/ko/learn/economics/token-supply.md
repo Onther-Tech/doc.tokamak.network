@@ -1,7 +1,7 @@
 ---
 id: token-supply
-title: 토큰 공급과 분배
-sidebar_label: 토큰 공급과 분배
+title: Token Supply and Distribution
+sidebar_label: Token Supply and Distribution
 ---
 
 TON의 모든 공급은 초기발행량과 추가발행량으로 이루어진다. 추가발행량은 TON을 스테이킹한 오퍼레이터가 커밋을 수행할 때마다 발행되는 커밋 보상으로, 그 양은 항상 스테이킹된 TON의 양과 기간에 비례해서 결정된다. 커밋 보상의 분배 또한 스테이킹한 TON의 양과 기간에 따라 이루어진다.

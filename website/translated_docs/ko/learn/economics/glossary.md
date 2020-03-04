@@ -1,7 +1,7 @@
 ---
 id: glossary
-title: 파라미터 정리
-sidebar_label: 파라미터 정리
+title: Parameters
+sidebar_label: Parameters
 ---
 
 

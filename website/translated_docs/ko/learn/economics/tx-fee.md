@@ -1,9 +1,8 @@
 ---
 id: tx-fee
-title: 트랜잭션 수수료 정책
-sidebar_label: 트랜잭션 수수료 정책
+title: Transaction Fee
+sidebar_label: Transaction Fee
 ---
-
 
 ## 기존 트랜잭션 수수료 정책의 문제
 
