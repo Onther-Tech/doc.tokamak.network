@@ -4,42 +4,45 @@ title: TON
 sidebar_label: TON
 ---
 
-## TON이란?
-TON은 토카막 네트워크의 native token으로 이더리움(Ethereum)에서의 이더(Ether)와 같이 네트워크 자체에서 통용되는 토큰이다.
+## What are TONs?
+TON is the native token of Tokamak Network which acts like Ether within the Etheruem ecosystem.
 
-TON의 단위는 두개로 가장 큰 단위인 TON은 소수점 18번째 자리까지 사용가능하며, 가장 낮은 단위인 Poon은 소수점이 없다. 이러한 소수점을 기준으로 TON은 비트코인의 bitcoin 이나 이더리움의 ether와 유사하고, Poon은 비트코인의 사토시(satoshi) 혹은 이더리움의 wei와 유사하다.
+TON has 18 decimal points and the lowest unit is called Poon. TON is the equivalent unit to BTC or ETH, and Poon is similar to satoshi or wei.
+
 
 | Unit | Decimal Places |
 | ---- |:--------------:|
 | Poon |       0        |
 | TON  |       18       |
 
-## TON은 어디에 사용되는가?
-TON은 토카막 네트워크에서 다양한 용도로 사용되며, 크게 i)네트워크를 구성하는 자식체인을 올바르게 동작시키기 위한 보증금의 역할을 하거나, ii)자식체인 내에서 트랜잭션 수수료를 부담하는 용도로 사용하거나, iii)파워톤(PowerTON) 게임에 참여하는데 사용될 수 있다.
 
-### 스테이킹(Staking)
-TON은 토카막 네트워크에서 자식체인을 배포하고 이를 루트체인에 연결하기 위한 용도로 사용된다. 자식체인을 운영하는 오퍼레이터(operator)는 반드시 일정 금액 이상의 TON을 예치하여야 자식체인을 토카막 네트워크에 연결할 수 있다.
+## What are the uses of TONs?
+TONs serve the following three core functions in Tokamak Network: i) to be used for deposit in order to ensure the security of a child chain, ii) to be used as transaction fees within the child chain, and iii) to be used to participate in PowerTON.
 
-### 파워톤
-TON은 토카막 네트워크 자체에서 운영되는 파워톤 게임에 참여하는데 사용된다. 파워톤은 스테이킹을 통해 발행되지 않은 시뇨리지의 일부를 이용하여 진행되는 게임으로, TON을 통해서만 참여가 가능하다.
 
-### 스태미나
-TON은 자식체인의 트랜잭션 수수료를 부담하기 위해 사용될 수 있다. 토카막 네트워크의 모든 자식체인에서는 TON을 예치하여 트랜잭션 수수료로 사용될 수 있는 스태미나(Stamina)를 생성할 수 있다. 스태미나는 기존의 수수료와 달리 사용 후 완전히 소멸되지 않고 일정 기간 이후 재충전되며, 제3자에게 위임할 수 있다는 특징을 갖는다.
+### Staking
+Ton is used when deploying child chains and connecting them to Tokamak Network. Child chain operators must deposit more than a certain amount of TON to deploy and connect the child chain to the Tokamak Network.
 
-### 챌린지
-TON은 토카막 네트워크의 자식체인들이 모두 올바르게 동작하도록 암호경제학적 유인을 제공하기 위해 사용된다. 토카막 네트워크에 참여하는 구성원들은 특정한 행동을 하기 위해 일정 금액 이상의 TON을 예치하여야 하며, 사전에 정해진 규칙에 반하는 행동을 하였을 경우 챌린지(challenge)를 당할 수 있다. 챌린지가 성공하면 위반자의 예치금은 몰수되며, 챌린저(challenger)에게 전체 혹은 일부 금액이 보상으로 주어지며 나머지 금액은 모두 삭감된다.
+### PowerTON
+TON is also used to participate in the PowerTON game. PowerTon is a gamified method to distribute unissued commit reward from staking, which can only be played through TON.
+
+### Stamina
+TON, along with other tokens, can be used to pay transaction fees in child chains. Anyone can deposit TON to create Stamina, which also can be paid as transaction fees. What's different about Stamina is that it is not entirely consumed after payment, and recovers after a certain period. It can also be delegated to a third party.
+
+### Challenge
+TON provides cryptoeconomic incentives for all child chains to operate securely. Operators participating in Tokamak Network must deposit a certain amount of TON to perform a particular action and may be challenged if they act against a predetermined rule. If the challenge is proven true, the deposit will be slashed the entire or some amount will go to the challenger as a reward, with the remaining amount burned if there is any.
 
 
 ## Staking, Delegating and Commit
 
-**스테이킹(staking)**은 일정량의 TON을 예치하는 행위이다. 스테이킹은 오퍼레이터가 되어 자식체인을 운영하고 이에 대한 보상인 토큰 시뇨리지를 받기 위한 근거가 된다.
+**Staking** is depositing a certain amount of TON to connect a child chain. By staking, the operator can run a child chain and take profit from the commit reward.
 
-**언스테이킹(unstaking)**은 스테이킹된 TON의 일부 혹은 전부를 인출하는 행위이다.
+**Unstaking** is withdrawing some or all of the staked TON.
 
-**델리게이팅(delegating)**은 이미 TON을 스테이킹한 다른 사용자에게 TON을 위임하여 예치하는 행위이다. 델리게이팅은 토큰 시뇨리지를 받기 위한 근거는 되지만, 자식체인을 운영할 수 있는 자격요건과는 관계가 없다. 델리게이팅된 TON은 이후 TON의 추가발행을 결정하는 기준이 되는 스테이킹된 TON의 양을 계산할 때 이에 합산된다.
+**Delegating** is delegating TON to another staker. Delegators can take a portion of the profit from commit reward, but cannot participate in operating the child chain. Delegated TONs are added to the total amount of staked TONs, which is a key parameter for determining further issuance of TON.
 
-**언델리게이팅(undelegating)**은 델리게이팅한 TON을 인출하는 행위이다.
+**Undelegating** is withdrawing delegated TONs.
 
-**커밋(commit)**은 자식체인의 블록의 요약본을 루트체인에 제출하여 기록하는 것으로, 추가발행되는 토큰을 보상으로 받을 수 있는 단위가 되는 행위이다. 커밋은 기존 블록체인에서의 블록 마이닝 혹은 검증작업과 유사한 작업으로 볼 수 있다.
+**Commit** is recording roots of blocks of child chain by submitting them to the root chain. Additional TON is issued per commit as a reward. Committing can be perceived as block mining or validating on other blockchains.
 
-**진입(enter)**은 루트체인에서 자식체인으로 자산이나 상태를 옮기는 행위이다. TON을 진입하는 경우, 그 금액의 일부가 델리게이팅과 같이 해당 자식체인에 스테이킹된 TON의 양을 계산할 때 합산된다.
+**Enter** is transferring an asset or state from the root chain to the child chain. When TON is entered, a portion of the amount is added to the total amount of TON staked on the child chain, just like when a TON is delegated.

@@ -6,8 +6,8 @@
     "tagline": "Plasma evm documents",
     "docs": {
       "guides/getting-started/how-to-connect-public-testnet-manually": {
-        "title": "How to connect public testnet menually",
-        "sidebar_label": "Connect Menually"
+        "title": "퍼블릿 테스트넷 직접 연결하기",
+        "sidebar_label": "직접 연결하기"
       },
       "guides/getting-started/how-to-connect-public-testnet-prepare": {
         "title": "Prepare connect public testnet",
@@ -86,8 +86,8 @@
         "sidebar_label": "루트체인"
       },
       "learn/basic/enter-and-exit": {
-        "title": "Interoperability - Enter & Exit",
-        "sidebar_label": "Interoperability"
+        "title": "interoperability: Enter & Exit",
+        "sidebar_label": "interoperability: Enter & Exit"
       },
       "learn/basic/layer-2-solutions": {
         "title": "learn/basic/layer-2-solutions"
@@ -101,32 +101,32 @@
         "sidebar_label": "Convenience"
       },
       "learn/economics/challenge": {
-        "title": "챌린지",
-        "sidebar_label": "챌린지"
+        "title": "Challenge",
+        "sidebar_label": "Challenge"
       },
       "learn/economics/child-chain": {
-        "title": "자식체인과 스테이킹",
-        "sidebar_label": "자식체인과 스테이킹"
+        "title": "Child Chain and Staking",
+        "sidebar_label": "Child Chain and Staking"
       },
       "learn/economics/glossary": {
-        "title": "파라미터 정리",
-        "sidebar_label": "파라미터 정리"
+        "title": "Parameters",
+        "sidebar_label": "Parameters"
       },
       "learn/economics/powerton": {
-        "title": "파워톤",
-        "sidebar_label": "파워톤"
+        "title": "PowerTON",
+        "sidebar_label": "PowerTON"
       },
       "learn/economics/token-supply": {
-        "title": "토큰 공급과 분배",
-        "sidebar_label": "토큰 공급과 분배"
+        "title": "Token Supply and Distribution",
+        "sidebar_label": "Token Supply and Distribution"
       },
       "learn/economics/ton": {
         "title": "TON",
         "sidebar_label": "TON"
       },
       "learn/economics/tx-fee": {
-        "title": "트랜잭션 수수료 정책",
-        "sidebar_label": "트랜잭션 수수료 정책"
+        "title": "Transaction Fee",
+        "sidebar_label": "Transaction Fee"
       }
     },
     "links": {
