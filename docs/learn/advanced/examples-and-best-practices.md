@@ -33,7 +33,7 @@ contract BaseCounter {
 ### SimpleCounter
 For making this requestable, we can define state variable 'n' to be increased or decreased by enter or exit requests. It will work like below.
 
-![](https://i.imgur.com/GQaEylR.png)
+![SimpleCounter](assets/learn_advanced_examples_SimpleCounter.png)
 
 Yellow box means that the counter() has increased `n` by 1, and red box is `n` changed by enter request, the green box is `n` changed by exit request.
 
@@ -118,7 +118,7 @@ contract SimpleCounter is BaseCounter, RequestableI {
 ### FreezableCounter
 In `FreezableCounter`, counter on child chain is frozen at default. When an enter request is generated, it freezes the counter in the root chain. After the request is applied in child chain, the counter in the child chain will be unfreezed. This will not allow `n` to decrease.
 
-![](https://i.imgur.com/IDHhZRs.png)
+![FreezableCounter](assets/learn_advanced_examples_FreezableCounter.png)
 
 ```solidity
 pragma solidity ^0.4.24;
@@ -203,7 +203,7 @@ However, because of challenge period of exit request, both counters remain froze
 
 <!-- 상태 변수를 1개 더 사용하고 컨트랙트 구현에 다소 복잡해지는 것과 `n`이 감소하는 경우는 상충(trade-off) 합니다. -->
 
-![](https://i.imgur.com/CZ6DnAG.png)
+![TrackableCounter](assets/learn_advanced_examples_TrackableCounter.png)
 
 
 ```solidity
@@ -461,7 +461,7 @@ You can check requestable token contract based on OpenZeppelin and ds-token in f
 
 > You can check the detalis of this part [here](https://medium.com/onther-tech/cryptokitties-in-plasma-574159c581dc).
 
-![](https://miro.medium.com/max/570/1*8GIz9Ovmdq-bQRMjQDkrIw.png)
+![RequestableCryptoKitties](assets/learn_advanced_examples_RequestableCryptoKitties.png)
 
 [CryptoKitties](https://github.com/cryptocopycats/awesome-cryptokitties)에서 실제로 배포되는 컨트랙트는 `KittyCore`, `SaleClockAuction`, `SiringClockAuction`으로 ERC721 토큰으로서의 기능은 `KittyCore`가 담당한다.
 

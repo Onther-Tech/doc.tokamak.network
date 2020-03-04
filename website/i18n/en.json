@@ -6,28 +6,28 @@
     "tagline": "Plasma evm documents",
     "docs": {
       "guides/getting-started/how-to-connect-public-testnet-manually": {
-        "title": "퍼블릿 테스트넷 직접 연결하기",
-        "sidebar_label": "직접 연결하기"
+        "title": "How to connect public testnet menually",
+        "sidebar_label": "Menually"
       },
       "guides/getting-started/how-to-connect-public-testnet-prepare": {
-        "title": "Prepare connect public testnet",
-        "sidebar_label": "Prepare connection"
+        "title": "Requirements for Connecting Public Testnet",
+        "sidebar_label": "Requirements"
       },
       "guides/getting-started/how-to-connect-public-testnet-puppeth": {
-        "title": "Connect Public Testnet with Puppeth",
-        "sidebar_label": "Connect with Puppeth"
+        "title": "Connect to Public Testnet with Puppeth",
+        "sidebar_label": "With Puppeth"
       },
       "guides/getting-started/how-to-open-private-testnet-manually": {
-        "title": "프라이빗 테스트넷 자식 체인 직접 설정하기",
-        "sidebar_label": "자식체인 설정"
+        "title": "Setup Childchain in Private Testnet",
+        "sidebar_label": "Setup Childchain"
       },
       "guides/getting-started/how-to-open-private-testnet-puppeth": {
-        "title": "Puppeth 사용하여 프라이빗 테스트넷 설정하기",
-        "sidebar_label": "Puppeth 사용하여 부모-자식체인 설정"
+        "title": "Setup Private Testnet With Puppeth",
+        "sidebar_label": "Setup with Puppeth"
       },
       "guides/getting-started/how-to-open-private-testnet-rootchain": {
-        "title": "프라이빗 테스트넷 루트체인 설정하기",
-        "sidebar_label": "루트체인 설정"
+        "title": "Setup Rootchain in Private Testnet",
+        "sidebar_label": "Setup Rootchain"
       },
       "guides/guides_apis_npm-plasma-evm-contracts": {
         "title": "npm plasma-evm-contracts",
@@ -46,16 +46,12 @@
         "sidebar_label": "How to manage STAMINA"
       },
       "guides/public-testnets": {
-        "title": "토카막 퍼블릭 테스트넷 정보",
-        "sidebar_label": "퍼블릭 테스트넷 정보"
+        "title": "Tokamak Public Testnet Information",
+        "sidebar_label": "Public Testnet Information"
       },
       "learn/advanced/child-chain": {
         "title": "Child Chain",
         "sidebar_label": "Child Chain"
-      },
-      "learn/advanced/computation-challenge": {
-        "title": "Computation Challenge",
-        "sidebar_label": "Computation Challenge"
       },
       "learn/advanced/continuous-rebase": {
         "title": "Continuous Rebase",
@@ -66,31 +62,28 @@
         "sidebar_label": "Design Rationale"
       },
       "learn/advanced/examples-and-best-practices": {
-        "title": "요청 가능한 컨트랙트 예제",
-        "sidebar_label": "요청 가능한 컨트랙트 예제"
+        "title": "Examples and Best Practices of Requestable Contract",
+        "sidebar_label": "Examples and Best Practices"
       },
       "learn/advanced/plasma-evm-architecture": {
         "title": "Plasma EVM Architecture",
         "sidebar_label": "Plasma EVM Architecture"
       },
-      "learn/advanced/plasma-evm-client": {
-        "title": "Plasma EVM Client",
-        "sidebar_label": "Plasma EVM Client"
-      },
       "learn/advanced/plasma-evm-smart-contracts": {
-        "title": "Plasma EVM 스마트 컨트랙트",
-        "sidebar_label": "Plasma EVM 스마트 컨트랙트"
+        "title": "Plasma EVM Smart Contracts",
+        "sidebar_label": "Plasma EVM Smart Contracts"
       },
       "learn/advanced/root-chain": {
-        "title": "루트체인",
-        "sidebar_label": "루트체인"
+        "title": "RootChain",
+        "sidebar_label": "RootChain"
       },
       "learn/basic/enter-and-exit": {
-        "title": "interoperability: Enter & Exit",
-        "sidebar_label": "interoperability: Enter & Exit"
+        "title": "Interoperability - Enter & Exit",
+        "sidebar_label": "Interoperability"
       },
       "learn/basic/layer-2-solutions": {
-        "title": "learn/basic/layer-2-solutions"
+        "title": "Comparison with Other Solutions",
+        "sidebar_label": "Comparison with Other Solutions"
       },
       "learn/basic/tokamak-network": {
         "title": "Tokamak Network",

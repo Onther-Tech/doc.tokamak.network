@@ -230,7 +230,7 @@ What would you like to do? (default = create)
 > 2
 
 Where's the genesis file? (local file or http/https url)
-> /home/ubuntu/plasma-evm/genesis.json
+> plasma-evm/genesis.json
 ```
 
 If `genesis.json` is imported successfully, following message will be printed and it will return to start screen on `Puppeth` console.

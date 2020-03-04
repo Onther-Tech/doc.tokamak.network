@@ -49,6 +49,7 @@ plasma-evm$ build/bin/geth \
     --nat extip:::1 \
     --maxpeers 50
 ```
+사용자 노드의 체인데이터는 `plasma-evm/chaindata` 에 저장된다.
 
 Chain data of user node will be stored on `plasma-evm/chaindata`.
 
