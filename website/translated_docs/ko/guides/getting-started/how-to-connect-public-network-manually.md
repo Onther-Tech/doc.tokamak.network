@@ -1,7 +1,7 @@
 ---
 id: how-to-connect-public-testnet-manually
 title: How to connect public testnet menually
-sidebar_label: Connect Menually
+sidebar_label: Menually
 ---
 
 ## 페러데이 사용자 노드

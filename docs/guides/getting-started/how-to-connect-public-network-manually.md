@@ -1,7 +1,7 @@
 ---
 id: how-to-connect-public-testnet-manually
-title: Connect Public Testnet Manually
-sidebar_label: Mannually
+title: How to connect public testnet menually
+sidebar_label: Menually
 ---
 
 ## Faraday User Node
