@@ -1,8 +1,9 @@
 ---
 id: how-to-open-private-testnet-rootchain
-title: 프라이빗 테스트넷 루트체인 설정하기
-sidebar_label: 루트체인 설정
+title: Setup Rootchain in Private Testnet
+sidebar_label: Setup Rootchain
 ---
+
 Ubuntu 18.04 를 기준으로 작성되었다.
 
 ## 환경 설정하기

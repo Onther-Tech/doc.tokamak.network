@@ -1,7 +1,7 @@
 ---
 id: how-to-open-private-testnet-manually
-title: 프라이빗 테스트넷 자식 체인 직접 설정하기
-sidebar_label: 자식체인 설정
+title: Setup Childchain in Private Testnet
+sidebar_label: Setup Childchain
 ---
 
 자식 체인을 설정하려면 로컬 환경에서 루트체인이 실행되고 있는 환경에서 진행해야 하므로, <br> 루트체인이 실행중이지 않고 있다면 [루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)를 먼저 진행한다.
@@ -90,7 +90,7 @@ Repeat passphrase:
 
 만약, 오퍼레이터 키스토어 파일에 암호가 걸려 있는경우 `signer.pass` 파일 내부에 패스워드를 기록해주어야 한다. 암호가 없는 경우 `signer.pass` 는 아무런 내용이 없는 빈파일을 생성한다.
 
-아래 커맨드를 통해서 `singer.pass` 파일을 생성해 준다(이때 `"` 는 제외 한다).
+아래 커맨드를 통해서 `signer.pass` 파일을 생성해 준다(이때 `"` 는 제외 한다).
 
 ```bash
 plasma-evm$ echo > "<Passphrase for operator keystore file>" > signer.pass

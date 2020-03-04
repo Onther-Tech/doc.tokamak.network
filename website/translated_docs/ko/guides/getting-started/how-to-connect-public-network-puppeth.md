@@ -1,7 +1,7 @@
 ---
 id: how-to-connect-public-testnet-puppeth
-title: Connect Public Testnet with Puppeth 
-sidebar_label: Connect with Puppeth 
+title: Connect to Public Testnet with Puppeth
+sidebar_label: With Puppeth
 ---
 
 `plasma-evm` 에서 제공하는 노드 배포 유틸리티 프로그램인 `Puppeth`를 통해 사용자 노드를 설정 한다.
