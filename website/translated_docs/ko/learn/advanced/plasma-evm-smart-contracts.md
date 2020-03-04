@@ -1,7 +1,7 @@
 ---
 id: plasma-evm-smart-contracts
-title: Plasma EVM 스마트 컨트랙트
-sidebar_label: Plasma EVM 스마트 컨트랙트
+title: Plasma EVM Smart Contracts
+sidebar_label: Plasma EVM Smart Contracts
 ---
 
 <!-- TODO: 컨트랙트 함수 부분은 REST API 문서 방식으로? -->

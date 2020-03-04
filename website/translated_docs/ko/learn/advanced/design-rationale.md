@@ -1,7 +1,7 @@
 ---
 id: design-rationale
-title: 디자인 원칙
-sidebar_label: 디자인 원칙
+title: Design Rationale
+sidebar_label: Design Rationale
 ---
 
 ## 강제 실행

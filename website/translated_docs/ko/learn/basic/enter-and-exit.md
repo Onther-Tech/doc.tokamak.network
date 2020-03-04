@@ -1,7 +1,7 @@
 ---
 id: enter-and-exit
-title: 상호운용성: 진입 & 퇴장
-sidebar_label: 상호운용성: 진입 & 퇴장
+title: Interoperability - Enter & Exit
+sidebar_label: Interoperability
 ---
 
 ## 요청 트랜잭션

@@ -1,13 +1,10 @@
 ---
 id: plasma-evm-architecture
-title: Plasma EVM 아키텍처
-sidebar_label: Plasma EVM 아키텍처
+title: Plasma EVM Architecture
+sidebar_label: Plasma EVM Architecture
 ---
-<!--
-TODO: insert_figure eth2.0 architecture-like figure
--->
 
-Plasma EVM을 구성하는 핵심 요소는 **루트체인(root chain)**과 이에 연결된 여러개의 **자식체인(child chain)**들이다. 
+Plasma EVM을 구성하는 핵심 요소는 **루트체인(root chain)**과 이에 연결된 여러개의 **자식체인(child chain)**들이다.
 
 자식체인은 **오퍼레이터(operator)**에 의해 운영되며, 오퍼레이터는 사용자들의 트랜잭션이 포함된 자식체인의 블록들을 마이닝하여 루트체인의 **루트체인 컨트랙트(root chain contract)**에 제출하게 된다. 루트체인 컨트랙트는 자식체인의 올바른 상태를 강제 및 운영을 관리하는 역할을 수행하며, 오퍼레이터는 루트체인 컨트랙트의 상태를 기준으로 자식체인을 운영하며, 사용자들은 루트체인 컨트랙트에 여러 종류의 요청을 제출하여 루트체인과 자식체인간에 자산과 상태를 이동시킬 수 있다. 
 

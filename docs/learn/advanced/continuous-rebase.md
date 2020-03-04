@@ -1,4 +1,3 @@
-
 ---
 id: continuous-rebase
 title: Continuous Rebase

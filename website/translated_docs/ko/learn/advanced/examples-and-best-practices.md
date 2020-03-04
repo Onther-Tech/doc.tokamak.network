@@ -1,7 +1,7 @@
 ---
 id: examples-and-best-practices
-title: 요청 가능한 컨트랙트 예제
-sidebar_label: 요청 가능한 컨트랙트 예제
+title: Examples and Best Practices of Requestable Contract
+sidebar_label: Examples and Best Practices
 ---
 
 > Continuous Rebase는 아직 개발중으로 본 문서에서는 해당 기능이 빠진 컨트랙트 구현을 다루고 있다.

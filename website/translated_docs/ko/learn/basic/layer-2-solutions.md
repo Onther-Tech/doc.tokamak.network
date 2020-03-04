@@ -1,7 +1,7 @@
 ---
 id: layer-2-solutions
-title: 비교: 다른 확장성 솔루션
-sidebar_label: 비교: 다른 확장성 솔루션
+title: Comparison with Other Solutions
+sidebar_label: Comparison with Other Solutions
 ---
 
 ## 블록체인, 데이터 가용성 그리고 확장성

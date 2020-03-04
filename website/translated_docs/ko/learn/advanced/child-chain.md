@@ -1,7 +1,7 @@
 ---
 id: child-chain
-title: 자식체인
-sidebar_label: 자식체인
+title: Child Chain
+sidebar_label: Child Chain
 ---
 
 ## 오퍼레이터, 사용자, 챌린저

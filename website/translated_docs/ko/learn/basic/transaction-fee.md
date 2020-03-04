@@ -1,8 +1,9 @@
 ---
 id: transaction-fee
-title: 편의성: 계정, 트랜잭션 수수료, 개발도구
-sidebar_label: 편의성: 계정, 트랜잭션 수수료, 개발도구
+title: Convenience: Account, Transaction Fee, Development Tool
+sidebar_label: Convenience
 ---
+
 ## 토카막 플라즈마의 계정 모델
 
 기존 플라즈마 솔루션들의 가장 큰 문제점은 이더리움과 다른 트랜잭션 실행 모델을 갖고 있다는 점이었다. 이 때문에 이더리움에서 동작하는 기존의 탈 중앙화 어플리케이션들을 플라즈마 체인에서 사용하기 위해서는 추가적인 개발 소요가 있다. 하지만 토카막 플라즈마는 이더리움과 동일한 트랜잭션 처리 모델을 사용하고 있기 때문에 기존의 DApp을 그대로 사용할 수 있다.

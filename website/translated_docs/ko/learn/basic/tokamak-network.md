@@ -1,7 +1,7 @@
 ---
 id: tokamak-network
-title: 토카막 네트워크
-sidebar_label: 토카막 네트워크
+title: Tokamak Network
+sidebar_label: Tokamak Network
 ---
 
 ## 토카막 네트워크란?
