@@ -1,7 +1,7 @@
 ---
 id: root-chain
-title: 루트체인
-sidebar_label: 루트체인
+title: RootChain 
+sidebar_label: RootChain
 ---
 
 ## RootChain contract
