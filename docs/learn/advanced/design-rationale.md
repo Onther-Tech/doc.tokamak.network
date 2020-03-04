@@ -45,7 +45,7 @@ Non-interactive ways(e.g. zero-knowledge proofs) are not considered because they
 ## Why Continuous Rebase
 
 ### Data availability
-In Plasma, [data unavailability] (https://github.com/ethereum/research/wiki/A-note-on-data-availability-and-erasure-coding)) refers to problems that occur when the operator submits blocks to the root chain but does not propagate them to the user. Data unavailability are fatal in Plasma because there is no way for users to deal with these attacks if an operator goes malicious.
+In Plasma, [data unavailability](https://github.com/ethereum/research/wiki/A-note-on-data-availability-and-erasure-coding) refers to problems that occur when the operator submits blocks to the root chain but does not propagate them to the user. Data unavailability are fatal in Plasma because there is no way for users to deal with these attacks if an operator goes malicious.
 
 Challenges are necessary to enforce the correct execution of child chain by root chain, and block data is required for challenge. Therefore, unavailable block data means that challenge cannot be done. So all the different Plasma solutions address this by enabling users to **exit** from the child chain, not by challenge.
 

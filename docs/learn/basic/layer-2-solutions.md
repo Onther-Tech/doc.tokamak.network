@@ -1,20 +1,15 @@
-
 ---
 id: layer-2-solutions
 title: Comparison with Other Solutions
 sidebar_label: Comparison with Other Solutions
 ---
 
-
 ## Blockchain, Data Availability and Scailability
 Data unavailability refers to a situation in which a miner (or block producer) includes a double-spending transaction in a block and does not propagate it to user nodes. Blockchain itself can be deemed as a protocol for solving data availability. In Proof of Work, a typical blockchain consensus algorithm, if the miner does not propagate the blocks, the created block is not recognized as the longest block (unless it occupies 51% hash power). The costs incurred in producing the block will be wasted, thus setting incentives to prevent data from being unavailable.
 
 The issue of data unavailability is highlighted, especially in Plasma, because instead of recording all block data in layer-2,  only the summary, the merkle root, is recorded in the root chain to achieve scalability. The security of assets is threatened if the operator intentionally mines invalid blocks and does not propagate it because we cannot figure out the transaction in a block from a merkle root. To prevent this, each Plasma solutions have a contingency plan for data unavailability issue.
 
-사이드체인의 경우 자체적인 합의를 통해 불가용한 상황을 극복하고(다수의 검증자와 블록 생산자 확보하고 2/3이상의 투표를 통해 블록을 생성하는 등), 롤업은 발생한 모든 트랜잭션 자체를 루트체인에 기록해 데이터 가용성 문제를 해결한다. 이렇듯 각각의 확장성 솔루션은 데이터 가용성에 관한 접근 및 해결 방식이 다르기 때문에  특정한 영역에서 각각의 장단점 또한 명확하다.
-
 Sidechains prevents unavailability through separate consensus (such as having multiple validators or block producers and creating blocks through two-thirds or more votes), and rollups address data unavailability by putting all the transactions in the root chain. The pros and cons of each scalability solution are clearly divided because they all have different approaches and solutions.
-
 
 ## Plasma vs Rollup vs Sidechain
 

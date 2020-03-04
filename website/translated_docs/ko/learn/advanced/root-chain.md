@@ -1,7 +1,7 @@
 ---
 id: root-chain
-title: RootChain 
-sidebar_label: RootChain
+title: Root Chain 
+sidebar_label: Root Chain
 ---
 
 

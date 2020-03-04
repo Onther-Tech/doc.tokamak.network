@@ -22,7 +22,7 @@ Tokamak Network is a protocol that enables frictionless deployment of plasma cha
 
 ## Plasma EVM and Tokamak Network
 
-[PlasmaEVM] (https://onther-tech.github.io/papers/tech-paper-kr.pdf)) is an architecture run a turing-complete plasma proposed by Onther in 2018, which is also used as a critical engine for the Tokamak network. Plasma EVM periodically submits the merkle root and state root of the plasma block to the root chain, prevents double spending through a truebit-like-verification game, and resolves data availability problems through continuous rebase.
+[PlasmaEVM](https://onther-tech.github.io/papers/tech-paper-kr.pdf)) is an architecture run a turing-complete plasma proposed by Onther in 2018, which is also used as a critical engine for the Tokamak network. Plasma EVM periodically submits the merkle root and state root of the plasma block to the root chain, prevents double spending through a truebit-like-verification game, and resolves data availability problems through continuous rebase.
 
 
 ## References
