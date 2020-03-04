@@ -1,25 +1,27 @@
 ---
 id: how-to-open-private-testnet-rootchain
-title: 프라이빗 테스트넷 루트체인 설정
-sidebar_label: 루트체인 설정
+title: Setup Rootchain in Private Testnet
+sidebar_label: Setup Rootchain
 ---
-## 로컬 환경 설정
 
-운영체제는 Ubuntu 18.04 환경을 기준으로 한다.
+## Setup local environment
 
-golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm 컴파일 가능한 환경을 만든다.
+This Instructions are provided for Linux(Ubuntu 18.04)
 
-### 시스템 업데이트 및 필수 패키지 설치
+If you have to install golang, please follow next instruction to compile plasma-evm.
 
-아래 명령어로 컴파일 환경을 설정한다.
+### System update and install required packages
+
+Setting compilation environment by running following command.
 
 ```shell
 ~$ sudo apt-get update && sudo apt-get install tar wget make git build-essential -y
 ```
 
-### golang 환경 설정
+### Setup golang environment
 
-아래 명령어를 순차적으로 실행하여, go 실행파일을 `/usr/local/` 경로 아래 위치하게 한다.
+Run following command, go will be installed at `/usr/local/`.
+
 
 ```shell
 ~$ wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
@@ -27,8 +29,7 @@ golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm �
 ~$ sudo mv go /usr/local
 ```
 
-GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 
-GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 설정한다.
+Make a directory for GOPATH, set envrionment variables.
 
 ```bash
 ~$ export GOROOT=/usr/local/go
@@ -37,7 +38,7 @@ GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 설정한다.
 ~$ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
 
-부팅시에 위의 환경변수가 자동으로 설정되도록 하려면, `~/.profile` 파일에 환경변수를 등록 해두는 것이 좋다.
+We recommend to register environment variables to `~/.profile` file, in order to keep this setting permanently.
 
 ```sh
 # ~/.profile
@@ -48,26 +49,26 @@ export GOPATH=$HOME/plasma
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
 
-## 루트 체인 설정
+## Setup rootchain
 
-실행 스크립트가 설정되어 있는 `onther-tech/go-ethereum` 를 사용하는 것이 편리하다.
+We recommend to use `onther-tech/go-ethereum` since it has a script for running rootchain.
 
-루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 챌린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다. 특히, <U>챌린저 계정에 최소 0.5 ETH 이상이</U> 있어야 오퍼레이터 노드가 정상적으로 실행된다.
+Operator and challenger account to be used in root chain must have enough ether balance. Note that operator node will run successfully only when challenger account has <U>at least 0.5 ETH.</U>
 
-만약 오퍼레이터 계정의 이더 잔고가 부족한 경우, 오퍼레이터가 루트체인에 트랜잭션을 전송 할 수 없으므로 자식체인의 블록 생성이 멈춘다.
+If operator account balance is too low, it cannot submit blocks to root chain.
 
-### 루트체인 소스코드 다운로드
+### Download source code of rootchain
 
-루트체인으로 사용할 `go-ethereum`의 소스코드를 다운로드 받는다.
+Download `go-ethereum` to be used for rootchain.
 
 ```bash
 ~$ git clone https://github.com/Onther-Tech/go-ethereum
 ~$ cd go-ethereum
 ```
 
-### 루트체인 실행 스크립트 확인
+### Check script of rootchain
 
-아래는 `onther-tech/go-ethereum`에 위치하고 있는 `run.rootchain.sh` 이다.
+`run.rootchain.sh` in `onther-tech/go-ethereum` is as follows.
 
 ```bash
 # plasam-evm/run.rootchain.sh
@@ -84,34 +85,35 @@ KEY1="bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5";
 KEY2="067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc";
 KEY3="ae03e057a5b117295db86079ba4c8505df6074cdc54eec62f2050e677e5d4e66";
 
-
 make geth && build/bin/geth \
-    --dev \
-    --dev.period 1 \
-    --dev.faucetkey "$OPERATOR_PRIV_KEY,$KEY0,$KEY1,$KEY2,$KEY3,$CHALLENGER_KEY" \
-    --miner.gastarget 7500000 \
-    --miner.gasprice "10" \
-    --rpc \
-    --rpcport 8545 \
-    --rpcapi eth,debug,net \
-    --ws \
-    --wsport 8546
+  --dev \
+  --dev.period 1 \
+  --dev.faucetkey "$OPERATOR_PRIV_KEY,$KEY0,$KEY1,$KEY2,$KEY3,$CHALLENGER_KEY" \
+  --rpc \
+  --rpcport 8545 \
+  --rpcapi eth,debug,net \
+  --rpcaddr 0.0.0.0 \
+  --ws \
+  --wsport 8546 \
+  --wsaddr 0.0.0.0 \
+  --wsapi eth,debug,net \
+  --miner.gastarget 7500000 \
+  --miner.gasprice "10"
 ```
 
-위 스크립트로 실행되는 루트체인의 계정정보는 다음과 같다.
+Accounts used in the script are as follows.
 
-- 오퍼레이터 : 0x71562b71999873DB5b286dF957af199Ec94617F7
+- Operator : 0x71562b71999873DB5b286dF957af199Ec94617F7
 
-- 챌린저 : 0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8
+- Challenger : 0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8
 
-### 루트체인 실행
+### Run rootchain
 
-`go-ethereum`폴더 내에 `run.rootchain.sh` 스크립트를 실행하여 로컬 네트워크에서 동작하는 루트체인을 구동시킨다.
+Run `run.rootchain.sh` in `go-ethereum` to start rootchain running on local network.
 
 ```bash
 go-ethereum$ bash run.rootchain.sh
 ```
 
-
-## 설정 완료 후 구조도
-![루트 체인 설정 완료후](assets/guides_private_testnet_rootchain.png)
+## Architecture Diagram
+![Architecture after Setup RootChain](assets/guides_private_testnet_rootchain.png)

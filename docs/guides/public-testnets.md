@@ -1,15 +1,15 @@
 ---
 id: public-testnets
-title: 토카막 퍼블릭 테스트넷 정보
-sidebar_label: 퍼블릭 테스트넷 정보
+title: Tokamak Public Testnet Information 
+sidebar_label: Public Testnet Information
 ---
 
-온더에서 운영하고 있는 토카막 네트워크 테스트체인인 '페러데이'의 구성도 및 접속 정보.
+This it Faraday, Tokamak Public testnet, Architecture & Information which is operator by Onther Inc.
 
 ![Faraday Testnet Architecture](assets/guides_public-testnets.png)
 
-[Faraday Ethstats](https://ethstats.faraday.tokamak.network) : 페러데이 테스트넷 연결된 노드 정보 확인 가능.
+[Faraday Ethstats](https://ethstats.faraday.tokamak.network) : Current Status of Faraday testnet.
 
-[Faraday Explorer](https://explorer.faraday.tokamak.network) : 페러데이 테스트넷 블록 익스플로러.
+[Faraday Explorer](https://explorer.faraday.tokamak.network) : Faraday Testnt Block Explorer.
 
-Faraday API (https://api.faraday.tokamak.network): 온더에서 운영하고 있는 사용자 노드 접속 JSON-RPC 엔드포인트(Endpoint).
+Faraday API: https://api.faraday.tokamak.network, It is endpoint URL of JSON-RPC for User node.

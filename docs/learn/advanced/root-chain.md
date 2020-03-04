@@ -1,22 +1,23 @@
 ---
 id: root-chain
-title: 루트체인
-sidebar_label: 루트체인
+title: RootChain 
+sidebar_label: RootChain
 ---
 
-
-## 루트체인 컨트랙트
-루트체인 컨트랙트(root chain contract)는 자식체인을 관리하고 상태를 강제하는 역할을 수행한다. 구체적으로 루트체인 컨트랙트는 자식체인의 다음 블록이 어떤 종류의 [블록](child-chain#블록과-에폭)이 되어야 하는지 강제하며, 만약 요청 블록이거나 탈출 블록일 경우 해당 블록에 어떠한 [요청 트랜잭션](child-chain#요청과-요청-트랜잭션)들이 포함되어야 할지 지정한다. 
-
-여기서 강제한다는 것의 의미는 오퍼레이터가 이를 올바르게 수행하지 않더라도 [챌린지](child-chain#챌린지)를 통해 강제가 가능함을 의미한다. 따라서 루트체인 컨트랙트는 사용자들이 신청하는 챌린지를 관리하는 역할도 수행한다. 
-
-또한 루트체인 컨트랙트는 사용자들이 루트체인과 자식체인간에 자산이나 상태를 이동하기 위해 요청하는 창구이기도 하다. 사용자들이 루트체인 컨트랙트에 요청들을 제출하면 루트체인 컨트랙트는 이를 자식체인에서 올바르게 반영하도록 강제한다.
+## RootChain contract
+RootChain contract manages the child chain and enforces state. Specifically, RootChain contract enforces type of the next block in the child chain and which request transactions should be included in that block if the type is request or escape block. 
 
 
-## 합의
-자식체인의 자산 안전성은 루트체인의 합의(consensus)가 safety와 liveness를 유지하는 한 항상 보장될 수 있다. 이는 자식체인은 오직 루트체인에 의해 그 상태가 강제되기 때문이다. 
+Enforcement here can be implemented through challenge even if the operator does not perform correctly. Therefore, RootChain contract also manages challenges. 
 
-따라서 오퍼레이터 혹은 다른 사용자가 악의적인 공격행위를 하더라도 루트체인이 올바르게 작동하고 있다면 자식체인의 자산과 상태들은 안전하게 보호될 수 있다.
+RootChain contract is also a channel that users request to move assets or states between root and child chain. When users submit requests to the RootChain contract, the contract will enforce the requested action on the child chain.
 
-## 참고자료
-- [Plasma EVM(국문)](https://onther-tech.github.io/papers/tech-paper-kr.pdf)
+
+## Consensus
+Asset security of the child chain can always be guaranteed as long as the consensus of the root chain maintains safety and liveness. This is because child chains are enforced only by the root chain. 
+
+Thus, assets and states of child chain can be safely protected as long as the root chain functions correctly, even if the operator or other users act maliciously.
+
+
+## References
+- [Plasma EVM](https://github.com/Onther-Tech/papers/blob/master/docs/tech-paper.pdf)

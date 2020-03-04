@@ -1,60 +1,60 @@
 ---
 id: design-rationale
-title: 디자인 원칙
-sidebar_label: 디자인 원칙
+title: Design Rationale
+sidebar_label: Design Rationale
 ---
 
-## 강제 실행
-**강제 실행(enforced execution)**은 모든 플라즈마가 갖는 특성으로, 루트체인과 연결된 모든 자식체인들은 오직 루트체인에 의해서만 그 실행이 강제되어야 한다. 따라서 루트체인의 safety와 liveness가 보장되는 한 항상 모든 자식체인의 올바른 실행이 강제되고 자산 안전성(asset security)이 보장된다.
+## Enforced Execution
+**Enforced execution** is a property of Plasma. Execution of all child chains must be enforced only by the root chain. Thus, as long as the safety and liveness of the root chain are guaranteed, correct execution is always enforced in all child chains and asset security is ensured.
 
-## 확장성
-단일 체인 혹은 여러개의 샤드체인으로 구성된 하나의 루트체인에 수천, 수만개 이상의 탈중앙 어플리케이션(decentralized application, DApp)이 작동하는 경우 수 많은 트랜잭션들을 발생시켜 확장성 문제를 야기할 수 밖에 없다. 따라서 이러한 DApp들을 수천, 수만개의 자식체인에서 작동하도록 하여 근본적으로 하나의 체인에 많은 양의 트랜잭션이 몰리는 것을 방지하여 **확장성(scalability)** 문제를 원천적으로 해결할 수 있어야 한다.
+## Scailability
+If thousands or tens of thousands of DApps operate on a single root chain or multiple shard chains, they will create numerous transactions, causing scalability issues. Therefore, these DApps should operate on tens of thousands of child chains to prevent a large number of transactions from flocking to a few chains so that ***scalability** problems can be fundamentally addressed.
 
-## 튜링 완전성
-루트체인에 존재하는 DApp을 여러개의 자식체인에서 나누어 동작시키기 위해서는 자식체인이 모든 종류의 DApp들을 작동시킬 수 있어야 한다. 즉, 모든 자식체인은 **튜링 완전하게(Turing Complete)** 실제 일반 컴퓨터에서 가능한 모든 연산을 수행할 수 있어야 하며, 어떠한 일반적인 프로그램이든 동일하게 모델링할 수 있어야 한다. 단, 연산에 필요한 수수료(가스)에 대한 제약이 없다는 가정이 필요하다.
+## Turing Completeness
+The child chain must be compatible with all DApps in order to operate them in child chains. That is, all child chains should be **turing complete*** capable of performing all possible data-manipulation rules or operating general programs. However, it is necessary to assume that there is no restriction on the fees (gas) required for computation.
 
-## 호환성
-루트체인과 연결된 자식체인이 루트체인과 다른 실행 및 개발 환경을 갖는 것은 매우 비효율적이다. 따라서 자식체인은 루트체인과 동일하거나 최대한 유사한 환경을 제공하여 최대한의 **호환성(Compatibility)**을 보장하는것이 바람직하다. 이는 두가지 관점에서 중요한데, 첫째, 기존 개발자들이 새로운 환경이나 도구를 익히지 않고 바로 플라즈마를 활용할 수 있으며, 둘째, 이미 루트체인에서 운영되고 있던 DApp들의 이동(migration)이 매우 효율적으로 이뤄질 수 있기 때문이다.
-
-
-## 왜 플라즈마인가
-블록체인의 확장성 문제를 해결하는데에는 다음과 같은 여러 방법들이 있다.
-- **합의 알고리즘(Consensus)의 성능 개선**
-- **샤딩(Sharding)과 같은 온체인 확장**
-- **인터체인(Interchain)**
-- **레이어-2 솔루션(layer-2 solution): 플라즈마(Plasma), 상태 채널(state channel), 롤업(roll up), etc.**
-
-우선 각각의 방법들은 모두 경쟁적인 관계가 아니며 **상호보완적**인 관계이다. 특히 레이어-2 솔루션은 나머지 세가지 솔루션들과 조화롭게 사용될 수 있으며, 이런 솔루션들이 적용되거나 적용되지 않은 블록체인의 확장성을 극대화할 수 있다.
-
-이는 플라즈마를 포함한 모든 레이어-2 솔루션들이 **합의를 필요로 하지 않기** 때문이다. 모든 레이어-2 솔루션들은 루트체인이 올바르게 동작하는 한 안전성을 보장할 수 있기 때문에, 루트체인만 안정적으로 작동한다면 수많은 레이어-2를 구성하여 확장성을 대폭 증가시킬 수 있다. 이러한 점은 모든 레이어-2 솔루션들의 공통적인 장점이다.
-
-여러 종류의 레이어-2 솔루션중 플라즈마만이 갖는 장점은 **기능성**과 **확장성**에 있다. 상태 채널은 소수의 사용자들 간의 상호작용에 최적화되어 있는 레이어-2 솔루션으로 근본적으로 다수의 사용자들이 동시에 사용하는 DApp에 적용하기에는 한계가 존재한다. 또한 롤업과 같은 방식들은 트랜잭션 데이터들을 루트체인에 모두 저장하기 때문에 근본적으로 확장성이 제한되게 된다.
-
-하지만 플라즈마의 경우 일반적인 루트체인과 같은 형태로 구성되어 다수의 사용자가 동시에 사용하는 DApp들을 문제 없이 운영할 수 있으며, 루트체인에는 오직 머클루트(Merkle Root)값만을 저장하기 때문에 매우 높은 확장성을 제공할 수 있다. 물론, 이러한 높은 기능성과 확장성을 제공하는 대신 안전성을 보장하기 위한 조건이 다른 레이어-2 솔루션에 비해 매우 복잡하고 까다롭다는 단점이 존재하지만, 이를 해결할 수 있다면 플라즈마는 **가장 효과적인 레이어-2 솔루션**이라고 할 수 있다.
+## Compatibility
+It is very inefficient for the child chain connected to the root chain to have a different execution and development environment from the root chain. Therefore, it is desirable to ensure maximum **compatibility** by providing an environment as identical as possible to the root chain. This is important from two perspectives, first because developers can use Plasma immediately without learning new environments or tools. Secondly, the migration of the DApps from the root chain can be very efficient.
 
 
-## 왜 truebit 방식의 검증게임인가
-자식체인의 실행을 올바르게 강제하기 위해서는 거짓 증명(fraud proof)을 위한 챌린지 시스템이 반드시 필요하다. 하지만 일반화된 플라즈마의 경우 자식체인에서 수행되는 연산이 매우 복잡하므로, 이를 루트체인에서 검증하기 위한 비용 또한 매우 높아지게 된다.
+## Why Plasma
+There are several ways to address the scalability issue:
+- Improvement of consensus
+- On-chain scaling such as sharding
+- Interchain
+- Layer-2 solutions: Plasma, State Channel, Rollup, etc.
 
-이를 truebit 방식의 검증게임을 통해 수행하게 되면, 루트체인에서 단 하나의 옵코드(opcode)단위만 실행할 수 있게 되므로 그 **검증비용을 최소화** 할 수 있게 된다.
+First of all, each method is not in a competitive relationship but is **mutually complementary**. In particular, layer-2 solutions can be used with the other three solutions, maximizing scalability of blockchains regardless of the solutions being already implemented.
 
-truebit방식과 같이 인터랙티브(interactive)한 검증 방법이 아닌 넌-인터랙티브(non-interactive)한 방법들(e.g zero knowledge proof)는 증명(proving) 연산 측면에서 실용적이지(practical) 않으므로 고려되지 않았다.
+This is possible because all layer-2 solutions, including Plasma, **do not require consensus**. Because they can ensure safety as long as the root chain works correctly, many second layers can be implemented to significantly increase scalability. This is a common advantage of all layer-2 solutions.
 
-## 왜 Continuous Rebase인가
+Among the many different layer-2 solutions, only Plasma has the advantage of **functionality** and **scalability**. State channel is a layer-2 solution optimized for interactions between a small number of users, and there are limitations to be applied for DApps that are used by multiple users simultaneously. In addition, Rollup stores all of the transaction data in the root chain, which essentially limits scalability.
 
-### 데이터 가용성
-플라즈마에서 [데이터 가용성 문제](https://github.com/ethereum/research/wiki/A-note-on-data-availability-and-erasure-coding)는 오퍼레이터가 블록을 루트체인에 제출하였지만 구체적인 블록 데이터는 사용자에게 전파하지 않는 경우 발생하는 문제를 의미한다. 데이터 가용성 문제가 플라즈마에서 치명적인 이유는 오퍼레이터가 이와 같은 공격 행위를 수행할 경우 사용자들은 이에 저항할 수 있는 방법이 존재하지 않기 때문이다.
+However, for Plasma, implementation can be in the same form as the root chain and can operate DApps that are used simultaneously by many users. Only the merkle root value is stored on the root chain, so it can reach very high scalability. 
 
-루트체인을 통해 자식체인의 올바른 실행을 강제하기 위해서는 챌린지가 필요하고, 챌린지를 진행하기 위해서는 증거, 즉 블록 데이터가 필요하다. 따라서 블록 데이터가 주어지지 않는다는것은 챌린지도 불가능함을 의미한다. 때문에 모든 다양한 플라즈마들은 이를 챌린지가 아니라 자식체인에서 사용자들이 **탈출**할 수 있도록 하여 해결한다.
+Of course, instead of high functionality and scalability, there is a disadvantage that the conditions for ensuring safety are very complex and demanding compared to other layer-2 solutions. However, if the safety issue can be addressed, Plasma is the **most effective layer-2 solution**.
 
 
-### 일반 플라즈마에서의 데이터 가용성
-문제는 Plasma EVM과 같이 일반화된 플라즈마 모델에서는 이러한 탈출을 가능하게 하는 것이 [매우 어렵다](https://ethresear.ch/t/why-smart-contracts-are-not-feasible-on-plasma/2598). 일반화된 플라즈마에서는 하나의 트랜잭션이 모든 상태에 영향을 미칠 수 있다. 즉 각 트랜잭션들이 원자성(atomic)을 갖지 않기 때문에 데이터 가용성 문제가 발생되는 순간 모든 상태는 잠재적으로 **유효하지 않은 상태**가 된다. 때문에 데이터 가용성 문제가 발생한 이후에 탈출을 하더라도 사용자의 자산과 상태의 안전을 보장할 수 없게 된다.
+## Why Truebit-like Verification Game
+Challenge system for fraud proof is essential to properly enforce the execution of child chains. However, in generalized Plasma, computations executed on child chains are complex, and the cost of verifying them on the root chain is high.
 
-### Continuous Rebase
-이를 해결하기 위해서는 자식체인의 현재 상태와는 관계 없이 사용자들이 탈출할 수 있도록 하여야 한다. Continuous Rebase는 주기적으로 사용자들이 데이터 가용성 문제가 발생하기 이전의 자식체인 상태를 기준으로 탈출할 수 있도록 하기 때문에 이러한 문제를 **근본적으로 해결**할 수 있게 된다. 단, 이는 자식체인의 완결성(finality)을 다소 지연시키는 문제를 야기한다.
+If challenge systems are carried out through verification games like Truebit, we can **minimize verification cost** to the execution of only one opcode.
 
-## 참고자료
+Non-interactive ways(e.g. zero-knowledge proofs) are not considered because they are not practical in terms of proving cost.
+
+## Why Continuous Rebase
+
+### Data availability
+In Plasma, [data unavailability](https://github.com/ethereum/research/wiki/A-note-on-data-availability-and-erasure-coding) refers to problems that occur when the operator submits blocks to the root chain but does not propagate them to the user. Data unavailability are fatal in Plasma because there is no way for users to deal with these attacks if an operator goes malicious.
+
+Challenges are necessary to enforce the correct execution of child chain by root chain, and block data is required for challenge. Therefore, unavailable block data means that challenge cannot be done. So all the different Plasma solutions address this by enabling users to **exit** from the child chain, not by challenge.
+
+### Data Unavailability in Generalized Plasma
+The problem is that it is [very difficult](https://ethresear.ch/t/why-smart-contracts-are-not-feasible-on-plasma/2598) to enable exit in generalized plasma such as Plasma EVM. In generalized plasma, a single transaction can change all states. That is, because each transaction are not atomic, all states must be considered as **invalid** when data is unavailable. Therefore, after the data becomes unavailable, the safety of assets is not ensured even if users request exits.
+
+To solve this, users should be allowed to escape regardless of the current state of child chain. Continuous rebase periodically allows users to escape based on old valid states, thus **fundamentally resolves data unavailability**. However, this will delay finality of child chain.
+
+## References
 - [Plasma whitepaper](https://www.plasma.io/plasma.pdf)
 - [ethresear.ch/plasma](https://ethresear.ch/c/plasma)
 - [Awesome Layer-2](https://github.com/Awesome-Layer-2/Awesome-Layer-2/blob/master/README.md#tokamak-network)
@@ -62,3 +62,4 @@ truebit방식과 같이 인터랙티브(interactive)한 검증 방법이 아닌 
 - [A note on data availability](https://github.com/ethereum/research/wiki/A-note-on-data-availability-and-erasure-coding)
 - [Why smart contracts are not feasible on plasma](https://ethresear.ch/t/why-smart-contracts-are-not-feasible-on-plasma/2598)
 - [Why is EVM on Plasma hard](https://medium.com/@kelvinfichter/why-is-evm-on-plasma-hard-bf2d99c48df7)
+

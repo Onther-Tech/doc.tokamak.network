@@ -1,9 +1,9 @@
 {
   "docs": {
-    "배우기": [
+    "Learn": [
       {
         "type": "subcategory",
-        "label": "기초",
+        "label": "Basic",
         "ids": [
           "learn/basic/tokamak-network",
           "learn/basic/enter-and-exit",
@@ -13,7 +13,7 @@
       },
       {
         "type": "subcategory",
-        "label": "고급",
+        "label": "Advanced",
         "ids": [
           "learn/advanced/design-rationale",
           "learn/advanced/plasma-evm-architecture",
@@ -26,7 +26,7 @@
       },
       {
         "type": "subcategory",
-        "label": "토큰경제",
+        "label": "Token Economy",
         "ids": [
           "learn/economics/ton",
           "learn/economics/child-chain",
@@ -38,10 +38,10 @@
         ]
       }
     ],
-    "가이드": [
+    "Guide": [
       {
         "type": "subcategory",
-        "label": "프라이빗 테스트넷 시작하기",
+        "label": "Getting Started Private Testnet",
         "ids": [
           "guides/getting-started/how-to-open-private-testnet-rootchain",
           "guides/getting-started/how-to-open-private-testnet-manually",
@@ -50,7 +50,7 @@
       },
       {
         "type": "subcategory",
-        "label": "퍼블릭 테스트넷 연결하기",
+        "label": "Connect Public Testnet",
         "ids": [
           "guides/getting-started/how-to-connect-public-testnet-prepare",
           "guides/getting-started/how-to-connect-public-testnet-manually",
