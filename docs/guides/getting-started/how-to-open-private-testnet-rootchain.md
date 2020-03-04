@@ -27,7 +27,6 @@ golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm �
 ~$ sudo mv go /usr/local
 ```
 
-GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 
 GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 설정한다.
 
 ```bash
