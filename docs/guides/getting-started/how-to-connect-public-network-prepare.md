@@ -12,7 +12,7 @@ You can take either way of below to setup user node.
 1. [Connect to public testnet in local environment](how-to-connect-public-testnet-manually)
 2. [Connect to public testnet with `Puppeth`](how-to-connect-public-testnet-puppeth)
 
-## System update and install required packages
+## System Update and Install Required Packages
 
 Setup compilement environment with following command.
 
@@ -20,7 +20,7 @@ Setup compilement environment with following command.
 ~$ sudo apt-get update && sudo apt-get install tar wget make git build-essential -y
 ```
 
-### Set golang environment
+### Set Golang Environment
 
 Run following command in order.
 
@@ -58,7 +58,7 @@ For running user node, you need to access to `RootChain`. There are many ways, b
 
 If you do not have `Infura` account, sign up in [infura.io](https://infura.io/).
 
-### Generate `Rinkeby` `RootChain` address
+### Generate `Rinkeby` `RootChain` Address
 
 Login to `Infura`, and click `"CREATE NEW PROJECT"` of `Dashboard` to create new project.
 

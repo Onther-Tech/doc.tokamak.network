@@ -90,7 +90,7 @@ plasma-evm$ build/bin/geth --nousb init \
             genesis.json
 ```
 
-### 4. Create Keystore of Operator Account.
+### 4. Create Keystore of Operator Account
 
 You need private key of operator account in order to sign transaction for submitting blocks to root chain.
 
@@ -174,7 +174,7 @@ Make `boot.key` file for operator node to use designated enode address.
 plasma-evm$ echo "e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3" > boot.key
 ```
 
-### 3. Run user node
+### 3. Run User Node
 
 You must [Setup User Node - 1. Initialize](how-to-open-private-testnet-manually##1-initialize) before running user node. It will use same `datadir` as in the initialization.
 

@@ -7,7 +7,7 @@
     "docs": {
       "guides/getting-started/how-to-connect-public-testnet-manually": {
         "title": "How to connect public testnet manually",
-        "sidebar_label": "Menually"
+        "sidebar_label": "Manually"
       },
       "guides/getting-started/how-to-connect-public-testnet-prepare": {
         "title": "Requirements for Connecting Public Testnet",

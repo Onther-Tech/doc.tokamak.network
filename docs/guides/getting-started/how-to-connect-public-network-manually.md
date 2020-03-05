@@ -56,4 +56,4 @@ Chain data of user node will be stored on `plasma-evm/chaindata`.
 
 > If you want to use both `rpc` and `keystore`, add `--allow-insecure-unlock` to the command.
 
-You can check status of Faraday testnet in [here](http://ethstats.faraday.tokamak.network/).
+You can check status of Faraday testnet [here](http://ethstats.faraday.tokamak.network/).

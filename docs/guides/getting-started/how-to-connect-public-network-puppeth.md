@@ -12,7 +12,7 @@ You can set user node with `Puppeth` in `plasma-evm`.
 
 `Puppeth` is handy tool for deploying Ethereum node. We added additional features to `Puppeth` in `plasma-evm` for deploying Tokamak node easily.
 
-Download source code from [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm). Then, compile `Puppeth` .
+Download source code from [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm). Then, compile `Puppeth`.
 
 ```bash
 $ git clone https://github.com/onther-tech/plasma-evm
