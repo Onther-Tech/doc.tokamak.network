@@ -29,10 +29,6 @@
         "title": "Setup Rootchain in Private Testnet",
         "sidebar_label": "Setup Rootchain"
       },
-      "guides/guides_apis_npm-plasma-evm-contracts": {
-        "title": "npm plasma-evm-contracts",
-        "sidebar_label": "npm plasma-evm-contracts"
-      },
       "guides/manuals/guides_manuals_how-to-make-request": {
         "title": "How to make request",
         "sidebar_label": "How to make request"
