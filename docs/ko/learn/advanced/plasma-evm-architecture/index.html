@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Plasma EVM 아키텍처 · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Plasma EVM을 구성하는 핵심 요소는 **루트체인(root chain)**과 이에 연결된 여러개의 **자식체인(child chain)**들이다."/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="Plasma EVM 아키텍처 · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="Plasma EVM을 구성하는 핵심 요소는 **루트체인(root chain)**과 이에 연결된 여러개의 **자식체인(child chain)**들이다."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/learn/advanced/plasma-evm-architecture">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>고급</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">배우기<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">기초</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/tokamak-network">토카막 네트워크</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/enter-and-exit">상호운용성: 진입 &amp; 퇴장</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/transaction-fee">편의성: 계정, 트랜잭션 수수료, 개발도구</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/layer-2-solutions">비교: 다른 확장성 솔루션</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">고급</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/design-rationale">디자인 원칙</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ko/learn/advanced/plasma-evm-architecture">Plasma EVM 아키텍처</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/root-chain">루트체인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/child-chain">자식체인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/plasma-evm-smart-contracts">Plasma EVM 스마트 컨트랙트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/examples-and-best-practices">요청 가능한 컨트랙트 예제</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">토큰경제</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/child-chain">자식체인과 스테이킹</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/token-supply">토큰 공급과 분배</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/powerton">파워톤</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/tx-fee">트랜잭션 수수료 정책</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/challenge">챌린지</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/glossary">파라미터 정리</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">가이드<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">프라이빗 테스트넷 시작하기</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">루트체인 설정</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-manually">자식체인 설정</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-puppeth">Puppeth 사용하여 부모-자식체인 설정</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">퍼블릭 테스트넷 연결하기</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-prepare">연결 준비하기</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-manually">직접 연결하기</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-puppeth">Puppeth 사용하여 연결하기</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/ko/guides/public-testnets">퍼블릭 테스트넷 정보</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/learn/advanced/plasma-evm-architecture.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Plasma EVM 아키텍처</h1></header><article><div><span><p>Plasma EVM을 구성하는 핵심 요소는 <strong>루트체인(root chain)</strong>과 이에 연결된 여러개의 <strong>자식체인(child chain)</strong>들이다.</p>
+<p>자식체인은 <strong>오퍼레이터(operator)</strong>에 의해 운영되며, 오퍼레이터는 사용자들의 트랜잭션이 포함된 자식체인의 블록들을 마이닝하여 루트체인의 <strong>루트체인 컨트랙트(root chain contract)</strong>에 제출하게 된다. 루트체인 컨트랙트는 자식체인의 올바른 상태를 강제 및 운영을 관리하는 역할을 수행하며, 오퍼레이터는 루트체인 컨트랙트의 상태를 기준으로 자식체인을 운영하며, 사용자들은 루트체인 컨트랙트에 여러 종류의 요청을 제출하여 루트체인과 자식체인간에 자산과 상태를 이동시킬 수 있다.</p>
+<p>만약 이 과정에서 오퍼레이터나 사용자가 잘못된 행위를 하였을 경우 챌린저는 챌린지를 통해 이를 올바르게 강제할 수 있다. 또한 데이터 가용성 문제가 발생했을 경우 사용자들은 주기적으로 탈출요청을 제출하여 자식체인에서 안전하게 탈출할 수 있다.</p>
+<p>Plasma EVM 클라이언트는 기존 이더리움 클라이언트에 기반하고 있기 때문에 루트체인 컨트랙트에 의해 블록 마이닝의 순서나 종류가 강제되는 것을 제외하면 모든 부분이 루트체인인 이더리움과 동일하다. 따라서 블록, 트랜잭션, 어카운트 등의 자료구조는 이더리움과 모두 같다.</p>
+<p>단, 이는 이더리움을 루트체인으로 하였기 때문에 동일한 것이지 <strong>반드시 이더리움과 동일한 구조를 가져야 함을 의미하는 것은 아니다.</strong></p>
+<h2><a class="anchor" aria-hidden="true" id="참고자료"></a><a href="#참고자료" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>참고자료</h2>
+<ul>
+<li><a href="https://onther-tech.github.io/papers/tech-paper-kr.pdf">Plasma EVM(국문)</a></li>
+</ul>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-5 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/learn/advanced/design-rationale"><span class="arrow-prev">← </span><span>디자인 원칙</span></a><a class="docs-next button" href="/docs/ko/learn/advanced/root-chain"><span>루트체인</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#참고자료">참고자료</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>

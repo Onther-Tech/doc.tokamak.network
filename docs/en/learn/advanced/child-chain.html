@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Child Chain · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Operator, User, and Challenger"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Child Chain · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="## Operator, User, and Challenger"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ko/learn/advanced/child-chain">한국어</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Advanced</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Learn<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Basic</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/tokamak-network">Tokamak Network</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/enter-and-exit">Interoperability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/transaction-fee">Convenience</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/layer-2-solutions">Comparison with Other Solutions</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Advanced</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/design-rationale">Design Rationale</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-architecture">Plasma EVM Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/root-chain">RootChain</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/learn/advanced/child-chain">Child Chain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-smart-contracts">Plasma EVM Smart Contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/examples-and-best-practices">Examples and Best Practices</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Token Economy</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/child-chain">Child Chain and Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/token-supply">Token Supply and Distribution</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/powerton">PowerTON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/tx-fee">Transaction Fee</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/challenge">Challenge</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/glossary">Parameters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Guide<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Getting Started Private Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Setup Rootchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-manually">Setup Childchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth">Setup with Puppeth</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Connect Public Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-prepare">Requirements</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-manually">Manually</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-puppeth">With Puppeth</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/en/guides/public-testnets">Public Testnet Information</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/learn/advanced/child-chain.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Child Chain</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="operator-user-and-challenger"></a><a href="#operator-user-and-challenger" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operator, User, and Challenger</h2>
+<h3><a class="anchor" aria-hidden="true" id="operator"></a><a href="#operator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operator</h3>
+<p><strong>Operators</strong> run the child chain. Operators aggregate user's transactions in blocks, and submit them to the RootChain contract. Anyone can be an operator, and the number of operators in the child chain is configurable.</p>
+<h3><a class="anchor" aria-hidden="true" id="user"></a><a href="#user" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>User</h3>
+<p><strong>Users</strong> use child chain operated by the operator and move assets and state between the root and child chain.</p>
+<p>Users can run their own nodes to monitor the operations of the child chain, and when they notice attacks, they can escape or become a challenger to protect their assets.</p>
+<h3><a class="anchor" aria-hidden="true" id="challenger"></a><a href="#challenger" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Challenger</h3>
+<p><strong>Challengers</strong> can correct the operator or user's actions through challenges if they have violated a predefined rule.</p>
+<p>There are no requirements to become a challenger, which means that anyone can be a challenger.</p>
+<h2><a class="anchor" aria-hidden="true" id="block-and-epoch"></a><a href="#block-and-epoch" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Block and Epoch</h2>
+<p>There are three types of blocks in the child chain.</p>
+<ul>
+<li><strong>Non-Request Block(NRB)</strong></li>
+<li><strong>Request Block(RB)</strong></li>
+<li><strong>Escape Block(EB)</strong></li>
+</ul>
+<p><strong>Non-request blocks</strong> are the same as normal blocks. It includes transactions of users.</p>
+<p><strong>Request block</strong> is a block that includes only requests. Enter and exit requests are processed in RB.</p>
+<p><strong>Escape blocks</strong> are mined only under special conditions. Continuous rebase provides a period of time for users to check data availability and escape from the child chain. When users submit an escape request to the RootChain contract, escape blocks are mined.</p>
+<p><strong>Epoch</strong> is a period that contains several blocks. Depending on the type of the block, there are three types of epochs:</p>
+<ul>
+<li><strong>Non-Request Epoch (NRE)</strong></li>
+<li><strong>Request Epoch (RE)</strong></li>
+<li><strong>Escape Epoch (EE))</strong></li>
+</ul>
+<p><strong>Length</strong> of epoch means the number of blocks included in it. The length of non-request epoch does not change because it is a pre-defined constant. The number of blocks included in request and escape epoch may vary depending on the number of requests submitted by users, thus the length of both epochs is variable.</p>
+<p>However, the genesis block is the 0th non-request epoch, and the length of the epoch is always 1.</p>
+<h2><a class="anchor" aria-hidden="true" id="block-submission"></a><a href="#block-submission" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Block Submission</h2>
+<p>Operators run the child chain and submit blocks to the RootChain contract. The RootChain contract assigns the types of epochs to submit and implements the transactions and requests in the following order.</p>
+<ol>
+<li>NRE#1 is placed after NRE#0.</li>
+<li>After NRE#N, RE#(N+1) is always placed. Similarly, after RE#N, NRE#(N+1) is placed.</li>
+<li>Requests generated when current epoch is NRE#N or RE#(N+1), are applied in RE#(N+3). If they are not generated, the length of the RE becomes 0.</li>
+</ol>
+<p>In summary, the base rule is to place non-request epoch after a request epoch, and request epoch after non-request epoch. Requests are not immediately included in the next request epoch, but will be included in the request epoch following the next request epoch.</p>
+<p><img src="/docs/assets/learn_advanced_simple_rootchain.png" alt="simple rootchain"></p>
+<p>As described in the figure above, the state of RootChain contract changes regularly to <code>AcceptNRB</code> and <code>AcceptRB</code> to receive two types of blocks. In <code>AcceptNRB</code>, only non-request blocks can be submitted, and request blocks can be submitted only to <code>AcceptRB</code>. The operator must submit blocks according to the state of the RootChain contract. The figure shows how the state of RootChain contract changes.</p>
+<p>When submitting blocks, operators must include three merkle roots which are <code>stateRoot</code>, <code>transactionsRoot</code>, <code>receiptsRoot.</code> However, under certain conditions, they can submit only <code>transactionsRoot.</code> Details will be described in the continuous rebase section.</p>
+<h2><a class="anchor" aria-hidden="true" id="request-and-request-transaction"></a><a href="#request-and-request-transaction" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Request and Request Transaction</h2>
+<h3><a class="anchor" aria-hidden="true" id="request"></a><a href="#request" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Request</h3>
+<p>Request is a request that users sumbit to RootChain contract in order to transfer assets or states between root and child chain. There are 4 types of request:</p>
+<ul>
+<li>Enter request: request to transfer assets or state from root to child chain</li>
+<li>Exit request: request to transfer assets or state from child to root chain</li>
+<li>Escape request: request to escape from child chain, this is used in data unavailability</li>
+<li>Undo request: request to undo old enter requests in data unavailability</li>
+</ul>
+<p>Enter and exit requests are included in the request block, escape and undo requests are included in the escape block.</p>
+<p>Request consists of the following 4 parameters.</p>
+<ul>
+<li><code>requestor</code>: account that generated the request</li>
+<li><code>to</code>: an address of requestable contract deployed on root chain</li>
+<li><code>trieKey</code>: identifier of request</li>
+<li><code>trieValue</code>: value of request</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="request-transaction"></a><a href="#request-transaction" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Request Transaction</h3>
+<p>Requests are implemented in the form of request transactions on the child chain. Request transaction consists of the following 5 parameters.</p>
+<ul>
+<li><code>sender</code>: null address(NA)</li>
+<li><code>to</code>: an address of requestable contract deployed on child chain</li>
+<li><code>value</code>: 0</li>
+<li><code>function signature</code>: a specific function signature of requestable contract</li>
+<li><code>parameters</code>: parameters for calling functions of contract</li>
+</ul>
+<p>Null address has no private key and the address is 0x00, meaning that anyone can be mine the block that includes requests.</p>
+<p>All requests are submitted to the RootChain contract, so the users can submit the request and mine the blocks themselves even after the operator stops the operation of the child chain.</p>
+<h3><a class="anchor" aria-hidden="true" id="requestable-contract"></a><a href="#requestable-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Requestable Contract</h3>
+<p>Requestable contract is a contract that can execute the requests and is deployed to the root and child chain. The requestable contract should implement the following interface to apply all requests.</p>
+<pre><code class="hljs css language-solidity"><span class="token keyword">interface</span> <span class="token class-name">Requestable</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">applyEnter</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span><span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span><span class="token builtin">address</span> requestor<span class="token punctuation">,</span><span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span><span class="token builtin">bytes</span> trieValue<span class="token punctuation">)</span>
+    <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">applyExit</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span><span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span><span class="token builtin">address</span> requestor<span class="token punctuation">,</span><span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span><span class="token builtin">bytes</span> trieValue<span class="token punctuation">)</span>
+    <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">applyEscape</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span><span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span><span class="token builtin">address</span> requestor<span class="token punctuation">,</span><span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span><span class="token builtin">bytes</span> trieValue<span class="token punctuation">)</span>
+    <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">applyUndo</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span><span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span><span class="token builtin">address</span> requestor<span class="token punctuation">,</span><span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span><span class="token builtin">bytes</span> trieValue<span class="token punctuation">)</span>
+    <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="apply-enter-request"></a><a href="#apply-enter-request" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Apply Enter Request</h3>
+<p>RootChain contract applies enter requests to the requestable contract deployed on each chain in the following order:</p>
+<p><img src="/docs/assets/learn_advanced_enter.png" alt="apply enter"></p>
+<ol>
+<li>The user sends a transaction calling RootChain.startEnter() to RootChain contract.</li>
+<li>RootChain contract applies enter request to requestable contract in the root chain. Enter request will not be generated if the transaction is reverted in this process.</li>
+<li>If step 2 has been processed successfully, the RootChain contract records enter request.</li>
+<li>In request epoch, operator mines request block including request transaction.</li>
+<li>Request transaction changes the state of the child chain according to enter request.</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="apply-exit-request"></a><a href="#apply-exit-request" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Apply Exit Request</h3>
+<p>RootChain contract applies exit request to the requestable contract deployed on each chain in the following order:</p>
+<p><img src="/docs/assets/learn_advanced_exit.png" alt="apply exit"></p>
+<ol>
+<li>User sends transaction calling RootChain.startExit() to RootChain contract.</li>
+<li>Unlike enter request, exit request is immediately recorded and included in the request block in the form of request transaction.</li>
+<li>After the challenge period of the request block is finished, challenge period of the exit request begins. If the request transaction in step 2 is reverted, anyone can execute exit challenge by calling RootChain.challengeExit() function.</li>
+<li>After challenge in step 3, exit request is finalized by calling RootChain.finalizeRequest(). Through this request, the exit request is deployed on the root chain through the requestable contract.</li>
+</ol>
+<p>The key is that enter request is applied to the root chain first and then to the child chain, and exit request is applied to child chain and then on the root chain only when the request is valid.</p>
+<h3><a class="anchor" aria-hidden="true" id="apply-escape-and-undo-request"></a><a href="#apply-escape-and-undo-request" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Apply Escape and Undo Request</h3>
+<p>Escape and undo request are executed same as the exit request, but request transactions are included in escape block, not the request block. Check more details on continuous rebase section.</p>
+<p><img src="/docs/assets/learn_advanced_request_and_challenge.png" alt="request and challenge"></p>
+<h2><a class="anchor" aria-hidden="true" id="challenge"></a><a href="#challenge" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Challenge</h2>
+<p>Challengers can challenge child chains to enforce correct operation. There are 3 types of challenges:</p>
+<h3><a class="anchor" aria-hidden="true" id="null-address-challenge"></a><a href="#null-address-challenge" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Null Address Challenge</h3>
+<p>Null address challenge is a challenge submitted when non-request blocks contain transactions with null address as <code>sender</code>. Such transactions mean that it was meant for request transactions, and they must not be included in a non-request block.</p>
+<p>Challenger can prove that the non-request block committed to the RootChain contract includes a request transaction through merkle proofs.</p>
+<h3><a class="anchor" aria-hidden="true" id="exit-challenge"></a><a href="#exit-challenge" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Exit Challenge</h3>
+<p>Exit challenge is a challenge submitted if an exit or escape request is not appropriate. An incorrect exit or escape request transaction is reverted in the child chain, in which case the request should also be deleted from the RootChain contract.</p>
+<p>Challengers prove that the request transaction is reverted in child chain through merkle proof.  However, in order to proceed with the exit challenge, exit or escape request must be finalized. Otherwise, an operator can attack the protocol and the request transaction that should not be reverted may be reverted.</p>
+<h3><a class="anchor" aria-hidden="true" id="computation-challenge"></a><a href="#computation-challenge" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Computation Challenge</h3>
+<p>Computation challenge is a challenge submitted when an operator does not execute the transactions correctly in all types of blocks.</p>
+<p>When operators submit invalid <code>stateRoot</code>, it may be challenged via Truebit-like verification game with <code>blockData</code>, <code>preStateRoot</code>, <code>postStateRoot</code>.</p>
+<p><img src="/docs/assets/learn_advanced_verification_game.png" alt="verification game"></p>
+<h3><a class="anchor" aria-hidden="true" id="verification-game"></a><a href="#verification-game" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Verification Game</h3>
+<p>Verification game proposed by Truebit is comparing actual output with the expected output after executing only one opcode. Plasma EVM verifies computation using <a href="https://github.com/Onther-Tech/solEVM">solEVM</a>, a smart contract that runs an EVM inside the EVM that has been implemented by Ohalo Limited and Parsec Labs.</p>
+<h2><a class="anchor" aria-hidden="true" id="stamina"></a><a href="#stamina" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Stamina</h2>
+<p><strong>Stamina</strong> is used to for <strong>delegatee</strong> to charge gas to <strong>delegator</strong> in transaction execution model of child chain. In short, delegatee pays gas as stamina for delegator. Stamina can be obtained by depositing state balance in stamina contract. An account that deposited stamina is called <strong>depositor account</strong>.</p>
+<p>Stamina balance of delegatee is deducted after paying gas for delegator. The deducted stamina is recoverd after a certain period of time. The time period is called <strong>recovery epoch</strong>, and after the period, same amount of stamina as the total amount deposited in the account is recovered.</p>
+<h3><a class="anchor" aria-hidden="true" id="set-delegator"></a><a href="#set-delegator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Set Delegator</h3>
+<p>Delegatee can set delegator. On the contrary, delegator cannot set delegatee. Delegatee also can set multiple delegators. When delegatee set delegator, both are paired as stamina pair or fee-delegate pair. Delegatee calls <code>setDelegator()</code> in stamina contract to set delegator.</p>
+<h3><a class="anchor" aria-hidden="true" id="deposit-and-withdraw-stamina"></a><a href="#deposit-and-withdraw-stamina" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deposit and Withdraw Stamina</h3>
+<p>To generate stamina, you must deposit TONs by calling the <code>deposit()</code> in <code>Stamina Contract</code>. The account on which the TON is deposited is paid a stamina of the amount deposited.</p>
+<p>To withdraw stamina, call <code>requestWithdrawal()</code> and <code>withdraw()</code> in <code>Stamina Contract</code>. All stamina will burn and same amount of TON will be withdrawn.</p>
+<p>Process of withdrawing stamina consists of two stages(<a href="https://consensys.github.io/smart-contract-best-practices/recommendations/#favor-pull-over-push-for-external-calls">Favor pull over push payments</a>).</p>
+<ol>
+<li>call <code>requestWithdrawal()</code>: stamina balance of account decreases by withdrawn amount.</li>
+<li>call <code>withdraw()</code>: the same amount as decreased in <code>requestWithdrawal()</code> will be withdrawn to the account.</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="refund-and-recovery"></a><a href="#refund-and-recovery" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Refund and Recovery</h3>
+<p>In Ethereum, the remaining gas after transaction execution is refunded to transactor. Similarly, the remaining stamina after the execution generated is refunded.</p>
+<p><code>subtractStamina()</code> function in <code>Stamina Contract</code> deducts stamina, and <code>addStamina()</code> refunds stamina. Both functions can only be called by the null-address.</p>
+<p>The stamina used is recharged after recovery epoch. Stamina recovery is performed automatically when the stamina is refunded. In the process of refunding the stamina, the stamina will be restored again after checking whether the recovery epoch has elapsed. The amount of stamina recovered shall not exceed the total amount deposited.</p>
+<h3><a class="anchor" aria-hidden="true" id="normal-execution"></a><a href="#normal-execution" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Normal Execution</h3>
+<p>Normal execution is same as the execution process of Ethereum, it proceeds as follows.</p>
+<ol>
+<li>Read account balance of transactor.</li>
+<li>Check that upfront cost is payable.</li>
+<li>Deduct the upfront cost</li>
+<li>Execute VM</li>
+<li>Refund remaining gas</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="delegated-execution"></a><a href="#delegated-execution" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Delegated Execution</h3>
+<p>Delegated execution proceeds as follows.</p>
+<ol>
+<li>Check if transactor has stamina pair with delegatee account.</li>
+</ol>
+<ul>
+<li>If paired with delegatee account
+<ol start="2">
+<li>Check that gas-upfront cost is payable by delegatee.</li>
+<li>Deduct same amount of stamina as the gas-upfront cost from delegatee.</li>
+<li>Deduct value-upfront cost from transactor balance.</li>
+<li>Execute VM</li>
+<li>Refund same amount of stamina as refunded gas to delegatee.</li>
+</ol></li>
+</ul>
+<ul>
+<li>If paired with delegatee account
+<ol start="2">
+<li><a href="child-chain#normal-execution">Normal execution</a></li>
+</ol></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="references"></a><a href="#references" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>References</h2>
+<ul>
+<li><a href="https://github.com/Onther-Tech/papers/blob/master/docs/tech-paper.pdf">Plasma EVM</a></li>
+<li><a href="https://youtu.be/gW7FCiBgBI4">Economic Description of Tokamak Network and its Ecosystem - Kevin Jeong</a></li>
+</ul>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-5 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/learn/advanced/root-chain"><span class="arrow-prev">← </span><span class="function-name-prevnext">RootChain</span></a><a class="docs-next button" href="/docs/en/learn/advanced/continuous-rebase"><span>Continuous Rebase</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#operator-user-and-challenger">Operator, User, and Challenger</a><ul class="toc-headings"><li><a href="#operator">Operator</a></li><li><a href="#user">User</a></li><li><a href="#challenger">Challenger</a></li></ul></li><li><a href="#block-and-epoch">Block and Epoch</a></li><li><a href="#block-submission">Block Submission</a></li><li><a href="#request-and-request-transaction">Request and Request Transaction</a><ul class="toc-headings"><li><a href="#request">Request</a></li><li><a href="#request-transaction">Request Transaction</a></li><li><a href="#requestable-contract">Requestable Contract</a></li><li><a href="#apply-enter-request">Apply Enter Request</a></li><li><a href="#apply-exit-request">Apply Exit Request</a></li><li><a href="#apply-escape-and-undo-request">Apply Escape and Undo Request</a></li></ul></li><li><a href="#challenge">Challenge</a><ul class="toc-headings"><li><a href="#null-address-challenge">Null Address Challenge</a></li><li><a href="#exit-challenge">Exit Challenge</a></li><li><a href="#computation-challenge">Computation Challenge</a></li><li><a href="#verification-game">Verification Game</a></li></ul></li><li><a href="#stamina">Stamina</a><ul class="toc-headings"><li><a href="#set-delegator">Set Delegator</a></li><li><a href="#deposit-and-withdraw-stamina">Deposit and Withdraw Stamina</a></li><li><a href="#refund-and-recovery">Refund and Recovery</a></li><li><a href="#normal-execution">Normal Execution</a></li><li><a href="#delegated-execution">Delegated Execution</a></li></ul></li><li><a href="#references">References</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>

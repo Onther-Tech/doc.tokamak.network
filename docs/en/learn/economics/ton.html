@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>TON · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## What are TONs?"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="TON · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="## What are TONs?"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ko/learn/economics/ton">한국어</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Token Economy</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Learn<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Basic</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/tokamak-network">Tokamak Network</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/enter-and-exit">Interoperability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/transaction-fee">Convenience</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/layer-2-solutions">Comparison with Other Solutions</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Advanced</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/design-rationale">Design Rationale</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-architecture">Plasma EVM Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/root-chain">RootChain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/child-chain">Child Chain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-smart-contracts">Plasma EVM Smart Contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/examples-and-best-practices">Examples and Best Practices</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Token Economy</h4><ul><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/child-chain">Child Chain and Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/token-supply">Token Supply and Distribution</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/powerton">PowerTON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/tx-fee">Transaction Fee</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/challenge">Challenge</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/glossary">Parameters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Guide<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Getting Started Private Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Setup Rootchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-manually">Setup Childchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth">Setup with Puppeth</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Connect Public Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-prepare">Requirements</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-manually">Manually</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-puppeth">With Puppeth</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/en/guides/public-testnets">Public Testnet Information</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/learn/economics/ton.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">TON</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="what-are-tons"></a><a href="#what-are-tons" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What are TONs?</h2>
+<p>TON is the native token of Tokamak Network which acts like Ether within the Etheruem ecosystem.</p>
+<p>TON has 18 decimal points and the lowest unit is called Poon. TON is the equivalent unit to BTC or ETH, and Poon is similar to satoshi or wei.</p>
+<table>
+<thead>
+<tr><th>Unit</th><th style="text-align:center">Decimal Places</th></tr>
+</thead>
+<tbody>
+<tr><td>Poon</td><td style="text-align:center">0</td></tr>
+<tr><td>TON</td><td style="text-align:center">18</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="what-are-the-uses-of-tons"></a><a href="#what-are-the-uses-of-tons" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What are the uses of TONs?</h2>
+<p>TONs serve the following three core functions in Tokamak Network: i) to be used for deposit in order to ensure the security of a child chain, ii) to be used as transaction fees within the child chain, and iii) to be used to participate in PowerTON.</p>
+<h3><a class="anchor" aria-hidden="true" id="staking"></a><a href="#staking" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Staking</h3>
+<p>Ton is used when deploying child chains and connecting them to Tokamak Network. Child chain operators must deposit more than a certain amount of TON to deploy and connect the child chain to the Tokamak Network.</p>
+<h3><a class="anchor" aria-hidden="true" id="powerton"></a><a href="#powerton" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PowerTON</h3>
+<p>TON is also used to participate in the PowerTON game. PowerTon is a gamified method to distribute unissued commit reward from staking, which can only be played through TON.</p>
+<h3><a class="anchor" aria-hidden="true" id="stamina"></a><a href="#stamina" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Stamina</h3>
+<p>TON, along with other tokens, can be used to pay transaction fees in child chains. Anyone can deposit TON to create Stamina, which also can be paid as transaction fees. What's different about Stamina is that it is not entirely consumed after payment, and recovers after a certain period. It can also be delegated to a third party.</p>
+<h3><a class="anchor" aria-hidden="true" id="challenge"></a><a href="#challenge" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Challenge</h3>
+<p>TON provides cryptoeconomic incentives for all child chains to operate securely. Operators participating in Tokamak Network must deposit a certain amount of TON to perform a particular action and may be challenged if they act against a predetermined rule. If the challenge is proven true, the deposit will be slashed the entire or some amount will go to the challenger as a reward, with the remaining amount burned if there is any.</p>
+<h2><a class="anchor" aria-hidden="true" id="staking-delegating-and-commit"></a><a href="#staking-delegating-and-commit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Staking, Delegating and Commit</h2>
+<p><strong>Staking</strong> is depositing a certain amount of TON to connect a child chain. By staking, the operator can run a child chain and take profit from the commit reward.</p>
+<p><strong>Unstaking</strong> is withdrawing some or all of the staked TON.</p>
+<p><strong>Delegating</strong> is delegating TON to another staker. Delegators can take a portion of the profit from commit reward, but cannot participate in operating the child chain. Delegated TONs are added to the total amount of staked TONs, which is a key parameter for determining further issuance of TON.</p>
+<p><strong>Undelegating</strong> is withdrawing delegated TONs.</p>
+<p><strong>Commit</strong> is recording roots of blocks of child chain by submitting them to the root chain. Additional TON is issued per commit as a reward. Committing can be perceived as block mining or validating on other blockchains.</p>
+<p><strong>Enter</strong> is transferring an asset or state from the root chain to the child chain. When TON is entered, a portion of the amount is added to the total amount of TON staked on the child chain, just like when a TON is delegated.</p>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-2-11 by aiden0505</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/learn/advanced/examples-and-best-practices"><span class="arrow-prev">← </span><span>Examples and Best Practices</span></a><a class="docs-next button" href="/docs/en/learn/economics/child-chain"><span>Child Chain and Staking</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#what-are-tons">What are TONs?</a></li><li><a href="#what-are-the-uses-of-tons">What are the uses of TONs?</a><ul class="toc-headings"><li><a href="#staking">Staking</a></li><li><a href="#powerton">PowerTON</a></li><li><a href="#stamina">Stamina</a></li><li><a href="#challenge">Challenge</a></li></ul></li><li><a href="#staking-delegating-and-commit">Staking, Delegating and Commit</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>

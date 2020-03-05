@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Requirements for Connecting Public Testnet · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Faraday is public testnet of Tokamak Network operated by Onther."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Requirements for Connecting Public Testnet · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="Faraday is public testnet of Tokamak Network operated by Onther."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-prepare">한국어</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Connect Public Testnet</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Learn<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Basic</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/tokamak-network">Tokamak Network</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/enter-and-exit">Interoperability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/transaction-fee">Convenience</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/layer-2-solutions">Comparison with Other Solutions</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Advanced</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/design-rationale">Design Rationale</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-architecture">Plasma EVM Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/root-chain">RootChain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/child-chain">Child Chain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-smart-contracts">Plasma EVM Smart Contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/examples-and-best-practices">Examples and Best Practices</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Token Economy</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/child-chain">Child Chain and Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/token-supply">Token Supply and Distribution</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/powerton">PowerTON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/tx-fee">Transaction Fee</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/challenge">Challenge</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/glossary">Parameters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Guide<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Getting Started Private Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Setup Rootchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-manually">Setup Childchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth">Setup with Puppeth</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Connect Public Testnet</h4><ul><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-prepare">Requirements</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-manually">Manually</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-puppeth">With Puppeth</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/en/guides/public-testnets">Public Testnet Information</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/getting-started/how-to-connect-public-network-prepare.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Requirements for Connecting Public Testnet</h1></header><article><div><span><p>Faraday is public testnet of Tokamak Network operated by Onther.</p>
+<p>Same as all tokamak child chain, only operator can mine blocks in Faraday testent. This guide explains how to setup user node connected to the testnet.</p>
+<p>You can take either way of below to setup user node.</p>
+<ol>
+<li><a href="how-to-connect-public-testnet-manually">Connect to public testnet in local environment</a></li>
+<li><a href="how-to-connect-public-testnet-puppeth">Connect to public testnet with <code>Puppeth</code></a></li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="system-update-and-install-required-packages"></a><a href="#system-update-and-install-required-packages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>System Update and Install Required Packages</h2>
+<p>Setup compilement environment with following command.</p>
+<pre><code class="hljs css language-shell">~$ sudo apt-get update &amp;&amp; sudo apt-get install tar wget make git build-essential -y
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="set-golang-environment"></a><a href="#set-golang-environment" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Set Golang Environment</h3>
+<p>Run following command in order.</p>
+<p>Install Go compiler at <code>/usr/local/</code> by running following command.</p>
+<pre><code class="hljs css language-bash">~$ wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
+~$ tar -xvf go1.13.4.linux-amd64.tar.gz
+~$ sudo mv go /usr/<span class="hljs-built_in">local</span>
+</code></pre>
+<p>Make a directory for GOPATH, set envrionment variables.</p>
+<pre><code class="hljs css language-bash">~$ <span class="hljs-built_in">export</span> GOROOT=/usr/<span class="hljs-built_in">local</span>/go
+~$ mkdir -p <span class="hljs-variable">$HOME</span>/plasma
+~$ <span class="hljs-built_in">export</span> GOPATH=<span class="hljs-variable">$HOME</span>/plasma
+~$ <span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$GOPATH</span>/bin:<span class="hljs-variable">$GOROOT</span>/bin:<span class="hljs-variable">$PATH</span>
+</code></pre>
+<p>We recommend to register environment variables to <code>~/.profile</code> file, in order to keep this setting permanently.</p>
+<pre><code class="hljs css language-sh"><span class="hljs-comment"># ~/.profile</span>
+....
+
+<span class="hljs-built_in">export</span> GOROOT=/usr/<span class="hljs-built_in">local</span>/go
+<span class="hljs-built_in">export</span> GOPATH=<span class="hljs-variable">$HOME</span>/plasma
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$GOPATH</span>/bin:<span class="hljs-variable">$GOROOT</span>/bin:<span class="hljs-variable">$PATH</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="get-endpoint-url-of-rootchain-node"></a><a href="#get-endpoint-url-of-rootchain-node" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Get Endpoint URL of <code>RootChain</code> Node</h2>
+<p>For running user node, you need to access to <code>RootChain</code>. There are many ways, but we recommend to use testnet node address served by <code>Infura</code></p>
+<p>If you do not have <code>Infura</code> account, sign up in <a href="https://infura.io/">infura.io</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="generate-rinkeby-rootchain-address"></a><a href="#generate-rinkeby-rootchain-address" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Generate <code>Rinkeby</code> <code>RootChain</code> Address</h3>
+<p>Login to <code>Infura</code>, and click <code>&quot;CREATE NEW PROJECT&quot;</code> of <code>Dashboard</code> to create new project.</p>
+<p>Configure <code>RootChain</code> address as below.</p>
+<p><code>wss://rinkeby.infura.io/ws/v3/[PROJECT ID]</code></p>
+<p><img src="/docs/assets/guides_create-infura-node.png" alt="Infura node ID"></p>
+<p>Ex) <code>wss://rinkeby.infura.io/ws/v3/c8a90eabc71448d1aaf6779752a22d26</code></p>
+<p>If you already have your own node of Rinkeby testnet, you can use it instead of <code>Infura</code>.</p>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-5 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth"><span class="arrow-prev">← </span><span>Setup with Puppeth</span></a><a class="docs-next button" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-manually"><span>Manually</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#system-update-and-install-required-packages">System Update and Install Required Packages</a><ul class="toc-headings"><li><a href="#set-golang-environment">Set Golang Environment</a></li></ul></li><li><a href="#get-endpoint-url-of-rootchain-node">Get Endpoint URL of <code>RootChain</code> Node</a><ul class="toc-headings"><li><a href="#generate-rinkeby-rootchain-address">Generate <code>Rinkeby</code> <code>RootChain</code> Address</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>

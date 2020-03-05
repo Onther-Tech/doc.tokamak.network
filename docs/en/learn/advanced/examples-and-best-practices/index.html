@@ -1,0 +1,657 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Examples and Best Practices of Requestable Contract · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&gt; This document describes contract implementation without continuous rebase which is currently work in progress."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Examples and Best Practices of Requestable Contract · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="&gt; This document describes contract implementation without continuous rebase which is currently work in progress."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ko/learn/advanced/examples-and-best-practices">한국어</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Advanced</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Learn<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Basic</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/tokamak-network">Tokamak Network</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/enter-and-exit">Interoperability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/transaction-fee">Convenience</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/layer-2-solutions">Comparison with Other Solutions</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Advanced</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/design-rationale">Design Rationale</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-architecture">Plasma EVM Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/root-chain">RootChain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/child-chain">Child Chain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-smart-contracts">Plasma EVM Smart Contracts</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/learn/advanced/examples-and-best-practices">Examples and Best Practices</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Token Economy</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/child-chain">Child Chain and Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/token-supply">Token Supply and Distribution</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/powerton">PowerTON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/tx-fee">Transaction Fee</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/challenge">Challenge</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/glossary">Parameters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Guide<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Getting Started Private Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Setup Rootchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-manually">Setup Childchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth">Setup with Puppeth</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Connect Public Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-prepare">Requirements</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-manually">Manually</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-puppeth">With Puppeth</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/en/guides/public-testnets">Public Testnet Information</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/learn/advanced/examples-and-best-practices.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Examples and Best Practices of Requestable Contract</h1></header><article><div><span><blockquote>
+<p>This document describes contract implementation without continuous rebase which is currently work in progress.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="counter"></a><a href="#counter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Counter</h2>
+<p>Let's start from a simple counter contract that only increases numbers. We are going to add a requestable function to this simple <code>BaseCounter</code>, and improve the issues gradually.</p>
+<h3><a class="anchor" aria-hidden="true" id="basecounter"></a><a href="#basecounter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>BaseCounter</h3>
+<pre><code class="hljs css language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.4.24</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">contract</span> <span class="token class-name">BaseCounter</span> <span class="token punctuation">{</span>
+  <span class="token builtin">uint</span> n<span class="token punctuation">;</span>
+
+  <span class="token keyword">event</span> <span class="token function">Counted</span><span class="token punctuation">(</span><span class="token builtin">uint</span> _n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token punctuation">{</span>
+    n<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">emit</span> <span class="token function">Counted</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">getCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">view</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">uint</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="simplecounter"></a><a href="#simplecounter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SimpleCounter</h3>
+<p>For making this requestable, we can define state variable 'n' to be increased or decreased by enter or exit requests. It will work like below.</p>
+<p><img src="/docs/assets/learn_advanced_examples_SimpleCounter.png" alt="SimpleCounter"></p>
+<p>Yellow box means that the counter() has increased <code>n</code> by 1, and red box is <code>n</code> changed by enter request, the green box is <code>n</code> changed by exit request.</p>
+<pre><code class="hljs css language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.4.24</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span>SimpleDecode<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"../lib/SimpleDecode.sol"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>RequestableI<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"../lib/RequestableI.sol"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>BaseCounter<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"./BaseCounter.sol"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>SafeMath<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"openzeppelin-solidity/contracts/math/SafeMath.sol"</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">/// @notice A request can decrease `n`. But, is it right to decrease the count?</span>
+<span class="token keyword">contract</span> <span class="token class-name">SimpleCounter</span> <span class="token keyword">is</span> BaseCounter<span class="token punctuation">,</span> RequestableI <span class="token punctuation">{</span>
+  <span class="token comment">// SimpleDecode library to decode trieValue.</span>
+  <span class="token keyword">using</span> <span class="token class-name">SimpleDecode</span> <span class="token keyword">for</span> <span class="token builtin">bytes</span><span class="token punctuation">;</span>
+  <span class="token keyword">using</span> <span class="token class-name">SafeMath</span> <span class="token keyword">for</span> <span class="token operator">*</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// trie key for state variable `n`.</span>
+  <span class="token builtin">bytes32</span> <span class="token keyword">constant</span> <span class="token keyword">public</span> TRIE_KEY_N <span class="token operator">=</span> <span class="token number">0x00</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// address of RootChain contract.</span>
+  <span class="token builtin">address</span> <span class="token keyword">public</span> rootchain<span class="token punctuation">;</span>
+
+  <span class="token keyword">mapping</span> <span class="token punctuation">(</span><span class="token builtin">uint</span> <span class="token operator">=></span> <span class="token builtin">bool</span><span class="token punctuation">)</span> appliedRequests<span class="token punctuation">;</span>
+
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">address</span> _rootchain<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    rootchain <span class="token operator">=</span> _rootchain<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">applyRequestInRootChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender <span class="token operator">==</span> rootchain<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// only accept request for `n`.</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>trieKey <span class="token operator">==</span> TRIE_KEY_N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">applyRequestInChildChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender <span class="token operator">==</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// only accept request for `n`.</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>trieKey <span class="token operator">==</span> TRIE_KEY_N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><code>SimpleCounter</code> increases or decreases <code>n</code> according to requests. The counter has to check both contracts on root and child chain in order to get total counts. However, the counter in which <code>n</code> decreases may not be desirable. We can improve it by adding counter only on either chain, which is <code>FreezableCounter</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="freezablecounter"></a><a href="#freezablecounter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>FreezableCounter</h3>
+<p>In <code>FreezableCounter</code>, counter on child chain is frozen at default. When an enter request is generated, it freezes the counter in the root chain. After the request is applied in child chain, the counter in the child chain will be unfreezed. This will not allow <code>n</code> to decrease.</p>
+<p><img src="/docs/assets/learn_advanced_examples_FreezableCounter.png" alt="FreezableCounter"></p>
+<pre><code class="hljs css language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.4.24</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+
+<span class="token comment">/// @notice Both contract may be frozen at the same time. Is it right?</span>
+<span class="token keyword">contract</span> <span class="token class-name">FreezableCounter</span> <span class="token keyword">is</span> BaseCounter<span class="token punctuation">,</span> RequestableI <span class="token punctuation">{</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+  <span class="token comment">// freeze counter before make request.</span>
+  <span class="token builtin">bool</span> <span class="token keyword">public</span> frozen<span class="token punctuation">;</span>
+
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">address</span> _rootchain<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    rootchain <span class="token operator">=</span> _rootchain<span class="token punctuation">;</span>
+
+    <span class="token comment">// Counter in child chain is frozen at first.</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>_rootchain <span class="token operator">==</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      frozen <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">freeze</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    frozen <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">applyRequestInRootChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>frozen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      frozen <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+      n <span class="token operator">=</span> trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">require</span><span class="token punctuation">(</span>n <span class="token operator">==</span> trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">applyRequestInChildChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>frozen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">require</span><span class="token punctuation">(</span>n <span class="token operator">==</span> trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      frozen <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>However, because of challenge period of exit request, both counters remain frozen until end of the period. In addition, since either counter must be frozen, the drawback is that only special accounts can make requests. Therefore, to prevent this, we need to keep track of &quot;how much <code>n</code> is changed by requests&quot; by managing new state variable.</p>
+<h3><a class="anchor" aria-hidden="true" id="trackablecounter"></a><a href="#trackablecounter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TrackableCounter</h3>
+<p><code>TrackableCounter</code> has new variable <code>requestableN</code> for checking whether enter or exit can be delivered or not. <code>counter()</code> now increases <code>n</code> and <code>requestableN</code> at the same time, and decreases <code>requestableN</code> on root chain in enters(or on child chain in exit). When request for <code>counter</code> is applied to the root or child chain, it increases <code>n</code> on the chain.</p>
+<!-- 상태 변수를 1개 더 사용하고 컨트랙트 구현에 다소 복잡해지는 것과 `n`이 감소하는 경우는 상충(trade-off) 합니다. -->
+<p><img src="/docs/assets/learn_advanced_examples_TrackableCounter.png" alt="TrackableCounter"></p>
+<pre><code class="hljs css language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.4.24</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">contract</span> <span class="token class-name">TrackableCounter</span> <span class="token keyword">is</span> BaseCounter<span class="token punctuation">,</span> RequestableI <span class="token punctuation">{</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+  <span class="token comment">// previous count before enter request in root chain and exit request in child chain.</span>
+  <span class="token builtin">uint</span> <span class="token keyword">public</span> requestableN<span class="token punctuation">;</span>
+
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+  <span class="token comment">/// @dev override BaseCounter.count function.</span>
+  <span class="token keyword">function</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token punctuation">{</span>
+    requestableN<span class="token operator">++</span><span class="token punctuation">;</span>
+    n<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">emit</span> <span class="token function">Counted</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">applyRequestInRootChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token builtin">uint</span> _n <span class="token operator">=</span> trieValue<span class="token punctuation">.</span><span class="token function">toUint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>_n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      requestableN <span class="token operator">=</span> requestableN<span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>_n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">applyRequestInChildChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      requestableN <span class="token operator">=</span> requestableN<span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>_n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      n <span class="token operator">=</span> n<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>_n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="token"></a><a href="#token" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Token</h2>
+<p>For ERC20 token contract, there are two possible ways to implement <code>balances[holder]</code>, [SimpleCounter] and [FreezableCounter]. <code>SimpleCounter</code> allows token issued in child chain to be exited to parent chain at all times, but <code>FreezableCounter</code> should always lock the amount of token exited in the root chain. In this document, we only describe <code>SimpleCounter</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="requestablesimpletoken"></a><a href="#requestablesimpletoken" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RequestableSimpleToken</h3>
+<p><a href="https://github.com/Onther-Tech/requestable-simple-token/blob/master/contracts/RequestableSimpleToken.sol"><code>RequestableSimpleToken</code></a>is a contract where the <code>owner</code> can issue new tokens and token holders can send tokens to others or generate requests.</p>
+<pre><code class="hljs css language-solidity"><span class="token keyword">contract</span> <span class="token class-name">RequestableSimpleToken</span> <span class="token keyword">is</span> Ownable<span class="token punctuation">,</span> RequestableI <span class="token punctuation">{</span>
+  <span class="token keyword">using</span> <span class="token class-name">SafeMath</span> <span class="token keyword">for</span> <span class="token operator">*</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// `owner` is stored at bytes32(0).</span>
+  <span class="token comment">// address owner; from Ownable</span>
+
+  <span class="token comment">// `totalSupply` is stored at bytes32(1).</span>
+  <span class="token builtin">uint</span> <span class="token keyword">public</span> totalSupply<span class="token punctuation">;</span>
+
+  <span class="token comment">// `balances[addr]` is stored at keccak256(bytes32(addr), bytes32(2)).</span>
+  <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token operator">=></span> <span class="token builtin">uint</span><span class="token punctuation">)</span> <span class="token keyword">public</span> balances<span class="token punctuation">;</span>
+
+  <span class="token comment">// requests</span>
+  <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">uint</span> <span class="token operator">=></span> <span class="token builtin">bool</span><span class="token punctuation">)</span> appliedRequests<span class="token punctuation">;</span>
+
+  <span class="token builtin">bytes32</span> <span class="token keyword">constant</span> <span class="token keyword">public</span> KEY_OWNER         <span class="token operator">=</span> <span class="token number">0x0000000000000000000000000000000000000000000000000000000000000000</span><span class="token punctuation">;</span>
+  <span class="token builtin">bytes32</span> <span class="token keyword">constant</span> <span class="token keyword">public</span> KEY_TOTAL_SUPPLY  <span class="token operator">=</span> <span class="token number">0x0000000000000000000000000000000000000000000000000000000000000001</span><span class="token punctuation">;</span>
+  <span class="token builtin">bytes32</span> <span class="token keyword">constant</span> <span class="token keyword">public</span> PERFIX_BALANCES   <span class="token operator">=</span> <span class="token number">0x0000000000000000000000000000000000000000000000000000000000000002</span><span class="token punctuation">;</span>
+
+  <span class="token comment">/* Events */</span>
+  <span class="token keyword">event</span> <span class="token function">Transfer</span><span class="token punctuation">(</span><span class="token builtin">address</span> _from<span class="token punctuation">,</span> <span class="token builtin">address</span> _to<span class="token punctuation">,</span> <span class="token builtin">uint</span> _value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">event</span> <span class="token function">Mint</span><span class="token punctuation">(</span><span class="token builtin">address</span> _to<span class="token punctuation">,</span> <span class="token builtin">uint</span> _value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">event</span> <span class="token function">Requested</span><span class="token punctuation">(</span><span class="token builtin">bool</span> _isExit<span class="token punctuation">,</span> <span class="token builtin">address</span> _requestor<span class="token punctuation">,</span> <span class="token builtin">bytes32</span> _trieKey<span class="token punctuation">,</span> <span class="token builtin">bytes</span> _trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">transfer</span><span class="token punctuation">(</span><span class="token builtin">address</span> _to<span class="token punctuation">,</span> <span class="token builtin">uint</span> _value<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token punctuation">{</span>
+    balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">=</span> balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>_value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    balances<span class="token punctuation">[</span>_to<span class="token punctuation">]</span> <span class="token operator">=</span> balances<span class="token punctuation">[</span>_to<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>_value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">emit</span> <span class="token function">Transfer</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> _to<span class="token punctuation">,</span> _value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">mint</span><span class="token punctuation">(</span><span class="token builtin">address</span> _to<span class="token punctuation">,</span> <span class="token builtin">uint</span> _value<span class="token punctuation">)</span> <span class="token keyword">public</span> onlyOwner <span class="token punctuation">{</span>
+    totalSupply <span class="token operator">=</span> totalSupply<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>_value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    balances<span class="token punctuation">[</span>_to<span class="token punctuation">]</span> <span class="token operator">=</span> balances<span class="token punctuation">[</span>_to<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>_value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">emit</span> <span class="token function">Mint</span><span class="token punctuation">(</span>_to<span class="token punctuation">,</span> _value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">emit</span> <span class="token function">Transfer</span><span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> _to<span class="token punctuation">,</span> _value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// User can get the trie key of one's balance and make an enter request directly.</span>
+  <span class="token keyword">function</span> <span class="token function">getBalanceTrieKey</span><span class="token punctuation">(</span><span class="token builtin">address</span> who<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">pure</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bytes32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">keccak256</span><span class="token punctuation">(</span>abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span><span class="token builtin">bytes32</span><span class="token punctuation">(</span><span class="token builtin">bytes20</span><span class="token punctuation">(</span>who<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> PERFIX_BALANCES<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">applyRequestInRootChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> <span class="token keyword">calldata</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO: adpot RootChain</span>
+    <span class="token comment">// require(msg.sender == address(rootchain));</span>
+
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_OWNER <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// only owner (in child chain) can exit `owner` variable.</span>
+        <span class="token comment">// but it is checked in applyRequestInChildChain and exitChallenge.</span>
+
+        <span class="token comment">// set requestor as owner in root chain.</span>
+        <span class="token function">_transferOwnership</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_TOTAL_SUPPLY <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// no one can exit `totalSupply` variable.</span>
+        <span class="token comment">// but do nothing to return true.</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getBalanceTrieKey</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span> <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// this checks trie key equals to `balances[requestor]`.</span>
+        <span class="token comment">// only token holder can exit one's token.</span>
+        <span class="token comment">// exiting means moving tokens from child chain to root chain.</span>
+        balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// cannot exit other variables.</span>
+        <span class="token comment">// but do nothing to return true.</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// apply enter</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_OWNER <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// only owner (in root chain) can enter `owner` variable.</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token function">owner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> requestor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// do nothing in root chain</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_TOTAL_SUPPLY <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// no one can enter `totalSupply` variable.</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getBalanceTrieKey</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span> <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// this checks trie key equals to `balances[requestor]`.</span>
+        <span class="token comment">// only token holder can enter one's token.</span>
+        <span class="token comment">// entering means moving tokens from root chain to child chain.</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span>balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// cannot apply request on other variables.</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">emit</span> <span class="token function">Requested</span><span class="token punctuation">(</span>isExit<span class="token punctuation">,</span> requestor<span class="token punctuation">,</span> trieKey<span class="token punctuation">,</span> trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// TODO: adpot RootChain</span>
+    <span class="token comment">// setRequestApplied(requestId);</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// this is only called by NULL_ADDRESS in child chain</span>
+  <span class="token comment">// when i) exitRequest is initialized by startExit() or</span>
+  <span class="token comment">//     ii) enterRequest is initialized</span>
+  <span class="token keyword">function</span> <span class="token function">applyRequestInChildChain</span><span class="token punctuation">(</span>
+    <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+    <span class="token builtin">uint256</span> requestId<span class="token punctuation">,</span>
+    <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+    <span class="token builtin">bytes32</span> trieKey<span class="token punctuation">,</span>
+    <span class="token builtin">bytes</span> <span class="token keyword">calldata</span> trieValue
+  <span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bool</span> success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO: adpot child chain</span>
+    <span class="token comment">// require(msg.sender == NULL_ADDRESS);</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_OWNER <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// only owner (in child chain) can exit `owner` variable.</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token function">owner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> requestor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// do nothing when exit `owner` in child chain</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_TOTAL_SUPPLY <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// no one can exit `totalSupply` variable.</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getBalanceTrieKey</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span> <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// this checks trie key equals to `balances[tokenHolder]`.</span>
+        <span class="token comment">// only token holder can exit one's token.</span>
+        <span class="token comment">// exiting means moving tokens from child chain to root chain.</span>
+
+        <span class="token comment">// revert provides a proof for `exitChallenge`.</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span>balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token comment">// cannot exit other variables.</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token comment">// apply enter</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_OWNER <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// only owner (in root chain) can make enterRequest of `owner` variable.</span>
+        <span class="token comment">// but it is checked in applyRequestInRootChain.</span>
+
+        <span class="token function">_transferOwnership</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>KEY_TOTAL_SUPPLY <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// no one can enter `totalSupply` variable.</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getBalanceTrieKey</span><span class="token punctuation">(</span>requestor<span class="token punctuation">)</span> <span class="token operator">==</span> trieKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// this checks trie key equals to `balances[tokenHolder]`.</span>
+        <span class="token comment">// only token holder can enter one's token.</span>
+        <span class="token comment">// entering means moving tokens from root chain to child chain.</span>
+        balances<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// cannot apply request on other variables.</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    appliedRequests<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">emit</span> <span class="token function">Requested</span><span class="token punctuation">(</span>isExit<span class="token punctuation">,</span> requestor<span class="token punctuation">,</span> trieKey<span class="token punctuation">,</span> trieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">decodeTrieValue</span><span class="token punctuation">(</span><span class="token builtin">bytes</span> <span class="token keyword">memory</span> trieValue<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">pure</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">uint</span> v<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">0x20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">assembly</span> <span class="token punctuation">{</span>
+       v <span class="token operator">:=</span> <span class="token function">mload</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">,</span> <span class="token number">0x20</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>You can check requestable token contract based on OpenZeppelin and ds-token in following links.</p>
+<ul>
+<li><a href="https://github.com/Onther-Tech/requestable-erc20-wrapper-token/blob/master/contracts/RequestableERC20Wrapper.sol">RequestableERC20WrapperToken</a></li>
+<li><a href="https://github.com/Onther-Tech/requestable-ds-wrapper-token">requestable-ds-wrapper-token</a></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="requestable-cryptokitties"></a><a href="#requestable-cryptokitties" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Requestable CryptoKitties</h3>
+<blockquote>
+<p>You can check the detalis of this part <a href="https://medium.com/onther-tech/cryptokitties-in-plasma-574159c581dc">here</a>.</p>
+</blockquote>
+<p><img src="/docs/assets/learn_advanced_examples_RequestableCryptoKitties.png" alt="RequestableCryptoKitties"></p>
+<p>The contracts deployed for <a href="https://github.com/cryptocopycats/awesome-cryptokitties">CryptoKitties</a> are <code>KittyCore</code>, <code>SaleClockAuction</code>, <code>SiringClockAuction</code>, and <code>KittyCore</code>. <code>KittyCore</code> manages functions related to ERC721.</p>
+<p>Requests for state variables of CryptoKitties can be defined as follows:</p>
+<ul>
+<li><code>KittyAccessControll.paused</code>: only enter by anyone</li>
+<li><code>KittyAccessControll.ceoAddress</code>: only enter by anyone</li>
+<li><code>KittyAccessControll.cfoAddress</code>: only enter by anyone</li>
+<li><code>KittyAccessControll.cooAddress</code>: only enter by anyone</li>
+<li><code>KittyBreeding.autoBirthFee</code>: only enter by anyone</li>
+</ul>
+<p>Variables above may be enforced to move to one direction by allowing only enter from root to child chain.</p>
+<ul>
+<li><code>KittyBase.kitties</code>: enter or exit by anyone</li>
+<li><code>KittyBase.kittyIndexToOwner</code>: enter and exit by kitty owner</li>
+</ul>
+<p>It allows for anyone to request for <code>kitties</code>, and only owner of kitty can request one's kitty in the <code>kitties</code>.</p>
+<ul>
+<li><code>KittyBase.kittyIndexToApproved</code>: non-requestable.</li>
+<li><code>KittyBase.ownershipTokenCount</code>: non-requestable.</li>
+<li><code>KittyBase.sireAllowedToAddress</code>: non-requestable</li>
+</ul>
+<p>Variables above will be deleted when ownership is changed in <code>transfer()</code>, and they are not requestable.</p>
+<ul>
+<li><code>KittyBreeding.pregnantKitties</code>: Pregenent Kitty Ownership Request.</li>
+</ul>
+<p>It increases or decreases when transferring ownership of pregnant kitty.</p>
+<ul>
+<li><code>KittyBase.saleAuction</code>: non-requestable. set by CEO</li>
+<li><code>KittyBase.siringAuction</code>: non-requestable. set by CEO</li>
+<li><code>KittyBreeding.geneScience</code>: non-requestable. set by CEO</li>
+<li><code>KittyCore.newContractAddress</code>: non-requestable. set by CEO</li>
+</ul>
+<p>External contract addresses, set by only CEO, is not requestable.</p>
+<ul>
+<li><code>KittyMinting.promoCreatedCount</code>: only enter by anyone</li>
+<li><code>KittyMinting.gen0CreatedCount</code>: only enter by anyone</li>
+</ul>
+<p>The above two variables are simple constants, and anyone can request them.</p>
+<h2><a class="anchor" aria-hidden="true" id="requestablemultisig"></a><a href="#requestablemultisig" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RequestableMultisig</h2>
+<blockquote>
+<p>This example is not for production use.</p>
+</blockquote>
+<p><a href="https://github.com/Onther-Tech/requestable-multisig"><code>RequestableMultisig</code></a> is requetable version of <a href="https://github.com/gnosis/MultiSigWallet/blob/master/contracts/MultiSigWallet.sol">MultiSigWallet</a>.</p>
+<p><code>RequestableMultisig</code> manages transaction data sent from multisig contract with struct <code>Transaction</code> and variable <code>transactions</code>. Signatures of the transaction are collected in variable <code>confirmations</code>, and it will run when <code>confirmations</code> &gt;  <code>_required</code>. You can run again in an error; e.g out of gas, and if it is executed successfully, the result of the transaction will be applied to variable <code>executed</code>. Requests of <code>RequestableMultisig</code> are as follows:</p>
+<h3><a class="anchor" aria-hidden="true" id="1-transactions"></a><a href="#1-transactions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. <code>transactions</code></h3>
+<p>This request simply keeps data of both chain identical, and <code>trieValue</code> of the request is transaction data, RLP encoded. Transaction data is registered and confirmed in <code>submitTransaction</code>, and this request records only data without confirmation. Only <code>owner</code> can call this request.</p>
+<pre><code class="hljs css language-solidity"><span class="token function">_handleTransaction</span><span class="token punctuation">(</span>isRootChain<span class="token punctuation">,</span> isExit<span class="token punctuation">,</span> <span class="token function">toTransaction</span><span class="token punctuation">(</span>trieValue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">_handleTransaction</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span> <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span> Transaction <span class="token keyword">memory</span> transaction<span class="token punctuation">)</span> <span class="token keyword">internal</span> <span class="token punctuation">{</span>
+  <span class="token builtin">bytes32</span> transactionId <span class="token operator">=</span> <span class="token function">hash</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// transaction check</span>
+  <span class="token comment">//                          isRootChain == true       isRootChain == false</span>
+  <span class="token comment">//                       +--------------------------------------------------</span>
+  <span class="token comment">//     enter request     |  must be added         |  must not be added</span>
+  <span class="token comment">//     exit request      |  must not be added     |  must be added</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>isRootChain <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>isRootChain <span class="token operator">&amp;&amp;</span> isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>transactions<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">.</span>added<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>transactions<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">.</span>added<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">addTransaction</span><span class="token punctuation">(</span>transaction<span class="token punctuation">.</span>destination<span class="token punctuation">,</span> transaction<span class="token punctuation">.</span>value<span class="token punctuation">,</span> transaction<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="2-executed"></a><a href="#2-executed" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. <code>executed</code></h3>
+<p>Transactions executed in one chain must not be re-excuted in another chain. Requests to <code>executed</code> prevent re-execution of the transaction.</p>
+<pre><code class="hljs css language-solidity"><span class="token function">_handleExecuted</span><span class="token punctuation">(</span>isExit<span class="token punctuation">,</span> trieValue<span class="token punctuation">.</span><span class="token function">toBytes32</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">_handleExecuted</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isExit<span class="token punctuation">,</span> <span class="token builtin">bytes32</span> transactionId<span class="token punctuation">)</span>
+  <span class="token keyword">internal</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// short circuit if transaction is already executed for exit request.</span>
+  <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>executed<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  executed<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token keyword">emit</span> <span class="token function">ExecutionAdded</span><span class="token punctuation">(</span>transactionId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="3-new--revoked-confirmations"></a><a href="#3-new--revoked-confirmations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. New / Revoked <code>confirmations</code></h3>
+<p>&quot;Request for new <code>confirmations</code>&quot; corresponding to <code>confirmTransaction</code> is request to apply new confirmation of <code>owner</code> to another chain. For non-executed transactions, this will prevent execution of the transaction from confirmation as in the request for <code>executed</code>.</p>
+<pre><code class="hljs css language-solidity"><span class="token function">_handleNewConfirmation</span><span class="token punctuation">(</span>isRootChain<span class="token punctuation">,</span> isExit<span class="token punctuation">,</span> requestor<span class="token punctuation">,</span> trieValue<span class="token punctuation">.</span><span class="token function">toBytes32</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">_handleNewConfirmation</span><span class="token punctuation">(</span>
+  <span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span>
+  <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+  <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+  <span class="token builtin">bytes32</span> transactionId
+<span class="token punctuation">)</span>
+  <span class="token keyword">internal</span>
+  <span class="token function">notExecuted</span><span class="token punctuation">(</span>transactionId<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// check ownership for exit request.</span>
+  <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>isExit <span class="token operator">||</span> isOwner<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// confirmation check</span>
+  <span class="token comment">//                          isRootChain == true       isRootChain == false</span>
+  <span class="token comment">//                       +--------------------------------------------------</span>
+  <span class="token comment">//     enter request     |  must be confirmed      |  must not be confirmed</span>
+  <span class="token comment">//     exit request      |  must not be confirmed  |  must be confirmed</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>isRootChain <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>isRootChain <span class="token operator">&amp;&amp;</span> isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">emit</span> <span class="token function">Confirmation</span><span class="token punctuation">(</span>requestor<span class="token punctuation">,</span> transactionId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&quot;Request for deleted <code>confirmations</code>&quot; corresponding to function <code>revokeConfirmation</code> functions as the opposite.</p>
+<pre><code class="hljs css language-solidity"><span class="token function">_handleRevokedConfirmation</span><span class="token punctuation">(</span>isRootChain<span class="token punctuation">,</span> isExit<span class="token punctuation">,</span> requestor<span class="token punctuation">,</span> trieValue<span class="token punctuation">.</span><span class="token function">toBytes32</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">_handleRevokedConfirmation</span><span class="token punctuation">(</span>
+  <span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span>
+  <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span>
+  <span class="token builtin">address</span> requestor<span class="token punctuation">,</span>
+  <span class="token builtin">bytes32</span> transactionId
+<span class="token punctuation">)</span>
+  <span class="token keyword">internal</span>
+  <span class="token function">notExecuted</span><span class="token punctuation">(</span>transactionId<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// check ownership for exit request.</span>
+  <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>isExit <span class="token operator">||</span> isOwner<span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// confirmation check</span>
+  <span class="token comment">//                          isRootChain == true       isRootChain == false</span>
+  <span class="token comment">//                       +--------------------------------------------------</span>
+  <span class="token comment">//     enter request     |  must be not confirmed  |  must be confirmed</span>
+  <span class="token comment">//     exit request      |  must be confirmed      |  must not be confirmed</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>isRootChain <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>isRootChain <span class="token operator">&amp;&amp;</span> isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    confirmations<span class="token punctuation">[</span>transactionId<span class="token punctuation">]</span><span class="token punctuation">[</span>requestor<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">emit</span> <span class="token function">Revocation</span><span class="token punctuation">(</span>requestor<span class="token punctuation">,</span> transactionId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>It is not necessary to seperate &quot;request for new variable <code>confirmations</code>&quot; and &quot;request for deleted <code>confirmations</code>&quot; with different <code>trieKey</code>. You can merge both requests into one, and use <code>trieValue</code> as <code>RLP.encode(transactionId, isNew)</code>.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="4-new--removed-owners"></a><a href="#4-new--removed-owners" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. New / Removed <code>owners</code></h3>
+<p>Request for new <code>owner</code> or deleted <code>owner</code>.</p>
+<pre><code class="hljs css language-solidity">  <span class="token keyword">function</span> <span class="token function">_handleNewOwner</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span> <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span> <span class="token builtin">address</span> owner<span class="token punctuation">)</span> <span class="token keyword">internal</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isRootChain <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>isRootChain <span class="token operator">&amp;&amp;</span> isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">require</span><span class="token punctuation">(</span>isOwner<span class="token punctuation">[</span>owner<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addOwner</span><span class="token punctuation">(</span>owner<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">_handleRemovedOwner</span><span class="token punctuation">(</span><span class="token builtin">bool</span> isRootChain<span class="token punctuation">,</span> <span class="token builtin">bool</span> isExit<span class="token punctuation">,</span> <span class="token builtin">address</span> owner<span class="token punctuation">)</span> <span class="token keyword">internal</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isRootChain <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isExit <span class="token operator">||</span> <span class="token operator">!</span>isRootChain <span class="token operator">&amp;&amp;</span> isExit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>isOwner<span class="token punctuation">[</span>owner<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">removeOwner</span><span class="token punctuation">(</span>owner<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-5 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/learn/advanced/plasma-evm-smart-contracts"><span class="arrow-prev">← </span><span>Plasma EVM Smart Contracts</span></a><a class="docs-next button" href="/docs/en/learn/economics/ton"><span>TON</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#counter">Counter</a><ul class="toc-headings"><li><a href="#basecounter">BaseCounter</a></li><li><a href="#simplecounter">SimpleCounter</a></li><li><a href="#freezablecounter">FreezableCounter</a></li><li><a href="#trackablecounter">TrackableCounter</a></li></ul></li><li><a href="#token">Token</a><ul class="toc-headings"><li><a href="#requestablesimpletoken">RequestableSimpleToken</a></li><li><a href="#requestable-cryptokitties">Requestable CryptoKitties</a></li></ul></li><li><a href="#requestablemultisig">RequestableMultisig</a><ul class="toc-headings"><li><a href="#1-transactions">1. <code>transactions</code></a></li><li><a href="#2-executed">2. <code>executed</code></a></li><li><a href="#3-new--revoked-confirmations">3. New / Revoked <code>confirmations</code></a></li><li><a href="#4-new--removed-owners">4. New / Removed <code>owners</code></a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>

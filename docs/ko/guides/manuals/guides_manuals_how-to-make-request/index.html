@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>How to make request · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&gt; This Document Work In Progress"/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="How to make request · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="&gt; This Document Work In Progress"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/ko/learn/basic/tokamak-network" target="_self">Docs</a></li><li class=""><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/guides/manuals/guides_manuals_how-to-make-request">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/manuals/how-to-make-request.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">How to make request</h1></header><article><div><span><blockquote>
+<p>This Document Work In Progress</p>
+</blockquote>
+<p>사용자가 Plasma-evm Wallet을 사용하여 Rootchain contract에 Enter/Exit Tx 생성 해주는 방식으로 설명.</p>
+<p>이더리움 메인넷 또는 Rinkeby 테스트넷의 자산을 자식체인으로 옮기기 위해서는 진입(Enter) 트랜잭션을 생성하여야 합니다.</p>
+<p>다음은 <a href="https://wallet.tokamak.network">https://wallet.tokamak.network</a> 에 접속하여 Enter 트랜잭션을 생성하고 RootChain의 자산을 Plasma체인으로 옮기는 과정을 설명하도록 하겠습니다.</p>
+<h3><a class="anchor" aria-hidden="true" id="진입enter"></a><a href="#진입enter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>진입(ENTER)</h3>
+<ol>
+<li>Plasma Wallet 접속</li>
+<li>Metamask 네트워크 선택 : RootChain[Mainn</li>
+<li>TODO: RootChain 컨트랙트 주소 입력 (혹은 선택)</li>
+<li>컨트렉트 선택 : EtherToken</li>
+<li>함수 선택 : swapFrometh + 전송 ETH 입력</li>
+<li>Metamask TX 전송.</li>
+<li>함수 선택 : getBalanceTrieKey + Key 저장.</li>
+<li>컨트렉트 선택 : rootchain</li>
+<li>startEnter 선택 + Input 값 입력 [TODO] _trieVlue 값 value로 대체.. 핵불편.</li>
+<li>Metamask TX 전송.</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="퇴장exit"></a><a href="#퇴장exit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>퇴장(EXIT)</h3>
+<ol>
+<li>Plasma Wallet 접속.</li>
+<li>Metamask 네트워크 선택 : Plasma</li>
+<li>swapFrometh 선택 + 전송 ETH 입력</li>
+<li>Metamask TX 전송.</li>
+<li>함수 선택 : getBalanceTrieKey + Key 저장.</li>
+<li>컨트렉트 선택 : rootchain</li>
+<li>startExit 선택 + Input 값 입력 [TODO] _trieVlue 값 value로 대체.. 핵불편.</li>
+<li>Metamask TX 전송.</li>
+<li>[Optional] FinalizeBlock 함수 선택 TX 전송</li>
+</ol>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-12-19 by Jin</em></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>

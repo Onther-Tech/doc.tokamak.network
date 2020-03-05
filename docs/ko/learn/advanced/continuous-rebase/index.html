@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Continuous Rebase · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Continuous Rebase는 주기적으로 사용자들의 탈출요청을 받아 자식체인을 리베이스(rebase)하여 **데이터 가용성 문제**가 발생했을 경우 사용자들이 항상 **안전하게 탈출**할 수 있도록 한다. "/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="Continuous Rebase · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="Continuous Rebase는 주기적으로 사용자들의 탈출요청을 받아 자식체인을 리베이스(rebase)하여 **데이터 가용성 문제**가 발생했을 경우 사용자들이 항상 **안전하게 탈출**할 수 있도록 한다. "/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/learn/advanced/continuous-rebase">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>고급</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">배우기<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">기초</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/tokamak-network">토카막 네트워크</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/enter-and-exit">상호운용성: 진입 &amp; 퇴장</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/transaction-fee">편의성: 계정, 트랜잭션 수수료, 개발도구</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/layer-2-solutions">비교: 다른 확장성 솔루션</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">고급</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/design-rationale">디자인 원칙</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/plasma-evm-architecture">Plasma EVM 아키텍처</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/root-chain">루트체인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/child-chain">자식체인</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ko/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/plasma-evm-smart-contracts">Plasma EVM 스마트 컨트랙트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/examples-and-best-practices">요청 가능한 컨트랙트 예제</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">토큰경제</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/child-chain">자식체인과 스테이킹</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/token-supply">토큰 공급과 분배</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/powerton">파워톤</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/tx-fee">트랜잭션 수수료 정책</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/challenge">챌린지</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/glossary">파라미터 정리</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">가이드<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">프라이빗 테스트넷 시작하기</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">루트체인 설정</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-manually">자식체인 설정</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-puppeth">Puppeth 사용하여 부모-자식체인 설정</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">퍼블릭 테스트넷 연결하기</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-prepare">연결 준비하기</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-manually">직접 연결하기</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-puppeth">Puppeth 사용하여 연결하기</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/ko/guides/public-testnets">퍼블릭 테스트넷 정보</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/learn/advanced/continuous-rebase.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Continuous Rebase</h1></header><article><div><span><p>Continuous Rebase는 주기적으로 사용자들의 탈출요청을 받아 자식체인을 리베이스(rebase)하여 <strong>데이터 가용성 문제</strong>가 발생했을 경우 사용자들이 항상 <strong>안전하게 탈출</strong>할 수 있도록 한다.</p>
+<h2><a class="anchor" aria-hidden="true" id="리베이스"></a><a href="#리베이스" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>리베이스</h2>
+<p><strong>리베이스(rebase)</strong>는 루트체인에 제출한 블록을 다른 블록 기준으로 다시 마이닝하는 것으로, Git의 rebase에서 이름을 빌려왔다. 리베이스는 기존의 블록에 포함된 트랜잭션들을 다른 부모블록을 기준으로 재연산하기 때문에 리베이스 이전과 이후의 <code>trasactionsRoot</code>는 서로 일치하지만 <code>stateRoot</code>와 <code>receiptsRoot</code>는 일치하지 않을 수 있다.</p>
+<p>리베이스된 에폭과 블록들은 다음과 같이 나타낸다.</p>
+<ul>
+<li><strong>리베이스된 요청에폭(Rebased Request Epoch; RE')</strong></li>
+<li><strong>리베이스된 비요청에폭(Rebased Non-Request Epoch; NRE')</strong></li>
+<li><strong>리베이스된 비요청블록(Rebased Non-Request Block; NRB')</strong></li>
+<li><strong>리베이스된 요청블록(Rebased Request Block; RB')</strong></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="사이클과-단계"></a><a href="#사이클과-단계" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사이클과 단계</h2>
+<p>Plasma EVM은 <strong>사이클(cycle)</strong>이라는 하나의 큰 주기를 기준으로 작동된다. 하나의 사이클은 총 4개의 <strong>단계(stage)</strong>로 구성되며, 각 딘계는 Pre-commit, DA-check, Commit, Challenge이다.</p>
+<p><img src="/docs/assets/learn_advanced_cycle.png" alt="cycle and stage"></p>
+<h3><a class="anchor" aria-hidden="true" id="pre-commit"></a><a href="#pre-commit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pre-commit</h3>
+<p>Pre-commmit은 일종의 예비 제출 단계로, 오퍼레이터는 블록 마이닝하여 블록들의 <code>transactionsRoot</code>만을 루트체인에 제출한다. 단, 요청블록의 경우 모든 트랜잭션 데이터가 루트체인 컨트랙트에 이미 존재하므로, <code>transactionsRoot</code>를 별도로 제출하지 않아도 된다. 사용자에게 이 단계에서 오퍼레이터는 해당 블록들에 포함된 트랜잭션 데이터들을 사용자에게 전파하게 된다. 만약 사용자들이 이 단계에서 트랜잭션 데이터를 제대로 전파받지 못했을 경우 다음 단계인 DA-check에서 탈출 요청을 제출해야 한다.</p>
+<p><code>transactionsRoot</code>만을 루트체인에 제출하는 이유는 <code>stateRoot</code>와 <code>receiptsRoot</code>가 리베이스 이후에 최종적으로 결정되기 때문이다. 반면 <code>transactionsRoot</code>를 제출해야 하는 이유는 해당 블록에 포함된 트랜잭션들이 무엇인지 알 수 있다면 해당 블록의 올바른 <code>stateRoot</code>도 알 수 있기 때문이다. 따라서 오퍼레이터에게서 루트체인 컨트랙트에 제출된 <code>transactionRoot</code>와 일치하는 블록 데이터를 전송받은 사용자는 이후 Commit단계에서 오퍼레이터가 데이터를 숨기고 잘못된 <code>stateRoot</code>를 제출하더라도 챌린지 할 수 있다.</p>
+<p><img src="/docs/assets/learn_advanced_pre_commit.png" alt="pre commit"></p>
+<h3><a class="anchor" aria-hidden="true" id="da-check"></a><a href="#da-check" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DA-check</h3>
+<p>DA-check는 사용자가 Pre-commit 단계에서 오퍼레이터가 전송한 블록 <strong>데이터의 가용성</strong>과 트랜잭션의 데이터 크기를 확인하고 문제가 없는지 점검하는 단계이다. 만약 점검 과정에서 문제가 있는 상황이라면, 사용자는 스스로를 보호하기 위하여 <strong>탈출요청</strong>을 제출하여 자식체인에 존재하는 모든 자산과 상태를 탈출시켜야 한다.</p>
+<p>만약 해당 사이클에서 진입을 하였다면 탈출요청과 더불어 이러한 진입을 취소하기 위한 <strong>무효요청</strong>을 제출하여 진입이 반영되는 것을 무효화해야 한다. 또한 기존에 퇴장을 신청한 경우도 이중으로 퇴장이 되는 것을 방지하기 위해 취소해야 한다.</p>
+<p><img src="/docs/assets/learn_advanced_da_check.png" alt="da check"></p>
+<h3><a class="anchor" aria-hidden="true" id="commit"></a><a href="#commit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Commit</h3>
+<p>Commit은 오퍼레이터가 이전 사이클의 <strong>마지막 블록</strong>에 DA-check에서 제출된 모든 요청들을 반영한 후 Pre-commit에서 제출한 블록들을 <strong>리베이스</strong>하는 과정이다. 이 과정에서 블록들의 <strong>모든 루트</strong>들이 제출된다.</p>
+<p><img src="/docs/assets/learn_advanced_commit.png" alt="commit"></p>
+<h3><a class="anchor" aria-hidden="true" id="challenge"></a><a href="#challenge" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Challenge</h3>
+<p>Challenge단계에서 사용자들은 Commit 단계에서 제출된 블록이 유효하지 않을 경우, 이에 대해 챌린지를 진행할 수 있다. 단, 이 때 탈출 챌린지는 신청할 수 없다.</p>
+<p>제출된 챌린지가 다수일 경우 챌린저가 승리하는 순간 다른 챌린지는 취소된다. 또한 챌린저가 승리한 경우 해당 사이클의 Commit된 블록을 포함한 이후의 모든 블록들이 취소되며, DA Check단계로 되돌아간다.</p>
+<p><img src="/docs/assets/learn_advanced_challenge.png" alt="challenge"></p>
+<h3><a class="anchor" aria-hidden="true" id="완결"></a><a href="#완결" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>완결</h3>
+<p>Challenge단계에서 어떠한 챌린지도 성공하지 못했다면, 해당 사이클은 완결(finalize)되며, Commit단계에서 제출된 모든 블록들은 동시에 완결된다.</p>
+<h3><a class="anchor" aria-hidden="true" id="단계-길이"></a><a href="#단계-길이" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>단계 길이</h3>
+<p><strong>단계 길이(stage length)</strong>는 Pre-commit과 Commit에서 처리되어야 하는 에폭의 수를 의미하며 다음과 같이 구성되며, 모두 루트체인 컨트랙트 배포시 오퍼레이터에 의해 결정된다.</p>
+<ul>
+<li><code>Pre-commit length = 비요청에폭의 수 * 2</code></li>
+<li><code>Commit length = 는 비요청에폭의 수 * 2 + 1 (추가된 하나의 에폭은 탈출에폭을 의미한다)</code></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="단계-시간"></a><a href="#단계-시간" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>단계 시간</h3>
+<p><strong>단계 시간(stage period)</strong>는 각 단계에 할당된 시간을 의미한다. Pre-commit 단계 시간과 Commit 단계 시간은 중단 조건의 기준이되고, DA-check와 Challenge 단계 시간은 단순히 각 단계를 수행할 수 있는 기간을 의미한다.</p>
+<h2><a class="anchor" aria-hidden="true" id="중단-조건"></a><a href="#중단-조건" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>중단 조건</h2>
+<p>어떠한 이유로든 오퍼레이터가 정해진 절차를 제대로 수행하지 않을 경우 <strong>중단 조건(halting condition)</strong>이 충족될 수 있다. 중단 조건이 충족되는 경우 해당 자식 체인은 폐쇄된다.</p>
+<h3><a class="anchor" aria-hidden="true" id="pre-commit단계의-중단-조건"></a><a href="#pre-commit단계의-중단-조건" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pre-commit단계의 중단 조건</h3>
+<p>오퍼레이터가 Pre-commit 단계 시간 이내에 Pre-commit 단계 길이의 에폭을 모두 제출하지 못할 경우 중단 조건이 충족된다.</p>
+<h3><a class="anchor" aria-hidden="true" id="commit단계의-중단-조건"></a><a href="#commit단계의-중단-조건" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Commit단계의 중단 조건</h3>
+<p>오퍼레이터가 Commit 단계 시간 동안 Commit 단계 길이의 에폭을 모두 제출하지 못할 경우 중단 조건이 충족된다. 이 경우 해당 사이클을 포함한 이후의 모든 진행이 일시 중단된다. 만약 중단된 시점에 탈출블록이 제출되지 않은 상태라면 누구나 이를 제출할 수 있고, 해당 블록이 제출되면 일시 중단된 사이클이 재개된다.</p>
+<h3><a class="anchor" aria-hidden="true" id="폐쇄"></a><a href="#폐쇄" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>폐쇄</h3>
+<p><strong>폐쇄(shutdown)</strong>는 말 그대로 자식체인을 폐쇄하는 절차이다. 자식체인이 폐쇄되면 더 이상 해당 체인의 추가적인 사이클은 진행될 수 없다. 오직 마지막으로 완결된 블록을 기준으로 탈출요청 제출 - 탈출블록 제출 - 챌린지를 반복한다.</p>
+<h3><a class="anchor" aria-hidden="true" id="전체-사이클-동작과정"></a><a href="#전체-사이클-동작과정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>전체 사이클 동작과정</h3>
+<p>지금까지 살펴본 하나의 사이클의 동작과정은 다음 그림과 같이 나타낼 수 있다.</p>
+<p><img src="/docs/assets/learn_advanced_rootchain.png" alt="rootchain"></p>
+<h2><a class="anchor" aria-hidden="true" id="사이클-중첩"></a><a href="#사이클-중첩" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사이클 중첩</h2>
+<p>지금까지 논의한 것은 하나의 사이클의 동작 과정이었다. 하지만 <strong>여러개의 사이클이 중첩되</strong>어 동시에 동작하는 것 또한 가능하다.</p>
+<p><img src="/docs/assets/learn_advanced_overlap_cycle.png" alt="overlap cycle"></p>
+<p>두개의 사이클이 맞물릴 경우 이전 사이클의 Challenge단계의 완료 여부와 관계 없이 다음 사이클의 Pre-commit 단계가 시작될 수 있다.</p>
+<p>이처럼 여러개의 사이클이 맞물려 진행되기 위해서는 다음과 같은 조건이 충족되어야 한다.</p>
+<ol>
+<li><strong>현재 사이클의 Pre-commit이 완료되는 즉시 다음 사이클의 Pre-commit이 시작된다.</strong></li>
+<li><strong>현재 사이클의 Pre-commit이 완료되는 즉시 현재 사이클의 DA-check가 시작된다.</strong></li>
+<li><strong>현재 사이클의 Commit은 이전 사이클의 Commit 완료 이후에 시작될 수 있다.</strong></li>
+</ol>
+<p>이를 통해 주기적으로 사용자들의 탈출요청을 반영하여 리베이스를 진행하면서 체인의 진행을 멈추지 않고 계속해서 동작할 수 있게 된다.</p>
+<h2><a class="anchor" aria-hidden="true" id="참고자료"></a><a href="#참고자료" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>참고자료</h2>
+<ul>
+<li><a href="https://onther-tech.github.io/papers/tech-paper-kr.pdf">Plasma EVM(국문)</a></li>
+</ul>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-12-19 by aiden0505</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/learn/advanced/child-chain"><span class="arrow-prev">← </span><span>자식체인</span></a><a class="docs-next button" href="/docs/ko/learn/advanced/plasma-evm-smart-contracts"><span>Plasma EVM 스마트 컨트랙트</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#리베이스">리베이스</a></li><li><a href="#사이클과-단계">사이클과 단계</a><ul class="toc-headings"><li><a href="#pre-commit">Pre-commit</a></li><li><a href="#da-check">DA-check</a></li><li><a href="#commit">Commit</a></li><li><a href="#challenge">Challenge</a></li><li><a href="#완결">완결</a></li><li><a href="#단계-길이">단계 길이</a></li><li><a href="#단계-시간">단계 시간</a></li></ul></li><li><a href="#중단-조건">중단 조건</a><ul class="toc-headings"><li><a href="#pre-commit단계의-중단-조건">Pre-commit단계의 중단 조건</a></li><li><a href="#commit단계의-중단-조건">Commit단계의 중단 조건</a></li><li><a href="#폐쇄">폐쇄</a></li><li><a href="#전체-사이클-동작과정">전체 사이클 동작과정</a></li></ul></li><li><a href="#사이클-중첩">사이클 중첩</a></li><li><a href="#참고자료">참고자료</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>

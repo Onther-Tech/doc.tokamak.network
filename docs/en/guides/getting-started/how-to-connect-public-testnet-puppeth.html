@@ -1,0 +1,348 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Connect to Public Testnet with Puppeth · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="You can set user node with `Puppeth` in `plasma-evm`."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Connect to Public Testnet with Puppeth · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="You can set user node with `Puppeth` in `plasma-evm`."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-puppeth">한국어</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Connect Public Testnet</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Learn<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Basic</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/tokamak-network">Tokamak Network</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/enter-and-exit">Interoperability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/transaction-fee">Convenience</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/layer-2-solutions">Comparison with Other Solutions</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Advanced</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/design-rationale">Design Rationale</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-architecture">Plasma EVM Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/root-chain">RootChain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/child-chain">Child Chain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-smart-contracts">Plasma EVM Smart Contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/examples-and-best-practices">Examples and Best Practices</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Token Economy</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/child-chain">Child Chain and Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/token-supply">Token Supply and Distribution</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/powerton">PowerTON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/tx-fee">Transaction Fee</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/challenge">Challenge</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/glossary">Parameters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Guide<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Getting Started Private Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Setup Rootchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-manually">Setup Childchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth">Setup with Puppeth</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Connect Public Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-prepare">Requirements</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-manually">Manually</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-puppeth">With Puppeth</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/en/guides/public-testnets">Public Testnet Information</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/getting-started/how-to-connect-public-network-puppeth.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Connect to Public Testnet with Puppeth</h1></header><article><div><span><p>You can set user node with <code>Puppeth</code> in <code>plasma-evm</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="install-and-run-puppeth"></a><a href="#install-and-run-puppeth" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install and Run <code>Puppeth</code></h2>
+<h3><a class="anchor" aria-hidden="true" id="download-and-compile-source-code"></a><a href="#download-and-compile-source-code" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Download and Compile Source Code</h3>
+<p><code>Puppeth</code> is handy tool for deploying Ethereum node. We added additional features to <code>Puppeth</code> in <code>plasma-evm</code> for deploying Tokamak node easily.</p>
+<p>Download source code from <a href="https://github.com/onther-tech/plasma-evm">https://github.com/onther-tech/plasma-evm</a>. Then, compile <code>Puppeth</code>.</p>
+<pre><code class="hljs css language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/onther-tech/plasma-evm
+$ <span class="hljs-built_in">cd</span> plasma-evm &amp;&amp; make all
+</code></pre>
+<p>After compilement, <code>Puppeth</code> binary will be located at <code>plasma-evm/build/bin/</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="run-puppeth"></a><a href="#run-puppeth" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Run <code>Puppeth</code></h3>
+<p>Run <code>Puppeth</code> with following command.</p>
+<pre><code class="hljs css language-text">plasma-evm$ build/bin/puppeth
++-----------------------------------------------------------+
+| Welcome to puppeth, your Ethereum private network manager |
+|                                                           |
+| This tool lets you create a new Ethereum network down to  |
+| the genesis block, bootnodes, miners and ethstats servers |
+| without the hassle that it would normally entail.         |
+|                                                           |
+| Puppeth uses SSH to dial in to remote servers, and builds |
+| its network components out of Docker containers using the |
+| docker-compose toolset.                                   |
++-----------------------------------------------------------+
+
+Please specify a network name to administer (no spaces, hyphens or capital letters please)
+>
+</code></pre>
+<p>You can use unique name for <code>NETWORK NAME</code> in Puppeth console.
+The <code>NETWORK NAME</code> will be saved in <code>~/.puppeth/&lt;NETWORK NAME&gt;</code> file for Puppeth to recognize network.</p>
+<blockquote>
+<p>When starting Puppeth, you can apply old setting by inserting <code>NETWORK NAME</code> used before.</p>
+</blockquote>
+<p>Following instructions are on <code>puppeth</code> console.</p>
+<h2><a class="anchor" aria-hidden="true" id="connect-user-node-to-faraday-testnet"></a><a href="#connect-user-node-to-faraday-testnet" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connect User Node to Faraday Testnet</h2>
+<h3><a class="anchor" aria-hidden="true" id="1-setup-genesis-file"></a><a href="#1-setup-genesis-file" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Setup <code>genesis</code> file</h3>
+<p>In order to connect user node to Faraday testnet, you need <code>genesis</code> file of operator node.</p>
+<p><code>Puppeth</code> can load <code>genesis</code> file via http.</p>
+<p>It will use <code>faraday.json</code> on <code>github</code> as <code>genesis</code>.</p>
+<p>You can check the <code>genesis</code> file in <a href="https://github.com/Onther-Tech/plasma-evm-networks/blob/master/faraday-testnet/faraday.json"><code>faraday.json</code></a> at <a href="https://github.com/Onther-Tech/plasma-evm-networks/tree/master/faraday-testnet">github.com/onther-tech/plasma-evm-networks</a>.</p>
+<pre><code class="hljs css language-text">What would you like to do? (default = stats)
+    1. Show network stats
+    2. Configure new genesis
+    3. Track new remote server
+    4. Deploy network components
+> 2
+
+What would you like to do? (default = create)
+    1. Create new genesis from scratch
+    2. Import already existing genesis
+> 2
+
+Where's the genesis file? (local file or http/https url)
+> https://raw.githubusercontent.com/Onther-Tech/plasma-evm-networks/master/faraday-testnet/faraday.json
+</code></pre>
+<p>If <code>genesis.json</code> is imported successfully, following message will be printed and it will return to start screen on <code>Puppeth</code> console.</p>
+<pre><code class="hljs css language-text">INFO [12-12|05:45:32.124] Imported genesis block
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="2-add-remote-machine"></a><a href="#2-add-remote-machine" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Add Remote Machine</h3>
+<p>You must install <code>Docker</code> in remote machine in order to use <code>Puppeth</code>.
+About installing <code>Docker</code> depending on host environment, check <a href="https://docs.docker.com/install/#supported-platforms">here</a>.</p>
+<p>Add local environment to remote server at <code>Puppeth</code> console.</p>
+<pre><code class="hljs css language-text">What would you like to do? (default = stats)
+    1. Show network stats
+    2. Configure new genesis
+    3. Track new remote server
+    4. Deploy network components
+> 3
+
+What is the remote server's address ([username[:identity]@]hostname[:port])?
+> ubuntu@<Public IP address>
+
+</code></pre>
+<blockquote>
+<p>You should NOT use <code>localhost(127.0.0.1)</code> as  <code>remote server's address</code> input. Because nodes are looking each other with <code>&lt;Public IP address&gt;</code>.</p>
+</blockquote>
+<pre><code class="hljs css language-text">The authenticity of host '52.198.169.75:22 (52.198.169.75:22)' can't be established.
+SSH key fingerprint is ff:00:ff:00:ff:00:ff:00:ff:00:ff:00:ff:00:ff:00 [MD5]
+Are you sure you want to continue connecting (yes/no)? yes
+
+INFO [02-25|00:00:00.000] Starting remote server health-check      server=ubuntu@52.198.169.75
++----------------------+---------------+---------+--------+-------+
+|        SERVER        |    ADDRESS    | SERVICE | CONFIG | VALUE |
++----------------------+---------------+---------+--------+-------+
+| ubuntu@52.198.169.75 | 52.198.169.75 |         |        |       |
++----------------------+---------------+---------+--------+-------+
+</code></pre>
+<blockquote>
+<p>If you insert domain address instead of ip address, <code>Nginx</code> which is used for reverse proxy server, cannot parse domain syntax. You must insert ip address.</p>
+</blockquote>
+<p>If you connect to remote server with a keyfile for <code>SSH</code>, you should insert it in form of <code>onther:onther_private.pem@localhost</code> in console.</p>
+<h3><a class="anchor" aria-hidden="true" id="3-deploy-ethstats-container"></a><a href="#3-deploy-ethstats-container" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Deploy <code>Ethstats</code> Container</h3>
+<p>Puppeth cannot be started without <code>Ethstats</code>. Thus, you must deploy <code>ethstats</code> node first.</p>
+<pre><code class="hljs css language-text">+----------------------+---------------+---------+--------+-------+
+|        SERVER        |    ADDRESS    | SERVICE | CONFIG | VALUE |
++----------------------+---------------+---------+--------+-------+
+| ubuntu@52.198.169.75 | 52.198.169.75 |         |        |       |
++----------------------+---------------+---------+--------+-------+
+
+What would you like to do? (default = stats)
+    1. Show network stats
+    2. Manage existing genesis
+    3. Manage tracked machines
+    4. Deploy network components
+> 4
+
+What would you like to deploy? (recommended order)
+    1. Ethstats  - Network monitoring tool
+    2. Bootnode  - Entry point of the network
+    3. Sealer    - Full node minting new blocks
+    4. Explorer  - Chain analysis webservice
+    5. Wallet    - Browser wallet for quick sends
+    6. Faucet    - Crypto faucet to give away funds
+    7. Dashboard - Website listing above web-services
+> 1
+
+Which server do you want to interact with?
+    1. onther@localhost
+    2. Connect another server
+> 1
+
+Which port should ethstats listen on? (default = 80)
+> 80
+
+Allow sharing the port with other services (y/n)? (default = yes)
+> y
+
+INFO [01-01|00:00:00.000] Deploying nginx reverse-proxy            server=localhost port=80
+Building nginx
+Step 1/1 : FROM jwilder/nginx-proxy
+    ---> 46fc9150cb48
+Successfully built 46fc9150cb48
+Successfully tagged faraday/nginx:latest
+Creating faraday_nginx_1 ...
+Creating faraday_nginx_1 ... done
+</code></pre>
+<p>First, it configures reverse proxy to access <code>Ethstats</code> server. Insert domain address(or ip address) and password to keep deploying <code>Ethstats</code> container.</p>
+<pre><code class="hljs css language-text">Proxy deployed, which domain to assign? (default = localhost)
+> 52.198.169.75
+What should be the secret password for the API? (must not be empty)
+> onther
+
+Found orphan containers (faraday_nginx_1) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.
+Building ethstats
+Step 1/2 : FROM puppeth/ethstats:latest
+    ---> fb62abe59cb2
+Step 2/2 : RUN echo 'module.exports = {trusted: [], banned: [], reserved: ["yournode"]};' > lib/utils/config.js
+    ---> Running in ac7e749c51f5
+Removing intermediate container ac7e749c51f5
+    ---> 276dd2683d00
+Successfully built 276dd2683d00
+Successfully tagged faraday/ethstats:latest
+Creating faraday_ethstats_1 ...
+Creating faraday_ethstats_1 ... done
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="4-deploy-user-node-container"></a><a href="#4-deploy-user-node-container" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Deploy User Node Container</h3>
+<p>You cannot deploy user node container without <code>Ethstats</code>. Make sure that you did <a href="how-to-connect-public-testnet-puppeth#3-deploy-ethstats-container">3. Deploy <code>Ethstats</code> Container</a>.</p>
+<pre><code class="hljs css language-text">+----------------------+---------------+----------+-----------------------+---------------+
+|        SERVER        |    ADDRESS    | SERVICE  |        CONFIG         |     VALUE     |
++----------------------+---------------+----------+-----------------------+---------------+
+| ubuntu@52.198.169.75 | 52.198.169.75 | ethstats | Banned addresses      |               |
+|                      |               |          | Login secret          | onther        |
+|                      |               |          | Website address       | 52.198.169.75 |
+|                      |               |          | Website listener port | 80            |
+|                      |               |          | --------------------- | ------------- |
+|                      |               | nginx    | Shared listener port  | 80            |
++----------------------+---------------+----------+-----------------------+---------------+
+
+What would you like to do? (default = stats)
+    1. Show network stats
+    2. Manage existing genesis
+    3. Manage tracked machines
+    4. Deploy network components
+> 4
+
+    1. Tear down Nginx on ubuntu@52.198.169.75
+    2. Tear down Ethstats on ubuntu@52.198.169.75
+    3. Deploy new network component
+> 3
+
+What would you like to deploy? (recommended order)
+    1. Ethstats  - Network monitoring tool
+    2. Bootnode  - Entry point of the network
+    3. Sealer    - Full node minting new blocks
+    4. Explorer  - Chain analysis webservice
+    5. Wallet    - Browser wallet for quick sends
+    6. Faucet    - Crypto faucet to give away funds
+    7. Dashboard - Website listing above web-services
+> 2
+
+Which server do you want to interact with?
+    1. ubuntu@52.198.169.75
+    2. Connect another server
+> 1
+
+What URL to listen on root chain JSONRPC?
+> wss://rinkeby.infura.io/ws/v3/[PROJECT ID]
+</code></pre>
+<!-- TODO Update Infura-->
+<p>Use your own infura URL which you got from <a href="how-to-connect-public-testnet-prepare#get-endpoint-url-of-rootchain-node">&quot;Requirements for Connecting Public Testnet - Get Endpoint URL of <code>RootChain</code> Node&quot;</a> for <code>~ root chain JSONRPC?</code>.</p>
+<pre><code class="hljs css language-text">Do you want expose HTTP JSONRPC endpoint (y/n)? (default=no)
+> y
+
+Which TCP port to expose? (default=8545)
+> 8547
+
+Which is virtual hostname? (default=172.17.0.1,localhost)
+> 172.17.0.1
+</code></pre>
+<p>Insert <code>yes</code> on <code>HTTP JSONRPC endpoint</code> console for users to access to the node.</p>
+<pre><code class="hljs"><span class="hljs-keyword">Do</span> you want expose WebSocket JSONRPC endpoint (y/n)? (<span class="hljs-attribute">default</span>=<span class="hljs-literal">no</span>)
+&gt; y
+
+Which TCP<span class="hljs-built_in"> port </span><span class="hljs-keyword">to</span> expose? (<span class="hljs-attribute">default</span>=8546)
+&gt; 8548
+
+Where should data be stored on the remote machine?
+&gt; /home/ubuntu/.pls.user
+
+Which TCP/UDP<span class="hljs-built_in"> port </span><span class="hljs-keyword">to</span> listen on? (default = 30305)
+&gt; 30306
+
+How many peers <span class="hljs-keyword">to</span> allow connecting? (default = 512)
+&gt; 512
+
+How many light peers <span class="hljs-keyword">to</span> allow connecting? (default = 256)
+&gt; 256
+
+What should the node be called on the stats page?
+&gt; usernode
+
+Building bootnode
+<span class="hljs-keyword">Step</span> 1/4 : <span class="hljs-keyword">FROM</span> onthertech/plasma-evm:latest
+latest: Pulling <span class="hljs-keyword">from</span> onthertech/plasma-evm
+Digest: sha256:aa8029de17fb3da6c390545df4e05abae109ec6a45f12ecb22a0e0063b1aa276
+Status: Downloaded newer image <span class="hljs-keyword">for</span> onthertech/plasma-evm:latest
+    ---&gt; 1576e54d80ef
+<span class="hljs-keyword">Step</span> 2/4 : <span class="hljs-builtin-name">ADD</span> genesis.json /genesis.json
+    ---&gt; 5c5992d4f1a2
+<span class="hljs-keyword">Step</span> 3/4 : <span class="hljs-builtin-name">RUN</span>   echo $<span class="hljs-string">'geth --cache 512 init --rootchain.url wss://rinkeby.infura.io/ws/v3/... /genesis.json'</span> &gt; geth.sh &amp;&amp; echo $<span class="hljs-string">'exec geth --syncmode="full" --networkid 16 --rootchain.url wss://rinkeby.infura.io/ws/v3/... --rpc --rpcaddr \'</span>0.0.0.0\<span class="hljs-string">' --rpcport 8545 --rpcapi eth,net,debug --rpccorsdomain "*" --rpcvhosts=localhost --ws --wsorigins \'</span>*\<span class="hljs-string">' --wsaddr \'</span>0.0.0.0\<span class="hljs-string">' --wsport 8546 --cache 512 --port 30306 --nat extip:52.198.169.75 --maxpeers 512 --lightpeers=256 --lightserv=50 --ethstats \'</span>tokamak-mynode:ubuntu@localhost\<span class="hljs-string">' --miner.gastarget 0 --miner.gaslimit 0 --miner.gasprice 0'</span> &gt;&gt; geth.sh
+    ---&gt; Running <span class="hljs-keyword">in</span> 826cf2fe881a
+Removing intermediate container 826cf2fe881a
+    ---&gt; ed4330e0d27f
+<span class="hljs-keyword">Step</span> 4/4 : ENTRYPOINT [<span class="hljs-string">"/bin/sh"</span>, <span class="hljs-string">"geth.sh"</span>]
+    ---&gt; Running <span class="hljs-keyword">in</span> 49f1003114a2
+Removing intermediate container 49f1003114a2
+    ---&gt; 120072c6f2ee
+Successfully built 120072c6f2ee
+Successfully tagged tokamak/bootnode:latest
+Creating tokamak_bootnode_1 <span class="hljs-built_in">..</span>.
+Creating tokamak_bootnode_1 <span class="hljs-built_in">..</span>. done
+</code></pre>
+<p>Insert <code>usernode</code> for node name shown in <code>Ethstats</code>, and use default parameters for others.</p>
+<h2><a class="anchor" aria-hidden="true" id="faraday-user-node-container"></a><a href="#faraday-user-node-container" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Faraday User Node Container</h2>
+<p>If user node was deployed successfully, you can see below message from <code>Puppeth</code>.</p>
+<pre><code class="hljs css language-text">+----------------------+---------------+----------+--------------------------+-----------------------------------+
+|       SERVER         |    ADDRESS    | SERVICE  |          CONFIG          |                VALUE              |
++----------------------+---------------+----------+--------------------------+-----------------------------------+
+| ubuntu@52.198.169.75 | 52.198.169.75 | bootnode | Data directory           | /home/ubuntu/.pls.user            |
+|                      |               |          | Ethstats username        | usernode                          |
+|                      |               |          | JSONRPC VHOST            | 52.198.169.75,localhost           |
+|                      |               |          | Listener port            | 30306                             |
+|                      |               |          | Peer count (all total)   | 512                               |
+|                      |               |          | Peer count (light nodes) | 256                               |
+|                      |               |          | Root chain JSONRPC URL   | wss://rinkeby.infura.io/ws/v3/... |
+|                      |               |          | ------------------------ | --------------------------------- |
+|                      |               | ethstats | Banned addresses         |                                   |
+|                      |               |          | Login secret             | onther                            |
+|                      |               |          | Website address          | 52.198.169.75                     |
+|                      |               |          | Website listener port    | 80                                |
+|                      |               |          | ------------------------ | --------------------------------- |
+|                      |               | nginx    | Shared listener port     | 80                                |
++----------------------+---------------+----------+--------------------------+-----------------------------------+
+</code></pre>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-5 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-manually"><span class="arrow-prev">← </span><span>Manually</span></a><a class="docs-next button" href="/docs/en/guides/public-testnets"><span>Public Testnet Information</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-and-run-puppeth">Install and Run <code>Puppeth</code></a><ul class="toc-headings"><li><a href="#download-and-compile-source-code">Download and Compile Source Code</a></li><li><a href="#run-puppeth">Run <code>Puppeth</code></a></li></ul></li><li><a href="#connect-user-node-to-faraday-testnet">Connect User Node to Faraday Testnet</a><ul class="toc-headings"><li><a href="#1-setup-genesis-file">1. Setup <code>genesis</code> file</a></li><li><a href="#2-add-remote-machine">2. Add Remote Machine</a></li><li><a href="#3-deploy-ethstats-container">3. Deploy <code>Ethstats</code> Container</a></li><li><a href="#4-deploy-user-node-container">4. Deploy User Node Container</a></li></ul></li><li><a href="#faraday-user-node-container">Faraday User Node Container</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>

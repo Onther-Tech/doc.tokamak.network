@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Plasma EVM Smart Contracts · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!-- TODO: 컨트랙트 함수 부분은 REST API 문서 방식으로? --&gt;"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Plasma EVM Smart Contracts · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="&lt;!-- TODO: 컨트랙트 함수 부분은 REST API 문서 방식으로? --&gt;"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ko/learn/advanced/plasma-evm-smart-contracts">한국어</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Advanced</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Learn<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Basic</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/tokamak-network">Tokamak Network</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/enter-and-exit">Interoperability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/transaction-fee">Convenience</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/layer-2-solutions">Comparison with Other Solutions</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Advanced</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/design-rationale">Design Rationale</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-architecture">Plasma EVM Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/root-chain">RootChain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/child-chain">Child Chain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-smart-contracts">Plasma EVM Smart Contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/examples-and-best-practices">Examples and Best Practices</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Token Economy</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/child-chain">Child Chain and Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/token-supply">Token Supply and Distribution</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/powerton">PowerTON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/tx-fee">Transaction Fee</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/challenge">Challenge</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/glossary">Parameters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Guide<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Getting Started Private Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Setup Rootchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-manually">Setup Childchain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth">Setup with Puppeth</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Connect Public Testnet</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-prepare">Requirements</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-manually">Manually</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/getting-started/how-to-connect-public-testnet-puppeth">With Puppeth</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/en/guides/public-testnets">Public Testnet Information</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/learn/advanced/plasma-evm-smart-contracts.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Plasma EVM Smart Contracts</h1></header><article><div><span><!-- TODO: 컨트랙트 함수 부분은 REST API 문서 방식으로? -->
+<blockquote>
+<p>This document describes contract implementation without continuous rebase which is currently work in progress.</p>
+</blockquote>
+<p>You can check the source code of contracts used in Plasma EVM <a href="https://github.com/Onther-Tech/plasma-evm-contracts">here</a></p>
+<h2><a class="anchor" aria-hidden="true" id="contract-diagram"></a><a href="#contract-diagram" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Contract Diagram</h2>
+<p><img src="/docs/assets/learn_advanced_plasma-evm-contracts.png" alt="Contract_Diagram"></p>
+<p><em>Box</em> means contract implementation, <em>solid line</em> means inheritance relationship, <em>black dotted line</em> means reference relationship with <code>CALL</code>, <em>blue dotted line</em> means library reference. <em>Green square</em> means contract deployed on the network. Because the size of <code>RootChain</code> contract is large, we split it to <code>EpochHandler</code> and <code>SubmitHandler</code>, and connect them to handler contract by <code>DELEGATECALL</code>.</p>
+<p>Contracts in this diagram have following features:</p>
+<h2><a class="anchor" aria-hidden="true" id="data"></a><a href="#data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Data</h2>
+<p><code>Data</code> implements structs and internal componenets used in Plasma EVM such as <code>Epoch</code>, <code>PlansmaBlock</code>, <code>Request</code>, <code>RequestBlock</code>, <code>Transaction</code>. In particular, it manages internal logic, e.g convert <code>Request</code> to <code>RequestTransaction</code>, compute <code>transactionsRoot</code> of <code>RequestBlock</code>. Constants managed by <code>Data</code> are as follows:</p>
+<ul>
+<li><p><code>address public constant NA = address(0)</code></p>
+<p>Address of null address, <code>msg.sender</code> of request transaction in child chain must be <code>NA</code>.</p></li>
+<li><p><code>uint public constant NA_TX_GAS_PRICE = 1e9</code></p>
+<p><code>tx.gasPrice</code> of request transaction is always 1 Gwei.</p></li>
+<li><p><code>uint public constant NA_TX_GAS_LIMIT = 100000</code></p>
+<p>Gas limit of request transaction is always 100,000.</p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="rootchainstorage"></a><a href="#rootchainstorage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RootChainStorage</h2>
+<p><code>RootChainStorage</code> is contract that only implements state variables. Key variables are as follows:</p>
+<!-- Name | Type | Description 으로 테이블 만들기? -->
+<ul>
+<li><code>address operator</code>: Operator account of child chain. <code>operator</code> handles authority management for block submission, requestable contract mapping of both chains, and operator account change.</li>
+<li><code>address epochHandler</code>: <code>EpochHandler</code> contract address referred by <code>DELEGATECALL</code></li>
+<li><code>address submitHandler</code>: <code>SubmitHandler</code> contract address referred by <code>DELEGATECALL</code></li>
+<li><code>address etherToken</code>: <em>ERC20</em> token contract in root chain corresponding to PETH of child chain.</li>
+<li><code>mapping (address =&gt; address) requestableContracts</code>: Mapping of requestable contracts of root and child chain.</li>
+<li><code>uint NRELength</code>: Length of <code>NRE</code> determined in deploying <code>RootChain</code>.</li>
+<li><code>uint currentFork</code>: Current fork number. It is identical to cycle number in continuous rebase.</li>
+<li><code>Data.Request[] EROs</code>: Array of enter and exit requests. Index range of <code>EROs</code>, to be included <code>n</code>th RE, is determined when <code>n-3</code>th NRE is submitted. <code>RootChain</code> contract manages range of requests to be applied to child chain through this.</li>
+<li><code>Data.RequestBlock[] ORBs</code>:  More than one RB can be included in RE. Due to gas limit of child chain, number of requests in RB has limits. Therefore, <code>ORBs</code> is used for managing index range of <code>EROs</code> in RB and <code>transactionsRoot</code> of the request transactions.</li>
+<li><code>uint lastAppliedForkNumber</code>: Fork number that applied the last request.</li>
+<li><code>uint lastAppliedEpochNumber</code>: Epoch number that applied the last request.</li>
+<li><code>uint lastAppliedBlockNumber</code>: Block number that applied the last request.</li>
+<li><code>uint EROIdToFinalize</code>: Index of <code>EROs</code> to be applied next.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="rootchainevent"></a><a href="#rootchainevent" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RootChainEvent</h2>
+<p><code>RootChainEvent</code> is a contract that only implements events of <code>RootChain</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="rootchainbase-is-rootchainstorage-rootchainevent"></a><a href="#rootchainbase-is-rootchainstorage-rootchainevent" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RootChainBase is RootChainStorage, RootChainEvent</h2>
+<p><code>RootChainBase</code>inherits state variables and events from <code>RootChainStorage</code> and <code>RootChainEvent</code>. It has a function executing <code>DELEGATECALL</code> to <code>EpochHandler</code> and <code>SubmitHandler</code>.</p>
+<p><code>SubmitHandler</code></p>
+<ul>
+<li><code>submitNRE(uint256,uint256,bytes32,bytes32,bytes32)</code>: Function to submit <code>NRE</code> called by <code>RootChain</code>.</li>
+<li><code>submitORB(uint256,bytes32,bytes32,bytes32)</code>: Function to submit <code>NRE</code> called by <code>RootChain</code>.</li>
+</ul>
+<p><code>EpochHandler</code></p>
+<ul>
+<li><code>prepareORE()</code>: Function preparing to submit next <code>RE</code> when <code>SubmitHandler</code> submits <code>NRE</code>.</li>
+<li><code>prepareNRE()</code>: Function preparing to submit next <code>NRE</code> when <code>SubmitHandler</code> submits last <code>RB</code>.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="submithandler-is-rootchainbase"></a><a href="#submithandler-is-rootchainbase" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SubmitHandler is RootChainBase</h2>
+<p><code>SubmitHandler</code> is a contract for submitting blocks and epoch such as <code>NRE</code>, <code>RB</code>, etc. The contract reads <code>EpochHandler</code> to proceed to the next epoch. The following two functions are called only by <code>Submitter</code>.</p>
+<ul>
+<li><code>submitNRE(uint _pos1, uint _pos2, bytes32 _epochStateRoot, bytes32 _epochTransactionsRoot, bytes32 _epochReceiptsRoot)</code></li>
+</ul>
+<p><code>pos1</code> is <code>uint256</code> type variable which merged two <code>uint128</code> variables, fork number and epoch number. <code>pos2</code> is &quot;start and end block number of epoch&quot;, also encoded in the same way. This function prepares <code>epochNumber + 3</code>th RE in the end of execution.</p>
+<ul>
+<li><code>submitORB(uint _pos, bytes32 _statesRoot, bytes32 _transactionsRoot, bytes32 _receiptsRoot)</code></li>
+</ul>
+<p><code>pos</code> is <code>uint256</code> type variable which merged two <code>uint128</code> variables, fork number and epoch number. For <code>RB</code>, the function computes merkle root of request transactions corresponding to the index of <code>EROs</code> determined by <code>RootChain</code>. If the merkel root is not identical to <code>_transactionsRoot</code>, the transaction will be reverted.</p>
+<h2><a class="anchor" aria-hidden="true" id="epochhandler-is-rootchainbase"></a><a href="#epochhandler-is-rootchainbase" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>EpochHandler is RootChainBase</h2>
+<p><code>EpochHandler</code> is a contract that prepares the next epoch when <code>NRE</code> or last <code>RB</code> is submitted. In case of <code>RE</code> whose <code>epochNumber</code> is <code>n</code>, index of <code>Requests</code> to be included in the <code>RE</code> is determined as soon as <code>n-3</code> NRE is submitted.</p>
+<ul>
+<li><code>prepareORE()</code>: Function called by <code>SubmitHandler</code> to submit <code>NRE</code>.</li>
+<li><code>prepareNRE()</code>: Function called by <code>SubmitHandler</code> to submit last <code>RB</code>.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="rootchain-is-rootchainbase-mapperrole-submitterrole"></a><a href="#rootchain-is-rootchainbase-mapperrole-submitterrole" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RootChain is RootChainBase, MapperRole, SubmitterRole</h2>
+<p><code>RootChain</code> is a contract that implements several features such as submit blocks and epoch, generate requests, finalize function and getter to read contract state. In order to manage authorities to map <code>RequestableContract</code> of both chains, the contract inherits <code>MapperRole</code>, and <code>SubmitterRole</code> for managing authority of submitting blocks and epoch. The following functions are implemented in 'RootChain'.</p>
+<ul>
+<li><p><code>mapRequestableContractByOperator()</code>: Function mapping requestable contracts of both chains. Only <code>Mapper</code> can call this function.</p></li>
+<li><p><code>finalizeBlock()</code>: Function to finalize submitted blocks. An internal function with the same feature is called when block or epoch is submitted.</p></li>
+<li><p><code>finalizeRequest()</code>: When RB is finalized, requests included in the block has its challenge period. Requests can be finalized after this period. This function checks finalization of blocks and requests to apply exit request in root chain.</p></li>
+<li><p><code>challengeExit()</code>: Start challenge against invalid exit request. It checks validity with proof that the request is reverted or not.</p></li>
+<li><p><code>challengeNullAddress()</code>: Transactions of NRB must be normal transactions. In other words, transactions sent by <code>NA</code> cannot be included in <code>NRB</code>. This function manages challenges for invalid <code>NRB</code>.</p></li>
+<li><p><code>startExit(address _to, bytes32 _trieKey, bytes _trieValue)</code>: This generates new exit request. <code>_to</code> is an address of requestable contract in root chain, <code>_trieKey</code> and <code>_trieValue</code> are paramters for request.</p></li>
+<li><p><code>startEnter(address _to, bytes32 _trieKey, bytes _trieValue)</code>: This generates new enter request. Parameters are the same as in <code>startExit</code>.</p></li>
+</ul>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-5 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/learn/advanced/continuous-rebase"><span class="arrow-prev">← </span><span>Continuous Rebase</span></a><a class="docs-next button" href="/docs/en/learn/advanced/examples-and-best-practices"><span>Examples and Best Practices</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#contract-diagram">Contract Diagram</a></li><li><a href="#data">Data</a></li><li><a href="#rootchainstorage">RootChainStorage</a></li><li><a href="#rootchainevent">RootChainEvent</a></li><li><a href="#rootchainbase-is-rootchainstorage-rootchainevent">RootChainBase is RootChainStorage, RootChainEvent</a></li><li><a href="#submithandler-is-rootchainbase">SubmitHandler is RootChainBase</a></li><li><a href="#epochhandler-is-rootchainbase">EpochHandler is RootChainBase</a></li><li><a href="#rootchain-is-rootchainbase-mapperrole-submitterrole">RootChain is RootChainBase, MapperRole, SubmitterRole</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
