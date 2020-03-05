@@ -100,6 +100,7 @@ Command `geth account` allows to create keystore file only with private key hex.
 
 > Use same `datadir` as in the initialzation.
 
+```
 # Generate Operator Keyfile
 plasma-evm$ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 --datadir ./chaindata-oper
 INFO [08-27|16:14:38.878] Bumping default cache on mainnet         provided=1024 updated=4096
@@ -175,7 +176,7 @@ plasma-evm$ echo "e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7
 
 ### 3. Run user node
 
-You must [Setup User Node - 1. Initialize](how-to-open-private-testnet-manually##1-initialize) before running user node. It will use same `datadir` as in the initialization. 
+You must [Setup User Node - 1. Initialize](how-to-open-private-testnet-manually##1-initialize) before running user node. It will use same `datadir` as in the initialization.
 
 Run user node with following command. If you want to run challenger, add `--rootchain.challenger 0x0...` to the command.
 

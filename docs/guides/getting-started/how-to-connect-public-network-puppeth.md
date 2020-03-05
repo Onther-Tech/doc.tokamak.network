@@ -14,8 +14,6 @@ You can set user node with `Puppeth` in `plasma-evm`.
 
 Download source code from [https://github.com/onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm). Then, compile `Puppeth` .
 
-아래 명령어를 실행하여 소스코드를 복제 하고 `Puppeth` 실행 파일을 컴파일 한다.
-
 ```bash
 $ git clone https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm && make all

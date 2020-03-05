@@ -279,9 +279,8 @@ contract TrackableCounter is BaseCounter, RequestableI {
 ERC20 토큰 컨트랙트의 경우 `balances[holder]` 변수에 대하여 [SimpleCounter](#simplecounter)와 [FreezableCounter](#freezablecounter) 방식 두 가지로 작성할 수 있다. `SimpleCounter` 방식은 자식 체인에서 발행된 토큰은 언제나 부모 체인으로 exit 될 수 있지만, `FreezableCounter` 방식은 언제나 exit 되는 토큰의 수량만큼 부모 체인에서 묶여있어야 한다. 본 문서에선 `SimpleCounter` 방식만을 다루고 있다.
 
 ### RequestableSimpleToken
-([github](https://github.com/Onther-Tech/requestable-simple-token/blob/master/contracts/RequestableSimpleToken.sol))
 
-`RequestableSimpleToken`는 `owner`가 토큰을 발행하고 일반 토큰 홀더가 자신의 토큰을 다른이에게 전송하거나 요청을 생성할 수 있는 컨트랙트다.
+[`RequestableSimpleToken`](https://github.com/Onther-Tech/requestable-simple-token/blob/master/contracts/RequestableSimpleToken.sol)는 `owner`가 토큰을 발행하고 일반 토큰 홀더가 자신의 토큰을 다른이에게 전송하거나 요청을 생성할 수 있는 컨트랙트다.
 
 ```solidity
 contract RequestableSimpleToken is Ownable, RequestableI {
@@ -515,9 +514,7 @@ CryptoKitties의 상태변수에 대한 요청은 다음과 같은 방식으로 
 
 > 이 예제를 실제 환경에서 사용하기 위해서는 추가적인 테스트가 필요하다.
 
-([github](https://github.com/Onther-Tech/requestable-multisig))
-
- `RequestableMultisig`는 [MultiSigWallet](https://github.com/gnosis/MultiSigWallet/blob/master/contracts/MultiSigWallet.sol)를 requestable하게 변경한 컨트랙트다.
+ [`RequestableMultisig`](https://github.com/Onther-Tech/requestable-multisig))는 [MultiSigWallet](https://github.com/gnosis/MultiSigWallet/blob/master/contracts/MultiSigWallet.sol)를 requestable하게 변경한 컨트랙트다.
 
  `RequestableMultisig`는 멀티 시그 컨트랙트가 보낼 트랜잭션 데이터를 `Transaction` 구조체와 `transactions` 변수로 관리한다. 그리고 해당 트랜잭션에 대한 서명을 `confirmations` 변수로 수집한 후 이것이 정족수(`_required`)를 넘으면 실행된다. out-of-gas와 같은 에러가 발생할 경우 다시 실행이 가능하며, 올바르기 실행된 경우 `executed` 변수에 결과를 반영한다. `RequestableMultisig`의 요청은 다음으로 나누어진다.
 
