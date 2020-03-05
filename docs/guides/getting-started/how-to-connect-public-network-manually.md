@@ -1,6 +1,6 @@
 ---
 id: how-to-connect-public-testnet-manually
-title: How to connect public testnet menually
+title: How to connect public testnet manually
 sidebar_label: Menually
 ---
 
@@ -49,7 +49,6 @@ plasma-evm$ build/bin/geth \
     --nat extip:::1 \
     --maxpeers 50
 ```
-사용자 노드의 체인데이터는 `plasma-evm/chaindata` 에 저장된다.
 
 Chain data of user node will be stored on `plasma-evm/chaindata`.
 

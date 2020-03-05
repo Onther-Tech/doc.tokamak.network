@@ -204,6 +204,7 @@ plasma-evm$ build/bin/geth \
 
 > You must set `syncmode` to `full` or `archive` in order to synchronize with operator node.
 
-### Architecture Diagram
+<!-- TODO : fix link -->
+<!-- ### Architecture Diagram -->
 
-![Architecture after setup childchain](assets/guides_private_testnet_manually.png)
+<!-- ![Architecture after setup childchain](assets/guides_private_testnet_manually.png) -->

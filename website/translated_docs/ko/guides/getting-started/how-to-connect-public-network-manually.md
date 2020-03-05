@@ -1,6 +1,6 @@
 ---
 id: how-to-connect-public-testnet-manually
-title: How to connect public testnet menually
+title: How to connect public testnet manually
 sidebar_label: Menually
 ---
 
