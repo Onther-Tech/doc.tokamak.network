@@ -71,7 +71,7 @@ class Index extends React.Component {
   render() {
     const props = this.props;
 
-    const {config: siteConfig, language = ''} = props;
+    const {config: siteConfig, language = 'en'} = props;
     const langPart = `${language ? `${language}/` : ''}`;
     const {baseUrl} = siteConfig;
 
