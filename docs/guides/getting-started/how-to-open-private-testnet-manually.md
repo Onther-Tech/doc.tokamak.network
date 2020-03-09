@@ -83,7 +83,6 @@ You must initialize chain data before running operator node.
 Run following command to initialize chain data.
 
 ```bash
-
 plasma-evm$ build/bin/geth --nousb init \
             --datadir ./chaindata-oper \
             --rootchain.url ws://localhost:8546 \
