@@ -90,18 +90,18 @@ class Index extends React.Component {
               // layout="twoColumn"
               contents={[
                 {
-                  title: `[Basic](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/basic/tokamak-network.html)`,
+                  title: `[기초](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/basic/tokamak-network.html)`,
                   image: "/img/index_basic.png",
                   imageLink: `/docs/${language}/learn/basic/tokamak-network`,
                   // imageAlign	: 'center',
-                  content: `[Learn basics of Tokamak Network](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/basic/tokamak-network.html)`,
+                  content: `[토카막 네트워크와 확장성 솔루션에 대한 기본 개념을 익혀보세요.](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/basic/tokamak-network.html)`,
                 },
                 {
-                  title: `[Advanced](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/advanced/design-rationale)`,
+                  title: `[고급](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/advanced/design-rationale)`,
                   image: "/img/index_advance.png",
                   imageLink: `/docs/${language}/learn/advanced/design-rationale`,
                   // imageAlign	: 'center',
-                  content: `[Deep dive into Tokamak Network](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/advanced/design-rationale)`,
+                  content: `[루트체인, 플라즈마EVM, 리베이스, 요청가능 컨트랙트 등 고급 개념을 익혀보세요.](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/advanced/design-rationale)`,
                   
                 },
               ]}
