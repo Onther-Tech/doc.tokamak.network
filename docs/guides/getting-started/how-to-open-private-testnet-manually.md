@@ -115,7 +115,7 @@ Repeat passphrase:
 
 If operator keystore is locked with passphrase, you must write the passphrase in `signer.pass` file. `signer.pass` will be empty if it had no passphrase.
 
-Create `signer.pass` with following command.(without `"`).
+Create `signer.pass` with following command.
 
 ```bash
 plasma-evm$ echo "<Passphrase for operator keystore file>" > signer.pass
