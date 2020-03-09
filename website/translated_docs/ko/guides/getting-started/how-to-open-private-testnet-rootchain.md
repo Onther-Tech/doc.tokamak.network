@@ -1,8 +1,9 @@
 ---
 id: how-to-open-private-testnet-rootchain
-title: 프라이빗 테스트넷 루트체인 설정
-sidebar_label: 루트체인 설정
+title: Setup Rootchain in Private Testnet
+sidebar_label: Setup Rootchain
 ---
+
 ## 로컬 환경 설정
 
 운영체제는 Ubuntu 18.04 환경을 기준으로 한다.

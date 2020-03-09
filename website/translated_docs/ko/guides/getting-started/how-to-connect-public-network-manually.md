@@ -1,7 +1,7 @@
 ---
 id: how-to-connect-public-testnet-manually
-title: 퍼블릿 테스트넷 직접 연결
-sidebar_label: 직접 연결
+title: How to connect public testnet manually
+sidebar_label: Manually
 ---
 
 ## 페러데이 사용자 노드

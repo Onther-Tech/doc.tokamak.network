@@ -1,7 +1,7 @@
 ---
 id: how-to-open-private-testnet-manually
-title: 프라이빗 테스트넷 자식 체인 설정
-sidebar_label: 자식체인 설정
+title: Setup Childchain in Private Testnet
+sidebar_label: Setup Childchain
 ---
 
 루트체인이 구동되고 있는 환경에서 자식 체인을 실행해야 하므로, [루트체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정)을 먼저 진행한다.
@@ -83,7 +83,6 @@ plasma-evm$ bash deploy.local.sh
 아래 명령어를 통해 체인데이터를 초기화한다.
 
 ```bash
-
 plasma-evm$ build/bin/geth init \
             --datadir ./chaindata-oper \
             --rootchain.url ws://localhost:8546 \

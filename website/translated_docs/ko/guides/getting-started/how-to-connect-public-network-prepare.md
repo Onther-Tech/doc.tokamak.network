@@ -1,7 +1,7 @@
 ---
 id: how-to-connect-public-testnet-prepare
-title: 퍼블릭 테스트넷 연결 준비
-sidebar_label: 연결 준비
+title: Requirements for Connecting Public Testnet
+sidebar_label: Requirements
 ---
 
 페러데이(Faraday)는 온더에서 운영하고 있는 토카막 플라즈마의 공개 테스트 네트워크다.
