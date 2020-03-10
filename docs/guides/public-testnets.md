@@ -6,7 +6,7 @@ sidebar_label: Public Testnet Information
 
 This it Faraday, Tokamak Public testnet, Architecture & Information which is operator by Onther Inc.
 
-![Faraday Testnet Architecture](assets/guides_public-testnets.png)
+![Faraday Testnet Architecture](assets/guides_public_testnet.png)
 
 [Faraday Ethstats](https://ethstats.faraday.tokamak.network) : Current Status of Faraday testnet.
 
