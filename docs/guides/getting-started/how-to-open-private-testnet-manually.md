@@ -37,7 +37,7 @@ Ex) If `EPOCH` is `4096`, it will submit epoch every 4096 blocks.
 Create `deploy.local.sh` by running following command.
 
 ```sh
-plasma-evm$ cat > deploy.local.sh << EOF
+plasma-evm$ cat > deploy.local.sh << "EOF"
 #!/bin/bash
 
 OPERATOR_KEY="b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"
@@ -55,10 +55,10 @@ ROOTCHAIN_IP=localhost # Onther Ropsten Geth Node IP.
 
 # Deploy contracts at rootchain
 echo "Deploy rootchain contract and others"
-make geth && build/bin/geth \\
-    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \\
-    --operator.key $OPERATOR_KEY \\
-    --datadir $DATADIR \\
+make geth && build/bin/geth \
+    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \
+    --operator.key $OPERATOR_KEY \
+    --datadir $DATADIR \
     deploy "./genesis.json" 16 true 4096
 
 # deploy params : chainID, isInitialAsset, Epochlength
