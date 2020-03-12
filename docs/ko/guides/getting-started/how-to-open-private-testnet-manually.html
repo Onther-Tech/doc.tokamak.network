@@ -142,7 +142,7 @@ EOF
 <p>초기화와 동일한 <code>datadir</code> 위치를 사용한다.</p>
 </blockquote>
 <pre><code class="hljs css language-bash"><span class="hljs-comment"># Generate Operator Keyfile</span>
-plasma-evm$ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 --datadir pls.data
+plasma-evm$ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 --datadir ./chaindata-oper
 INFO [08-27|16:14:38.878] Bumping default cache on mainnet         provided=1024 updated=4096
 INFO [08-27|16:14:38.879] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [08-27|16:14:38.905] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
@@ -157,8 +157,9 @@ Repeat passphrase:
 </code></pre>
 <p>아래 명령어를 통해서 오퍼레이터 노드를 실행한다.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth \
+    --nousb \
     --datadir ./chaindata-oper \
-    --syncmode=<span class="hljs-string">"full"</span> \
+    --syncmode=<span class="hljs-string">'full'</span> \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --operator 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -167,12 +168,11 @@ Repeat passphrase:
     --maxpeers 50 \
     --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
     --password signer.pass \
-    --bootnodes <span class="hljs-string">"enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30307"</span> \
+    --nodekeyhex e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3 \
     --mine \
     --miner.gastarget 7500000 \
     --miner.gaslimit 10000000
 </code></pre>
-<p>위 <code>bootnodes</code> 플래그에 사용되는 <code>enode://...</code> 주소는 <a href="how-to-open-private-testnet-manually#2-bootkey-생성">사용자 노드 설정 - 2. <code>bootkey</code> 생성</a>의 결과와 같다.</p>
 <h2><a class="anchor" aria-hidden="true" id="사용자-노드-설정"></a><a href="#사용자-노드-설정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사용자 노드 설정</h2>
 <p>챌린저 계정 설정 없이 사용자 노드 실행이 가능하므로, 이 가이드에서는 챌린저 계정 없이 사용자 노드를 실행한다.</p>
 <blockquote>
@@ -189,29 +189,26 @@ Repeat passphrase:
 <blockquote>
 <p><a href="how-to-open-private-testnet-manually#3-초기화">오퍼레이터 설정 - 3. 초기화</a>에서 사용한 <code>genesis.json</code> 파일을 사용한다.</p>
 </blockquote>
-<h3><a class="anchor" aria-hidden="true" id="2-bootkey-생성"></a><a href="#2-bootkey-생성" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. <code>bootkey</code> 생성</h3>
-<p>오퍼레이터 노드에서 미리 지정한 enode 주소를 사용하도록 <code>boot.key</code> 파일을 생성한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm$ <span class="hljs-built_in">echo</span> <span class="hljs-string">"e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3"</span> &gt; boot.key
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="3-사용자-노드-실행"></a><a href="#3-사용자-노드-실행" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. 사용자 노드 실행</h3>
+<h3><a class="anchor" aria-hidden="true" id="2-사용자-노드-실행"></a><a href="#2-사용자-노드-실행" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. 사용자 노드 실행</h3>
 <p><a href="how-to-open-private-testnet-manually#1-초기화">사용자 노드 설정 - 1. 초기화</a> 과정을 반드시 진행해야 한다. 초기화와 동일한 <code>datadir</code>을 사용한다.</p>
 <p>만약, 챌린저 역할도 수행하고자 한다면 <code>--rootchain.challenger 0x0...</code> 을 입력인자로 추가해 실행한다.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth \
+    --nousb \
     --datadir ./chaindata-user \
-    --syncmode=<span class="hljs-string">"full"</span> \
+    --syncmode=<span class="hljs-string">'full'</span> \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --rpc \
     --rpcaddr <span class="hljs-string">'0.0.0.0'</span> \
     --rpcport 8547 \
     --rpcapi eth,net,debug \
-    --rpccorsdomain <span class="hljs-string">"*"</span> \
+    --rpccorsdomain <span class="hljs-string">'*'</span> \
     --rpcvhosts=localhost \
     --ws \
     --wsorigins <span class="hljs-string">'*'</span> \
     --wsaddr <span class="hljs-string">'0.0.0.0'</span> \
     --wsport 8548 \
-    --nodekey boot.key \
+    --bootnodes <span class="hljs-string">"enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30306"</span> \
     --port 30307 \
     --nat extip:::1 \
     --maxpeers 50
@@ -221,4 +218,4 @@ Repeat passphrase:
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="설정-완료-후-구조도"></a><a href="#설정-완료-후-구조도" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>설정 완료 후 구조도</h3>
 <p><img src="/docs/assets/guides_private_testnet_manually.png" alt="자식 체인 설정 완료 후 개요도"></p>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-10 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain"><span class="arrow-prev">← </span><span>루트체인 설정</span></a><a class="docs-next button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-puppeth"><span>Puppeth 사용하여 부모-자식체인 설정</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#오퍼레이터-노드-설정">오퍼레이터 노드 설정</a><ul class="toc-headings"><li><a href="#1-저장소-다운로드-및-컴파일">1. 저장소 다운로드 및 컴파일</a></li><li><a href="#2-루트체인-컨트랙트-배포">2. 루트체인 컨트랙트 배포</a></li><li><a href="#3-초기화">3. 초기화</a></li><li><a href="#4-오퍼레이터-계정-키스토어-생성">4. 오퍼레이터 계정 키스토어 생성</a></li><li><a href="#5-오퍼레이터-노드-실행">5. 오퍼레이터 노드 실행</a></li></ul></li><li><a href="#사용자-노드-설정">사용자 노드 설정</a><ul class="toc-headings"><li><a href="#1-초기화">1. 초기화</a></li><li><a href="#2-bootkey-생성">2. <code>bootkey</code> 생성</a></li><li><a href="#3-사용자-노드-실행">3. 사용자 노드 실행</a></li><li><a href="#설정-완료-후-구조도">설정 완료 후 구조도</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-10 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain"><span class="arrow-prev">← </span><span>루트체인 설정</span></a><a class="docs-next button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-puppeth"><span>Puppeth 사용하여 부모-자식체인 설정</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#오퍼레이터-노드-설정">오퍼레이터 노드 설정</a><ul class="toc-headings"><li><a href="#1-저장소-다운로드-및-컴파일">1. 저장소 다운로드 및 컴파일</a></li><li><a href="#2-루트체인-컨트랙트-배포">2. 루트체인 컨트랙트 배포</a></li><li><a href="#3-초기화">3. 초기화</a></li><li><a href="#4-오퍼레이터-계정-키스토어-생성">4. 오퍼레이터 계정 키스토어 생성</a></li><li><a href="#5-오퍼레이터-노드-실행">5. 오퍼레이터 노드 실행</a></li></ul></li><li><a href="#사용자-노드-설정">사용자 노드 설정</a><ul class="toc-headings"><li><a href="#1-초기화">1. 초기화</a></li><li><a href="#2-사용자-노드-실행">2. 사용자 노드 실행</a></li><li><a href="#설정-완료-후-구조도">설정 완료 후 구조도</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>

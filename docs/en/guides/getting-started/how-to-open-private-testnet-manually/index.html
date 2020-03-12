@@ -158,7 +158,7 @@ Repeat passphrase:
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth \
     --nousb \
     --datadir ./chaindata-oper \
-    --syncmode=<span class="hljs-string">"full"</span> \
+    --syncmode=<span class="hljs-string">'full'</span> \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --operator 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -167,12 +167,11 @@ Repeat passphrase:
     --maxpeers 50 \
     --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
     --password signer.pass \
-    --bootnodes <span class="hljs-string">"enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30307"</span> \
+    --nodekeyhex e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3 \
     --mine \
     --miner.gastarget 7500000 \
     --miner.gaslimit 10000000
 </code></pre>
-<p><code>enode://...</code> address used in <code>bootnodes</code> flag above will be same as result of <a href="how-to-open-private-testnet-manually#2-generate-bootkey">Setup User Node - 2. Generate <code>bootkey</code></a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="setup-user-node"></a><a href="#setup-user-node" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setup User Node</h2>
 <p>This guide describes how to run user node without setting challenger account.</p>
 <blockquote>
@@ -189,30 +188,26 @@ Repeat passphrase:
 <blockquote>
 <p>Use same <code>genesis.json</code> as in <a href="how-to-open-private-testnet-manually#3-Initialize">setting up operator node</a>.</p>
 </blockquote>
-<h3><a class="anchor" aria-hidden="true" id="2-generate-bootkey"></a><a href="#2-generate-bootkey" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Generate <code>bootkey</code></h3>
-<p>Make <code>boot.key</code> file for operator node to use designated enode address.</p>
-<pre><code class="hljs css language-bash">plasma-evm$ <span class="hljs-built_in">echo</span> <span class="hljs-string">"e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3"</span> &gt; boot.key
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="3-run-user-node"></a><a href="#3-run-user-node" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Run User Node</h3>
+<h3><a class="anchor" aria-hidden="true" id="2-run-user-node"></a><a href="#2-run-user-node" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Run User Node</h3>
 <p>You must <a href="how-to-open-private-testnet-manually##1-initialize">Setup User Node - 1. Initialize</a> before running user node. It will use same <code>datadir</code> as in the initialization.</p>
 <p>Run user node with following command. If you want to run challenger, add <code>--rootchain.challenger 0x0...</code> to the command.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth \
     --nousb \
     --datadir ./chaindata-user \
-    --syncmode=<span class="hljs-string">"full"</span> \
+    --syncmode=<span class="hljs-string">'full'</span> \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --rpc \
     --rpcaddr <span class="hljs-string">'0.0.0.0'</span> \
     --rpcport 8547 \
     --rpcapi eth,net,debug \
-    --rpccorsdomain <span class="hljs-string">"*"</span> \
+    --rpccorsdomain <span class="hljs-string">'*'</span> \
     --rpcvhosts=localhost \
     --ws \
     --wsorigins <span class="hljs-string">'*'</span> \
     --wsaddr <span class="hljs-string">'0.0.0.0'</span> \
     --wsport 8548 \
-    --nodekey boot.key \
+    --bootnodes <span class="hljs-string">"enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30306"</span> \
     --port 30307 \
     --nat extip:::1 \
     --maxpeers 50
@@ -221,5 +216,6 @@ Repeat passphrase:
 <p>You must set <code>syncmode</code> to <code>full</code> or <code>archive</code> in order to synchronize with operator node.</p>
 </blockquote>
 <!-- TODO : fix link -->
-<!-- ### Architecture Diagram -->
-<!-- ![Architecture after setup childchain](/docs/assets/guides_private_testnet_manually.png) --></span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-10 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain"><span class="arrow-prev">← </span><span>Setup Rootchain</span></a><a class="docs-next button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth"><span>Setup with Puppeth</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#setup-operator-node">Setup Operator Node</a><ul class="toc-headings"><li><a href="#1-download-and-compile-repository">1. Download and Compile Repository</a></li><li><a href="#2-deploy-rootchain-contract">2. Deploy RootChain Contract</a></li><li><a href="#3-initialize">3. Initialize</a></li><li><a href="#4-create-keystore-of-operator-account">4. Create Keystore of Operator Account</a></li><li><a href="#5-run-operator-node">5. Run Operator Node</a></li></ul></li><li><a href="#setup-user-node">Setup User Node</a><ul class="toc-headings"><li><a href="#1-initialize">1. Initialize</a></li><li><a href="#2-generate-bootkey">2. Generate <code>bootkey</code></a></li><li><a href="#3-run-user-node">3. Run User Node</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
+<h3><a class="anchor" aria-hidden="true" id="architecture-diagram"></a><a href="#architecture-diagram" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Architecture Diagram</h3>
+<p><img src="/docs/assets/guides_private_testnet_manually.png" alt="Architecture after setup childchain"></p>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-10 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain"><span class="arrow-prev">← </span><span>Setup Rootchain</span></a><a class="docs-next button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth"><span>Setup with Puppeth</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#setup-operator-node">Setup Operator Node</a><ul class="toc-headings"><li><a href="#1-download-and-compile-repository">1. Download and Compile Repository</a></li><li><a href="#2-deploy-rootchain-contract">2. Deploy RootChain Contract</a></li><li><a href="#3-initialize">3. Initialize</a></li><li><a href="#4-create-keystore-of-operator-account">4. Create Keystore of Operator Account</a></li><li><a href="#5-run-operator-node">5. Run Operator Node</a></li></ul></li><li><a href="#setup-user-node">Setup User Node</a><ul class="toc-headings"><li><a href="#1-initialize">1. Initialize</a></li><li><a href="#2-run-user-node">2. Run User Node</a></li><li><a href="#architecture-diagram">Architecture Diagram</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
