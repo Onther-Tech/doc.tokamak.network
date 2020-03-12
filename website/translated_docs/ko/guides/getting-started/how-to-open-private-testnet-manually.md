@@ -101,7 +101,7 @@ plasma-evm$ build/bin/geth init \
 
 ```bash
 # Generate Operator Keyfile
-plasma-evm$ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 --datadir pls.data
+plasma-evm$ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 --datadir ./chaindata-oper
 INFO [08-27|16:14:38.878] Bumping default cache on mainnet         provided=1024 updated=4096
 INFO [08-27|16:14:38.879] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [08-27|16:14:38.905] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
@@ -124,8 +124,9 @@ plasma-evm$ echo "<Passphrase for operator keystore file>" > signer.pass
 
 ```bash
 plasma-evm$ build/bin/geth \
+    --nousb \
     --datadir ./chaindata-oper \
-    --syncmode="full" \
+    --syncmode='full' \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --operator 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -134,13 +135,11 @@ plasma-evm$ build/bin/geth \
     --maxpeers 50 \
     --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
     --password signer.pass \
-    --bootnodes "enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30307" \
+    --nodekeyhex e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3 \
     --mine \
     --miner.gastarget 7500000 \
     --miner.gaslimit 10000000
 ```
-
-위 `bootnodes` 플래그에 사용되는 `enode://...` 주소는 [사용자 노드 설정 - 2. `bootkey` 생성](how-to-open-private-testnet-manually#2-bootkey-생성)의 결과와 같다.
 
 ## 사용자 노드 설정
 
@@ -162,15 +161,8 @@ plasma-evm$ build/bin/geth init \
 ```
 > [오퍼레이터 설정 - 3. 초기화](how-to-open-private-testnet-manually#3-초기화)에서 사용한 `genesis.json` 파일을 사용한다.
 
-### 2. `bootkey` 생성
 
-오퍼레이터 노드에서 미리 지정한 enode 주소를 사용하도록 `boot.key` 파일을 생성한다.
-
-```bash
-plasma-evm$ echo "e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3" > boot.key
-```
-
-### 3. 사용자 노드 실행
+### 2. 사용자 노드 실행
 
 [사용자 노드 설정 - 1. 초기화](how-to-open-private-testnet-manually#1-초기화) 과정을 반드시 진행해야 한다. 초기화와 동일한 `datadir`을 사용한다.
 
@@ -178,21 +170,22 @@ plasma-evm$ echo "e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7
 
 ```bash
 plasma-evm$ build/bin/geth \
+    --nousb \
     --datadir ./chaindata-user \
-    --syncmode="full" \
+    --syncmode='full' \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --rpc \
     --rpcaddr '0.0.0.0' \
     --rpcport 8547 \
     --rpcapi eth,net,debug \
-    --rpccorsdomain "*" \
+    --rpccorsdomain '*' \
     --rpcvhosts=localhost \
     --ws \
     --wsorigins '*' \
     --wsaddr '0.0.0.0' \
     --wsport 8548 \
-    --nodekey boot.key \
+    --bootnodes "enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30306" \
     --port 30307 \
     --nat extip:::1 \
     --maxpeers 50

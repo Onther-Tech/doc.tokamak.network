@@ -126,7 +126,7 @@ Run operator node with following command.
 plasma-evm$ build/bin/geth \
     --nousb \
     --datadir ./chaindata-oper \
-    --syncmode="full" \
+    --syncmode='full' \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --operator 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -135,13 +135,11 @@ plasma-evm$ build/bin/geth \
     --maxpeers 50 \
     --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
     --password signer.pass \
-    --bootnodes "enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30307" \
+    --nodekeyhex e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3 \
     --mine \
     --miner.gastarget 7500000 \
     --miner.gaslimit 10000000
 ```
-
-`enode://...` address used in `bootnodes` flag above will be same as result of [Setup User Node - 2. Generate `bootkey`](how-to-open-private-testnet-manually#2-generate-bootkey).
 
 ## Setup User Node
 
@@ -164,16 +162,7 @@ plasma-evm$ build/bin/geth --nousb init \
 
 > Use same `genesis.json` as in [setting up operator node](how-to-open-private-testnet-manually#3-Initialize).
 
-
-### 2. Generate `bootkey`
-
-Make `boot.key` file for operator node to use designated enode address.
-
-```bash
-plasma-evm$ echo "e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3" > boot.key
-```
-
-### 3. Run User Node
+### 2. Run User Node
 
 You must [Setup User Node - 1. Initialize](how-to-open-private-testnet-manually##1-initialize) before running user node. It will use same `datadir` as in the initialization.
 
@@ -183,20 +172,20 @@ Run user node with following command. If you want to run challenger, add `--root
 plasma-evm$ build/bin/geth \
     --nousb \
     --datadir ./chaindata-user \
-    --syncmode="full" \
+    --syncmode='full' \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --rpc \
     --rpcaddr '0.0.0.0' \
     --rpcport 8547 \
     --rpcapi eth,net,debug \
-    --rpccorsdomain "*" \
+    --rpccorsdomain '*' \
     --rpcvhosts=localhost \
     --ws \
     --wsorigins '*' \
     --wsaddr '0.0.0.0' \
     --wsport 8548 \
-    --nodekey boot.key \
+    --bootnodes "enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30306" \
     --port 30307 \
     --nat extip:::1 \
     --maxpeers 50
@@ -205,6 +194,7 @@ plasma-evm$ build/bin/geth \
 > You must set `syncmode` to `full` or `archive` in order to synchronize with operator node.
 
 <!-- TODO : fix link -->
-<!-- ### Architecture Diagram -->
 
-<!-- ![Architecture after setup childchain](assets/guides_private_testnet_manually.png) -->
+### Architecture Diagram
+
+![Architecture after setup childchain](assets/guides_private_testnet_manually.png)
