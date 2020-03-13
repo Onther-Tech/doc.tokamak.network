@@ -40,38 +40,11 @@ Note that the criterion for calculating duration is not the actual time but the 
 ### Principles
 $s_{y}$ is distributed according to the following principles:
 
-1. The larger the staked amount of TON, the more the commit reward.
-2. The longer the duration of staked TON, the more the commit reward.
+1. Commit reward will be given to participants who contributed to the Tokamak Network.
+2. A typical way to contribute to Tokamak Network is commiting blocks by becoming operator through stkaing.
 
-One of the key criteria for distributing reward in most blockchains using staking model is the count of performed validation tasks. However, for Tokamak Network, the number of commits similar to mining (validation) is not considered as a critical criterion. The reason is because it is not easy to determine whether commits are an act of contributing to the network due to the nature of Plasma. For example, it is challenging to measure contribution with only the number of commits since meaningless empty blocks can be submitted solely to get commit reward. Also, few commits that actually contribute to the network can be more meaningful than lots of commits. For this reason, **'Number of commits'** is not considered in the distribution criteria of the commit reward.
 
 ### Distribution of Commit Reward
-Based on the two distribution principles, a formula of $s_{y}$ can be derived. The amount of commit reward the staker can get from $k$ to $t$ is calculated as follows.
-
-$s_{k,t}^{staker} = \sum_{i=k}^{t}\cfrac{d_{i}^{staker}}{ts_{i}}*S_{b}$
-
-#### Notation
-* $s_{k,t}^{staker}$ : Commit reward of staker from $k$ to $t$
-* $d_{t}^{staker}$ : Total amount of TON staked to staker account at $t$
+Commit reward is given to those who commit in Tokamak network and are distributed differently depending on their contribution.
 
 
-### Example
-The following is a simple example of commit reward simulation.
-
-| Parameters | Value |
-|:----------:|:-----:|
-|    $IS$    | 10000 |
-|  $S_{y}$   | 2000  |
-|  $N_{y}$   |   5   |
-|  $S_{b}$   |  400  |
-
-
-
-| Time(t) | Stake | Unstake | $d_{t}^{Alice}$ | $ts_{t}$ | $s_{t}^{Alice}$ |
-|:-------:|:-----:|:-------:|:---------------:|:--------:|:---------------:|
-|    0    | 1000  |         |        0        |  10000 |0                |
-|    1    |       |         |      1000       |  10000 |40=1000/10000*400|
-|    2    |       |         |      1000     |  10040 |39.8=1000/10040*400|
-|    3    |       |   500   |      1000     |10079.8|39.7=1000/10079.8*400|
-|    4    |       |         |       500       |  10119   |19.8=500/10119*400 |
-|    5    |       |         |       500       |  10139   |19.7=500/10139*400 |
