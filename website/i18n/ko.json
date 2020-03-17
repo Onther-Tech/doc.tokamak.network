@@ -37,13 +37,17 @@
         "title": "How to make request",
         "sidebar_label": "How to make request"
       },
-      "guides/manuals/guides_manuals_how-to-manage-staked-ton": {
-        "title": "How to manage staked TON",
-        "sidebar_label": "How to manage staked TON"
+      "guides/manuals/how-to-play-powerton": {
+        "title": "PowerTON",
+        "sidebar_label": "PowerTON"
       },
       "guides/manuals/guides_manuals_how-to-manage-stamina": {
         "title": "How to manage STAMINA",
         "sidebar_label": "How to manage STAMINA"
+      },
+      "guides/manuals/how-to-play-powerTON": {
+        "title": "How to Play PowerTON",
+        "sidebar_label": "PowerTON"
       },
       "guides/public-testnets": {
         "title": "토카막 퍼블릭 테스트넷 정보",
