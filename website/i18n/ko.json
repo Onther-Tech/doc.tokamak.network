@@ -25,6 +25,10 @@
         "title": "Puppeth 사용하여 프라이빗 테스트넷 설정하기",
         "sidebar_label": "Puppeth 사용하여 부모-자식체인 설정"
       },
+      "guides/getting-started/private-testnet-staking": {
+        "title": "프라이빗 네트워크 스테이크 튜토리얼",
+        "sidebar_label": "프라이빗 네트워크 튜토리얼"
+      },
       "guides/getting-started/how-to-open-private-testnet-rootchain": {
         "title": "프라이빗 테스트넷 루트체인 설정하기",
         "sidebar_label": "루트체인 설정"
