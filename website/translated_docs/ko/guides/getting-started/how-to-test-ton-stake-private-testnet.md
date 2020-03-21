@@ -22,7 +22,7 @@ sidebar_label: Private Testnet Staking test
 
 만약, 동작하고 있는 rootchain 이 없다면, [프라이빗 테스트넷 루트체인 설정하기](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain#루트-체인-설정) 수행한다.
 
-`deployManagers` 실행에 필요한 입력 파라미터는 <withdrawalDelay> 와 <seigPerBlock>, 총 2개 이다.
+`deployManagers` 실행에 필요한 입력 파라미터는 `withdrawalDelay` 와 `seigPerBlock` 총 2개 이다.
 
 입력 파라미터에 대한 설명은 다음과 같다.
 
