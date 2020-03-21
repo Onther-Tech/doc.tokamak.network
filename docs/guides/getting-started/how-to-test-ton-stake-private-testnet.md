@@ -1,15 +1,11 @@
 ---
 id: private-testnet-staking
-title: Staking Tutorial in Priavte Testnet
-sidebar_label: Private Testnet Staking
+title: Staking Test in Priavte Testnet
+sidebar_label: Private Testnet Staking test
 ---
 
 > This Document Work In Progress
 
-# Staking
+Sorry, Only Korean version is Available for now.
 
-## How to stake TONs?
-
-## How to unstake TONs?
-
-## How to delegate TONs?
+Will Update Soon.

@@ -30,8 +30,8 @@
         "sidebar_label": "Setup Rootchain"
       },
       "guides/getting-started/private-testnet-staking": {
-        "title": "Staking Tutorial in Priavte Testnet",
-        "sidebar_label": "Private Testnet Staking"
+        "title": "Staking Test in Priavte Testnet",
+        "sidebar_label": "Private Testnet Staking test"
       },
       "guides/manuals/guides_manuals_how-to-make-request": {
         "title": "How to make request",

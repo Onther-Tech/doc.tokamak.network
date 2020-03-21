@@ -1,10 +1,8 @@
 ---
 id: private-testnet-staking
-title: Staking Tutorial in Priavte Testnet
-sidebar_label: Private Testnet Staking
+title: Staking Test in Priavte Testnet
+sidebar_label: Private Testnet Staking test
 ---
-
-> This Document Work In Progress
 
 ## 프라이빗 네트워크 TON 스테이크
 

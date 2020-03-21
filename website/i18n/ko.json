@@ -6,23 +6,23 @@
     "tagline": "Plasma evm documents",
     "docs": {
       "guides/getting-started/how-to-connect-public-testnet-manually": {
-        "title": "퍼블릿 테스트넷 직접 연결하기",
-        "sidebar_label": "직접 연결하기"
+        "title": "퍼블릿 테스트넷 직접 연결",
+        "sidebar_label": "직접 연결"
       },
       "guides/getting-started/how-to-connect-public-testnet-prepare": {
-        "title": "퍼블릭 테스트넷 연결 준비하기",
-        "sidebar_label": "연결 준비하기"
+        "title": "퍼블릭 테스트넷 연결 준비",
+        "sidebar_label": "연결 준비"
       },
       "guides/getting-started/how-to-connect-public-testnet-puppeth": {
-        "title": "Puppeth 사용하여 퍼블릭 테스트넷 연결하기",
-        "sidebar_label": "Puppeth 사용하여 연결하기"
+        "title": "Puppeth 사용하여 퍼블릭 테스트넷 연결",
+        "sidebar_label": "Puppeth 사용하여 연결"
       },
       "guides/getting-started/how-to-open-private-testnet-manually": {
-        "title": "프라이빗 테스트넷 자식 체인 직접 설정하기",
+        "title": "프라이빗 테스트넷 자식 체인 직접 설정",
         "sidebar_label": "자식체인 설정"
       },
       "guides/getting-started/how-to-open-private-testnet-puppeth": {
-        "title": "Puppeth 사용하여 프라이빗 테스트넷 설정하기",
+        "title": "Puppeth 사용하여 프라이빗 테스트넷 설정",
         "sidebar_label": "Puppeth 사용하여 부모-자식체인 설정"
       },
       "guides/getting-started/private-testnet-staking": {
@@ -30,7 +30,7 @@
         "sidebar_label": "프라이빗 네트워크 테스트"
       },
       "guides/getting-started/how-to-open-private-testnet-rootchain": {
-        "title": "프라이빗 테스트넷 루트체인 설정하기",
+        "title": "프라이빗 테스트넷 루트체인 설정",
         "sidebar_label": "루트체인 설정"
       },
       "guides/guides_apis_npm-plasma-evm-contracts": {
@@ -147,9 +147,10 @@
       "Guide": "가이드",
       "Basic": "기초",
       "Advanced": "고급",
+      "TON Staking": "TON 스테이킹",
       "Token Economy": "토큰경제",
-      "Getting Started Private Testnet": "프라이빗 테스트넷 시작하기",
-      "Connect Public Testnet": "퍼블릭 테스트넷 연결하기"
+      "Getting Started Private Testnet": "프라이빗 테스트넷 시작",
+      "Connect Public Testnet": "퍼블릭 테스트넷 연결"
     }
   },
   "pages-strings": {
