@@ -1,7 +1,7 @@
 ---
-id: guides_manuals_how-to-manage-staked-ton
-title: How to manage staked TON
-sidebar_label: How to manage staked TON
+id: private-testnet-staking
+title: Staking Tutorial in Priavte Testnet
+sidebar_label: Private Testnet Staking
 ---
 
 > This Document Work In Progress

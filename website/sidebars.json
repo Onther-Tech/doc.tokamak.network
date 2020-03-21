@@ -54,10 +54,17 @@
         "ids": [
           "guides/getting-started/how-to-connect-public-testnet-prepare",
           "guides/getting-started/how-to-connect-public-testnet-manually",
-          "guides/getting-started/how-to-connect-public-testnet-puppeth"
+          "guides/getting-started/how-to-connect-public-testnet-puppeth",
+          "guides/public-testnets"
         ]
       },
-      "guides/public-testnets"
+      {
+        "type": "subcategory",
+        "label": "TON Staking",
+        "ids": [
+          "guides/getting-started/private-testnet-staking"
+        ]
+      }
     ]
   }
 }
