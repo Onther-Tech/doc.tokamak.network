@@ -6,9 +6,9 @@ sidebar_label: Private Testnet Staking test
 
 ## 프라이빗 네트워크 TON 스테이크
 
-이 문서 프라이빗 테스트 루트체인에서 두 오퍼레이터가 TON 토큰을 스테이크하는 예시를 다룬다.
+이 문서는 프라이빗 테스트 루트체인에서 두 오퍼레이터가 TON 토큰을 스테이크하는 예시를 다룬다.
 
-문서의 대부분 `plasma-evm`의 `staking` 명령어 사용에 대한 것으로, 개발자 및 오퍼레이터(Operator) 에게 유용한 툴이다.
+문서의 대부분 `plasma-evm`의 `staking` 명령어 사용에 대한 것이다. 이 명령어는 개발자 및 오퍼레이터(Operator) 에게 유용한 툴이다.
 
 > 일반 사용자의 경우 [dashboard](https://dashboard.faraday.tokamak.network)를 사용한다.
 
@@ -18,7 +18,7 @@ sidebar_label: Private Testnet Staking test
 
 ### TON 스테이크 매니저 컨트랙트 배포
 
-동작중인 rootchain에 스테이크 관련 컨트렉트들을 배포한다.
+동작중인 rootchain에 스테이크 관련 컨트렉트를 배포한다.
 
 만약, 동작하고 있는 rootchain 이 없다면, [프라이빗 테스트넷 루트체인 설정하기](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain#루트-체인-설정) 수행한다.
 
@@ -86,7 +86,7 @@ plasma-evm $ build/bin/geth staking deployPowerTON 60s \
 
 ### 배포 컨트랙트 정보
 
-배포한 컨트랙트의 정보는 `staking`의 하위 명령어인 `deployManager` 통해 `.pls.staking/manager` 에 위치한 rawdb저장되어 있다.
+배포한 컨트랙트의 정보는 `staking`의 하위 명령어인 `deployManager` 통해 `.pls.staking/manager` 에 위치한 rawdb저장된다.
 
 아래 명령어를 통해, 루트체인에 배포한 스테이크 컨트랙트 정보들을 추출하여 `manager.json` 파일로 저장한다.
 
