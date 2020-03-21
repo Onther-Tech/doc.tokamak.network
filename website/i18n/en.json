@@ -41,10 +41,6 @@
         "title": "How to manage STAMINA",
         "sidebar_label": "How to manage STAMINA"
       },
-      "guides/manuals/how-to-play-powerTON": {
-        "title": "How to Play PowerTON",
-        "sidebar_label": "PowerTON"
-      },
       "guides/public-testnets": {
         "title": "Tokamak Public Testnet Information",
         "sidebar_label": "Public Testnet Information"
