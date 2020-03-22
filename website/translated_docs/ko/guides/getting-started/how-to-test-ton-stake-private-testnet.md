@@ -12,7 +12,7 @@ sidebar_label: Private Testnet Staking test
 
 > 일반 사용자의 경우 [dashboard](https://dashboard.faraday.tokamak.network)를 사용한다.
 
-테스트 환경 구성은 [onther-tech/go-ethereum](https://github.com/onther-tech/go-ethereum)을 rootchain으로 사용하고, plasma-evm 은 [onther-tech/plasmaa-evm](https://github.com/onther-tech/plasma-evm)를 사용한다.
+테스트 환경 구성은 [onther-tech/go-ethereum](https://github.com/onther-tech/go-ethereum)을 rootchain으로 사용하고, plasma-evm 은 [onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm)를 사용한다.
 
 ## TON 스테이크 컨트랙트 설정
 
