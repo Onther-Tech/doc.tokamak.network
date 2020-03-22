@@ -20,17 +20,19 @@ sidebar_label: Private Testnet Staking test
 
 동작중인 rootchain에 스테이크 관련 컨트렉트를 배포한다.
 
-만약, 동작하고 있는 rootchain 이 없다면, [프라이빗 테스트넷 루트체인 설정하기](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain#루트-체인-설정) 수행한다.
+만약, 동작하고 있는 rootchain 이 없다면 [프라이빗 테스트넷 루트체인 설정하기](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain#루트-체인-설정) 수행한다.
 
-`staking` 명령어는 `plasma-evm` 의 `geth`에 추가되어 있는 기능으로, [프라이빗 테스트넷 시작 - 자식체인 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually) 을 참고 한다.
-
-이 문서에서는 아래 명령어를 통해 `plasma-evm` 저장소 다운로드 완료 한다.
+우선, 아래 명령어를 통해 `plasma-evm` 저장소 다운로드 완료 한다.
 
 ```
 $ git clone https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm
 plasma-evm $
 ```
+
+`plasma-evm` 설정에 대한 자세한 내용은, [프라이빗 테스트넷 시작 - 자식체인 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually) 을 참고 한다.
+
+`staking` 명령어는 `plasma-evm` 의 `geth`에 추가되어 있는 기능으로, TON 토큰 스테이크 관련 컨트랙트 배포 및 관리 그리고 TON 토큰 스테이크를 손쉽게 할 수 있는 기능을 가지고 있다.
 
 `deployManagers` 실행에 필요한 입력 파라미터는 `withdrawalDelay` 와 `seigPerBlock` 총 2개 이다.
 
