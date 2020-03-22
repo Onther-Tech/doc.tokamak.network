@@ -22,6 +22,16 @@ sidebar_label: Private Testnet Staking test
 
 만약, 동작하고 있는 rootchain 이 없다면, [프라이빗 테스트넷 루트체인 설정하기](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain#루트-체인-설정) 수행한다.
 
+`staking` 명령어는 `plasma-evm` 의 `geth`에 추가되어 있는 기능으로, [프라이빗 테스트넷 시작 - 자식체인 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually) 을 참고 한다.
+
+이 문서에서는 아래 명령어를 통해 `plasma-evm` 저장소 다운로드 완료 한다.
+
+```
+$ git clone https://github.com/onther-tech/plasma-evm
+$ cd plasma-evm
+plasma-evm $
+```
+
 `deployManagers` 실행에 필요한 입력 파라미터는 `withdrawalDelay` 와 `seigPerBlock` 총 2개 이다.
 
 입력 파라미터에 대한 설명은 다음과 같다.
@@ -154,15 +164,6 @@ plasma-evm $ build/bin/geth staking mintTON 0x3cd9f729c8d882b851f8c70fb36d22b391
 
 ```bash
 plasma-evm $ build/bin/geth staking mintTON 0x57ab89f4eabdffce316809d790d5c93a49908510 10000.0 \
-            --datadir ./.pls.staking/manager \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --operator 0x71562b71999873DB5b286dF957af199Ec94617F7
-```
-
-아래 명령어를 통해 오퍼레이터2의 잔고를 확인 할 수 있다.
-
-```bash
-plasma-evm $ build/bin/geth staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --operator 0x71562b71999873DB5b286dF957af199Ec94617F7
