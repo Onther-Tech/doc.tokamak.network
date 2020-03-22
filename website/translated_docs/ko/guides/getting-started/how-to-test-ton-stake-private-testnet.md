@@ -12,7 +12,7 @@ sidebar_label: Private Testnet Staking test
 
 > 일반 사용자의 경우 [dashboard](https://dashboard.faraday.tokamak.network)를 사용한다.
 
-테스트 환경 구성은 [onther-tech/go-ethereum]()을 rootchain으로 사용하고, plasma-evm 은 [onther-tech/plasmaa-evm]()를 사용한다.
+테스트 환경 구성은 [onther-tech/go-ethereum](https://github.com/onther-tech/go-ethereum)을 rootchain으로 사용하고, plasma-evm 은 [onther-tech/plasmaa-evm](https://github.com/onther-tech/plasma-evm)를 사용한다.
 
 ## TON 스테이크 컨트랙트 설정
 
@@ -31,8 +31,6 @@ plasma-evm $
 ```
 
 `plasma-evm` 설정에 대한 자세한 내용은, [프라이빗 테스트넷 시작 - 자식체인 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually) 을 참고 한다.
-
-`staking` 명령어는 `plasma-evm` 의 `geth`에 추가되어 있는 기능으로, TON 토큰 스테이크 관련 컨트랙트 배포 및 관리 그리고 TON 토큰 스테이크를 손쉽게 할 수 있는 기능을 가지고 있다.
 
 `deployManagers` 실행에 필요한 입력 파라미터는 `withdrawalDelay` 와 `seigPerBlock` 총 2개 이다.
 
