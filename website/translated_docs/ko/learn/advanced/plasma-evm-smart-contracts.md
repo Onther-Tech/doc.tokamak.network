@@ -120,6 +120,9 @@ Plasma EVM에서 사용하는 컨트랙트의 소스코드는 [여기](https://g
 - `register(address rootchain)`: `rootchain` 이 `RootChain` 컨트랙트인지 확인한 후 이를 `_rootchains`과 `_rootchainByIndex`에 기록한다.
 - `deployCoinage(address rootchain, address seigManager)`: 레지스트리에 등록된 `RootChain`컨트랙트인 `rootchain`을 파라미터로 `seigManager`컨트랙트의 `deployCoinage()`를 호출한다.
 
+## WTON is DSMath, ReentrancyGuard, Ownable, ERC20Mintable, ERC20Burnable, ERC20Detailed, SeigToken, OnApprove
+WTON은 TON을 Wrapping한 토큰 컨트랙트로, 소수점 자리수(decimal)를 추가하고 부가적인 기능을 추가한다.
+
 ## DepositManager is Ownable, ERC165, OnApprove
 `DepositManager`는 오퍼레이터와 사용자들의 WTON 예치 및 출금을 관리하는 컨트랙트이다.
 
