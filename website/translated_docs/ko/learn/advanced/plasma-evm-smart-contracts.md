@@ -12,7 +12,9 @@ Plasma EVM에서 사용하는 컨트랙트의 소스코드는 [여기](https://g
 
 ## 컨트랙트 다이어그램
 
-![](https://i.imgur.com/UEngaR2.png)
+<!-- TODO: Replace the diagram with pretty one -->
+
+![contracts diagram](assets/learn_advanced_plasma-evm-contracts-updated.png)
 
 *네모*는 컨트랙트 구현체, *실선*은 상속 관계, *검은색 점선*은 `CALL`을 통한 참조 관계, *빨간색 점선*은 `DELEGATECALL`을 통한 참조 관계, *파란색 점선*은 라이브러리 참조를 가리킨다. *초록색 네모*는 네트워크에 실제 배포되는 컨트랙트를 의미한다. `RootChain` 컨트랙트의 사이즈가 크기 때문에  `EpochHandler`와 `SubmitHandler`로 로직을 분리하고 `DELEGATECALL`을 통해 로직을 분리한 핸들러 컨트랙트로 연결한다.
 
@@ -103,3 +105,107 @@ Plasma EVM에서 사용하는 컨트랙트의 소스코드는 [여기](https://g
 - `startEnter(address _to, bytes32 _trieKey, bytes _trieValue)`
 
   Enter 요청을 생성한다. 파라미터는 `startExit`과 동일.
+
+
+
+
+## RootChainRegistry is RootChainRegistryI, Ownable
+`RootChainRegistry`는 배포된 루트체인을 등록하여 `SeigManager`를 통해 해당 루트체인에 스테이킹한 오퍼레이터 및 사용자들이 커밋 보상을 받을 수 있도록 하는 컨트랙트이다.
+
+중요한 상태 변수는 다음과 같다.
+- `mapping (address => bool) _rootchains`: 특정 컨트랙트가 `RootChain`인지 여부를 기록한다.
+- `mapping (uint256 => address) _rootchainByIndex`: 등록된 `RootChain`컨트랙트 주소를 순차적으로 기록한다.
+
+중요한 함수는 다음과 같다.
+- `register(address rootchain)`: `rootchain` 이 `RootChain` 컨트랙트인지 확인한 후 이를 `_rootchains`과 `_rootchainByIndex`에 기록한다.
+- `deployCoinage(address rootchain, address seigManager)`: 레지스트리에 등록된 `RootChain`컨트랙트인 `rootchain`을 파라미터로 `seigManager`컨트랙트의 `deployCoinage()`를 호출한다.
+
+## DepositManager is Ownable, ERC165, OnApprove
+`DepositManager`는 오퍼레이터와 사용자들의 WTON 예치 및 출금을 관리하는 컨트랙트이다.
+
+중요한 상태변수들은 크게 다음과 같은 3가지 종류의 데이터를 기록한다. 각 종류별로 루트체인, 어카운트, 루트체인-어카운트에 대해 기록한다.
+
+- accumulated staked amount: 스테이킹된 WTON의 누적량을 기록한다.
+    - `mapping (address => mapping (address => uint256)) _accStaked`
+    - `mapping (address => uint256) _accStakedRootChain`
+    - `mapping (address => uint256) _accStakedAccount`
+- pending unstaked amount: 출금 요청이 진행되는 동안 출금 대기상태에 있는 WTON의 양을 기록한다.
+    - `mapping (address => mapping (address => uint256)) _pendingUnstaked`
+    - `mapping (address => uint256) _pendingUnstakedRootChain`
+    - `mapping (address => uint256) _pendingUnstakedAccount`
+- accumulated unstaked amount: 출금 요청이 처리된 후 언스테이킹된 WTON의 누적량을 기록한다.
+    - `mapping (address => mapping (address => uint256)) _accUnstaked`
+    - `mapping (address => uint256) _accUnstakedRootChain`
+    - `mapping (address => uint256) _accUnstakedAccount`
+
+중요한 함수는 다음과 같다.
+- `deposit(address rootchain, uint256 amount)`: `rootchain`에 `amount`의 WTON을 스테이킹한다. accumulated staked amount 값들을 증가시키며, `SeigManager`컨트랙트의 `onDeposit()`을 호출한다.
+- `requestWithdrawal(address rootchain, uint256 amount)`: `rootchain`에서 `amount`의 WTON을 언스테이킹하는 요청을 생성한다. pending unstaked amount 값들을 증가시키며, `SeigManager`컨트랙트의 `onWithdraw()`을 호출한다.
+- `processRequests(address rootchain, uint256 n, bool receiveTON)`: `rootchain`에 대한 언스테이킹 요청들을 처리한다. pending unstaked amount 값들을 감소시키며, accumulated unstaked amount를 증가시킨다.
+
+## SeigManager is SeigManagerI, DSMath, Ownable, Pausable, AuthController
+`SeigManager`는 스테이킹한 오퍼레이터와 사용자(WTON 소유자)에게 커밋 보상을 지급 및 관리하는 컨트랙트이다. 오퍼레이터가 커밋을 수행할 때마다 스테이킹한 WTON의 양에 비례한 커밋 보상을 각 어카운트에게 지급한다.
+
+>`Coinage`는 블록단위마다 모든 사용자의 잔액을 증가시킬 수 있는 컨트랙트이다. `Coinage`의 소스코드는 [여기]([https://github.com/Onther-Tech/coinage-token](https://github.com/Onther-Tech/coinage-token))서 확인할 수 있다.
+
+중요한 상태 변수는 다음과 같다.
+- `CustomIncrementCoinage _tot`: 모든 루트체인에 스테이킹된 총 토큰의 양을 기록한다.
+- `mapping (address => CustomIncrementCoinage) _coinages`: 각 루트체인의 coinage 토큰 컨트랙트.
+- `mapping (address => uint256) _lastCommitBlock`: 각 루트체인의 마지막 커밋 블록 넘버
+- `uint256 _seigPerBlock`: 블록당 최대 커밋 보상
+- `uint256 _lastSeigBlock`: 마지막 커밋 보상이 주어진 블록 넘버
+
+중요한 함수는 다음과 같다.
+- `deployCoinage(address rootchain)` : `RootChainRegistry`컨트랙트에 의해 호출되는 콜백함수이다. `rootchain`에 대한 `Coinage` 컨트랙트를 배포한다.
+- `onCommit()`: `RootChain`의 블록이 커밋되면 호출되는 콜백함수이다.
+
+    `onCommit()` 의 실행과정은 다음과 같이 이루어진다.
+    1. `_tot`의 `totalSupply`를 총 스테이킹된 WTON의 양에 비례하여 계산된 커밋 보상 `stakedSeig`만큼 증가시킨다. 이 과정에서 `_tot`의 각 루트체인의 잔액도 해당 루트체인에 스테이킹된 양에 비례하여 증가시킨다. 또한, 스테이킹이 되지 않아 발행되지 않은 토큰의 일부만큼 `PowerTON`컨트랙트의 잔액을 증가시킨다.
+
+        이 때, `stakedSeig = max seigniorages * staking rate` 이다. 
+
+        `max seigniorages =  block.number - _lastSeigBlock` // without pause
+
+        `staking rate = total staked amount / total supply of (W)TON`
+
+    2. 블록이 커밋된 `RootChain`의 모든 스테이커들의 `Coinage`잔액을 스테이킹한 토큰의 양에 비례하여 증가시킨다.
+
+    3. `RootChain`의 `_lastCommitBlock`를 기록한다.
+
+- `onDeposit(address rootchain, address account, uint256 amount)`
+
+     `account`가 `rootchain`에 스테이킹을 하였을 때 호출되는 콜백함수이다. `_tot`에서 해당 어카운트가 스테이킹한 루트체인의 잔액을 `amount`만큼 증가시키며, 해당 루트체인의 `_coinages`에서 어카운트의 잔액을 `amount`만큼 증가시킨다. 또한 `PowerTON`컨트랙트의 `onDeposit()`을 호출한다.
+
+- `onWithdraw(address rootchain, address account, uint256 amount)`
+
+     `account`가 `rootchain`에서 언스테이킹을 요청하였을 때 호출되는 콜백함수이다. 해당 `RootChain`의 `_tot` 잔액을 `amount + ⍺`만큼 감소시키며, `Coinage`컨트랙트에서 해당 어카운트의 잔액을 `amount`만큼 감소시킨다. 또한 `PowerTON`컨트랙트의 `onWithdraw()`를 호출한다.
+
+     `⍺ = SEIGS * staking rate of the root chain * withdrawal rate of the account`
+    - `SEIGS = tot total supply - tot total supply at last commit from the root chain`
+    - `staked ratio of the root chain = tot balance of the root chain / tot total supply`
+    - `withdrawal rate of the account = amount to withdraw / total supply of coinage`
+
+## PowerTON is Ownable, Pausable, AuthController, PowerTONI
+`PowerTON`는 토카막 네트워크의 기여자에게 추가적으로 보상을 지급하는 컨트랙트이다. 
+
+중요한 상태변수는 다음과 같다.
+- `struct Round {uint64 startTime; uint64 endTime; uint256 reward; address winner; }`
+
+  `PowerTON`에서 보상을 지급하는 시간적 단위는 `Round`이다. `Round`는 시작시간(`startTime`)과 종료시간(`endTime`)이 사전에 정해지며, `Round`가 종료되면 `winner`에게 `reward`가 지급된다.
+
+- `SortitionSumTreeFactory.SortitionSumTrees sortitionSumTrees`
+
+  `SortitionSumTreeFactory`는 랜덤시드가 주어졌을 때, 각 사용자가 스테이킹한 토큰의 양에 비례하여 당첨자를 선정할 수 있는 컨트랙트이다. 
+
+>`SortitionSumTreeFactory`에 대한 자세한 설명은 [여기]([https://medium.com/kleros/an-efficient-data-structure-for-blockchain-sortition-15d202af3247](https://medium.com/kleros/an-efficient-data-structure-for-blockchain-sortition-15d202af3247))서 확인할 수 있다.
+
+중요한 함수는 다음과 같다.
+- `powerOf(address account)`: `account`의 Power, 즉 스테이킹한 토큰의 양을 리턴한다.
+- `endRound()`:  현재 진행중인 `Round`를 종료한다. `Round` 종료시 랜덤 `seed` 를 이용하여 `sortitionSumTree`를 통해 `winner`를 결정하며, `PowerTON`컨트랙트의 WTON 잔액의 일부를 `reward`로 지급한다. 또한 다음 라운드를 시작한다.
+- `onDeposit(address rootchain, address account, uint256 amount)`
+
+  `account` 가 `rootchain` 에 스테이킹 하였을 때 `SeigManager`에 의해 호출되는 콜백함수. `sortitionSumTree`에서 해당 어카운트의 잔액을 `amount`만큼 증가시킨다.
+
+- `onWithdraw(address rootchain, address account, uint256 amount)`
+
+  `account`가 `rootchain`에서 언스테이킹 하였을 때 `SeigManager`에 의해 호출되는 콜백함수. `sortitionSumTree`에서 해당 어카운트의 잔액을 감소시킨다.
