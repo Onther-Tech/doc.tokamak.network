@@ -355,15 +355,26 @@ WARN [01-01|00:00:00.000] Approved to deposit TON                  amount=1000.0
 INFO [01-01|00:00:00.000] Swap from TON to WTON                    amount="1000.0 TON" from=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD tx=4d15eb…904dd6
 ```
 
-`staking`의 하위 명령어인 `stake` 를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이크 한다.
+`staking`의 하위 명령어인 `stakeWTON` 를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이크 한다.
 
 ```bash
-plasma-evm $ build/bin/geth staking stake 500.0 \
+plasma-evm $ build/bin/geth staking stakeWTON 500.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
             --password pwd.pass \
             --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
+```
+
+또는, 위 두 과정을 `stakeTON` 명령어로 한번에 처리 할 수 있다.
+
+```bash
+plasma-evm $ build/bin/geth staking stakeTON 500.0 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
 
 ### 오퍼레이터2 체인 설정 및 스테이크 주소 설정
@@ -478,7 +489,18 @@ plasma-evm $ build/bin/geth staking swapFromTON 1000.0 \
 `staking`의 하위 명령어인 `stake` 를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이크 한다.
 
 ```bash
-plasma-evm $ build/bin/geth staking stake 500.0 \
+plasma-evm $ build/bin/geth staking stakeWTON 500.0 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+```
+
+또는, 위 두 과정을 `stakeTON` 명령어로 한번에 처리 할 수 있다.
+
+```bash
+plasma-evm $ build/bin/geth staking stakeTON 500.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -685,8 +707,9 @@ plasma-evm 의 `geth` 는 TON 스테이크 기능을 위해 `manage-staking` 과
 |----------------|------------------|---------|--------|
 | balances   |  address*         | address       | 입력인자로 입력한 주소가 가지고 있는 `TON`, `WTON`, `staked WTON(==deposit)`, `reward WTON(==(Un)Comitted)` 등과 같은 정보를 출력한다. |
 | swapFromTON  |  amount*            | Float or Int       | `WTON`을 `TON` 으로 변환하는 트랜잭션을 전송한다. `WTON` 으로 변환할 `TON`의 수량을 입력인자로 사용한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. |
-| swapToTON  |  amount*            | Float or Int       | `TON`을 `WTON` 으로 변환하는 트랜잭션을 전송한다. `TON` 으로 변환할 `WTON`의 수량을 입력인자로 사용한다.대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다.  |
-| stake  |  amount*            | Float or Int  | TON의 시뇨리지를 받기 위해 `WTON`을 스테이크 해야 한다. 오퍼레이터가 가지고 있는 `amount`의 만큼의 `WTON`을 스테이크 상태로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
+| swapToTON  |  amount*            | Float or Int       | `TON`을 `WTON` 으로 변환하는 트랜잭션을 전송한다. `TON` 으로 변환할 `WTON`의 수량을 입력인자리 사용한다.대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다.  |
+| stakeTON   |  amount*            | Float or Int  | 이 명령어는 `swapFromTON` 과 `stakeWTON` 을 하나의 명령어로 처리. 오퍼레이터가 입력한 `amount`의 만큼의 `TON`을 스테이크 상태로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
+| stakeWTON  |  amount*            | Float or Int  | TON의 시뇨리지를 받기 위해 `WTON`을 스테이크 해야 한다. 오퍼레이터가 입력한 `amount`의 만큼의 `WTON`을 스테이크 상태로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
 | requestWithdrawal  |  amount*            | Float or Int       | 스테이크 상태의 `WTON` 을 언스테이크 상태로 전환하는 트랜잭션을 전송한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. 언스테이크 요청(i.e requestWithdrawal) 은 `depositManager` 에서 설정한 `withdrawalDelay` 만큼의 블록이 진행된 이후 처리가능한 상태가 된다. |
 | processWithdrawal  | numRequests         | Int       | `requestWithdrawal` 을 통해 등록된 `WTON` 언스테이크를 완료 시킨다. 입력인자 미입력시 완료 가능한 모든 `requestWithdrawal` 이 처리 된다. |
 

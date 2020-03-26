@@ -359,12 +359,23 @@ INFO [01-01|00:00:00.000] Swap from TON to WTON                    amount="1000.
 Stake 500 WTON of 1,000 WTON converted with using `stake` sub-command of `staking`.
 
 ```bash
-plasma-evm $ build/bin/geth staking stake 500.0 \
+plasma-evm $ build/bin/geth staking stakeWTON 500.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
             --password pwd.pass \
             --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
+```
+
+Or, you can do the above two steps at once with using `stakeTON` sub-command.
+
+```bash
+plasma-evm $ build/bin/geth staking stakeTON 500.0 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
 
 ### Setup operator2 plasma chain and set stake contract address
@@ -479,13 +490,25 @@ plasma-evm $ build/bin/geth staking swapFromTON 1000.0 \
 Stake 500 WTON of 1,000 WTON converted with using `stake` sub-command of `staking`.
 
 ```bash
-plasma-evm $ build/bin/geth staking stake 500.0 \
+plasma-evm $ build/bin/geth staking stakeWTON 500.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
+
+Or, you can do the above two steps at once with using `stakeTON` sub-command.
+
+```bash
+plasma-evm $ build/bin/geth staking stakeTON 500.0 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+```
+
 
 ## Check TON commit rewards and withdrawal
 
@@ -688,7 +711,8 @@ This table is about sub-commands of `staking` and its arguments.
 | balances   |  address*         | address       | Output information about how much this address has `TON`, `WTON`, `staked WTON(==deposit)`, `reward WTON(==(Un)Committed)` and others. |
 | swapFromTON  |  amount*            | Float or Int       | Send transaction for convert `WTON` to `TON` token. the argument is how much will be convert. Target address must be specified `--rootchain.sender` flag. |
 | swapToTON  |  amount*            | Float or Int       |  Send transaction that convert `TON` to `WTON` token. the argument is how much will be convert. Target address must be specified `--rootchain.sender` flag. |
-| stake  |  amount*            | Float or Int  | In order to receive seigniorage of TON token, Operator have to stake `WTON`. Send transaction that the operator's `WTON` to the `stake` state with this amount. Target address must be specified `--rootchain.sender` flag. |
+| stakeTON   |  amount*            | Float or Int  | Combined `swapFromTON` and `stakeWTON`, convert and stake at once. Send transaction that the operator's `TON` to the `stake` state with this amount. Target address must be specified `--rootchain.sender` flag. |
+| stakeWTON  |  amount*            | Float or Int  | In order to receive seigniorage of TON token, Operator have to stake `WTON`. Send transaction that the operator's `WTON` to the `stake` state with this amount. Target address must be specified `--rootchain.sender` flag. |
 | requestWithdrawal  |  amount*            | Float or Int       | Send transaction that convert  `WTON` state from `stake` to `un-stake`.  Target address must be specified `--rootchain.sender` flag. this un-stake request will be valid after the number of blocks, `withdrawalDelay` specified in `depositManager`, increased in rootchain.  |
 | processWithdrawal  | numRequests         | Int       | Finalize un-stake requests. Without using argument, it will finalize all valid requests. |
 
