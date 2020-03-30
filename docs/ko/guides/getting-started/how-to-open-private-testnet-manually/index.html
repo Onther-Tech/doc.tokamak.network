@@ -73,101 +73,120 @@
               }
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/getting-started/how-to-open-private-testnet-manually.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">프라이빗 테스트넷 자식 체인 직접 설정</h1></header><article><div><span><p>루트체인이 구동되고 있는 환경에서 자식 체인을 실행해야 하므로, <a href="how-to-open-private-testnet-rootchain#루트-체인-설정">루트체인 설정</a>을 먼저 진행한다.</p>
-<h2><a class="anchor" aria-hidden="true" id="오퍼레이터-노드-설정"></a><a href="#오퍼레이터-노드-설정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터 노드 설정</h2>
+<h2><a class="anchor" aria-hidden="true" id="오퍼레이터1-노드-설정"></a><a href="#오퍼레이터1-노드-설정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터1 노드 설정</h2>
 <p><a href="how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0">루트체인 설정</a> 수행하였음을 전제로 한다.</p>
 <blockquote>
 <p>루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 챌린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다.
 특히, 챌린저 계정에 최소 0.5 ETH 이상이 있어야 오퍼레이터 노드가 정상적으로 실행된다.</p>
 </blockquote>
-<h3><a class="anchor" aria-hidden="true" id="1-저장소-다운로드-및-컴파일"></a><a href="#1-저장소-다운로드-및-컴파일" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. 저장소 다운로드 및 컴파일</h3>
-<p>소스파일을 다운로드 받은 후 실행가능한 <code>geth</code> 파일을 컴파일 한다.</p>
-<pre><code class="hljs css language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/onther-tech/plasma-evm
-$ <span class="hljs-built_in">cd</span> plasma-evm
-plasma-evm$ make geth
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="2-루트체인-컨트랙트-배포"></a><a href="#2-루트체인-컨트랙트-배포" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. 루트체인 컨트랙트 배포</h3>
+<h3><a class="anchor" aria-hidden="true" id="1-루트체인-컨트랙트-배포"></a><a href="#1-루트체인-컨트랙트-배포" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. 루트체인 컨트랙트 배포</h3>
 <p>루트체인 컨트랙트 배포 커맨드인 <code>deploy</code>에 대한 설명이다.</p>
 <p><code>deploy</code> 커맨드의 입력인자는 &lt;출력할 genesis 파일 이름&gt;, &lt;체인아이디(CHAINID)&gt;, &lt;프리 에셋(PRE-ASSET)&gt;, &lt;에폭(EPOCH)&gt;.</p>
 <p><code>CHAINID</code> : 오퍼레이터가 임의로 정할 수 있는 체인 고유의 숫자.</p>
 <p><code>PRE-ASSET</code> : <code>genesis</code> 파일에 미리 PETH를 부여할지에 대한 여부. <code>true</code> 경우 자식체인 계정들에 PETH 잔고가 생성됨.</p>
 <p><code>EPOCH</code> : 루트체인에 커밋할 자식체인의 블록갯수.
-예) <code>4096</code> 설정하는 경우, 자식체인 4096블록 마다 루트체인에 1회 커밋 트랜잭션을 전송.</p>
+예) <code>2</code> 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송.</p>
 <p>아래 커맨드로 <code>deploy.local.sh</code> 스크립트 파일을 생성한다.</p>
-<pre><code class="hljs css language-sh">plasma-evm$ cat &gt; deploy.local.sh &lt;&lt; <span class="hljs-string">"EOF"</span>
-<span class="hljs-meta">#!/bin/bash
-</span>
-OPERATOR_KEY=<span class="hljs-string">"b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"</span>
-KEY2=<span class="hljs-string">"78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a115"</span>
-KEY3=<span class="hljs-string">"067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc"</span>
-KEY4=<span class="hljs-string">"ae03e057a5b117295db86079ba4c8505df6074cdc54eec62f2050e677e5d4e66"</span>
-KEY5=<span class="hljs-string">"eda4515e1bc6c08e8606b51ffb6ffe70b3fe76781ed49872285e484064e3b634"</span>
-CHALLENGER_KEY=<span class="hljs-string">"78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a114"</span>
+<pre><code class="hljs css language-sh">plasma-evm$ cat &gt; deploy.operator1.sh &lt;&lt; <span class="hljs-string">"EOF"</span>
+<span class="hljs-meta">#!/bin/bash</span>
+OPERATOR_KEY=<span class="hljs-string">"bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5"</span>
+OPERATOR=<span class="hljs-string">"0x3cd9f729c8d882b851f8c70fb36d22b391a288cd"</span>
 
-DATADIR=pls.data
-OPERATOR=<span class="hljs-string">"0x71562b71999873DB5b286dF957af199Ec94617F7"</span>
-CHALLENGER=<span class="hljs-string">"0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8"</span>
+DATADIR=.pls.staking/operator1
 
-ROOTCHAIN_IP=localhost <span class="hljs-comment"># Onther Ropsten Geth Node IP.</span>
+ROOTCHAIN_IP=127.0.0.1
 
 <span class="hljs-comment"># Deploy contracts at rootchain</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">"Deploy rootchain contract and others"</span>
 make geth &amp;&amp; build/bin/geth \
-    --rootchain.url <span class="hljs-string">"ws://<span class="hljs-variable">$ROOTCHAIN_IP</span>:8546"</span> \
-    --operator.key <span class="hljs-variable">$OPERATOR_KEY</span> \
+    --nousb \
     --datadir <span class="hljs-variable">$DATADIR</span> \
-    deploy <span class="hljs-string">"./genesis.json"</span> 16 <span class="hljs-literal">true</span> 4096
+    --rootchain.url <span class="hljs-string">"ws://<span class="hljs-variable">$ROOTCHAIN_IP</span>:8546"</span> \
+    --unlock <span class="hljs-variable">$OPERATOR</span> \
+    --password pwd.pass \
+    --rootchain.sender <span class="hljs-variable">$OPERATOR</span> \
+    deploy <span class="hljs-string">"./genesis-operator1.json"</span> 102 <span class="hljs-literal">true</span> 2
 
-<span class="hljs-comment"># deploy params : chainID, isInitialAsset, Epochlength</span>
 <span class="hljs-comment"># you can checkout "$geth deploy --help" for more information</span>
 EOF
 </code></pre>
-<p>생성된 <code>deploy.local.sh</code> 스크립트는 아래 명령어로 실행한다.</p>
-<pre><code class="hljs css language-sh">plasma-evm$ bash deploy.local.sh
+<p>생성된 <code>deploy.operator1.sh</code> 스크립트는 아래 명령어로 실행한다.</p>
+<pre><code class="hljs css language-sh">plasma-evm$ bash deploy.operator1.sh
 </code></pre>
-<p>스크립트를 통해 생성한 <code>genesis.json</code> 파일은 <code>plasma-evm</code> 디렉토리 내에 위치한다.</p>
-<h3><a class="anchor" aria-hidden="true" id="3-초기화"></a><a href="#3-초기화" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. 초기화</h3>
+<p>스크립트를 통해 생성한 <code>genesis-operator1.json</code> 파일은 <code>plasma-evm</code> 디렉토리 내에 위치한다.</p>
+<h3><a class="anchor" aria-hidden="true" id="2-초기화"></a><a href="#2-초기화" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. 초기화</h3>
 <p>오퍼레이터 노드 실행전에 체인 데이터를 초기화 해야한다.</p>
-<p>기본 설정값인 <code>genesis.json</code> 파일이 실행경로에 위치하고 있으므로 genesis 파일 경로를 지정할 필요 없다.</p>
 <p>아래 명령어를 통해 체인데이터를 초기화한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth init \
-            --datadir ./chaindata-oper \
+<pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth --nousb init \
+            --datadir .pls.staking/operator1 \
             --rootchain.url ws://localhost:8546 \
-            genesis.json
+            genesis-operator1.json
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="4-오퍼레이터-계정-키스토어-생성"></a><a href="#4-오퍼레이터-계정-키스토어-생성" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. 오퍼레이터 계정 키스토어 생성</h3>
-<p>오퍼레이터 노드는 자식체인 블록 정보를 루트체인에 커밋 해야 하므로, 트랜잭션 생성에 오퍼레이터의 비밀키가 필요하다.</p>
-<p>따라서, 오퍼레이터 키를 담고 있는 키스토어 파일을 초기화한 <code>datadir</code>내에 위치시켜야 한다.</p>
-<p><code>Plasma-evm</code>의 <code>geth account</code> 커맨드는 비밀키(private key)만으로 키스토어 파일을 생성할 수 있다.</p>
-<blockquote>
-<p>초기화와 동일한 <code>datadir</code> 위치를 사용한다.</p>
-</blockquote>
-<pre><code class="hljs css language-bash"><span class="hljs-comment"># Generate Operator Keyfile</span>
-plasma-evm$ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 --datadir ./chaindata-oper
-INFO [08-27|16:14:38.878] Bumping default cache on mainnet         provided=1024 updated=4096
-INFO [08-27|16:14:38.879] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [08-27|16:14:38.905] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-Your new account is locked with a password. Please give a password. Do not forget this password.
-Passphrase:
-Repeat passphrase:
+<h3><a class="anchor" aria-hidden="true" id="3-매니저-컨트랙트-설정"></a><a href="#3-매니저-컨트랙트-설정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. 매니저 컨트랙트 설정</h3>
+<p>오퍼레이터 체인 시작을 위해 <a href="#2-초기화">초기화</a> 이후, 스테이크 메니저 컨트랙트에 각 오퍼레이터의 루트체인 컨트랙트 주소를 등록 해야 한다.</p>
+<p>아래 <code>manage-staking</code>의 하위 명령어인 <code>setManagers</code> 사용하여 오퍼레이터1의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb \
+            manage-staking setManagers manager.json  \
+            --datadir ./.pls.staking/operator1
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Set address                              name=TON addr=0x3A220f351252089D385b29beca14e27F204c296A
+INFO [01-01|00:00:00.000] Set address                              name=WTON addr=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf
+INFO [01-01|00:00:00.000] Set address                              name=DepositManager addr=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d
+INFO [01-01|00:00:00.000] Set address                              name=RootChainRegistry addr=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44
+INFO [01-01|00:00:00.000] Set address                              name=SeigManager       addr=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] Set address                              name=PowerTON          addr=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="5-오퍼레이터-노드-실행"></a><a href="#5-오퍼레이터-노드-실행" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. 오퍼레이터 노드 실행</h3>
-<p>만약, 오퍼레이터 키스토어 파일에 암호가 걸려 있는경우 <code>signer.pass</code> 파일 내부에 패스워드를 기록해주어야 한다. 암호가 없는 경우 <code>signer.pass</code> 는 아무런 내용이 없는 빈파일을 생성한다.</p>
-<p>아래 커맨드를 통해서 <code>signer.pass</code> 파일을 생성 한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm$ <span class="hljs-built_in">echo</span> <span class="hljs-string">"&lt;Passphrase for operator keystore file&gt;"</span> &gt; signer.pass
+<p><code>manage-staking</code> 의 하위 명령어인 <code>getManagers</code> 를 실행하여 오퍼레이터1 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb \
+            manage-staking getManagers \
+            --datadir ./.pls.staking/operator1
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Smartcard socket not found, disabling    err=<span class="hljs-string">"stat /run/pcscd/pcscd.comm: no such file or directory"</span>
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
+{
+  <span class="hljs-string">"TON"</span>: <span class="hljs-string">"0x3a220f351252089d385b29beca14e27f204c296a"</span>,
+  <span class="hljs-string">"WTON"</span>: <span class="hljs-string">"0xdb7d6ab1f17c6b31909ae466702703daef9269cf"</span>,
+  <span class="hljs-string">"DepositManager"</span>: <span class="hljs-string">"0x880ec53af800b5cd051531672ef4fc4de233bd5d"</span>,
+  <span class="hljs-string">"RootChainRegistry"</span>: <span class="hljs-string">"0x537e697c7ab75a26f9ecf0ce810e3154dfcaaf44"</span>,
+  <span class="hljs-string">"SeigManager"</span>: <span class="hljs-string">"0x3dc2cd8f2e345951508427872d8ac9f635fbe0ec"</span>,
+  <span class="hljs-string">"PowerTON"</span>: <span class="hljs-string">"0x82567a6f6e3abe246f62350322a07af7f413cfe6"</span>
+}
 </code></pre>
+<h3><a class="anchor" aria-hidden="true" id="4-루트체인-등록"></a><a href="#4-루트체인-등록" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. 루트체인 등록</h3>
+<p>오퍼레이터1 이 설정한 플라즈마 체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking register \
+            --datadir ./.pls.staking/operator1 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+            --password pwd.pass \
+            --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
+</code></pre>
+<p>오퍼레이터1 의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.</p>
+<pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] Registered SeigManager to RootChain      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=b546d3…fe55ed
+INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=6904c9…bc07a5
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="5-노드-실행"></a><a href="#5-노드-실행" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. 노드 실행</h3>
 <p>아래 명령어를 통해서 오퍼레이터 노드를 실행한다.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth \
     --nousb \
-    --datadir ./chaindata-oper \
+    --datadir ./.pls.staking/operator1 \
     --syncmode=<span class="hljs-string">'full'</span> \
-    --networkid 16 \
-    --rootchain.url ws://localhost:8546 \
-    --operator 0x71562b71999873DB5b286dF957af199Ec94617F7 \
+    --networkid 102 \
+    --rootchain.url ws://127.0.0.1:8546 \
+    --operator 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
     --port 30306 \
     --nat extip:::1 \
     --maxpeers 50 \
-    --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
-    --password signer.pass \
+    --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+    --password pwd.pass \
     --nodekeyhex e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3 \
     --mine \
     --miner.gastarget 7500000 \
@@ -181,22 +200,22 @@ Repeat passphrase:
 <h3><a class="anchor" aria-hidden="true" id="1-초기화"></a><a href="#1-초기화" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. 초기화</h3>
 <p><code>--rootchain.url</code> 플래그 입력 인자로 루트체인 컨트랙트가 배포된 루트체인 접속 주소(URL)를 입력한다.</p>
 <p><a href="how-to-open-private-testnet-rootchain#루트-체인-설정">루트 체인 설정</a> 통해 실행중인 루트체인 접속 주소를 사용한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth init \
-            --datadir ./chaindata-user \
+<pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth --nousb init \
+            --datadir ./.pls.staking/usernode \
             --rootchain.url ws://localhost:8546 \
-            genesis.json
+            genesis-operator1.json
 </code></pre>
 <blockquote>
-<p><a href="how-to-open-private-testnet-manually#3-초기화">오퍼레이터 설정 - 3. 초기화</a>에서 사용한 <code>genesis.json</code> 파일을 사용한다.</p>
+<p><a href="how-to-open-private-testnet-manually#2-초기화">오퍼레이터 설정 - 2. 초기화</a>에서 사용한 <code>genesis-operator1.json</code> 파일을 사용한다.</p>
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="2-사용자-노드-실행"></a><a href="#2-사용자-노드-실행" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. 사용자 노드 실행</h3>
 <p><a href="how-to-open-private-testnet-manually#1-초기화">사용자 노드 설정 - 1. 초기화</a> 과정을 반드시 진행해야 한다. 초기화와 동일한 <code>datadir</code>을 사용한다.</p>
 <p>만약, 챌린저 역할도 수행하고자 한다면 <code>--rootchain.challenger 0x0...</code> 을 입력인자로 추가해 실행한다.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth \
     --nousb \
-    --datadir ./chaindata-user \
+    --datadir ./.pls.staking/usernode \
     --syncmode=<span class="hljs-string">'full'</span> \
-    --networkid 16 \
+    --networkid 102 \
     --rootchain.url ws://localhost:8546 \
     --rpc \
     --rpcaddr <span class="hljs-string">'0.0.0.0'</span> \
@@ -216,6 +235,5 @@ Repeat passphrase:
 <blockquote>
 <p><code>syncmode</code>는 <code>full</code> 또는 <code>archive</code>를 입력해야 오퍼레이터 노드와 동기화 된다.</p>
 </blockquote>
-<h3><a class="anchor" aria-hidden="true" id="설정-완료-후-구조도"></a><a href="#설정-완료-후-구조도" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>설정 완료 후 구조도</h3>
-<p><img src="/docs/assets/guides_private_testnet_manually.png" alt="자식 체인 설정 완료 후 개요도"></p>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-10 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain"><span class="arrow-prev">← </span><span>루트체인 설정</span></a><a class="docs-next button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-puppeth"><span>Puppeth 사용하여 부모-자식체인 설정</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#오퍼레이터-노드-설정">오퍼레이터 노드 설정</a><ul class="toc-headings"><li><a href="#1-저장소-다운로드-및-컴파일">1. 저장소 다운로드 및 컴파일</a></li><li><a href="#2-루트체인-컨트랙트-배포">2. 루트체인 컨트랙트 배포</a></li><li><a href="#3-초기화">3. 초기화</a></li><li><a href="#4-오퍼레이터-계정-키스토어-생성">4. 오퍼레이터 계정 키스토어 생성</a></li><li><a href="#5-오퍼레이터-노드-실행">5. 오퍼레이터 노드 실행</a></li></ul></li><li><a href="#사용자-노드-설정">사용자 노드 설정</a><ul class="toc-headings"><li><a href="#1-초기화">1. 초기화</a></li><li><a href="#2-사용자-노드-실행">2. 사용자 노드 실행</a></li><li><a href="#설정-완료-후-구조도">설정 완료 후 구조도</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
+<!--### 설정 완료 후 구조도![자식 체인 설정 완료 후 개요도](/docs/assets/guides_private_testnet_manually.png)-->
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-30 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain"><span class="arrow-prev">← </span><span>루트체인 설정</span></a><a class="docs-next button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-puppeth"><span>Puppeth 사용하여 부모-자식체인 설정</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#오퍼레이터1-노드-설정">오퍼레이터1 노드 설정</a><ul class="toc-headings"><li><a href="#1-루트체인-컨트랙트-배포">1. 루트체인 컨트랙트 배포</a></li><li><a href="#2-초기화">2. 초기화</a></li><li><a href="#3-매니저-컨트랙트-설정">3. 매니저 컨트랙트 설정</a></li><li><a href="#4-루트체인-등록">4. 루트체인 등록</a></li><li><a href="#5-노드-실행">5. 노드 실행</a></li></ul></li><li><a href="#사용자-노드-설정">사용자 노드 설정</a><ul class="toc-headings"><li><a href="#1-초기화">1. 초기화</a></li><li><a href="#2-사용자-노드-실행">2. 사용자 노드 실행</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
