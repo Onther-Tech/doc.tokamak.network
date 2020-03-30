@@ -78,115 +78,95 @@
 <p>Operator and challenger account to be used in root chain must have enough ether balance.
 Note that operator node will run successfully only when challenger account has at least 0.5 ETH.</p>
 </blockquote>
-<h3><a class="anchor" aria-hidden="true" id="1-deploy-rootchain-contract"></a><a href="#1-deploy-rootchain-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Deploy rootchain contract</h3>
+<h3><a class="anchor" aria-hidden="true" id="1-download-and-compile-repository"></a><a href="#1-download-and-compile-repository" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Download and Compile Repository</h3>
+<p>Download source file and then compile <code>geth</code>.</p>
+<pre><code class="hljs css language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/onther-tech/plasma-evm
+$ <span class="hljs-built_in">cd</span> plasma-evm
+plasma-evm$ make geth
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="2-deploy-rootchain-contract"></a><a href="#2-deploy-rootchain-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Deploy RootChain Contract</h3>
 <p>This section explains about <code>deploy</code> command and its parameters for deploying rootChain contract.</p>
 <p><code>deploy</code> : It has 4 parameters, <code>name of genesis file</code>, <code>CHAINID</code>, <code>PRE-ASSET</code>, <code>EPOCH</code>.</p>
 <p><code>CHAINID</code> : Chain id set by opertaor.</p>
 <p><code>PRE-ASSET</code> : Flag to allocate PETH to accounts in child chain at genesis or not.</p>
 <p><code>EPOCH</code> : Length of epoch.
-Ex) If <code>EPOCH</code> is <code>2</code>, it will submit epoch every 2 blocks.</p>
+Ex) If <code>EPOCH</code> is <code>4096</code>, it will submit epoch every 4096 blocks.</p>
 <p>Create <code>deploy.local.sh</code> by running following command.</p>
-<pre><code class="hljs css language-bash">plasma-evm$ cat &gt; deploy.operator1.sh &lt;&lt; <span class="hljs-string">"EOF"</span>
-<span class="hljs-meta">#!/bin/bash</span>
-OPERATOR_KEY=<span class="hljs-string">"bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5"</span>
-OPERATOR=<span class="hljs-string">"0x3cd9f729c8d882b851f8c70fb36d22b391a288cd"</span>
+<pre><code class="hljs css language-sh">plasma-evm$ cat &gt; deploy.local.sh &lt;&lt; <span class="hljs-string">"EOF"</span>
+<span class="hljs-meta">#!/bin/bash
+</span>
+OPERATOR_KEY=<span class="hljs-string">"b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"</span>
+KEY2=<span class="hljs-string">"78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a115"</span>
+KEY3=<span class="hljs-string">"067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc"</span>
+KEY4=<span class="hljs-string">"ae03e057a5b117295db86079ba4c8505df6074cdc54eec62f2050e677e5d4e66"</span>
+KEY5=<span class="hljs-string">"eda4515e1bc6c08e8606b51ffb6ffe70b3fe76781ed49872285e484064e3b634"</span>
+CHALLENGER_KEY=<span class="hljs-string">"78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a114"</span>
 
-DATADIR=.pls.staking/operator1
+DATADIR=pls.data
+OPERATOR=<span class="hljs-string">"0x71562b71999873DB5b286dF957af199Ec94617F7"</span>
+CHALLENGER=<span class="hljs-string">"0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8"</span>
 
-ROOTCHAIN_IP=127.0.0.1
+ROOTCHAIN_IP=localhost <span class="hljs-comment"># Onther Ropsten Geth Node IP.</span>
 
 <span class="hljs-comment"># Deploy contracts at rootchain</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">"Deploy rootchain contract and others"</span>
 make geth &amp;&amp; build/bin/geth \
-    --nousb \
-    --datadir <span class="hljs-variable">$DATADIR</span> \
     --rootchain.url <span class="hljs-string">"ws://<span class="hljs-variable">$ROOTCHAIN_IP</span>:8546"</span> \
-    --unlock <span class="hljs-variable">$OPERATOR</span> \
-    --password pwd.pass \
-    --rootchain.sender <span class="hljs-variable">$OPERATOR</span> \
-    deploy <span class="hljs-string">"./genesis-operator1.json"</span> 102 <span class="hljs-literal">true</span> 2
+    --operator.key <span class="hljs-variable">$OPERATOR_KEY</span> \
+    --datadir <span class="hljs-variable">$DATADIR</span> \
+    deploy <span class="hljs-string">"./genesis.json"</span> 16 <span class="hljs-literal">true</span> 4096
 
+<span class="hljs-comment"># deploy params : chainID, isInitialAsset, Epochlength</span>
 <span class="hljs-comment"># you can checkout "$geth deploy --help" for more information</span>
 EOF
 </code></pre>
-<p>You can run <code>deploy.local.sh</code> script as following command.</p>
-<pre><code class="hljs css language-sh">plasma-evm$ bash deploy.operator1.sh
+<p>You can run <code>deploy.local.sh</code> by running following command.</p>
+<pre><code class="hljs css language-sh">plasma-evm$ bash deploy.local.sh
 </code></pre>
-<p><code>genesis-operator1.json</code> gerenated from the script will be located in <code>plasma-evm</code> directory.</p>
-<h3><a class="anchor" aria-hidden="true" id="2-initialize"></a><a href="#2-initialize" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Initialize</h3>
+<p><code>genesis.json</code> gerenated from the script will be located in <code>plasma-evm</code> directory.</p>
+<h3><a class="anchor" aria-hidden="true" id="3-initialize"></a><a href="#3-initialize" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Initialize</h3>
 <p>You must initialize chain data before running operator node.</p>
-<p><code>genesis-operator1.json</code> is located in current path(i.e <code>~/plasma-evm/genesis-operator1.json</code>).</p>
+<p><code>genesis.json</code> is located in current path(i.e <code>~/plasma-evm/genesis.json</code>).</p>
 <p>Run following command to initialize chain data.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth --nousb init \
-            --datadir .pls.staking/operator1 \
+            --datadir ./chaindata-oper \
             --rootchain.url ws://localhost:8546 \
-            genesis-operator1.json
+            genesis.json
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="3-set-manager-contract"></a><a href="#3-set-manager-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Set manager contract</h3>
-<p>After <a href="#2-initialize">2. Initialize</a> for childchain, The Operator should register an address of the rootchain contract to stake manager contract.</p>
-<p>After setup operator plasma chain, Operator must register an address of rootchain to Stake manager contract.</p>
-<p>Using <code>setManagers</code> sub-command of <code>manage-staking</code>, Set the stake contract addresses for running Operator1's plasma chain.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking setManagers manager.json  \
-            --datadir ./.pls.staking/operator1
-INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
-INFO [01-01|00:00:00.000] Set address                              name=TON addr=0x3A220f351252089D385b29beca14e27F204c296A
-INFO [01-01|00:00:00.000] Set address                              name=WTON addr=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf
-INFO [01-01|00:00:00.000] Set address                              name=DepositManager addr=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d
-INFO [01-01|00:00:00.000] Set address                              name=RootChainRegistry addr=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44
-INFO [01-01|00:00:00.000] Set address                              name=SeigManager       addr=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] Set address                              name=PowerTON          addr=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
+<h3><a class="anchor" aria-hidden="true" id="4-create-keystore-of-operator-account"></a><a href="#4-create-keystore-of-operator-account" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Create Keystore of Operator Account</h3>
+<p>You need private key of operator account in order to sign transaction for submitting blocks to root chain.</p>
+<p>You must locate the keystore to the <code>datadir</code> directory.</p>
+<p>Command <code>geth account</code> allows to create keystore file only with private key hex.</p>
+<blockquote>
+<p>Use same <code>datadir</code> as in the initialzation.</p>
+</blockquote>
+<pre><code class="hljs"><span class="hljs-comment"># Generate Operator Keyfile</span>
+plasma-evm$ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 --datadir ./chaindata-oper
+<span class="hljs-builtin-name">INFO</span> [08-27|16:14:38.878] Bumping<span class="hljs-built_in"> default </span>cache on mainnet         <span class="hljs-attribute">provided</span>=1024 <span class="hljs-attribute">updated</span>=4096
+<span class="hljs-builtin-name">INFO</span> [08-27|16:14:38.879] Maximum<span class="hljs-built_in"> peer </span>count                       <span class="hljs-attribute">ETH</span>=50 <span class="hljs-attribute">LES</span>=0 <span class="hljs-attribute">total</span>=50
+<span class="hljs-builtin-name">INFO</span> [08-27|16:14:38.905] <span class="hljs-builtin-name">Set</span> options <span class="hljs-keyword">for</span> submitting a block       <span class="hljs-attribute">mingaspirce</span>=1000000000 <span class="hljs-attribute">maxgasprice</span>=100000000000 <span class="hljs-attribute">resubmit</span>=0s
+Your new account is locked with a password. Please give a password. <span class="hljs-keyword">Do</span> <span class="hljs-keyword">not</span> forget this password.
+Passphrase:
+Repeat passphrase:
 </code></pre>
-<p>Check the information of stake contract addresses with <code>getManagers</code> sub-command of <code>manage-staking</code> in Operator1 chaindata.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb \
-              manage-staking getManagers \
-              --datadir ./.pls.staking/operator1
-INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Smartcard socket not found, disabling    err=<span class="hljs-string">"stat /run/pcscd/pcscd.comm: no such file or directory"</span>
-INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
-{
-  <span class="hljs-string">"TON"</span>: <span class="hljs-string">"0x3a220f351252089d385b29beca14e27f204c296a"</span>,
-  <span class="hljs-string">"WTON"</span>: <span class="hljs-string">"0xdb7d6ab1f17c6b31909ae466702703daef9269cf"</span>,
-  <span class="hljs-string">"DepositManager"</span>: <span class="hljs-string">"0x880ec53af800b5cd051531672ef4fc4de233bd5d"</span>,
-  <span class="hljs-string">"RootChainRegistry"</span>: <span class="hljs-string">"0x537e697c7ab75a26f9ecf0ce810e3154dfcaaf44"</span>,
-  <span class="hljs-string">"SeigManager"</span>: <span class="hljs-string">"0x3dc2cd8f2e345951508427872d8ac9f635fbe0ec"</span>,
-  <span class="hljs-string">"PowerTON"</span>: <span class="hljs-string">"0x82567a6f6e3abe246f62350322a07af7f413cfe6"</span>
-}
+<h3><a class="anchor" aria-hidden="true" id="5-run-operator-node"></a><a href="#5-run-operator-node" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. Run Operator Node</h3>
+<p>If operator keystore is locked with passphrase, you must write the passphrase in <code>signer.pass</code> file. <code>signer.pass</code> will be empty if it had no passphrase.</p>
+<p>Create <code>signer.pass</code> with following command.</p>
+<pre><code class="hljs css language-bash">plasma-evm$ <span class="hljs-built_in">echo</span> <span class="hljs-string">"&lt;Passphrase for operator keystore file&gt;"</span> &gt; signer.pass
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="4-register-rootchain-contract"></a><a href="#4-register-rootchain-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Register rootchain contract</h3>
-<p>Make to receive stake seigniorage of TON with register an address of rootchain which setup by Operator1 to the stake manager contract.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking register \
-            --datadir ./.pls.staking/operator1 \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
-            --password pwd.pass \
-            --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
-</code></pre>
-<p>If sucessfully registered the rootchain address, output as follows.</p>
-<pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
-INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] Registered SeigManager to RootChain      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=b546d3…fe55ed
-INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=6904c9…bc07a5
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="5-run-operator-node"></a><a href="#5-run-operator-node" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. Run Operator node</h3>
 <p>Run operator node with following command.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth \
     --nousb \
-    --datadir ./.pls.staking/operator1 \
+    --datadir ./chaindata-oper \
     --syncmode=<span class="hljs-string">'full'</span> \
-    --networkid 102 \
-    --rootchain.url ws://127.0.0.1:8546 \
-    --operator 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+    --networkid 16 \
+    --rootchain.url ws://localhost:8546 \
+    --operator 0x71562b71999873DB5b286dF957af199Ec94617F7 \
     --port 30306 \
     --nat extip:::1 \
     --maxpeers 50 \
-    --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
-    --password pwd.pass \
+    --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
+    --password signer.pass \
     --nodekeyhex e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3 \
     --mine \
     --miner.gastarget 7500000 \
@@ -199,23 +179,23 @@ INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x53
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="1-initialize"></a><a href="#1-initialize" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Initialize</h3>
 <p>Insert URL of RootChain on which <code>RootChain Contract</code> was deployed, as parameter of <code>--rootchain.url</code> flag.</p>
-<p>Use the address of RootChain set in <a href="how-to-open-private-testnet-rootchain#setup-rootchain">here</a> as <code>--rootchain.url</code>.</p>
+<p>Use address of the <code>RootChain</code> set in <a href="how-to-open-private-testnet-rootchain#Setup-rootchain">here</a>.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth --nousb init \
-            --datadir ./.pls.staking/usernode \
+            --datadir ./chaindata-user \
             --rootchain.url ws://localhost:8546 \
-            genesis-operator1.json
+            genesis.json
 </code></pre>
 <blockquote>
-<p>Use same <code>genesis-operator1.json</code> file as in <a href="how-to-open-private-testnet-manually#2-initialize">Setup Operator Node - 2. Initialize</a>.</p>
+<p>Use same <code>genesis.json</code> as in <a href="how-to-open-private-testnet-manually#3-Initialize">setting up operator node</a>.</p>
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="2-run-user-node"></a><a href="#2-run-user-node" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Run User Node</h3>
-<p>You must <a href="how-to-open-private-testnet-rootchain#1-initialize">Setup User Node - 1. Initialize</a> before running user node. It will use same <code>datadir</code> as in the initialization.</p>
+<p>You must <a href="how-to-open-private-testnet-manually##1-initialize">Setup User Node - 1. Initialize</a> before running user node. It will use same <code>datadir</code> as in the initialization.</p>
 <p>Run user node with following command. If you want to run challenger, add <code>--rootchain.challenger 0x0...</code> to the command.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth \
     --nousb \
-    --datadir ./.pls.staking/usernode \
+    --datadir ./chaindata-user \
     --syncmode=<span class="hljs-string">'full'</span> \
-    --networkid 102 \
+    --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --rpc \
     --rpcaddr <span class="hljs-string">'0.0.0.0'</span> \
@@ -235,4 +215,7 @@ INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x53
 <blockquote>
 <p>You must set <code>syncmode</code> to <code>full</code> or <code>archive</code> in order to synchronize with operator node.</p>
 </blockquote>
-<!--## Architecture Diagram ![Architecture after setup childchain](/docs/assets/guides_private_testnet_manually.png)--></span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-30 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain"><span class="arrow-prev">← </span><span>Setup Rootchain</span></a><a class="docs-next button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth"><span>Setup with Puppeth</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#setup-operator-node">Setup Operator Node</a><ul class="toc-headings"><li><a href="#1-deploy-rootchain-contract">1. Deploy rootchain contract</a></li><li><a href="#2-initialize">2. Initialize</a></li><li><a href="#3-set-manager-contract">3. Set manager contract</a></li><li><a href="#4-register-rootchain-contract">4. Register rootchain contract</a></li><li><a href="#5-run-operator-node">5. Run Operator node</a></li></ul></li><li><a href="#setup-user-node">Setup User Node</a><ul class="toc-headings"><li><a href="#1-initialize">1. Initialize</a></li><li><a href="#2-run-user-node">2. Run User Node</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
+<!-- TODO : fix link -->
+<h3><a class="anchor" aria-hidden="true" id="architecture-diagram"></a><a href="#architecture-diagram" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Architecture Diagram</h3>
+<p><img src="/docs/assets/guides_private_testnet_manually.png" alt="Architecture after setup childchain"></p>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-10 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain"><span class="arrow-prev">← </span><span>Setup Rootchain</span></a><a class="docs-next button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-puppeth"><span>Setup with Puppeth</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#setup-operator-node">Setup Operator Node</a><ul class="toc-headings"><li><a href="#1-download-and-compile-repository">1. Download and Compile Repository</a></li><li><a href="#2-deploy-rootchain-contract">2. Deploy RootChain Contract</a></li><li><a href="#3-initialize">3. Initialize</a></li><li><a href="#4-create-keystore-of-operator-account">4. Create Keystore of Operator Account</a></li><li><a href="#5-run-operator-node">5. Run Operator Node</a></li></ul></li><li><a href="#setup-user-node">Setup User Node</a><ul class="toc-headings"><li><a href="#1-initialize">1. Initialize</a></li><li><a href="#2-run-user-node">2. Run User Node</a></li><li><a href="#architecture-diagram">Architecture Diagram</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
