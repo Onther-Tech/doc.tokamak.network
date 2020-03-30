@@ -4,10 +4,19 @@ title: Staking Test in Priavte Testnet
 sidebar_label: Private Testnet Staking test
 ---
 
+In this document, We will cover to staking TON token on private testnet which is two operator exists.
+
+> For common user, Recommand to use [dashboard](https://dashboard.faraday.tokamak.network/).
+
+For this testing, you should proceed [Setup Rootchain in Private Testnet](how-to-open-private-testnet-rootchain) and [Setup Childchain in Private Testnet](how-to-open-private-testnet-manually). If you did not yet, please those two steps.
+
+> The usernode is not necessary in this section by [Setup Childhcain - Setup Usernode node](how-to-open-private-testnet-manually#setup-user-node).
+
+## Operator TON stake
 
 ### Mint Test TON
 
-For this testing, have to mint test TON to each Operator who attend `stake` If `DepositManager` contract deployed as follow [Deploy TON Stake manager contract](#deploy-ton-stake-manager-contract).
+For this testing, have to mint test TON to each Operator who attend `stake` If `DepositManager` contract deployed as follow [Deploy TON Stake manager contract](how-to-open-private-testnet-manually#deploy-ton-stake-manager-contract).
 
 In this private testnet, we assumed that two operators are exist. Operator1 and Operator2 use following accounts.
 
@@ -34,79 +43,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x57ab89f4eabdffce316
             --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
 ```
 
-## Operator stake TON
-
-Operator1 and Operator2 have 10,000 TON in the private testnet.
-
-After setup operator plasma chain, Operator must register an address of rootchain to stake manager contract.
-
-### Setup operator1 plasma chain and set stake contract address
-
-Use `deploy` command to deploy rootchain contracts for running operator1 plasma chain.
-
-```bash
-plasma-evm $ build/bin/geth deploy ./.pls.staking/operator1/operator1_genesis.json 1021 true 2 \
-            --datadir ./.pls.staking/operator1 \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
-            --password pwd.pass \
-            --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
-```
-
-As following command, Initialize the plasma chain with `operator1_genesis.json` file including an address of `rootchain` contract deployed by Operator1.
-
-```bash
-plasma-evm $ build/bin/geth init ./.pls.staking/operator1/operator1_genesis.json  \
-            --datadir ./.pls.staking/operator1  \
-            --rootchain.url ws://127.0.0.1:8546
-```
-
-Using `setManagers` sub-command of `manage-staking`, Set the stake contract addresses for running Operator1's plasma chain.
-
-```bash
-plasma-evm $ build/bin/geth manage-staking setManagers manager.json  \
-            --datadir ./.pls.staking/operator1
-NFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
-INFO [01-01|00:00:00.000] Set address                              name=TON addr=0x3A220f351252089D385b29beca14e27F204c296A
-INFO [01-01|00:00:00.000] Set address                              name=WTON addr=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf
-INFO [01-01|00:00:00.000] Set address                              name=DepositManager addr=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d
-INFO [01-01|00:00:00.000] Set address                              name=RootChainRegistry addr=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44
-INFO [01-01|00:00:00.000] Set address                              name=SeigManager       addr=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] Set address                              name=PowerTON          addr=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
-```
-
-Check the information of stake contract addresses with `getManagers` sub-command of `manage-staking` in Operator1 chaindata.
-
-```bash
-plasma-evm $ build/bin/geth manage-staking getManagers --datadir ./.pls.staking/operator1
-```
-
-### Register operator1 rootchain contract and Check TON balance
-
-Make to receive stake seigniorage of TON with register an address of rootchain which setup by Operator1 to the stake manager contract.
-
-```bash
-plasma-evm $ build/bin/geth manage-staking register \
-            --datadir ./.pls.staking/operator1 \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
-            --password pwd.pass \
-            --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
-```
-
-If sucessfully registered the rootchain address, output as follows.
-
-```bash
-INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
-INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] Registered SeigManager to RootChain      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=b546d3…fe55ed
-INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=6904c9…bc07a5
-```
+### Check TON balance
 
 As following command, Check test TON balance of Operator1.
 
@@ -148,7 +85,7 @@ As following command, Convert 1,000 TON into WTON.
 > Applying 1e9(1,000,000,000 wei) unit only when the decimal point is used as the input argument of `swapFromTON` sub-command.
 
 ```bash
-plasma-evm $ build/bin/geth staking swapFromTON 1000.0 \
+plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
@@ -190,10 +127,12 @@ plasma-evm $ build/bin/geth staking stakeTON 500.0 \
 
 ### Setup operator2 plasma chain and set stake contract address
 
+As Operator2, follow the same as setup process in [Setup Childchain in Private Testnet](how-to-open-private-testnet-manually).
+
 Use `deploy` command to deploy rootchain contracts for running operator2 plasma chain.
 
 ```bash
-plasma-evm $ build/bin/geth deploy ./.pls.staking/operator2/operator2_genesis.json 1021 true 2 \
+plasma-evm $ build/bin/geth --nousb deploy ./.pls.staking/operator2/genesis-operator2.json 103 true 2 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -201,10 +140,10 @@ plasma-evm $ build/bin/geth deploy ./.pls.staking/operator2/operator2_genesis.js
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
 
-As following command, Initialize the plasma chain with `operator2_genesis.json` file including an address of rootchain contract deployed by Operator2.
+As following command, Initialize the plasma chain with `genesis-operator2.json` file including an address of rootchain contract deployed by Operator2.
 
 ```bash
-plasma-evm $ build/bin/geth init ./.pls.staking/operator2/operator2_genesis.json  \
+plasma-evm $ build/bin/geth --nousb init ./.pls.staking/operator2/genesis-operator2.json  \
             --datadir ./.pls.staking/operator2  \
             --rootchain.url ws://127.0.0.1:8546
 ```
@@ -212,14 +151,14 @@ plasma-evm $ build/bin/geth init ./.pls.staking/operator2/operator2_genesis.json
 Using `setManagers` sub-command of `manage-staking`, Set the stake contract addresses for running Operator2's plasma chain.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking setManagers manager.json  \
+plasma-evm $ build/bin/geth --nousb manage-staking setManagers manager.json  \
             --datadir ./.pls.staking/operator2
 ```
 
 Check the information of stake contract addresses with `getManagers` sub-command of `manage-staking` in Operator2 chaindata.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking getManagers --datadir ./.pls.staking/operator2
+plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./.pls.staking/operator2
 ```
 
 ### Register operator2 rootchain contract and Check TON balance
@@ -227,7 +166,7 @@ plasma-evm $ build/bin/geth manage-staking getManagers --datadir ./.pls.staking/
 Make to receive stake seigniorage of TON with register an address of rootchain which setup by Operator2 to the stake manager contract.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking register \
+plasma-evm $ build/bin/geth --nousb manage-staking register \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -250,7 +189,7 @@ INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x53
 As following command, Check test TON balance of Operator2.
 
 ```bash
-plasma-evm $ build/bin/geth staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -289,7 +228,7 @@ As following command, Convert 1,000 TON into WTON.
 > Applying 1e9(1,000,000,000 wei) unit only when the decimal point is used as the input argument of `swapFromTON` sub-command.
 
 ```bash
-plasma-evm $ build/bin/geth staking swapFromTON 1000.0 \
+plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -300,7 +239,7 @@ plasma-evm $ build/bin/geth staking swapFromTON 1000.0 \
 Stake 500 WTON of 1,000 WTON converted with using `stake` sub-command of `staking`.
 
 ```bash
-plasma-evm $ build/bin/geth staking stakeWTON 500.0 \
+plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -311,7 +250,7 @@ plasma-evm $ build/bin/geth staking stakeWTON 500.0 \
 Or, you can do the above two steps at once with using `stakeTON` sub-command.
 
 ```bash
-plasma-evm $ build/bin/geth staking stakeTON 500.0 \
+plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -331,7 +270,7 @@ At this time, Seigniorage rewards of TON will be calculated as follow how much `
 As following command, Run Opreator1 node in private network.
 
 ```bash
-plasma-evm $ build/bin/geth \
+plasma-evm $ build/bin/geth --nousb \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
@@ -375,7 +314,7 @@ Operator2 stake rewards has increased as `Uncommited` status because only operat
 In new terminal, Check Operator2 rewards of staked TON with using `staking balances`, like as following.
 
 ```bash
-plasma-evm $ build/bin/geth staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -412,7 +351,7 @@ In this part, we are going to withdraw `WTON` including the seigniorage of stake
 For withdraw 510 WTON, use `requestWithdrawal` sub-command of `staking` for request withdrwaing as following.
 
 ```bash
-plasma-evm $ build/bin/geth staking requestWithdrawal 510.0 \
+plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 510.0 \
               --datadir ./.pls.staking/operator1 \
               --rootchain.url ws://127.0.0.1:8546 \
               --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
@@ -435,7 +374,7 @@ b07f4d
 And re-check Operator1 balance, you can see the amount of 510 WTON in a line start with `Pending withdrawal ..`.
 
 ```bash
-plasma-evm $ build/bin/geth staking balances 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+plasma-evm $ build/bin/geth --nousb staking balances 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
@@ -459,7 +398,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="10 WT
 To finalize withdrawal request, use `processWithdrawal` sub-command as follow.
 
 ```bash
-plasma-evm $ build/bin/geth staking processWithdrawal \
+plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
               --datadir ./.pls.staking/operator1 \
               --rootchain.url ws://127.0.0.1:8546 \
               --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
@@ -470,7 +409,7 @@ plasma-evm $ build/bin/geth staking processWithdrawal \
 If `processWithDrawal` tx is successfully processed, then you can check 1,010 WTON in `WTON Balance` in result of using `balances`.
 
 ```bash
-plasma-evm $ build/bin/geth staking balances 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+plasma-evm $ build/bin/geth --nousb staking balances 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
@@ -491,7 +430,7 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTO
 INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
-## Appendix sub-commands 
+## Appendix sub-commands
 
 Plasma-evm has a new commands `manage-staking` and  `staking` for deploying and managements of TON token staking.
 
@@ -505,8 +444,8 @@ This table is about sub-commands of `manage-staking` and its arguments.
 |                | seigPerBlock*    | Float   | The amount of maximum seigniorage of TON per block. This parameter is effect to total inflation of TON token. |
 | deployPowerTON | roundDuration*   | Int(Seconds) | Deploy `PowerTON` contract. this sub-command required `roundDuration`, unit is seconds. for example, If deployed `PowerTON` contract with `60s` as round duration.  an operator who receives un-issued seigniorage of TON is selected every 60 seconds.
 | startPowerTON  |  None            | -       | Activate `PowerTON` contract which deployed with `deployPowerTON` sub-command. |
-| getManagers    | <filename>*      | string       | Extract the addressses of the stake manager contracts from the db, located with `--datadir` and save the addresses as `<filename>.json`. In most cases, the path for  `--datadir` should be specified same as `deployManager` sub-command.  |
-| setManagers  |  <filename>*      | string       | Read the target file (e.g `manager.json`) that contains the addresses of stake manager contracts then set addresses for running the operator's plasma chain. the path of `--datadir` should place in the operator chaindata location. |
+| getManagers    | filename      | string       | Extract the addressses of the stake manager contracts from the db, located with `--datadir` and save the addresses as `<filename>.json`. In most cases, the path for  `--datadir` should be specified same as `deployManager` sub-command.  |
+| setManagers  |  filename*      | string       | Read the target file (e.g `manager.json`) that contains the addresses of stake manager contracts then set addresses for running the operator's plasma chain. the path of `--datadir` should place in the operator chaindata location. |
 | register    |  None            | -       | Operator have to register own rootchain contract address to seigniroage manager contract in order to receive seigniorage TON. the path of `--datadir` should place in the operator chaindata location, which was set stake manager contracts by `setManager` sub-command.  |
 | mintTON  |  amount*            | Float or Int       | Generate test TON token as much as input argument.  |
 
