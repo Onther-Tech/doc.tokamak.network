@@ -70,7 +70,7 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 아래는 `onther-tech/go-ethereum`에 위치하고 있는 `run.rootchain.sh` 이다.
 
 ```bash
-# plasam-evm/run.rootchain.sh
+# go-ethereum/run.rootchain.sh
 ADDR0="0x71562b71999873DB5b286dF957af199Ec94617F7";
 ADDR1="0x3cd9f729c8d882b851f8c70fb36d22b391a288cd";
 ADDR2="0x57ab89f4eabdffce316809d790d5c93a49908510";
@@ -100,9 +100,9 @@ make geth && build/bin/geth \
 위 스크립트로 실행되는 루트체인의 계정들은 다음과 같은 역할에 사용된다.
 
 - ADDR0 : TON 스테이크 매니저, TON 스테이킹 관련 컨트렉트들을 배포하고 설정.
-- ADDR1 : 오퍼레이터1, TON 스테이킹에 참여하면서 자식체인을 운영.
-- ADDR2 : 오퍼레이터2, TON 스테이킹에 참여하면서 자식체인을 운영.
-- ADDR3 : 첼린저, 오퍼레이터의 자식체인 데이터 검증 및 클레임.
+- ADDR1 : 오퍼레이터1, TON 스테이킹에 참여하면서 자식체인1을 운영.
+- ADDR2 : 오퍼레이터2, TON 스테이킹에 참여하면서 자식체인2을 운영.
+- ADDR3 : 첼린저, 자식체인 데이터 검증자 및 첼리저.
 
 ### 루트체인 실행
 
@@ -157,8 +157,8 @@ plasma-evm $ build/bin/geth --nousb account importKey b71c71a67e1177ad4e901695e1
 테스트 편의상 빈 패스워드를 지정한다.
 
 ```bash
-INFO [03-24|15:35:42.112] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [03-24|15:35:42.276] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
 Your new account is locked with a password. Please give a password. Do not forget this password.
 Password:
 Repeat password:
@@ -258,7 +258,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking deployPowerTON 60s \
 아래 명령어를 통해, 루트체인에 배포한 스테이크 컨트랙트 정보들을 추출하여 `manager.json` 파일로 저장한다.
 
 ```bash
-plasam-evm $ build/bin/geth manage-staking getManagers manager.json --datadir ./.pls.staking/manager
+plasam-evm $ build/bin/geth --nousb manage-staking getManagers manager.json --datadir ./.pls.staking/manager
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
