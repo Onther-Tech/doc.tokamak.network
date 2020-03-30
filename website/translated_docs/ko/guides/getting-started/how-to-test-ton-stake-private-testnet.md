@@ -47,30 +47,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x57ab89f4eabdffce316
 
 오퍼레이터의 플라즈마 체인을 설정 이후, 스테이크 메니저 컨트랙트에 각 오퍼레이터의 루트체인 컨트랙트 주소를 등록 해야 한다.
 
-### 오퍼레이터1 루트체인 등록 및 TON 잔고 확인
-
-오퍼레이터1 이 설정한 플라즈마 체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.
-
-```bash
-plasma-evm $ build/bin/geth --nousb manage-staking register \
-            --datadir ./.pls.staking/operator1 \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
-            --password pwd.pass \
-            --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
-```
-
-오퍼레이터1 의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.
-
-```bash
-INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
-INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] Registered SeigManager to RootChain      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=b546d3…fe55ed
-INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=6904c9…bc07a5
-```
+### TON 잔고 확인
 
 아래 명령어를 통해, 오퍼레이터1의 테스트 TON 잔고를 확인한다.
 
