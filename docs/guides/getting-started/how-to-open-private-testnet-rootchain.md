@@ -4,13 +4,13 @@ title: Setup Rootchain in Private Testnet
 sidebar_label: Setup Rootchain
 ---
 
-## Setup local environment
+## Setup Local Environment
 
 This Instructions are provided for Linux(Ubuntu 18.04)
 
 If you have to install golang, please follow next instruction to compile plasma-evm.
 
-### System update and install required packages
+### System Update and Install Required Packages
 
 Setting compilation environment by running following command.
 
@@ -18,7 +18,7 @@ Setting compilation environment by running following command.
 ~$ sudo apt-get update && sudo apt-get install tar wget make git build-essential -y
 ```
 
-### Setup golang environment
+### Setup Golang Environment
 
 Run following command, go will be installed at `/usr/local/`.
 
@@ -49,7 +49,7 @@ export GOPATH=$HOME/plasma
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
 
-## Setup rootchain
+## Setup RootChain
 
 We recommend to use `onther-tech/go-ethereum` since it has a script for running rootchain.
 
@@ -57,7 +57,7 @@ Operator and challenger account to be used in root chain must have enough ether 
 
 If operator account balance is too low, it cannot submit blocks to root chain.
 
-### Download source code of rootchain
+### Download Source Code of RootChain
 
 Download `go-ethereum` to be used for rootchain.
 
@@ -66,7 +66,7 @@ Download `go-ethereum` to be used for rootchain.
 ~$ cd go-ethereum
 ```
 
-### Check script of rootchain
+### Check Script of RootChain
 
 `run.rootchain.sh` in `onther-tech/go-ethereum` is as follows.
 
@@ -107,7 +107,7 @@ Accounts used in the script are as follows.
 
 - Challenger : 0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8
 
-### Run rootchain
+### Run RootChain
 
 Run `run.rootchain.sh` in `go-ethereum` to start rootchain running on local network.
 

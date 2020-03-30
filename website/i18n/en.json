@@ -6,8 +6,8 @@
     "tagline": "Plasma evm documents",
     "docs": {
       "guides/getting-started/how-to-connect-public-testnet-manually": {
-        "title": "How to connect public testnet menually",
-        "sidebar_label": "Menually"
+        "title": "How to connect public testnet manually",
+        "sidebar_label": "Manually"
       },
       "guides/getting-started/how-to-connect-public-testnet-prepare": {
         "title": "Requirements for Connecting Public Testnet",
@@ -29,13 +29,13 @@
         "title": "Setup Rootchain in Private Testnet",
         "sidebar_label": "Setup Rootchain"
       },
+      "guides/getting-started/private-testnet-staking": {
+        "title": "Staking Test in Priavte Testnet",
+        "sidebar_label": "Private Testnet Staking test"
+      },
       "guides/manuals/guides_manuals_how-to-make-request": {
         "title": "How to make request",
         "sidebar_label": "How to make request"
-      },
-      "guides/manuals/guides_manuals_how-to-manage-staked-ton": {
-        "title": "How to manage staked TON",
-        "sidebar_label": "How to manage staked TON"
       },
       "guides/manuals/guides_manuals_how-to-manage-stamina": {
         "title": "How to manage STAMINA",

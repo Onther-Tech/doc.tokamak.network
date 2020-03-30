@@ -1,7 +1,7 @@
 ---
 id: how-to-connect-public-testnet-manually
-title: How to connect public testnet menually
-sidebar_label: Menually
+title: How to connect public testnet manually
+sidebar_label: Manually
 ---
 
 ## Faraday User Node
@@ -49,7 +49,6 @@ plasma-evm$ build/bin/geth \
     --nat extip:::1 \
     --maxpeers 50
 ```
-사용자 노드의 체인데이터는 `plasma-evm/chaindata` 에 저장된다.
 
 Chain data of user node will be stored on `plasma-evm/chaindata`.
 
@@ -57,4 +56,4 @@ Chain data of user node will be stored on `plasma-evm/chaindata`.
 
 > If you want to use both `rpc` and `keystore`, add `--allow-insecure-unlock` to the command.
 
-You can check status of Faraday testnet in [here](http://ethstats.faraday.tokamak.network/).
+You can check status of Faraday testnet [here](http://ethstats.faraday.tokamak.network/).

@@ -37,7 +37,7 @@ Ex) If `EPOCH` is `4096`, it will submit epoch every 4096 blocks.
 Create `deploy.local.sh` by running following command.
 
 ```sh
-plasma-evm$ cat > deploy.local.sh << EOF
+plasma-evm$ cat > deploy.local.sh << "EOF"
 #!/bin/bash
 
 OPERATOR_KEY="b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"
@@ -55,10 +55,10 @@ ROOTCHAIN_IP=localhost # Onther Ropsten Geth Node IP.
 
 # Deploy contracts at rootchain
 echo "Deploy rootchain contract and others"
-make geth && build/bin/geth \\
-    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \\
-    --operator.key $OPERATOR_KEY \\
-    --datadir $DATADIR \\
+make geth && build/bin/geth \
+    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \
+    --operator.key $OPERATOR_KEY \
+    --datadir $DATADIR \
     deploy "./genesis.json" 16 true 4096
 
 # deploy params : chainID, isInitialAsset, Epochlength
@@ -83,14 +83,13 @@ You must initialize chain data before running operator node.
 Run following command to initialize chain data.
 
 ```bash
-
 plasma-evm$ build/bin/geth --nousb init \
             --datadir ./chaindata-oper \
             --rootchain.url ws://localhost:8546 \
             genesis.json
 ```
 
-### 4. Create Keystore of Operator Account.
+### 4. Create Keystore of Operator Account
 
 You need private key of operator account in order to sign transaction for submitting blocks to root chain.
 
@@ -100,6 +99,7 @@ Command `geth account` allows to create keystore file only with private key hex.
 
 > Use same `datadir` as in the initialzation.
 
+```
 # Generate Operator Keyfile
 plasma-evm$ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 --datadir ./chaindata-oper
 INFO [08-27|16:14:38.878] Bumping default cache on mainnet         provided=1024 updated=4096
@@ -114,7 +114,7 @@ Repeat passphrase:
 
 If operator keystore is locked with passphrase, you must write the passphrase in `signer.pass` file. `signer.pass` will be empty if it had no passphrase.
 
-Create `signer.pass` with following command.(without `"`).
+Create `signer.pass` with following command.
 
 ```bash
 plasma-evm$ echo "<Passphrase for operator keystore file>" > signer.pass
@@ -126,7 +126,7 @@ Run operator node with following command.
 plasma-evm$ build/bin/geth \
     --nousb \
     --datadir ./chaindata-oper \
-    --syncmode="full" \
+    --syncmode='full' \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --operator 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -135,13 +135,11 @@ plasma-evm$ build/bin/geth \
     --maxpeers 50 \
     --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
     --password signer.pass \
-    --bootnodes "enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30307" \
+    --nodekeyhex e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3 \
     --mine \
     --miner.gastarget 7500000 \
     --miner.gaslimit 10000000
 ```
-
-`enode://...` address used in `bootnodes` flag above will be same as result of [Setup User Node - 2. Generate `bootkey`](how-to-open-private-testnet-manually#2-generate-bootkey).
 
 ## Setup User Node
 
@@ -164,18 +162,9 @@ plasma-evm$ build/bin/geth --nousb init \
 
 > Use same `genesis.json` as in [setting up operator node](how-to-open-private-testnet-manually#3-Initialize).
 
+### 2. Run User Node
 
-### 2. Generate `bootkey`
-
-Make `boot.key` file for operator node to use designated enode address.
-
-```bash
-plasma-evm$ echo "e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3" > boot.key
-```
-
-### 3. Run user node
-
-You must [Setup User Node - 1. Initialize](how-to-open-private-testnet-manually##1-initialize) before running user node. It will use same `datadir` as in the initialization. 
+You must [Setup User Node - 1. Initialize](how-to-open-private-testnet-manually##1-initialize) before running user node. It will use same `datadir` as in the initialization.
 
 Run user node with following command. If you want to run challenger, add `--rootchain.challenger 0x0...` to the command.
 
@@ -183,26 +172,28 @@ Run user node with following command. If you want to run challenger, add `--root
 plasma-evm$ build/bin/geth \
     --nousb \
     --datadir ./chaindata-user \
-    --syncmode="full" \
+    --syncmode='full' \
     --networkid 16 \
     --rootchain.url ws://localhost:8546 \
     --rpc \
     --rpcaddr '0.0.0.0' \
     --rpcport 8547 \
     --rpcapi eth,net,debug \
-    --rpccorsdomain "*" \
+    --rpccorsdomain '*' \
     --rpcvhosts=localhost \
     --ws \
     --wsorigins '*' \
     --wsaddr '0.0.0.0' \
     --wsport 8548 \
-    --nodekey boot.key \
+    --bootnodes "enode://4966a7e4621c2c0b1b1b3295b4a35ccc4224ba1d529bf5aa2323e4650f6075bd5eb6618372b2579965819347307f1f97315ce91b09ca342d60c2e98ad88db9f3@127.0.0.1:30306" \
     --port 30307 \
     --nat extip:::1 \
     --maxpeers 50
 ```
 
 > You must set `syncmode` to `full` or `archive` in order to synchronize with operator node.
+
+<!-- TODO : fix link -->
 
 ### Architecture Diagram
 

@@ -270,9 +270,8 @@ For ERC20 token contract, there are two possible ways to implement `balances[hol
 
 
 ### RequestableSimpleToken
-([github](https://github.com/Onther-Tech/requestable-simple-token/blob/master/contracts/RequestableSimpleToken.sol))
 
-`RequestableSimpleToken` is a contract where the `owner` can issue new tokens and token holders can send tokens to others or generate requests.
+[`RequestableSimpleToken`](https://github.com/Onther-Tech/requestable-simple-token/blob/master/contracts/RequestableSimpleToken.sol)is a contract where the `owner` can issue new tokens and token holders can send tokens to others or generate requests.
 
 ```solidity
 contract RequestableSimpleToken is Ownable, RequestableI {
@@ -463,8 +462,6 @@ You can check requestable token contract based on OpenZeppelin and ds-token in f
 
 ![RequestableCryptoKitties](assets/learn_advanced_examples_RequestableCryptoKitties.png)
 
-[CryptoKitties](https://github.com/cryptocopycats/awesome-cryptokitties)에서 실제로 배포되는 컨트랙트는 `KittyCore`, `SaleClockAuction`, `SiringClockAuction`으로 ERC721 토큰으로서의 기능은 `KittyCore`가 담당한다.
-
 The contracts deployed for [CryptoKitties](https://github.com/cryptocopycats/awesome-cryptokitties) are `KittyCore`, `SaleClockAuction`, `SiringClockAuction`, and `KittyCore`. `KittyCore` manages functions related to ERC721.
 
 Requests for state variables of CryptoKitties can be defined as follows:
@@ -511,9 +508,7 @@ The above two variables are simple constants, and anyone can request them.
 
 > This example is not for production use.
 
-([github](https://github.com/Onther-Tech/requestable-multisig))
-
-`RequestableMultisig` is requetable version of [MultiSigWallet](https://github.com/gnosis/MultiSigWallet/blob/master/contracts/MultiSigWallet.sol).
+[`RequestableMultisig`](https://github.com/Onther-Tech/requestable-multisig) is requetable version of [MultiSigWallet](https://github.com/gnosis/MultiSigWallet/blob/master/contracts/MultiSigWallet.sol).
 
 `RequestableMultisig` manages transaction data sent from multisig contract with struct `Transaction` and variable `transactions`. Signatures of the transaction are collected in variable `confirmations`, and it will run when `confirmations` >  `_required`. You can run again in an error; e.g out of gas, and if it is executed successfully, the result of the transaction will be applied to variable `executed`. Requests of `RequestableMultisig` are as follows:
 

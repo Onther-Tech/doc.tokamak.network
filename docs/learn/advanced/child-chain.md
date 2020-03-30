@@ -36,8 +36,8 @@ There are three types of blocks in the child chain.
 **Escape blocks** are mined only under special conditions. Continuous rebase provides a period of time for users to check data availability and escape from the child chain. When users submit an escape request to the RootChain contract, escape blocks are mined.
 
 **Epoch** is a period that contains several blocks. Depending on the type of the block, there are three types of epochs:
-- **Non-Request Epoch (NRE)*
-- **Request Epoch (RE)*
+- **Non-Request Epoch (NRE)**
+- **Request Epoch (RE)**
 - **Escape Epoch (EE))**
 
 **Length** of epoch means the number of blocks included in it. The length of non-request epoch does not change because it is a pre-defined constant. The number of blocks included in request and escape epoch may vary depending on the number of requests submitted by users, thus the length of both epochs is variable.

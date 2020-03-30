@@ -38,7 +38,7 @@ Contracts in this diagram have following features:
 
 
 ## RootChainStorage
-RootChainStorage` is contract that only implements state variables. Key variables are as follows:
+`RootChainStorage` is contract that only implements state variables. Key variables are as follows:
 
 <!-- Name | Type | Description 으로 테이블 만들기? -->
 
