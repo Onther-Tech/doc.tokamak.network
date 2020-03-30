@@ -278,8 +278,6 @@ INFO [01-01|00:00:00.000] Exported manager contracts               path=manager.
 
 `PowerTON` 컨트랙트를 포함하여 6개의 컨트랙트 주소가 `manager.json` 에 저장된다.
 
-## TON 스테이크 설정
-
 ### PowerTON 실행
 
 미발행 시뇨리지 분배에 대한 규칙을 가지고 있는 `PowerTON` 활성화 하려면 `staking`의 하위 명령어인 `startPowerTON`을 사용한다.
@@ -300,35 +298,6 @@ INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x715
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] PowerTON started                         PowerTON=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
-```
-
-### 테스트 TON 생성
-
-[TON 스테이크 매니저 컨트랙트 배포](#ton-스테이크-매니저-컨트랙트-배포)를 수행하여 `DepositManager` 컨트랙트가 배포되었다면, 스테이크에 참가할 오퍼레이터들에게 테스트용 TON을 생성해주어야 한다.
-
-테스트 토카막 네트워크 에서 두 오퍼레이터 상황을 가정하였다, 따라서 오퍼레이터1 과 오퍼레이터2 는 아래의 계정을 사용한다.
-
-- Operator1 : `0x3cd9f729c8d882b851f8c70fb36d22b391a288cd`
-- Operator2 : `0x57ab89f4eabdffce316809d790d5c93a49908510`
-
-아래 명령어를 통해 각각 오퍼레이터에게 10,000 TON을 생성한다.
-
-```bash
-plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd 10000.0 \
-            --datadir ./.pls.staking/manager \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
-            --password pwd.pass \
-            --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
-```
-
-```bash
-plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x57ab89f4eabdffce316809d790d5c93a49908510 10000.0 \
-            --datadir ./.pls.staking/manager \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
-            --password pwd.pass \
-            --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
 ```
 
 <!-TODO : should be update based on this contents ## 설정 완료 후 구조도 [루트 체인 설정 완료후](assets/guides_private_testnet_rootchain.png)->

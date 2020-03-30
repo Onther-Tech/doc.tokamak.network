@@ -4,199 +4,19 @@ title: Staking Test in Priavte Testnet
 sidebar_label: Private Testnet Staking test
 ---
 
-## 프라이빗 네트워크 TON 스테이크
-
 이 문서는 프라이빗 테스트 루트체인에서 두 오퍼레이터가 TON 토큰을 스테이크하는 예시를 다룬다.
-
-문서의 대부분 `plasma-evm`의 `staking` 과 `manage-staking`에 대한 명령어 사용에 대한 것이다. 이 명령어는 개발자 및 오퍼레이터(Operator) 에게 유용한 툴이다.
 
 > 일반 사용자의 경우 [dashboard](https://dashboard.faraday.tokamak.network)를 사용한다.
 
-테스트 환경 구성은 [onther-tech/go-ethereum](https://github.com/onther-tech/go-ethereum)을 rootchain으로 사용하고, plasma-evm 은 [onther-tech/plasma-evm](https://github.com/onther-tech/plasma-evm)를 사용한다.
+테스트 환경 구성은 [프라이빗 테스트넷 시작 - 루트체인 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain) 과 [프라이빗 테스트넷 시작 - 자식체인 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually) 과정을 수행한 상태이다.
 
-## TON 스테이크 컨트랙트 설정
+> 이때, [자식체인 설정 - 사용자 노드 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually#사용자-노드-설정)를 통해 실행한 사용자 노드가 동작하지 않아도 된다.
 
-프라이빗 테스트넷 TON 스테이크 테스트에는 한명의 매니저가 있으며, 스테이크에 참여하는 두 오퍼레이터가 있다고 가정한다.
-
-매니저는 테스트 TON 토큰 및 스테이크에 관련한 컨트랙트를 배포하고 관리한다.
-
-오퍼레이터들은 자신의 플라즈마 체인을 운영하면서 TON 토큰을 스테이크, 언스테이크 한다.
-
-### Plasma-evm 소스코드 다운로드
-동작중인 rootchain에 스테이크 관련 컨트렉트를 배포한다.
-
-만약, 동작하고 있는 rootchain 이 없다면 [프라이빗 테스트넷 루트체인 설정하기](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain#루트-체인-설정) 수행한다.
-
-우선, 아래 명령어를 통해 `plasma-evm` 저장소 다운로드 완료 한다.
-
-```bash
-$ git clone https://github.com/onther-tech/plasma-evm
-$ cd plasma-evm
-plasma-evm $
-```
-
-`plasma-evm` 설정에 대한 자세한 내용은, [프라이빗 테스트넷 시작 - 자식체인 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually) 을 참고 한다.
-
-### 매니저 와 오퍼레이터 계정 생성
-
-테스트에 필요한 계정을 생성한다.
-
-```bash
-plasma-evm $ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 \
-            --datadir ./.pls.staking/manager
-```
-
-테스트 편의상 빈 패스워드를 지정한다.
-
-```bash
-INFO [03-24|15:35:42.112] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [03-24|15:35:42.276] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-Your new account is locked with a password. Please give a password. Do not forget this password.
-Password:
-Repeat password:
-Address: {71562b71999873db5b286df957af199ec94617f7}
-```
-
-아래 명령어를 통해, 각 오퍼레이터 계정을 생성한다.
-
-```bash
-plasma-evm $ build/bin/geth account importKey bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5 \
-            --datadir ./.pls.staking/operator1
-```
-
-```bash
-plasma-evm $ build/bin/geth account importKey 067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc \
-            --datadir ./.pls.staking/operator2
-```
-
-아래명령어를 사용하여 위 계정들의 암호를 저장하고 있는 `pwd.pass` 파일을 생성한다.
-
-```bash
-plasma-evm $ echo "" > pwd.pass
-```
-
-### TON 스테이크 매니저 컨트랙트 배포
-
-`deployManagers`는 `manage-staking` 명령어의 하위명령어로 매니저가 TON 토큰의 스테이킹에 대한 컨트랙트를 배포 및 관리하기 위한 기능을 가지고 있다.
-
-`deployManagers` 실행에 필요한 입력 파라미터는 `withdrawalDelay` 와 `seigPerBlock` 총 2개 이다.
-
-입력 파라미터에 대한 설명은 다음과 같다.
-
-`withdrawalDelay` : 단위는 루트체인의 블록 갯수이다. 스테이크된 WTON 을 언스테이크 상태로 변환하기 위해서는 `requestWithdrawal` 트랜잭션을 전송하고, 해당 파라미터 동안 지연된후 처리된다. 예를 들어 `10` 으로 정한경우, 스테이크 TON에 대해 `requestWithdrawal` 을 100 블록에 처리되었다면, 루트체인 110번째 이후에 `processRequest` 트랜잭션이 실행됨으로써 요청한 WTON에 대해 언-스테이크 상태가 된다.
-
-`seigPerBlock` : 루트체인 블록당 발생할 수 있는 시뇨리지의 최대 TON 개수. 해당 파라미터에 의해 연 인플레이션이 영향을 받는다.
-
-```bash
-plasma-evm $ make geth && build/bin/geth manage-staking deployManagers 10 1.5 \
-            --datadir ./.pls.staking/manager \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
-            --password pwd.pass \
-            --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
-```
-
-위 명령어를 통해 TON 스테이크에 필요한 컨트랙트가 모두 배포된다.
-
-```bash
-INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Unlocking developer account              address=0x0000000000000000000000000000000000000000
-INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x71562b71999873DB5b286dF957af199Ec94617F7
-INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
-INFO [01-01|00:00:00.000] 1. deploy TON contract
-INFO [01-01|00:00:00.000] TON deployed                             addr=0x3A220f351252089D385b29beca14e27F204c296A tx=0f9edc…149995
-INFO [01-01|00:00:00.000] 2. deploy WTON contract
-INFO [01-01|00:00:00.000] WTON deployed                            addr=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf tx=b951fc…ab742c
-INFO [01-01|00:00:00.000] 3. deploy RootChainRegistry
-INFO [01-01|00:00:00.000] RootChainRegistry deployed               addr=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 tx=1455b1…8db599
-INFO [01-01|00:00:00.000] 4. deploy DepositManager
-INFO [01-01|00:00:00.000] DepositManager deployed                  addr=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d tx=34f04d…713bee
-INFO [01-01|00:00:00.000] 5. deploy SeigManager
-INFO [01-01|00:00:00.000] SeigManager deployed                     addr=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=fd415d…bbcb15
-INFO [01-01|00:00:00.000] 6. add WTON minter role to SeigManager
-INFO [01-01|00:00:00.000] Set WTON minter to SeigManager           tx=4084ca…ec3718
-INFO [01-01|00:00:00.000] 7. add TON minter role to WTON
-INFO [01-01|00:00:00.000] Set TON minter to WTON                   tx=628885…e96b75
-INFO [01-01|00:00:00.000] 8. Setting SeigManager address to target contracts targets="[DepositManager WTON]"
-INFO [01-01|00:00:00.000] Set SeigManager to target cotnract       target=DepositManager tx=9435d0…c15c3a
-INFO [01-01|00:00:00.000] Set SeigManager to target cotnract       target=WTON           tx=4f26fc…ffacb4
-INFO [01-01|00:00:00.000] Staking manager contract deployed        TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-```
-
-### PowerTON 컨트랙트 배포
-
-다음 명령어를 통해 `PowerTON` 컨트랙트를 배포한다.
-
-`dpeloyPowerTON` 입력 인자는 파워톤 라운드 시간을 의미하며, 테스트를 위해 60초로 설정한다.
-
-여기서 파워톤 라운드 시간이란, 미발행 시뇨리지를 파워톤 규칙에 의해 재분배되는 주기를 말한다. 예를들어 `60s` 로 해당 값을 설정한 경우, 미발행 시뇨리지 WTON을 받는 오퍼레이터가 매 60초 마다 정해진다.
-
-`PowerTON`에 대한 자세한 내용은 [여기]()를 참고한다.
-
-```bash
-plasma-evm $ build/bin/geth manage-staking deployPowerTON 60s \
-            --datadir ./.pls.staking/manager \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
-            --password pwd.pass \
-            --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
-```
-
-### 배포 컨트랙트 정보
-
-배포한 컨트랙트의 정보는 `manage-staking`의 하위 명령어인 `deployManager` 통해 `.pls.staking/manager` 에 위치한 rawdb저장된다.
-
-아래 명령어를 통해, 루트체인에 배포한 스테이크 컨트랙트 정보들을 추출하여 `manager.json` 파일로 저장한다.
-
-```bash
-plasam-evm $ build/bin/geth manage-staking getManagers manager.json --datadir ./.pls.staking/manager
-
-INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata ca
-che=16.00MiB handles=16
-INFO [01-01|00:00:00.000] Exporting manager contracts              path=manager.json
-INFO [01-01|00:00:00.000] Exported manager contracts               path=manager.json
-{
-  "TON": "0x3a220f351252089d385b29beca14e27f204c296a",
-  "WTON": "0xdb7d6ab1f17c6b31909ae466702703daef9269cf",
-  "DepositManager": "0x880ec53af800b5cd051531672ef4fc4de233bd5d",
-  "RootChainRegistry": "0x537e697c7ab75a26f9ecf0ce810e3154dfcaaf44",
-  "SeigManager": "0x3dc2cd8f2e345951508427872d8ac9f635fbe0ec",
-  "PowerTON": "0xbcdfc870ea0c6463c6ebb2b2217a4b32b93bcfb7"
-}
-```
-
-`PowerTON` 컨트랙트를 포함하여 6개의 컨트랙트 주소가 `manager.json` 에 저장된다.
-
-## TON 스테이크 설정
-
-### PowerTON 실행
-
-미발행 시뇨리지 분배에 대한 규칙을 가지고 있는 `PowerTON` 활성화 하려면 `staking`의 하위 명령어인 `startPowerTON`을 사용한다.
-
-아래 명령어를 실행하여 `PowerTON` 활성화 Tx를 전송한다.
-
-```bash
-plasma-evm $ build/bin/geth manage-staking startPowerTON \
-            --datadir ./.pls.staking/manager \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
-            --password pwd.pass \
-            --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
-
-INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Unlocking developer account              address=0x0000000000000000000000000000000000000000
-INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x71562b71999873DB5b286dF957af199Ec94617F7
-INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
-INFO [01-01|00:00:00.000] PowerTON started                         PowerTON=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
-```
+## 오퍼레이터 TON 스테이크
 
 ### 테스트 TON 생성
 
-[TON 스테이크 매니저 컨트랙트 배포](#ton-스테이크-매니저-컨트랙트-배포)를 수행하여 `DepositManager` 컨트랙트가 배포되었다면, 스테이크에 참가할 오퍼레이터들에게 테스트용 TON을 생성해주어야 한다.
+[루트체인 설정 - TON 스테이크 매니저 컨트랙트 배포](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain#ton-스테이크-매니저-컨트랙트-배포)를 수행하여 `DepositManager` 컨트랙트가 배포되었다면, 스테이크에 참가할 오퍼레이터들에게 테스트용 TON을 생성해주어야 한다.
 
 테스트 토카막 네트워크 에서 두 오퍼레이터 상황을 가정하였다, 따라서 오퍼레이터1 과 오퍼레이터2 는 아래의 계정을 사용한다.
 
@@ -206,7 +26,7 @@ INFO [01-01|00:00:00.000] PowerTON started                         PowerTON=0xBc
 아래 명령어를 통해 각각 오퍼레이터에게 10,000 TON을 생성한다.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking mintTON 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd 10000.0 \
+plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd 10000.0 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -215,7 +35,7 @@ plasma-evm $ build/bin/geth manage-staking mintTON 0x3cd9f729c8d882b851f8c70fb36
 ```
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking mintTON 0x57ab89f4eabdffce316809d790d5c93a49908510 10000.0 \
+plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x57ab89f4eabdffce316809d790d5c93a49908510 10000.0 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -223,61 +43,16 @@ plasma-evm $ build/bin/geth manage-staking mintTON 0x57ab89f4eabdffce316809d790d
             --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
 ```
 
-## 오퍼레이터 TON 스테이크
-
-오퍼레이터1 과 오퍼레이터2 는 각각 10,000 TON을 가지고 있다.
+루트체인에 오퍼레이터1 과 오퍼레이터2 는 각각 10,000 TON을 가지고 있다.
 
 오퍼레이터의 플라즈마 체인을 설정 이후, 스테이크 메니저 컨트랙트에 각 오퍼레이터의 루트체인 컨트랙트 주소를 등록 해야 한다.
-
-### 오퍼레이터1 체인 설정 및 스테이크 주소 설정
-
-`deploy` 명령어를 사용하여 오퍼레이터1 실행에 필요한 컨트랙트를 루트체인에 배포한다.
-
-```bash
-plasma-evm $ build/bin/geth deploy ./.pls.staking/operator1/operator1_genesis.json 1021 true 2 \
-            --datadir ./.pls.staking/operator1 \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
-            --password pwd.pass \
-            --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
-```
-
-오퍼레이터1 이 배포한 `rootchain` 컨트랙트 정보가 포함되어 있는 `operator1_genesis.json` 파일을 통해 플라즈마 체인을 초기화 한다.
-
-```bash
-plasma-evm $ build/bin/geth init ./.pls.staking/operator1/operator1_genesis.json  \
-            --datadir ./.pls.staking/operator1  \
-            --rootchain.url ws://127.0.0.1:8546
-```
-
-아래 `manage-staking`의 하위 명령어인 `setManagers` 를 사용하여 오퍼레이터1의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
-
-```bash
-plasma-evm $ build/bin/geth manage-staking setManagers manager.json  \
-            --datadir ./.pls.staking/operator1
-NFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
-INFO [01-01|00:00:00.000] Set address                              name=TON addr=0x3A220f351252089D385b29beca14e27F204c296A
-INFO [01-01|00:00:00.000] Set address                              name=WTON addr=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf
-INFO [01-01|00:00:00.000] Set address                              name=DepositManager addr=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d
-INFO [01-01|00:00:00.000] Set address                              name=RootChainRegistry addr=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44
-INFO [01-01|00:00:00.000] Set address                              name=SeigManager       addr=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] Set address                              name=PowerTON          addr=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
-```
-
-`manage-staking`의 하위 명령어인 `getManagers` 를 실행하여 오퍼레이터1 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.
-
-```bash
-plasma-evm $ build/bin/geth manage-staking getManagers --datadir ./.pls.staking/operator1
-```
 
 ### 오퍼레이터1 루트체인 등록 및 TON 잔고 확인
 
 오퍼레이터1 이 설정한 플라즈마 체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking register \
+plasma-evm $ build/bin/geth --nousb manage-staking register \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
@@ -300,7 +75,7 @@ INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x53
 아래 명령어를 통해, 오퍼레이터1의 테스트 TON 잔고를 확인한다.
 
 ```bash
-plasma-evm $ build/bin/geth staking balances 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+plasma-evm $ build/bin/geth --nousb staking balances 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
@@ -337,7 +112,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTO
 > 이때 하위 명령어인 `swapFromTON` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
 
 ```bash
-plasma-evm $ build/bin/geth staking swapFromTON 1000.0 \
+plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
@@ -358,7 +133,7 @@ INFO [01-01|00:00:00.000] Swap from TON to WTON                    amount="1000.
 `staking`의 하위 명령어인 `stakeWTON` 를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이크 한다.
 
 ```bash
-plasma-evm $ build/bin/geth staking stakeWTON 500.0 \
+plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
@@ -369,7 +144,7 @@ plasma-evm $ build/bin/geth staking stakeWTON 500.0 \
 또는, 위 두 과정을 `stakeTON` 명령어로 한번에 처리 할 수 있다.
 
 ```bash
-plasma-evm $ build/bin/geth staking stakeTON 500.0 \
+plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -379,10 +154,12 @@ plasma-evm $ build/bin/geth staking stakeTON 500.0 \
 
 ### 오퍼레이터2 체인 설정 및 스테이크 주소 설정
 
+[프라이빗 테스트넷 시작 - 자식체인 설정](https//docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually##오퍼레이터1-노드-설정) 에서 오퍼레이터1의 설정 과정을 오퍼레이터2에 대해 동일하게 수행한다.
+
 `deploy` 명령어를 사용하여 오퍼레이터2 실행에 필요한 컨트랙트를 루트체인에 배포한다.
 
 ```bash
-plasma-evm $ build/bin/geth deploy ./.pls.staking/operator2/operator2_genesis.json 1021 true 2 \
+plasma-evm $ build/bin/geth --nousb deploy ./.pls.staking/operator2/operator2_genesis.json 103 true 2 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
