@@ -11,17 +11,7 @@ Make sure that you did [setup Rootchain](how-to-open-private-testnet-rootchain#S
 > Operator and challenger account to be used in root chain must have enough ether balance.
 Note that operator node will run successfully only when challenger account has at least 0.5 ETH.
 
-### 1. Download and Compile Repository
-
-Download source file and then compile `geth`.
-
-```bash
-$ git clone https://github.com/onther-tech/plasma-evm
-$ cd plasma-evm
-plasma-evm$ make geth
-```
-
-### 2. Deploy RootChain Contract
+### 1. Deploy rootchain contract
 
 This section explains about `deploy` command and its parameters for deploying rootChain contract.
 
@@ -32,109 +22,142 @@ This section explains about `deploy` command and its parameters for deploying ro
 `PRE-ASSET` : Flag to allocate PETH to accounts in child chain at genesis or not.
 
 `EPOCH` : Length of epoch.
-Ex) If `EPOCH` is `4096`, it will submit epoch every 4096 blocks.
+Ex) If `EPOCH` is `2`, it will submit epoch every 2 blocks.
 
 Create `deploy.local.sh` by running following command.
 
-```sh
-plasma-evm$ cat > deploy.local.sh << "EOF"
+```bash
+plasma-evm$ cat > deploy.operator1.sh << "EOF"
 #!/bin/bash
+OPERATOR_KEY="bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5"
+OPERATOR="0x3cd9f729c8d882b851f8c70fb36d22b391a288cd"
 
-OPERATOR_KEY="b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"
-KEY2="78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a115"
-KEY3="067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc"
-KEY4="ae03e057a5b117295db86079ba4c8505df6074cdc54eec62f2050e677e5d4e66"
-KEY5="eda4515e1bc6c08e8606b51ffb6ffe70b3fe76781ed49872285e484064e3b634"
-CHALLENGER_KEY="78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a114"
+DATADIR=.pls.staking/operator1
 
-DATADIR=pls.data
-OPERATOR="0x71562b71999873DB5b286dF957af199Ec94617F7"
-CHALLENGER="0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8"
-
-ROOTCHAIN_IP=localhost # Onther Ropsten Geth Node IP.
+ROOTCHAIN_IP=127.0.0.1
 
 # Deploy contracts at rootchain
 echo "Deploy rootchain contract and others"
 make geth && build/bin/geth \
-    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \
-    --operator.key $OPERATOR_KEY \
+    --nousb \
     --datadir $DATADIR \
-    deploy "./genesis.json" 16 true 4096
+    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \
+    --unlock $OPERATOR \
+    --password pwd.pass \
+    --rootchain.sender $OPERATOR \
+    deploy "./genesis-operator1.json" 102 true 2
 
-# deploy params : chainID, isInitialAsset, Epochlength
 # you can checkout "$geth deploy --help" for more information
 EOF
 ```
 
-You can run `deploy.local.sh` by running following command.
+You can run `deploy.local.sh` script as following command.
 
 ```sh
-plasma-evm$ bash deploy.local.sh
+plasma-evm$ bash deploy.operator1.sh
 ```
 
-`genesis.json` gerenated from the script will be located in `plasma-evm` directory.
+`genesis-operator1.json` gerenated from the script will be located in `plasma-evm` directory.
 
-### 3. Initialize
+### 2. Initialize
 
 You must initialize chain data before running operator node.
 
-`genesis.json` is located in current path(i.e `~/plasma-evm/genesis.json`).
+`genesis-operator1.json` is located in current path(i.e `~/plasma-evm/genesis-operator1.json`).
 
 Run following command to initialize chain data.
 
 ```bash
 plasma-evm$ build/bin/geth --nousb init \
-            --datadir ./chaindata-oper \
+            --datadir .pls.staking/operator1 \
             --rootchain.url ws://localhost:8546 \
-            genesis.json
+            genesis-operator1.json
 ```
 
-### 4. Create Keystore of Operator Account
+### 3. Set manager contract
 
-You need private key of operator account in order to sign transaction for submitting blocks to root chain.
+After [2. Initialize](#2-initialize) for childchain, The Operator should register an address of the rootchain contract to stake manager contract.
 
-You must locate the keystore to the `datadir` directory.
+After setup operator plasma chain, Operator must register an address of rootchain to Stake manager contract.
 
-Command `geth account` allows to create keystore file only with private key hex.
-
-> Use same `datadir` as in the initialzation.
-
-```
-# Generate Operator Keyfile
-plasma-evm$ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 --datadir ./chaindata-oper
-INFO [08-27|16:14:38.878] Bumping default cache on mainnet         provided=1024 updated=4096
-INFO [08-27|16:14:38.879] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [08-27|16:14:38.905] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-Your new account is locked with a password. Please give a password. Do not forget this password.
-Passphrase:
-Repeat passphrase:
-```
-
-### 5. Run Operator Node
-
-If operator keystore is locked with passphrase, you must write the passphrase in `signer.pass` file. `signer.pass` will be empty if it had no passphrase.
-
-Create `signer.pass` with following command.
+Using `setManagers` sub-command of `manage-staking`, Set the stake contract addresses for running Operator1's plasma chain.
 
 ```bash
-plasma-evm$ echo "<Passphrase for operator keystore file>" > signer.pass
+plasma-evm $ build/bin/geth --nousb manage-staking setManagers manager.json  \
+            --datadir ./.pls.staking/operator1
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Set address                              name=TON addr=0x3A220f351252089D385b29beca14e27F204c296A
+INFO [01-01|00:00:00.000] Set address                              name=WTON addr=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf
+INFO [01-01|00:00:00.000] Set address                              name=DepositManager addr=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d
+INFO [01-01|00:00:00.000] Set address                              name=RootChainRegistry addr=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44
+INFO [01-01|00:00:00.000] Set address                              name=SeigManager       addr=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] Set address                              name=PowerTON          addr=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
 ```
+
+Check the information of stake contract addresses with `getManagers` sub-command of `manage-staking` in Operator1 chaindata.
+
+```bash
+plasma-evm $ build/bin/geth --nousb \
+              manage-staking getManagers \
+              --datadir ./.pls.staking/operator1
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Smartcard socket not found, disabling    err="stat /run/pcscd/pcscd.comm: no such file or directory"
+INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
+{
+  "TON": "0x3a220f351252089d385b29beca14e27f204c296a",
+  "WTON": "0xdb7d6ab1f17c6b31909ae466702703daef9269cf",
+  "DepositManager": "0x880ec53af800b5cd051531672ef4fc4de233bd5d",
+  "RootChainRegistry": "0x537e697c7ab75a26f9ecf0ce810e3154dfcaaf44",
+  "SeigManager": "0x3dc2cd8f2e345951508427872d8ac9f635fbe0ec",
+  "PowerTON": "0x82567a6f6e3abe246f62350322a07af7f413cfe6"
+}
+```
+
+### 4. Register rootchain contract
+
+Make to receive stake seigniorage of TON with register an address of rootchain which setup by Operator1 to the stake manager contract.
+
+```bash
+plasma-evm $ build/bin/geth --nousb manage-staking register \
+            --datadir ./.pls.staking/operator1 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+            --password pwd.pass \
+            --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
+```
+
+If sucessfully registered the rootchain address, output as follows.
+
+```bash
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] Registered SeigManager to RootChain      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=b546d3…fe55ed
+INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=6904c9…bc07a5
+```
+
+### 5. Run Operator node
 
 Run operator node with following command.
 
 ```bash
 plasma-evm$ build/bin/geth \
     --nousb \
-    --datadir ./chaindata-oper \
+    --datadir ./.pls.staking/operator1 \
     --syncmode='full' \
-    --networkid 16 \
-    --rootchain.url ws://localhost:8546 \
-    --operator 0x71562b71999873DB5b286dF957af199Ec94617F7 \
+    --networkid 102 \
+    --rootchain.url ws://127.0.0.1:8546 \
+    --operator 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
     --port 30306 \
     --nat extip:::1 \
     --maxpeers 50 \
-    --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
-    --password signer.pass \
+    --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+    --password pwd.pass \
     --nodekeyhex e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3 \
     --mine \
     --miner.gastarget 7500000 \
@@ -151,29 +174,29 @@ This guide describes how to run user node without setting challenger account.
 
 Insert URL of RootChain on which `RootChain Contract` was deployed, as parameter of `--rootchain.url` flag.
 
-Use address of the `RootChain` set in [here](how-to-open-private-testnet-rootchain#Setup-rootchain).
+Use the address of RootChain set in [here](how-to-open-private-testnet-rootchain#setup-rootchain) as `--rootchain.url`.
 
 ```bash
 plasma-evm$ build/bin/geth --nousb init \
-            --datadir ./chaindata-user \
+            --datadir ./.pls.staking/usernode \
             --rootchain.url ws://localhost:8546 \
-            genesis.json
+            genesis-operator1.json
 ```
 
-> Use same `genesis.json` as in [setting up operator node](how-to-open-private-testnet-manually#3-Initialize).
+> Use same `genesis-operator1.json` file as in [Setup Operator Node - 2. Initialize](how-to-open-private-testnet-manually#2-initialize).
 
 ### 2. Run User Node
 
-You must [Setup User Node - 1. Initialize](how-to-open-private-testnet-manually##1-initialize) before running user node. It will use same `datadir` as in the initialization.
+You must [Setup User Node - 1. Initialize](how-to-open-private-testnet-rootchain#1-initialize) before running user node. It will use same `datadir` as in the initialization.
 
 Run user node with following command. If you want to run challenger, add `--rootchain.challenger 0x0...` to the command.
 
 ```bash
 plasma-evm$ build/bin/geth \
     --nousb \
-    --datadir ./chaindata-user \
+    --datadir ./.pls.staking/usernode \
     --syncmode='full' \
-    --networkid 16 \
+    --networkid 102 \
     --rootchain.url ws://localhost:8546 \
     --rpc \
     --rpcaddr '0.0.0.0' \
@@ -193,8 +216,4 @@ plasma-evm$ build/bin/geth \
 
 > You must set `syncmode` to `full` or `archive` in order to synchronize with operator node.
 
-<!-- TODO : fix link -->
-
-### Architecture Diagram
-
-![Architecture after setup childchain](assets/guides_private_testnet_manually.png)
+<!--## Architecture Diagram ![Architecture after setup childchain](assets/guides_private_testnet_manually.png)-->

@@ -6,23 +6,13 @@ sidebar_label: Setup Childchain
 
 루트체인이 구동되고 있는 환경에서 자식 체인을 실행해야 하므로, [루트체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정)을 먼저 진행한다.
 
-## 오퍼레이터 노드 설정
+## 오퍼레이터1 노드 설정
 [루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0) 수행하였음을 전제로 한다.
 
 > 루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 챌린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다.
 특히, 챌린저 계정에 최소 0.5 ETH 이상이 있어야 오퍼레이터 노드가 정상적으로 실행된다.
 
-### 1. 저장소 다운로드 및 컴파일
-
-소스파일을 다운로드 받은 후 실행가능한 `geth` 파일을 컴파일 한다.
-
-```bash
-$ git clone https://github.com/onther-tech/plasma-evm
-$ cd plasma-evm
-plasma-evm$ make geth
-```
-
-### 2. 루트체인 컨트랙트 배포
+### 1. 루트체인 컨트랙트 배포
 
 루트체인 컨트랙트 배포 커맨드인 `deploy`에 대한 설명이다.
 
@@ -33,108 +23,139 @@ plasma-evm$ make geth
 `PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨.
 
 `EPOCH` : 루트체인에 커밋할 자식체인의 블록갯수.
-예) `4096` 설정하는 경우, 자식체인 4096블록 마다 루트체인에 1회 커밋 트랜잭션을 전송.
+예) `2` 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송.
 
 아래 커맨드로 `deploy.local.sh` 스크립트 파일을 생성한다.
+
 ```sh
-plasma-evm$ cat > deploy.local.sh << "EOF"
+plasma-evm$ cat > deploy.operator1.sh << "EOF"
 #!/bin/bash
+OPERATOR_KEY="bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5"
+OPERATOR="0x3cd9f729c8d882b851f8c70fb36d22b391a288cd"
 
-OPERATOR_KEY="b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"
-KEY2="78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a115"
-KEY3="067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc"
-KEY4="ae03e057a5b117295db86079ba4c8505df6074cdc54eec62f2050e677e5d4e66"
-KEY5="eda4515e1bc6c08e8606b51ffb6ffe70b3fe76781ed49872285e484064e3b634"
-CHALLENGER_KEY="78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a114"
+DATADIR=.pls.staking/operator1
 
-DATADIR=pls.data
-OPERATOR="0x71562b71999873DB5b286dF957af199Ec94617F7"
-CHALLENGER="0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8"
-
-ROOTCHAIN_IP=localhost # Onther Ropsten Geth Node IP.
+ROOTCHAIN_IP=127.0.0.1
 
 # Deploy contracts at rootchain
 echo "Deploy rootchain contract and others"
 make geth && build/bin/geth \
-    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \
-    --operator.key $OPERATOR_KEY \
+    --nousb \
     --datadir $DATADIR \
-    deploy "./genesis.json" 16 true 4096
+    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \
+    --unlock $OPERATOR \
+    --password pwd.pass \
+    --rootchain.sender $OPERATOR \
+    deploy "./genesis-operator1.json" 102 true 2
 
-# deploy params : chainID, isInitialAsset, Epochlength
 # you can checkout "$geth deploy --help" for more information
 EOF
 ```
 
-생성된 `deploy.local.sh` 스크립트는 아래 명령어로 실행한다.
+생성된 `deploy.operator1.sh` 스크립트는 아래 명령어로 실행한다.
 
 ```sh
-plasma-evm$ bash deploy.local.sh
+plasma-evm$ bash deploy.operator1.sh
 ```
 
-스크립트를 통해 생성한 `genesis.json` 파일은 `plasma-evm` 디렉토리 내에 위치한다.
+스크립트를 통해 생성한 `genesis-operator1.json` 파일은 `plasma-evm` 디렉토리 내에 위치한다.
 
-### 3. 초기화
+### 2. 초기화
 
 오퍼레이터 노드 실행전에 체인 데이터를 초기화 해야한다.
-
-기본 설정값인 `genesis.json` 파일이 실행경로에 위치하고 있으므로 genesis 파일 경로를 지정할 필요 없다.
 
 아래 명령어를 통해 체인데이터를 초기화한다.
 
 ```bash
-plasma-evm$ build/bin/geth init \
-            --datadir ./chaindata-oper \
+plasma-evm$ build/bin/geth --nousb init \
+            --datadir .pls.staking/operator1 \
             --rootchain.url ws://localhost:8546 \
-            genesis.json
+            genesis-operator1.json
 ```
 
-### 4. 오퍼레이터 계정 키스토어 생성
+### 3. 매니저 컨트랙트 설정
 
-오퍼레이터 노드는 자식체인 블록 정보를 루트체인에 커밋 해야 하므로, 트랜잭션 생성에 오퍼레이터의 비밀키가 필요하다.
+오퍼레이터 체인 시작을 위해 [초기화](#2-초기화) 이후, 스테이크 메니저 컨트랙트에 각 오퍼레이터의 루트체인 컨트랙트 주소를 등록 해야 한다.
 
-따라서, 오퍼레이터 키를 담고 있는 키스토어 파일을 초기화한 `datadir`내에 위치시켜야 한다.
-
-`Plasma-evm`의 `geth account` 커맨드는 비밀키(private key)만으로 키스토어 파일을 생성할 수 있다.
-
-> 초기화와 동일한 `datadir` 위치를 사용한다.
+아래 `manage-staking`의 하위 명령어인 `setManagers` 사용하여 오퍼레이터1의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
 
 ```bash
-# Generate Operator Keyfile
-plasma-evm$ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 --datadir ./chaindata-oper
-INFO [08-27|16:14:38.878] Bumping default cache on mainnet         provided=1024 updated=4096
-INFO [08-27|16:14:38.879] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [08-27|16:14:38.905] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-Your new account is locked with a password. Please give a password. Do not forget this password.
-Passphrase:
-Repeat passphrase:
+plasma-evm $ build/bin/geth --nousb \
+            manage-staking setManagers manager.json  \
+            --datadir ./.pls.staking/operator1
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Set address                              name=TON addr=0x3A220f351252089D385b29beca14e27F204c296A
+INFO [01-01|00:00:00.000] Set address                              name=WTON addr=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf
+INFO [01-01|00:00:00.000] Set address                              name=DepositManager addr=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d
+INFO [01-01|00:00:00.000] Set address                              name=RootChainRegistry addr=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44
+INFO [01-01|00:00:00.000] Set address                              name=SeigManager       addr=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] Set address                              name=PowerTON          addr=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
 ```
 
-### 5. 오퍼레이터 노드 실행
-
-만약, 오퍼레이터 키스토어 파일에 암호가 걸려 있는경우 `signer.pass` 파일 내부에 패스워드를 기록해주어야 한다. 암호가 없는 경우 `signer.pass` 는 아무런 내용이 없는 빈파일을 생성한다.
-
-아래 커맨드를 통해서 `signer.pass` 파일을 생성 한다.
+`manage-staking` 의 하위 명령어인 `getManagers` 를 실행하여 오퍼레이터1 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.
 
 ```bash
-plasma-evm$ echo "<Passphrase for operator keystore file>" > signer.pass
+plasma-evm $ build/bin/geth --nousb \
+            manage-staking getManagers \
+            --datadir ./.pls.staking/operator1
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Smartcard socket not found, disabling    err="stat /run/pcscd/pcscd.comm: no such file or directory"
+INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
+{
+  "TON": "0x3a220f351252089d385b29beca14e27f204c296a",
+  "WTON": "0xdb7d6ab1f17c6b31909ae466702703daef9269cf",
+  "DepositManager": "0x880ec53af800b5cd051531672ef4fc4de233bd5d",
+  "RootChainRegistry": "0x537e697c7ab75a26f9ecf0ce810e3154dfcaaf44",
+  "SeigManager": "0x3dc2cd8f2e345951508427872d8ac9f635fbe0ec",
+  "PowerTON": "0x82567a6f6e3abe246f62350322a07af7f413cfe6"
+}
 ```
+
+### 4. 루트체인 등록
+
+오퍼레이터1 이 설정한 플라즈마 체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.
+
+```bash
+plasma-evm $ build/bin/geth --nousb manage-staking register \
+            --datadir ./.pls.staking/operator1 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+            --password pwd.pass \
+            --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
+```
+
+오퍼레이터1 의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.
+
+```bash
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] Registered SeigManager to RootChain      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=b546d3…fe55ed
+INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=6904c9…bc07a5
+```
+
+### 5. 노드 실행
 
 아래 명령어를 통해서 오퍼레이터 노드를 실행한다.
 
 ```bash
 plasma-evm$ build/bin/geth \
     --nousb \
-    --datadir ./chaindata-oper \
+    --datadir ./.pls.staking/operator1 \
     --syncmode='full' \
-    --networkid 16 \
-    --rootchain.url ws://localhost:8546 \
-    --operator 0x71562b71999873DB5b286dF957af199Ec94617F7 \
+    --networkid 102 \
+    --rootchain.url ws://127.0.0.1:8546 \
+    --operator 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
     --port 30306 \
     --nat extip:::1 \
     --maxpeers 50 \
-    --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
-    --password signer.pass \
+    --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+    --password pwd.pass \
     --nodekeyhex e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3 \
     --mine \
     --miner.gastarget 7500000 \
@@ -154,13 +175,13 @@ plasma-evm$ build/bin/geth \
 [루트 체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정) 통해 실행중인 루트체인 접속 주소를 사용한다.
 
 ```bash
-plasma-evm$ build/bin/geth init \
-            --datadir ./chaindata-user \
+plasma-evm$ build/bin/geth --nousb init \
+            --datadir ./.pls.staking/usernode \
             --rootchain.url ws://localhost:8546 \
-            genesis.json
+            genesis-operator1.json
 ```
-> [오퍼레이터 설정 - 3. 초기화](how-to-open-private-testnet-manually#3-초기화)에서 사용한 `genesis.json` 파일을 사용한다.
 
+> [오퍼레이터 설정 - 2. 초기화](how-to-open-private-testnet-manually#2-초기화)에서 사용한 `genesis-operator1.json` 파일을 사용한다.
 
 ### 2. 사용자 노드 실행
 
@@ -171,9 +192,9 @@ plasma-evm$ build/bin/geth init \
 ```bash
 plasma-evm$ build/bin/geth \
     --nousb \
-    --datadir ./chaindata-user \
+    --datadir ./.pls.staking/usernode \
     --syncmode='full' \
-    --networkid 16 \
+    --networkid 102 \
     --rootchain.url ws://localhost:8546 \
     --rpc \
     --rpcaddr '0.0.0.0' \
@@ -193,6 +214,4 @@ plasma-evm$ build/bin/geth \
 
 > `syncmode`는 `full` 또는 `archive`를 입력해야 오퍼레이터 노드와 동기화 된다.
 
-### 설정 완료 후 구조도
-
-![자식 체인 설정 완료 후 개요도](assets/guides_private_testnet_manually.png)
+<!--### 설정 완료 후 구조도![자식 체인 설정 완료 후 개요도](assets/guides_private_testnet_manually.png)-->
