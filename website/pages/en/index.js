@@ -13,6 +13,8 @@ const MarkdownBlock = CompLibrary.MarkdownBlock; /* Used to read markdown */
 const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 
+const translate = require('../../server/translate.js').translate;
+
 class HomeSplash extends React.Component {
   render() {
     const {siteConfig, language = ''} = this.props;
@@ -29,10 +31,12 @@ class HomeSplash extends React.Component {
       </div>
     );
 
+    const _title = () => {siteConfig.title};
+
     const ProjectTitle = () => (
       <h2 className="projectTitle">
-        {siteConfig.title}
-        <small>{siteConfig.tagline}</small>
+        <translate>Tokamak Network Documents</translate>
+        <small><translate>Plasma EVM Doc</translate></small>
       </h2>
     );
 
@@ -58,7 +62,7 @@ class HomeSplash extends React.Component {
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
           {/* <Button href={docUrl('getting-start/getting-start')}>Doc</Button> */}
-          <Button href={docUrl('guides/getting-started/how-to-open-private-testnet-rootchain')}>Getting Started</Button>
+          <Button href={docUrl('guides/getting-started/how-to-open-private-testnet-rootchain')}><translate>Getting Started</translate></Button>
           {/* <Button href={docUrl('getting-start/getting-start')}>Manuals</Button> */}
           </PromoSection>
         </div>
@@ -75,6 +79,12 @@ class Index extends React.Component {
     const langPart = `${language ? `${language}/` : ''}`;
     const {baseUrl} = siteConfig;
 
+    // grid contents translations, for links.
+    const basic_title = <translate>Basic</translate>;
+    const basic_content = <translate>Learn basics of Tokamak Network</translate>;
+    const advanced_title = <translate>Advanced</translate>;
+    const advanced_content = <translate>Deep dive into Tokamak Network</translate>;
+
     return (
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
@@ -90,20 +100,17 @@ class Index extends React.Component {
               // layout="twoColumn"
               contents={[
                 {
-                  title: `[Basic](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/basic/tokamak-network.html)`,
+                  title: `[${basic_title}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/basic/tokamak-network.html)`,
                   image: "/img/index_basic.png",
                   imageLink: `/docs/${language}/learn/basic/tokamak-network`,
-                  // imageAlign	: 'center',
-                  // 토카막 네트워크와 확장성 솔루션에 대한 기본 개념을 익혀보세요.
-                  content: `[Learn basics of Tokamak Network](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/basic/tokamak-network.html)`,
+                  content: `[${basic_content}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/basic/tokamak-network.html)`,
                 },
                 {
-                  title: `[Advanced](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/advanced/design-rationale)`,
+                  title: `[${advanced_title}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/advanced/design-rationale)`,
                   image: "/img/index_advance.png",
                   imageLink: `/docs/${language}/learn/advanced/design-rationale`,
                   // imageAlign	: 'center',
-                  // 루트체인, 플라즈마EVM, 리베이스, 요청가능 컨트랙트 등 고급 개념을 익혀보세요.
-                  content: `[Deep dive into Tokamak Network](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/advanced/design-rationale)`,
+                  content: `[${advanced_content}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/advanced/design-rationale)`,
                   
                 },
               ]}
