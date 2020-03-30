@@ -128,6 +128,13 @@
     }
   },
   "pages-strings": {
+    "Tokamak Network Documents|no description given": "Tokamak Network Documents",
+    "Plasma EVM Doc|no description given": "Plasma EVM Doc",
+    "Getting Started|no description given": "Getting Started",
+    "Basic|no description given": "Basic",
+    "Learn basics of Tokamak Network|no description given": "Learn basics of Tokamak Network",
+    "Advanced|no description given": "Advanced",
+    "Deep dive into Tokamak Network|no description given": "Deep dive into Tokamak Network",
     "Help Translate|recruit community translators for your project": "Help Translate",
     "Edit this Doc|recruitment message asking to edit the doc source": "Edit",
     "Translate this Doc|recruitment message asking to translate the docs": "Translate"
