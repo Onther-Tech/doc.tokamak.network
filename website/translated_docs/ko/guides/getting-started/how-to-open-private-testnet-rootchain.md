@@ -150,7 +150,7 @@ plasma-evm $ make geth
 테스트에 필요한 계정을 생성한다.
 
 ```bash
-plasma-evm $ build/bin/geth account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 \
+plasma-evm $ build/bin/geth --nousb account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 \
             --datadir ./.pls.staking/manager
 ```
 
@@ -168,12 +168,12 @@ Address: {71562b71999873db5b286df957af199ec94617f7}
 아래 명령어를 통해, 각 오퍼레이터 계정을 생성한다.
 
 ```bash
-plasma-evm $ build/bin/geth account importKey bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5 \
+plasma-evm $ build/bin/geth --nousb account importKey bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5 \
             --datadir ./.pls.staking/operator1
 ```
 
 ```bash
-plasma-evm $ build/bin/geth account importKey 067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc \
+plasma-evm $ build/bin/geth --nousb account importKey 067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc \
             --datadir ./.pls.staking/operator2
 ```
 
@@ -196,7 +196,7 @@ plasma-evm $ echo "" > pwd.pass
 `seigPerBlock` : 루트체인 블록당 발생할 수 있는 시뇨리지의 최대 TON 개수. 해당 파라미터에 의해 연 인플레이션이 영향을 받는다.
 
 ```bash
-plasma-evm $ make geth && build/bin/geth manage-staking deployManagers 10 1.5 \
+plasma-evm $ make geth && build/bin/geth --nousb manage-staking deployManagers 10 1.5 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -243,7 +243,7 @@ INFO [01-01|00:00:00.000] Staking manager contract deployed        TON=0x3A220f3
 `PowerTON`에 대한 자세한 내용은 [여기]()를 참고한다.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking deployPowerTON 60s \
+plasma-evm $ build/bin/geth --nousb manage-staking deployPowerTON 60s \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -287,7 +287,7 @@ INFO [01-01|00:00:00.000] Exported manager contracts               path=manager.
 아래 명령어를 실행하여 `PowerTON` 활성화 Tx를 전송한다.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking startPowerTON \
+plasma-evm $ build/bin/geth --nousb manage-staking startPowerTON \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -314,7 +314,7 @@ INFO [01-01|00:00:00.000] PowerTON started                         PowerTON=0xBc
 아래 명령어를 통해 각각 오퍼레이터에게 10,000 TON을 생성한다.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking mintTON 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd 10000.0 \
+plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd 10000.0 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
@@ -323,7 +323,7 @@ plasma-evm $ build/bin/geth manage-staking mintTON 0x3cd9f729c8d882b851f8c70fb36
 ```
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking mintTON 0x57ab89f4eabdffce316809d790d5c93a49908510 10000.0 \
+plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x57ab89f4eabdffce316809d790d5c93a49908510 10000.0 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
