@@ -62,7 +62,8 @@
         "type": "subcategory",
         "label": "TON Staking",
         "ids": [
-          "guides/getting-started/private-testnet-staking"
+          "guides/getting-started/private-testnet-staking",
+          "guides/getting-started/faraday-testnet-staking"
         ]
       }
     ]
