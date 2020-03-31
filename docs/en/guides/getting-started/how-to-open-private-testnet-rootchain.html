@@ -110,16 +110,13 @@
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="check-script-of-rootchain"></a><a href="#check-script-of-rootchain" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Check Script of RootChain</h3>
 <p><code>run.rootchain.sh</code> in <code>onther-tech/go-ethereum</code> is as follows.</p>
-<pre><code class="hljs css language-bash"><span class="hljs-comment"># plasam-evm/run.rootchain.sh</span>
-OPERATOR_PRIV_KEY=<span class="hljs-string">"b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"</span>
-CHALLENGER_KEY=<span class="hljs-string">"78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a114"</span>
-
-ADDR0=<span class="hljs-string">"0x5df7107c960320b90a3d7ed9a83203d1f98a811d"</span>;
+<pre><code class="hljs css language-bash"><span class="hljs-comment"># go-ethereum/run.rootchain.sh</span>
+ADDR0=<span class="hljs-string">"0x71562b71999873DB5b286dF957af199Ec94617F7"</span>;
 ADDR1=<span class="hljs-string">"0x3cd9f729c8d882b851f8c70fb36d22b391a288cd"</span>;
 ADDR2=<span class="hljs-string">"0x57ab89f4eabdffce316809d790d5c93a49908510"</span>;
 ADDR3=<span class="hljs-string">"0x6c278df36922fea54cf6f65f725267e271f60dd9"</span>;
 
-KEY0=<span class="hljs-string">"78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a115"</span>;
+KEY0=<span class="hljs-string">"b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"</span>;
 KEY1=<span class="hljs-string">"bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5"</span>;
 KEY2=<span class="hljs-string">"067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc"</span>;
 KEY3=<span class="hljs-string">"ae03e057a5b117295db86079ba4c8505df6074cdc54eec62f2050e677e5d4e66"</span>;
@@ -127,7 +124,7 @@ KEY3=<span class="hljs-string">"ae03e057a5b117295db86079ba4c8505df6074cdc54eec62
 make geth &amp;&amp; build/bin/geth \
   --dev \
   --dev.period 1 \
-  --dev.faucetkey <span class="hljs-string">"<span class="hljs-variable">$OPERATOR_PRIV_KEY</span>,<span class="hljs-variable">$KEY0</span>,<span class="hljs-variable">$KEY1</span>,<span class="hljs-variable">$KEY2</span>,<span class="hljs-variable">$KEY3</span>,<span class="hljs-variable">$CHALLENGER_KEY</span>"</span> \
+  --dev.faucetkey <span class="hljs-string">"<span class="hljs-variable">$KEY0</span>,<span class="hljs-variable">$KEY1</span>,<span class="hljs-variable">$KEY2</span>,<span class="hljs-variable">$KEY3</span>"</span> \
   --rpc \
   --rpcport 8545 \
   --rpcapi eth,debug,net \
@@ -139,15 +136,144 @@ make geth &amp;&amp; build/bin/geth \
   --miner.gastarget 7500000 \
   --miner.gasprice <span class="hljs-string">"10"</span>
 </code></pre>
-<p>Accounts used in the script are as follows.</p>
+<p>These accounts in above script has roles as follows.</p>
 <ul>
-<li><p>Operator : 0x71562b71999873DB5b286dF957af199Ec94617F7</p></li>
-<li><p>Challenger : 0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8</p></li>
+<li>ADDR0 : TON stake manager, Deployer and Owner of TON sktaing contracts.</li>
+<li>ADDR1 : Operator1, Operator childchain1 and Attendee of TON staking.</li>
+<li>ADDR2 : Operator2, Operator childchain2 and Attendee of TON staking.</li>
+<li>ADDR3 : Challenger, Block validator and Challenger for a childchain.</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="run-rootchain"></a><a href="#run-rootchain" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Run RootChain</h3>
 <p>Run <code>run.rootchain.sh</code> in <code>go-ethereum</code> to start rootchain running on local network.</p>
 <pre><code class="hljs css language-bash">go-ethereum$ bash run.rootchain.sh
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="architecture-diagram"></a><a href="#architecture-diagram" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Architecture Diagram</h2>
-<p><img src="/docs/assets/guides_private_testnet_rootchain.png" alt="Architecture after Setup RootChain"></p>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-5 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/learn/economics/glossary"><span class="arrow-prev">← </span><span>Parameters</span></a><a class="docs-next button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-manually"><span>Setup Childchain</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#setup-local-environment">Setup Local Environment</a><ul class="toc-headings"><li><a href="#system-update-and-install-required-packages">System Update and Install Required Packages</a></li><li><a href="#setup-golang-environment">Setup Golang Environment</a></li></ul></li><li><a href="#setup-rootchain">Setup RootChain</a><ul class="toc-headings"><li><a href="#download-source-code-of-rootchain">Download Source Code of RootChain</a></li><li><a href="#check-script-of-rootchain">Check Script of RootChain</a></li><li><a href="#run-rootchain">Run RootChain</a></li></ul></li><li><a href="#architecture-diagram">Architecture Diagram</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
+<h2><a class="anchor" aria-hidden="true" id="setup-ton-stake-contracts"></a><a href="#setup-ton-stake-contracts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setup TON stake contracts</h2>
+<p>Setup an environment for TON staking test in rootchain which it already setup in previous step.</p>
+<p>In this parts for How to using <code>staking</code> and <code>manage-staking</code> command in <code>plasma-evm</code>. these commands are quite useful for developer and Operator.</p>
+<p>Let assume that one manager and two operators for staking in TON staking private testnet.</p>
+<p>The manager deploy and manage contracts for TON staking.</p>
+<p>The operators stakes and un-stakes TON token, also they are oprating their own plasma chain.</p>
+<h3><a class="anchor" aria-hidden="true" id="download-repository-and-compile"></a><a href="#download-repository-and-compile" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Download Repository and Compile</h3>
+<p>First of all, Download <code>plasma-evm</code> repository with following below commands.</p>
+<pre><code class="hljs css language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/onther-tech/plasma-evm
+$ <span class="hljs-built_in">cd</span> plasma-evm
+plasma-evm $
+</code></pre>
+<p>As following command, make executable binary file <code>geth</code> of <code>Plasma-evm</code>.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ make geth
+</code></pre>
+<p>If you successfully compiled, The binary file <code>geth</code> will be located in <code>plasma-evm/build/bin</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="generate-accounts-for-manager-and-operators"></a><a href="#generate-accounts-for-manager-and-operators" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Generate accounts for Manager and Operators</h3>
+<p>Create accounts for test.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 \
+            --datadir ./.pls.staking/manager
+</code></pre>
+<p>Press enter twice, to insert empty string password for convinient test.</p>
+<pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+Your new account is locked with a password. Please give a password. Do not forget this password.
+Password:
+Repeat password:
+Address: {71562b71999873db5b286df957af199ec94617f7}
+</code></pre>
+<p>As following command, create accounts for two operators.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb account importKey bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5 \
+            --datadir ./.pls.staking/operator1
+</code></pre>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb account importKey 067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc \
+            --datadir ./.pls.staking/operator2
+</code></pre>
+<p>As following below command, create empty password file as <code>pwd.pass</code> for all accounts we created.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span> &gt; pwd.pass
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="deploy-ton-stake-manager-contract"></a><a href="#deploy-ton-stake-manager-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deploy TON Stake manager contract</h3>
+<p><code>deployManagers</code> sub-command is in <code>manage-staking</code>, It is for deploying or management about contracts of TON staking by manager, not operator.</p>
+<p><code>deployManagers</code> command required two input arguments, <code>withdrawalDelay</code> and <code>seigPerBlock</code>, to run.</p>
+<p>The description of the input parameters is as follows.</p>
+<p><code>withdrawalDelay</code> : Unit is the number of blocks in rootchain. Send <code>requestWithdrawal</code> transaction in order to convert staked WTON to un-staked WTON then it can be processed after this number of blocks in rootchain. For example, Let assume that this parameter set as <code>10</code>. If the request withdrawal tx processed in 100 block in rootchain, It can be valid <code>processRequest</code> transaction for this request after 110 block in rootchain.</p>
+<p><code>seigPerBlock</code> : The amount of maximum seigniorage of TON per block. This parameter is effect to total inflation of TON token.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ make geth &amp;&amp; build/bin/geth --nousb manage-staking deployManagers 10 1.5 \
+            --datadir ./.pls.staking/manager \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
+            --password pwd.pass \
+            --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
+</code></pre>
+<p>As following above command, All contracts for TON stake will be deployed.</p>
+<pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Unlocking developer account              address=0x0000000000000000000000000000000000000000
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x71562b71999873DB5b286dF957af199Ec94617F7
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] 1. deploy TON contract
+INFO [01-01|00:00:00.000] TON deployed                             addr=0x3A220f351252089D385b29beca14e27F204c296A tx=0f9edc…149995
+INFO [01-01|00:00:00.000] 2. deploy WTON contract
+INFO [01-01|00:00:00.000] WTON deployed                            addr=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf tx=b951fc…ab742c
+INFO [01-01|00:00:00.000] 3. deploy RootChainRegistry
+INFO [01-01|00:00:00.000] RootChainRegistry deployed               addr=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 tx=1455b1…8db599
+INFO [01-01|00:00:00.000] 4. deploy DepositManager
+INFO [01-01|00:00:00.000] DepositManager deployed                  addr=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d tx=34f04d…713bee
+INFO [01-01|00:00:00.000] 5. deploy SeigManager
+INFO [01-01|00:00:00.000] SeigManager deployed                     addr=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=fd415d…bbcb15
+INFO [01-01|00:00:00.000] 6. add WTON minter role to SeigManager
+INFO [01-01|00:00:00.000] Set WTON minter to SeigManager           tx=4084ca…ec3718
+INFO [01-01|00:00:00.000] 7. add TON minter role to WTON
+INFO [01-01|00:00:00.000] Set TON minter to WTON                   tx=628885…e96b75
+INFO [01-01|00:00:00.000] 8. Setting SeigManager address to target contracts targets=<span class="hljs-string">"[DepositManager WTON]"</span>
+INFO [01-01|00:00:00.000] Set SeigManager to target cotnract       target=DepositManager tx=9435d0…c15c3a
+INFO [01-01|00:00:00.000] Set SeigManager to target cotnract       target=WTON           tx=4f26fc…ffacb4
+INFO [01-01|00:00:00.000] Staking manager contract deployed        TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="deploy-powerton-contract"></a><a href="#deploy-powerton-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deploy PowerTON contract</h3>
+<p>Deploy <code>PowerTON</code> contract with the following command.</p>
+<p>An input argument of <code>deployPowerTON</code> sub-command is powerton round time. Set it 60 seconds for testing.</p>
+<p>The powerton round time refers to a cycle in which un-issued seigniorage distributed as powerton rule. For example, If it set <code>60s</code>, an operator who receives un-issued seigniorage of TON is selected every 60 seconds.</p>
+<p>More information about <code>PowerTon</code> in <a href="">Here</a>.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking deployPowerTON 60s \
+            --datadir ./.pls.staking/manager \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
+            --password pwd.pass \
+            --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="information-of-deployed-contracts"></a><a href="#information-of-deployed-contracts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Information of deployed contracts</h3>
+<p>The information of deployed contracts with sub-command <code>deployManager</code> of <code>manage-staking</code> command is saved in <code>.pls.staking/manager</code> as rawdb.</p>
+<p>As following command, Extract all information about deployed stake contract in rootchain then save in <code>manager.json</code> file.</p>
+<pre><code class="hljs css language-bash">plasam-evm $ build/bin/geth --nousb manage-staking getManagers manager.json --datadir ./.pls.staking/manager
+
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata ca
+che=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Exporting manager contracts              path=manager.json
+INFO [01-01|00:00:00.000] Exported manager contracts               path=manager.json
+{
+  <span class="hljs-string">"TON"</span>: <span class="hljs-string">"0x3a220f351252089d385b29beca14e27f204c296a"</span>,
+  <span class="hljs-string">"WTON"</span>: <span class="hljs-string">"0xdb7d6ab1f17c6b31909ae466702703daef9269cf"</span>,
+  <span class="hljs-string">"DepositManager"</span>: <span class="hljs-string">"0x880ec53af800b5cd051531672ef4fc4de233bd5d"</span>,
+  <span class="hljs-string">"RootChainRegistry"</span>: <span class="hljs-string">"0x537e697c7ab75a26f9ecf0ce810e3154dfcaaf44"</span>,
+  <span class="hljs-string">"SeigManager"</span>: <span class="hljs-string">"0x3dc2cd8f2e345951508427872d8ac9f635fbe0ec"</span>,
+  <span class="hljs-string">"PowerTON"</span>: <span class="hljs-string">"0xbcdfc870ea0c6463c6ebb2b2217a4b32b93bcfb7"</span>
+}
+</code></pre>
+<p>Total 6 contract addresses, include <code>PowerTON</code> contract address, are stored in <code>manager.json</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="setup-ton-stake"></a><a href="#setup-ton-stake" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setup TON Stake</h2>
+<h3><a class="anchor" aria-hidden="true" id="activate-powerton"></a><a href="#activate-powerton" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Activate PowerTON</h3>
+<p>Use <code>startPowerTON</code>, a sub-command of <code>manage-staking</code>, to activate <code>PowerTON</code> which has the rule of un-issued seigniorage of TON.</p>
+<p>As following command, Send transaction for activating <code>PowerTON</code>.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking startPowerTON \
+            --datadir ./.pls.staking/manager \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7 \
+            --password pwd.pass \
+            --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
+
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Unlocking developer account              address=0x0000000000000000000000000000000000000000
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x71562b71999873DB5b286dF957af199Ec94617F7
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] PowerTON started                         PowerTON=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
+</code></pre>
+<!--## Architecture Diagram ![Architecture after Setup RootChain](/docs/assets/guides_private_testnet_rootchain.png)-->
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-3-30 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/learn/economics/glossary"><span class="arrow-prev">← </span><span>Parameters</span></a><a class="docs-next button" href="/docs/en/guides/getting-started/how-to-open-private-testnet-manually"><span>Setup Childchain</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#setup-local-environment">Setup Local Environment</a><ul class="toc-headings"><li><a href="#system-update-and-install-required-packages">System Update and Install Required Packages</a></li><li><a href="#setup-golang-environment">Setup Golang Environment</a></li></ul></li><li><a href="#setup-rootchain">Setup RootChain</a><ul class="toc-headings"><li><a href="#download-source-code-of-rootchain">Download Source Code of RootChain</a></li><li><a href="#check-script-of-rootchain">Check Script of RootChain</a></li><li><a href="#run-rootchain">Run RootChain</a></li></ul></li><li><a href="#setup-ton-stake-contracts">Setup TON stake contracts</a><ul class="toc-headings"><li><a href="#download-repository-and-compile">Download Repository and Compile</a></li><li><a href="#generate-accounts-for-manager-and-operators">Generate accounts for Manager and Operators</a></li><li><a href="#deploy-ton-stake-manager-contract">Deploy TON Stake manager contract</a></li><li><a href="#deploy-powerton-contract">Deploy PowerTON contract</a></li><li><a href="#information-of-deployed-contracts">Information of deployed contracts</a></li></ul></li><li><a href="#setup-ton-stake">Setup TON Stake</a><ul class="toc-headings"><li><a href="#activate-powerton">Activate PowerTON</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
