@@ -29,6 +29,10 @@
         "title": "Setup Rootchain in Private Testnet",
         "sidebar_label": "Setup Rootchain"
       },
+      "guides/getting-started/faraday-testnet-staking": {
+        "title": "Staking in Faraday Testnet",
+        "sidebar_label": "Staking Faraday Testnet"
+      },
       "guides/getting-started/private-testnet-staking": {
         "title": "Staking Test in Priavte Testnet",
         "sidebar_label": "Private Testnet Staking test"

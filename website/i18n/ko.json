@@ -29,6 +29,10 @@
         "title": "프라이빗 네트워크 TON 스테이크 테스트",
         "sidebar_label": "프라이빗 네트워크 테스트"
       },
+      "guides/getting-started/faraday-testnet-staking": {
+        "title": "페러데이 테스트넷 스테이크",
+        "sidebar_label": "페러데이 테스트넷 스테이크"
+      },
       "guides/getting-started/how-to-open-private-testnet-rootchain": {
         "title": "프라이빗 테스트넷 루트체인 설정",
         "sidebar_label": "루트체인 설정"
