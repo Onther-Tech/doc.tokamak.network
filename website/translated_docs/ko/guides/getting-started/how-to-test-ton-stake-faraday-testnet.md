@@ -4,17 +4,15 @@ title: Staking in Faraday Testnet
 sidebar_label: Staking Faraday Testnet
 ---
 
-이 문서는 오퍼레이터가 페러데이 테스트넷의 TON을 스테이크 하는 방법에대해 다룬다.
+이 문서는 오퍼레이터가 TON을 스테이크 하는 방법에대해 다룬다.
 
 > 일반 사용자의 경우 [dashboard](https://dashboard.faraday.tokamak.network)를 사용한다.
 
-## 오퍼레이터 TON 스테이크
+## 오퍼레이터 준비
 
-### 페러데이 테스트넷 컨트랙트 정보
+### TON 컨트랙트 정보
 
-페러데이 테스트넷에서 테스트 `TON` 토큰을 스테이크 할 수 있다.
-
-페러데이 테스트넷의 `TON` 토큰 및 스테이크 매니저 컨트랙트 주소는 다음과 같다.
+`TON` 토큰 및 스테이크 매니저 컨트랙트 주소는 다음과 같다.
 
 **컨트렉트 정보**
 
@@ -25,18 +23,11 @@ sidebar_label: Staking Faraday Testnet
     "SeigManager": "0xa72e2e22e52fc21a4ca2505a071500c9f2496f6e",
     "PowerTON": "0x012af3ce809e4d77f389223b3e3b90f16f53eadd"
 
-해당 정보는 [Faraday testnet dashboard api](https://dashboard-api.faraday.tokamak.network/managers)를 통해서 확인 할 수 있다.
+해당 정보는 [Faraday testnet dashboard api](https://dashboard.tokamak.network/managers)를 통해서 확인 할 수 있다.
 
-### 페러데이 테스트넷 TON 받기
+### 루트체인 접속 주소
 
-<!- TODO : check for MTON? or TON from faucet->
-
-WIP
-
-## 오퍼레이터 자식체인 설정
-
-### 루트체인 접속 주소 확보
-사용자 노드를 실행하기 위해 루트체인에 접근할 수 있는 노드, 즉, 루트체인 접속 주소가 필요하다. 여러 방법이 있지만, `Infura`를 통해 제공되는 테스트넷 노드 주소를 활용하는편이 간편하다. `Infura`를 통해 페러데이 테스트넷의 루트체인인 `Rinkeby` 테스트넷에 접속 가능한 주소를 확보한다.
+사용자 노드를 실행하기 위해 루트체인에 접근할 수 있는 노드, 즉, 루트체인 접속 주소가 필요하다. 여러 방법이 있지만, `Infura`를 통해 제공되는 테스트넷 노드 주소를 활용하는편이 간편하다. `Infura`를 통해 접속 가능한 주소를 확보한다.
 
 만약, `Infura` 계정이 없다면 [infura.io](https://infura.io/) 회원가입을 통해 접속 주소(URL)를 얻을 수 있다.
 
@@ -44,13 +35,12 @@ WIP
 
 그 다음, 아래와 같이 `PROJECT ID`를 조합하여 루트체인 접속 주소를 구성한다.
 
-`wss://rinkeby.infura.io/ws/v3/[PROJECT ID]`
+`wss://mainnet.infura.io/ws/v3/[PROJECT ID]`
 
 ![Infura node ID](assets/guides_create-infura-node.png)
-예) `wss://rinkeby.infura.io/ws/v3/c8a90eabc71448d1aaf6779752a22d26`
+예) `wss://mainnet.infura.io/ws/v3/c8a90eabc71448d1aaf6779752a22d26`
 
-만약 자신이 운영하고 있는 이더리움 클라이언트가 Rinkeby Testnet에 연결되어있다면, 해당 노드의 접속 주소를 위의 방법으로 확보한 `Infura` 주소 대신 사용할 수 있다.
-
+만약 자신이 운영하고 있는 이더리움 클라이언트가 싱크 되어있다면, 해당 노드의 접속 주소를 위의 방법으로 확보한 `Infura` 주소 대신 사용할 수 있다.
 
 ### `ChainID` 확인
 
@@ -60,8 +50,10 @@ WIP
 
 이를 방지하기 위해서는 오퍼레이터 서로가 겹치지 않은 `ChainID`를 사용해야 한다. 토카막 네트워크에서는 이를 시뇨리지 메니저 에서 관리하게 되며, 동일한 `ChainID`를 사용할 수 없도록 방지 한다.
 
-먼저, 오퍼레이터가 되고자 루트체인 컨트랙트를 배포하기 아래 링크에서 자신이 사용하고자 하는 `ChainID` 가 이미 배포되어 있는지를 확인한다.
+먼저, 오퍼레이터가 되고자 루트체인 컨트랙트를 배포하기 전에 아래 링크에서 자신이 사용하고자 하는 `ChainID` 가 이미 등록되어 있는지 확인한다.
 
+
+## 오퍼레이터 자식체인 설정
 
 ### 루트체인 컨트랙트 배포
 
@@ -86,12 +78,12 @@ plasma-evm $ build/bin/geth --nousb init genesis.json \
             --rootchain.url ws://127.0.0.1:8546
 ```
 
-### 테스트넷 스테이크 주소 설정
+### 스테이크 주소 설정
 
-<!- TODO : get manager.json by https://dashboard-api.faraday.tokamak.network ->
+<!- TODO : get manager.json by https://dashboard.tokamak.network ->
 
 ```bash 
-curl -o managers.json 'https://dashboard-api.faraday.tokamak.network/managers'
+curl -o managers.json 'https://dashboard.tokamak.network/managers'
 ```
 
 아래 `manage-staking`의 하위 명령어인 `setManagers` 사용하여 오퍼레이터2의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
@@ -109,7 +101,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./opera
 
 ### 루트체인 등록
 
-오퍼레이터2 이 설정한 플라즈마 체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.
+오퍼레이터가 설정한 자식체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking register \
@@ -167,7 +159,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTO
 
 ### TON 스테이크
 
-테스트 `TON`을 스테이크 하려면 `WTON`으로 변환한 후, `WTON`을 `depositManager` 컨트랙트에 `stake` 해주어야 한다.
+`TON`을 스테이크 하려면 `WTON`으로 변환한 후, `WTON`을 `depositManager` 컨트랙트에 `stake` 해주어야 한다.
 
 실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이크 되는 토큰은 WTON 이다.
 
@@ -284,15 +276,13 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="100.0
 INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 ```
 
-위 결과는 예시이며, 실제 스테이크 테스트시에는 시간에따라 시뇨리지 WTON이 계산되기 때문에 소수점자리까지 나타난다.
+위 결과는 예시이며, 실제 스테이크된 시간에따라 시뇨리지 WTON이 계산되기 때문에 소수점자리까지 나타난다.
 
 ### 보상 인출
 
-오퍼레이터1 의 커밋으로 인해 스테이크한 테스트 TON의 시뇨리지가 오퍼레이터1 과 오퍼레이터2 모두에게 발생하였다.
+발생한 시뇨리지는 `WTON` 형태로 추가 발행되어 가 오퍼레이터 계정에 쌓인다.
 
-발생한 시뇨리지는 WTON 형태로 추가 발행되어 가 오퍼레이터 계정에 쌓인다.
-
-이 예시에서는 오퍼레이터1 의 시뇨리지 받은 WTON을 인출 해보고자 한다.
+이 예시에서는 오퍼레이터1 의 시뇨리지 받은 `WTON`을 인출 해보고자 한다.
 
 먼저 인출 요청은 `staking`의 하위 명령어인 `requestWithdrawal` 을 사용한다. 510 WTON 인출을 위해 아래와 같이 입력한다.
 
