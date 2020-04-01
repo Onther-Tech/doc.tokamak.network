@@ -24,7 +24,7 @@ This section explains about `deploy` command and its parameters for deploying ro
 `EPOCH` : Length of epoch.
 Ex) If `EPOCH` is `2`, it will submit epoch every 2 blocks.
 
-Create `deploy.local.sh` by running following command.
+Create `deploy.operator1.sh` by running following command.
 
 ```bash
 plasma-evm$ cat > deploy.operator1.sh << "EOF"
@@ -51,7 +51,7 @@ make geth && build/bin/geth \
 EOF
 ```
 
-You can run `deploy.local.sh` script as following command.
+You can run `deploy.operator1.sh` script as following command.
 
 ```sh
 plasma-evm$ bash deploy.operator1.sh

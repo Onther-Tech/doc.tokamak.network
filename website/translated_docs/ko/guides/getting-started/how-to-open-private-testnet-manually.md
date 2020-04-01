@@ -25,7 +25,7 @@ sidebar_label: Setup Childchain
 `EPOCH` : 루트체인에 커밋할 자식체인의 블록갯수.
 예) `2` 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송.
 
-아래 커맨드로 `deploy.local.sh` 스크립트 파일을 생성한다.
+아래 커맨드로 `deploy.operator1.sh` 스크립트 파일을 생성한다.
 
 ```sh
 plasma-evm$ cat > deploy.operator1.sh << "EOF"
