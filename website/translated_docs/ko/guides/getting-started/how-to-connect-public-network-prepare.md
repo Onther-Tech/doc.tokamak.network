@@ -64,6 +64,6 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 `wss://rinkeby.infura.io/ws/v3/[PROJECT ID]`
 
 ![Infura node ID](assets/guides_create-infura-node.png)
-예) `wss://rinkeby.infura.io/ws/v3/c8a90eabc71448d1aaf6779752a22d26`
+예) `wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194`
 
 만약 자신이 운영하고 있는 이더리움 클라이언트가 Rinkeby Testnet에 연결되어있다면, 해당 노드의 접속 주소를 위의 방법으로 확보한 `Infura` 주소 대신 사용할 수 있다.

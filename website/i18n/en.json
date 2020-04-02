@@ -33,6 +33,10 @@
         "title": "Staking in Faraday Testnet",
         "sidebar_label": "Staking Faraday Testnet"
       },
+      "guides/getting-started/mainnet-staking": {
+        "title": "How to stake TON in Mainnet",
+        "sidebar_label": "Mainnet staking"
+      },
       "guides/getting-started/private-testnet-staking": {
         "title": "Staking Test in Priavte Testnet",
         "sidebar_label": "Private Testnet Staking test"

@@ -336,7 +336,7 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="100.0
 INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 ```
 
-위 결과는 예시이며, 실제 스테이크 테스트시에는 시간에따라 시뇨리지 WTON이 계산되기 때문에 소수점자리까지 나타난다.
+위 결과는 예시이며, 실제 스테이크 테스트시에는 시간에 따라 시뇨리지 WTON이 계산되기 때문에 소수점자리까지 나타난다.
 
 ### 보상 인출
 

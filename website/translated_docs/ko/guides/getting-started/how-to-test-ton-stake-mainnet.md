@@ -1,7 +1,7 @@
 ---
-id: faraday-testnet-staking
-title: Staking in Faraday Testnet
-sidebar_label: Staking Faraday Testnet
+id: mainnet-staking
+title: How to stake TON in Mainnet
+sidebar_label: Mainnet staking
 ---
 
 이 문서는 오퍼레이터가 TON을 스테이크 하는 방법에대해 다룬다.
@@ -27,7 +27,7 @@ sidebar_label: Staking Faraday Testnet
 
 ### 루트체인 접속 주소
 
-오퍼레이터 노드를 실행하기 위해 루트체인 접속 주소가 필요하다. 여러 방법이 있지만, `Infura`를 통해 제공되는 `Rinkeby` 테스트넷 노드 주소를 사용하는것이 간편하다. `Infura`를 통해 접속 가능한 주소를 확보한다.
+오퍼레이터 노드를 실행하기 위해 루트체인 접속 주소가 필요하다. 여러 방법이 있지만, `Infura`를 통해 제공되는 노드 주소를 사용하는것이 간편하다. `Infura`를 통해 접속 가능한 주소를 확보한다.
 
 만약, `Infura` 계정이 없다면 [infura.io](https://infura.io/) 회원가입을 통해 접속 주소(URL)를 얻을 수 있다.
 
@@ -35,10 +35,10 @@ sidebar_label: Staking Faraday Testnet
 
 그 다음, 아래와 같이 `PROJECT ID`가 조합된 `ENDPOINTS` 주소를 사용한다.
 
-`wss://rinkeby.infura.io/ws/v3/[PROJECT ID]`
+`wss://mainnet.infura.io/ws/v3/[PROJECT ID]`
 
 ![Infura node ID](assets/guides_create-infura-node.png)
-예) `wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194`
+예) `wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194`
 
 만약 자신이 운영하고 있는 이더리움 노드가 있다면, 해당 노드의 접속 주소를 `Infura` 주소 대신 사용할 수 있다.
 
@@ -59,19 +59,13 @@ $ curl -g https://dashboard-api.tokamak.network/chainids
 
 현재까지 등록된 자식체인들의 ID가 `List` 형태로 출력된다.
 
-### 테스트 TON 받기
-
-<!- TODO : update how to get test ton ->
-
-WIP
-
 ## 오퍼레이터 자식체인 설정
 
 ### Plasma-evm 실행 환경 구성
 
 Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬 환경 설정](how-to-open-private-testnet-rootchain#로컬-환경-설정) 을 참고한다.
 
-[프라이빗 테스트넷 시작](how-to-open-private-testnet-rootchain#저장소-다운로드-및-컴파일) 과정을 통해 `plasma-evm` 의 `geth` 실행이 가능하다면 다음 단계로 넘어가도 된다.
+[프라이빗 테스트넷 시작]() 과정을 통해 `plasma-evm` 의 `geth` 실행이 가능하다면 다음 단계로 넘어가도 된다.
 
 먼저, 소스코드를 다운로드 받는다.
 
@@ -134,7 +128,7 @@ Path of the secret key file: operator/keystore/UTC--2020-01-01T00-00-00.00000000
 ```bash
 plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 true 2 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -145,7 +139,7 @@ plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 true 2 \
 ```bash
 plasma-evm $ build/bin/geth --nousb init genesis.json \
             --datadir ./operator  \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194
 ```
 
 ### 스테이크 주소 설정
@@ -176,7 +170,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./opera
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking register \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -238,7 +232,7 @@ curl -X POST \
 
 ### 커미션 설정
 
-오퍼레이터가 아닌 일반 사용자들로부터 `TON`을 위임받을 수 있다. 이때, 오퍼레이터는 위임 받은 `TON` 토큰에서 발생한 시뇨리지에 대한 커미션, 즉 수수료를 받을 수 있다.
+오퍼레이터가 아닌 일반 사용자들로부터 `TON`을 위임받을 수 있다. 이때, 오퍼레이터는 위임 받은 `TON` 토큰에서 발생한 시뇨리지에 대한 커미션, 즉 수수료를 정할 수 있다.
 
 초기 루트체인 컨트랙트를 등록하거나, 오퍼레이터가 자식체인을 운영하는 도중에서도 변경 가능하다.
 
@@ -249,7 +243,7 @@ curl -X POST \
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -262,7 +256,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -303,7 +297,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTO
 ```bash
 plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -314,7 +308,7 @@ plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -325,7 +319,7 @@ plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -348,7 +342,7 @@ plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
 ```bash
 plasma-evm $ build/bin/geth --nousb \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -389,7 +383,7 @@ console에 `eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], valu
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -426,7 +420,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0
 ```bash
 plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 510.0 \
               --datadir ./operator \
-              --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+              --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
               --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
               --password pwd.pass \
               --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -449,7 +443,7 @@ b07f4d
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -475,7 +469,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="10 WT
 ```bash
 plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
               --datadir ./operator \
-              --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+              --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
               --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
               --password pwd.pass \
               --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -486,7 +480,7 @@ plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
