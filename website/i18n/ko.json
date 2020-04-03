@@ -29,7 +29,7 @@
         "title": "프라이빗 네트워크 TON 스테이크 테스트",
         "sidebar_label": "프라이빗 네트워크 테스트"
       },
-      "guides/getting-started/faraday-testnet-staking": {
+      "guides/getting-started/rinkeby-testnet-staking": {
         "title": "테스트넷 스테이크",
         "sidebar_label": "테스트넷 스테이크"
       },
