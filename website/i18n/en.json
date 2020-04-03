@@ -29,10 +29,6 @@
         "title": "Setup Rootchain in Private Testnet",
         "sidebar_label": "Setup Rootchain"
       },
-      "guides/getting-started/faraday-testnet-staking": {
-        "title": "Staking in Faraday Testnet",
-        "sidebar_label": "Staking Faraday Testnet"
-      },
       "guides/getting-started/mainnet-staking": {
         "title": "How to stake TON in Mainnet",
         "sidebar_label": "Mainnet staking"
@@ -40,6 +36,10 @@
       "guides/getting-started/private-testnet-staking": {
         "title": "Staking Test in Priavte Testnet",
         "sidebar_label": "Private Testnet Staking test"
+      },
+      "guides/getting-started/rinkeby-testnet-staking": {
+        "title": "Staking in Rinkeby Testnet",
+        "sidebar_label": "Testnet staking"
       },
       "guides/manuals/guides_manuals_how-to-make-request": {
         "title": "How to make request",
