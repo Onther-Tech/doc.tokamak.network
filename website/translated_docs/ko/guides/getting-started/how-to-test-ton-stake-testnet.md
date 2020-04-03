@@ -1,7 +1,7 @@
 ---
-id: faraday-testnet-staking
-title: Staking in Faraday Testnet
-sidebar_label: Staking Faraday Testnet
+id: rinkeby-testnet-staking
+title: Staking in Rinkeby Testnet
+sidebar_label: Testnet staking
 ---
 
 이 문서는 오퍼레이터가 TON을 스테이크 하는 방법에대해 다룬다.
@@ -411,7 +411,7 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="100.0
 INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 ```
 
-위 결과는 예시이며, 실제 스테이크된 시간에따라 시뇨리지 `WTON`이 계산되기 때문에 소수점자리까지 나타난다.
+위 결과는 예시이며, 실제 스테이크된 시간에 따라 시뇨리지 `WTON`이 계산되기 때문에 소수점자리까지 나타난다.
 
 [자식체인 실행](#자식체인-실행) 에서 오퍼레이터 자식체인만 루트체인에 커밋되 었으므로, 다른 오퍼레이터들의 스테이크 보상은 `Uncommited` 상태에 TON 잔고가 쌓이게 된다.
 
