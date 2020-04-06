@@ -65,6 +65,14 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ~$ cd go-ethereum
 ```
 
+이 문서는 master 브랜치의 [4bf7d7e315e19a2b31683935e866ae952b32ab7d](https://github.com/Onther-Tech/go-ethereum/tree/4bf7d7e315e19a2b31683935e866ae952b32ab7d) 커밋을 기준으로 작성되었다.
+
+아래 명령어를 통해 소스코드 커밋을 맞춘다.
+
+```bash
+go-ethereum $ git reset 4f497552092e2d061c8636b58737bc462ba4a3d
+```
+
 ### 루트체인 실행 스크립트 확인
 
 아래는 `onther-tech/go-ethereum`에 위치하고 있는 `run.rootchain.sh` 이다.
@@ -132,10 +140,12 @@ go-ethereum $ bash run.rootchain.sh
 
 ```bash
 go-ethereum $ cd ~
-$ git clone https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc6.0 https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm
 plasma-evm $
 ```
+
+이 문서는 master 브랜치의 [v0.0.0-rc6.0 : 16e9e0310fa180a360a870dac88e1c098489826b](https://github.com/Onther-Tech/plasma-evm/tree/16e9e0310fa180a360a870dac88e1c098489826b) 커밋에서 테스트 되었다.
 
 `Plasma-evm` 의 실행파일인 `geth` 생성을 위해 아래 명령어를 입력한다.
 

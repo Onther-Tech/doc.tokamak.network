@@ -66,6 +66,15 @@ Download `go-ethereum` to be used for rootchain.
 ~$ cd go-ethereum
 ```
 
+This document well tested [4bf7d7e315e19a2b31683935e866ae952b32ab7d](https://github.com/Onther-Tech/go-ethereum/tree/4bf7d7e315e19a2b31683935e866ae952b32ab7d) commit of master branch.
+
+As following command, set same commit hash in the source.
+
+```bash
+go-ethereum $ git reset 4f497552092e2d061c8636b58737bc462ba4a3d
+```
+
+
 ### Check Script of RootChain
 
 `run.rootchain.sh` in `onther-tech/go-ethereum` is as follows.
@@ -130,10 +139,13 @@ The operators stakes and un-stakes TON token, also they are oprating their own p
 First of all, Download `plasma-evm` repository with following below commands.
 
 ```bash
-$ git clone https://github.com/onther-tech/plasma-evm
+go-ethereum $ cd ~
+$ git clone -b v0.0.0-rc6.0 https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm
 plasma-evm $
 ```
+
+This document well tested in [v0.0.0-rc6.0 : 16e9e0310fa180a360a870dac88e1c098489826b](https://github.com/Onther-Tech/plasma-evm/tree/16e9e0310fa180a360a870dac88e1c098489826b) commit of master branch.
 
 As following command, make executable binary file `geth` of `Plasma-evm`.
 
