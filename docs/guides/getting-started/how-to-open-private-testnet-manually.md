@@ -15,19 +15,17 @@ Note that operator node will run successfully only when challenger account has a
 
 This section explains about `deploy` command and its parameters for deploying rootChain contract.
 
-`deploy` : It has 4 parameters, `name of genesis file`, `CHAINID`, `PRE-ASSET`, `EPOCH`.
+`deploy` command has 4 input parameters, `<name of genesis file>`, `<CHAINID>`, `<PRE-ASSET>`, `<EPOCH>`.
 
-`CHAINID` : Chain id set by opertaor.
-
-`PRE-ASSET` : Flag to allocate PETH to accounts in child chain at genesis or not.
-
-`EPOCH` : Length of epoch.
+- `CHAINID` : Chain id set by opertaor.
+- `PRE-ASSET` : Flag to allocate PETH to accounts in child chain at genesis or not.
+- `EPOCH` : Length of epoch.
 Ex) If `EPOCH` is `2`, it will submit epoch every 2 blocks.
 
 Create `deploy.local.sh` by running following command.
 
 ```bash
-plasma-evm$ cat > deploy.operator1.sh << "EOF"
+plasma-evm$ cat > deploy.operator.sh << "EOF"
 #!/bin/bash
 OPERATOR_KEY="bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5"
 OPERATOR="0x3cd9f729c8d882b851f8c70fb36d22b391a288cd"
@@ -80,7 +78,7 @@ After [2. Initialize](#2-initialize) for childchain, The Operator should registe
 
 After setup operator plasma chain, Operator must register an address of rootchain to Stake manager contract.
 
-Using `setManagers` sub-command of `manage-staking`, Set the stake contract addresses for running Operator1's plasma chain.
+Using `setManagers` sub-command of `manage-staking`, Set the stake contract addresses for running Operator's plasma chain.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking setManagers manager.json  \
@@ -96,7 +94,7 @@ INFO [01-01|00:00:00.000] Set address                              name=SeigMana
 INFO [01-01|00:00:00.000] Set address                              name=PowerTON          addr=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
 ```
 
-Check the information of stake contract addresses with `getManagers` sub-command of `manage-staking` in Operator1 chaindata.
+Check the information of stake contract addresses with `getManagers` sub-command of `manage-staking` in Operator chaindata.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb \
@@ -118,7 +116,7 @@ INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/hom
 
 ### 4. Register rootchain contract
 
-Make to receive stake seigniorage of TON with register an address of rootchain which setup by Operator1 to the stake manager contract.
+Make to receive stake seigniorage of TON with register an address of rootchain which setup by Operator to the stake manager contract.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking register \

@@ -6,7 +6,7 @@ sidebar_label: Setup Childchain
 
 루트체인이 구동되고 있는 환경에서 자식 체인을 실행해야 하므로, [루트체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정)을 먼저 진행한다.
 
-## 오퍼레이터1 노드 설정
+## 오퍼레이터 노드 설정
 [루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0) 수행하였음을 전제로 한다.
 
 > 루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 챌린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다.
@@ -15,17 +15,16 @@ sidebar_label: Setup Childchain
 ### 1. 루트체인 컨트랙트 배포
 
 루트체인 컨트랙트 배포 커맨드인 `deploy`에 대한 설명이다.
-
+ 
 `deploy` 커맨드의 입력인자는 <출력할 genesis 파일 이름>, <체인아이디(CHAINID)>, <프리 에셋(PRE-ASSET)>, <에폭(EPOCH)>.
 
-`CHAINID` : 오퍼레이터가 임의로 정할 수 있는 체인 고유의 숫자.
+- `CHAINID` : 오퍼레이터가 임의로 정할 수 있는 체인 고유의 숫자.
+- `PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨.
+- `EPOCH` : 루트체인에 커밋할 자식체인의 블록갯수.
 
-`PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨.
-
-`EPOCH` : 루트체인에 커밋할 자식체인의 블록갯수.
 예) `2` 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송.
 
-아래 커맨드로 `deploy.local.sh` 스크립트 파일을 생성한다.
+아래 커맨드로 `deploy.operator1.sh` 스크립트 파일을 생성한다.
 
 ```sh
 plasma-evm$ cat > deploy.operator1.sh << "EOF"
@@ -52,7 +51,7 @@ make geth && build/bin/geth \
 EOF
 ```
 
-생성된 `deploy.operator1.sh` 스크립트는 아래 명령어로 실행한다.
+생성된 `deploy.operator.sh` 스크립트는 아래 명령어로 실행한다.
 
 ```sh
 plasma-evm$ bash deploy.operator1.sh
@@ -77,7 +76,7 @@ plasma-evm$ build/bin/geth --nousb init \
 
 오퍼레이터 체인 시작을 위해 [초기화](#2-초기화) 이후, 스테이크 메니저 컨트랙트에 각 오퍼레이터의 루트체인 컨트랙트 주소를 등록 해야 한다.
 
-아래 `manage-staking`의 하위 명령어인 `setManagers` 사용하여 오퍼레이터1의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
+아래 `manage-staking`의 하위 명령어인 `setManagers` 사용하여 오퍼레이터의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb \
@@ -94,7 +93,7 @@ INFO [01-01|00:00:00.000] Set address                              name=SeigMana
 INFO [01-01|00:00:00.000] Set address                              name=PowerTON          addr=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
 ```
 
-`manage-staking` 의 하위 명령어인 `getManagers` 를 실행하여 오퍼레이터1 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.
+`manage-staking` 의 하위 명령어인 `getManagers` 를 실행하여 오퍼레이터 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb \
@@ -116,7 +115,7 @@ INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/hom
 
 ### 4. 루트체인 등록
 
-오퍼레이터1 이 설정한 플라즈마 체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.
+오퍼레이터 이 설정한 플라즈마 체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking register \
@@ -127,7 +126,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking register \
             --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
 ```
 
-오퍼레이터1 의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.
+오퍼레이터 의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
