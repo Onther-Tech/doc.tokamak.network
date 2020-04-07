@@ -16,12 +16,12 @@ sidebar_label: Testnet staking
 
 **컨트렉트 정보**
 
-    "TON" :"",
-    "WTON": "",
-    "DepositManager": "",
-    "RootChainRegistry": "",
-    "SeigManager": "",
-    "PowerTON": ""
+    "TON": "0xbe41233606e135f17de0865790e94fc26338afd3",
+    "WTON": "0xad7cf0421998e6223b0c55ed251607d8c3d2f319",
+    "DepositManager": "0x425835cfedcc2e634cc742628fb94e8ad5485464",
+    "RootChainRegistry": "0x2b7f58b8ba55d22e29b6aa638018e9bb7a038986",
+    "SeigManager": "0x6f00c47bbb6266942f2fcb0605400e02e42d65b7",
+    "PowerTON": "0x5278a437b8c53c9019f5887ab6ac8f2e458f7cb9"
 
 해당 정보는 [Tokamak Network - Dashboard api](https://dashboard-api.tokamak.network/managers)를 통해서 확인 할 수 있다.
 
@@ -31,14 +31,14 @@ sidebar_label: Testnet staking
 
 만약, `Infura` 계정이 없다면 [infura.io](https://infura.io/) 회원가입을 통해 접속 주소(URL)를 얻을 수 있다.
 
-사이트 가입이 완료된 경우, `Dashboard`의 `"CREATE NEW PROJECT"` 를 클릭하여 프로젝트를 생성한다.
+사이트 가입이 완료된 경우, `Dashboard`의 좌측 `Ethereum` 아이콘을 선택한 후  `"CREATE NEW PROJECT"` 버튼을 클릭하여 프로젝트를 생성한다.
 
 그 다음, 아래와 같이 `PROJECT ID`가 조합된 `ENDPOINTS` 주소를 사용한다.
 
 `wss://rinkeby.infura.io/ws/v3/[PROJECT ID]`
 
-![Infura node ID](assets/guides_create-infura-node.png)
-예) `wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194`
+![Infura node ID](assets/guides_create-infura-rinkeby-node.png)
+예) `wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748`
 
 만약 자신이 운영하고 있는 이더리움 노드가 있다면, 해당 노드의 접속 주소를 `Infura` 주소 대신 사용할 수 있다.
 
@@ -46,7 +46,7 @@ sidebar_label: Testnet staking
 
 토카막 네트워크는 여러 오퍼레이터가 각자 자신의 자식체인을 운영하는 구조를 가지고 있다. 이때, 루트체인 컨트랙트 배포시 사용되는 `ChainID` 가 중복 될 수 있다.
 
-이는 [`Replay Attack`]() 이 가능한 요소이다. 예를들어 오퍼레이터A 와 오퍼레이터B 모두 동일한 `ChainID`를 사용하여 루트체인을 배포 하였다면, 오퍼레이터A 자식체인에서 처리된 트랜잭션을 누구나 가져와 오퍼레이터B의 자식체인에서도 사용 할 수 있다.
+이는 [`Replay Attack`](https://medium.com/coinmonks/what-is-a-replay-attack-b0e2c3b1dec4) 이 가능한 요소이다. 예를들어 오퍼레이터A 와 오퍼레이터B 모두 동일한 `ChainID`를 사용하여 루트체인을 배포 하였다면, 오퍼레이터A 자식체인에서 처리된 트랜잭션을 누구나 가져와 오퍼레이터B의 자식체인에서도 사용 할 수 있다.
 
 이 `Replay Attack`을 방지하기 위해서는 오퍼레이터 서로가 겹치지 않은 고유의 `ChainID`를 사용해야 한다.
 
@@ -54,16 +54,16 @@ sidebar_label: Testnet staking
 
 ```baash
 $ curl -g https://dashboard-api.tokamak.network/chainids
-[16, 125]
+[1021, 7777]
 ```
 
 현재까지 등록된 자식체인들의 ID가 `List` 형태로 출력된다.
 
 ### 테스트 TON 받기
 
-<!- TODO : update how to get test ton ->
+<!-  TODO : check out faucet need ->
 
-WIP
+Rinkeby 테스트넷의 TON 을 받기 위해서는 `info@onther.io` 메일로 연락 바란다.
 
 ## 오퍼레이터 자식체인 설정
 
@@ -76,10 +76,12 @@ Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬
 먼저, 소스코드를 다운로드 받는다.
 
 ```bash
-$ git clone https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc6.0 https://github.com/onther-tech/plasma-evm
 ```
 
-소스코드 다운로드 후, `plasma-evm` 디렉토리로 이동하여 아래 `make` 명령어로 실행  가능한 `geth` 파일을 생성한다.
+> 이 문서는 master 브랜치의 [v0.0.0-rc6.0 : 16e9e0310fa180a360a870dac88e1c098489826b](https://github.com/Onther-Tech/plasma-evm/tree/16e9e0310fa180a360a870dac88e1c098489826b) 커밋을 기준으로 작성되었다.
+
+소스코드 다운로드 후, `plasma-evm` 디렉토리로 이동하여 아래 `make` 명령어로 실행 가능한 `geth` 파일을 생성한다.
 
 ```bash
 $ cd plasma-evm
@@ -114,6 +116,14 @@ Path of the secret key file: operator/keystore/UTC--2020-01-01T00-00-00.00000000
 
 `--datadir` 입력한 경로인 `plasma-evm/operator` 에 해당 키파일이 생성된다.
 
+위에서 입력한 암호를 담고 있는 파일을 생성해야 한다. 바로 위 계정생성에 사용한 암호를 `<password>` 대신 사용하여 아래 명령어를 입력한다.
+
+```bash
+plasma-evm $ echo "<password>" > pwd.pass
+```
+
+해당 키파일 이름은 `geth`의 `--password` 플래그의 인자로 `pwd.pass` 사용된다.
+
 ### 루트체인 컨트랙트 배포
 
 `plasma-evm/operator` 폴더 안에 키파일이 생성된다. 이 키파일은 오퍼레이터 노드 운영에 있어 중요한 파일이므로 보안에 유의하여야 한다.
@@ -134,7 +144,7 @@ Path of the secret key file: operator/keystore/UTC--2020-01-01T00-00-00.00000000
 ```bash
 plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 true 2 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -145,7 +155,7 @@ plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 true 2 \
 ```bash
 plasma-evm $ build/bin/geth --nousb init genesis.json \
             --datadir ./operator  \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748
 ```
 
 ### 스테이크 주소 설정
@@ -153,13 +163,13 @@ plasma-evm $ build/bin/geth --nousb init genesis.json \
 이더리움 메인넷에 배포되어 있는 컨트렉트 정보를 `json` 파일로 저장한다.
 
 ```bash
-curl -o managers.json 'https://dashboard.tokamak.network/managers'
+curl -o managers.json 'https://dashboard-api.tokamak.network/managers?network=rinkeby'
 ```
 
 아래 `manage-staking`의 하위 명령어인 `setManagers` 사용하여 오퍼레이터의 자식체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking setManagers managers.json  \
+plasma-evm $ build/bin/geth --nousb manage-staking setManagers managers.json  \
             --datadir ./operator
 ```
 
@@ -176,7 +186,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./opera
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking register \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -219,17 +229,17 @@ plasma-evm $ DESCRIPTION="This is test operator"
 아래 명령어를 실행하여 등록한 환경 변수들을 `json` 타입 데이터로 변환하고, `curl`을 사용하여 변환된 데이터를 토카막 네트워크 `dashboard` API로 전송한다.
 
 ```bash
-ROOTCHAIN_REGISTRY=$(jq -n \
+plasma-evm $ ROOTCHAIN_REGISTRY=$(jq -n \
                    --arg genesis $GENESIS \
                    --arg name "$NAME" \
                    --arg website "$WEBSITE" \
                    --arg description "$DESCRIPTION" \
                    '{genesis: $genesis, name: $name, website: $website, description: $description}')
 
-curl -X POST \
-     -H "Content-Type: application/json" \
-     --data "$ROOTCHAIN_REGISTRY" \
-     "https://dashboard-api.tokamak.network/operators"
+plasma-evm $ curl -X POST \
+              -H "Content-Type: application/json" \
+              --data "$ROOTCHAIN_REGISTRY" \
+              "https://dashboard-api.tokamak.network/operators?network=rinkeby"
 ```
 
 이미 `ChainId`가 등록되어 있는 경우 아래와 같은 응답메시지가 수신된다.
@@ -249,7 +259,7 @@ curl -X POST \
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -262,10 +272,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
-            --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748
 ```
 
 아래 예시와 같이, 오퍼레이터 계정이 보유하고 있는 잔고를 `TON Balance` 란에서 확인할 수 있다.
@@ -303,7 +310,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTO
 ```bash
 plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -314,7 +321,7 @@ plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -325,7 +332,7 @@ plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -348,11 +355,9 @@ plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
 ```bash
 plasma-evm $ build/bin/geth --nousb \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
-            --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510 \
-            --operator 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+            --operator 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --operator.password pwd.pass
 ```
 
 새로운 터미널에서 오퍼레이터의 콘솔에 접속한다.
@@ -389,7 +394,7 @@ console에 `eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], valu
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --password pwd.pass \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -426,7 +431,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0
 ```bash
 plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 510.0 \
               --datadir ./operator \
-              --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+              --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
               --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
               --password pwd.pass \
               --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -449,7 +454,7 @@ b07f4d
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -475,7 +480,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="10 WT
 ```bash
 plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
               --datadir ./operator \
-              --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+              --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
               --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
               --password pwd.pass \
               --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
@@ -486,7 +491,7 @@ plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
