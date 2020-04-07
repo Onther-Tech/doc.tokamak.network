@@ -70,8 +70,11 @@ Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬
 먼저, 소스코드를 다운로드 받는다.
 
 ```bash
-$ git clone https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc6.0 https://github.com/onther-tech/plasma-evm
 ```
+
+> 이 문서는 master 브랜치의 [v0.0.0-rc6.0 : 16e9e0310fa180a360a870dac88e1c098489826b](https://github.com/Onther-Tech/plasma-evm/tree/16e9e0310fa180a360a870dac88e1c098489826b) 커밋을 기준으로 작성되었다.
+
 
 소스코드 다운로드 후, `plasma-evm` 디렉토리로 이동하여 아래 `make` 명령어로 실행  가능한 `geth` 파일을 생성한다.
 
@@ -107,6 +110,14 @@ Path of the secret key file: operator/keystore/UTC--2020-01-01T00-00-00.00000000
 ```
 
 `--datadir` 입력한 경로인 `plasma-evm/operator` 에 해당 키파일이 생성된다.
+
+위에서 입력한 암호를 담고 있는 파일을 생성해야 한다. 바로 위 계정생성에 사용한 암호를 `<password>` 대신 사용하여 아래 명령어를 입력한다.
+
+```bash
+plasma-evm $ echo "<password>" > pwd.pass
+```
+
+해당 키파일 이름은 `geth`의 `--password` 플래그의 인자로 `pwd.pass` 사용된다.
 
 ### 루트체인 컨트랙트 배포
 
@@ -153,7 +164,7 @@ curl -o managers.json 'https://dashboard.tokamak.network/managers'
 아래 `manage-staking`의 하위 명령어인 `setManagers` 사용하여 오퍼레이터의 자식체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking setManagers managers.json  \
+plasma-evm $ build/bin/geth --nousb manage-staking setManagers managers.json  \
             --datadir ./operator
 ```
 
@@ -213,17 +224,17 @@ plasma-evm $ DESCRIPTION="This is test operator"
 아래 명령어를 실행하여 등록한 환경 변수들을 `json` 타입 데이터로 변환하고, `curl`을 사용하여 변환된 데이터를 토카막 네트워크 `dashboard` API로 전송한다.
 
 ```bash
-ROOTCHAIN_REGISTRY=$(jq -n \
+plasma-evm $ ROOTCHAIN_REGISTRY=$(jq -n \
                    --arg genesis $GENESIS \
                    --arg name "$NAME" \
                    --arg website "$WEBSITE" \
                    --arg description "$DESCRIPTION" \
                    '{genesis: $genesis, name: $name, website: $website, description: $description}')
 
-curl -X POST \
-     -H "Content-Type: application/json" \
-     --data "$ROOTCHAIN_REGISTRY" \
-     "https://dashboard-api.tokamak.network/operators"
+plasma-evm $ curl -X POST \
+              -H "Content-Type: application/json" \
+              --data "$ROOTCHAIN_REGISTRY" \
+              "https://dashboard-api.tokamak.network/operators"
 ```
 
 이미 `ChainId`가 등록되어 있는 경우 아래와 같은 응답메시지가 수신된다.
@@ -256,10 +267,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
-            --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194
 ```
 
 아래 예시와 같이, 오퍼레이터 계정이 보유하고 있는 잔고를 `TON Balance` 란에서 확인할 수 있다.
@@ -343,10 +351,8 @@ plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
 plasma-evm $ build/bin/geth --nousb \
             --datadir ./operator \
             --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
-            --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510 \
-            --operator 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --operator 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --operator.password pwd.pass
 ```
 
 새로운 터미널에서 오퍼레이터의 콘솔에 접속한다.
