@@ -16,12 +16,12 @@ sidebar_label: Mainnet staking
 
 **컨트렉트 정보**
 
-    "TON" :"",
-    "WTON": "",
-    "DepositManager": "",
-    "RootChainRegistry": "",
-    "SeigManager": "",
-    "PowerTON": ""
+    "TON": "0xe3a87a9343d262f5f11280058ae807b45aa34669",
+    "WTON": "0x57b7D965082CB6015a89AE1E7df18231A39e1a30",
+    "RootChainRegistry": "0x5C7F8e605dC7B276a501A27EBc1de756c206c333",
+    "DepositManager": "0xB993793d7a3641b8b7A099D0D2D7ae8A36F849FC",
+    "SeigManager": "0x53B9d6c605B27FFDFea787566f21F776c0197805",
+    "PowerTON": "0x21CDEDEF641Ea65F5BF7e0A0031b20647BD9d0eD"
 
 해당 정보는 [Tokamak Network - Dashboard api](https://dashboard-api.tokamak.network/managers)를 통해서 확인 할 수 있다.
 
