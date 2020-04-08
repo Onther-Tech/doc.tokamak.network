@@ -4,6 +4,10 @@ title: Setup Rootchain in Private Testnet
 sidebar_label: Setup Rootchain
 ---
 
+## 들어가는말(Intro)
+
+이 문서의 과정은 프라이빗 블록체인을 루트체인(rootchain)으로 사용하는 레이어2 블록체인의 구축 과정을 담고있다. 루트체인(rootchain)이란 플라즈마 기반의 레이어2 블록체인을 사용하는 토카막 네트워크의 베이스체인(레이어1 체인)을 뜻한다. 자세한 개념은 [플라즈마란 무엇인가](https://docs.tokamak.network/docs/ko/learn/basic/tokamak-network#플라즈마란) 참조.
+
 ## 로컬 환경 설정
 
 운영체제는 Ubuntu 18.04 환경을 기준으로 한다.
@@ -309,5 +313,9 @@ INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] PowerTON started                         PowerTON=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
 ```
+
+## 다음으로(Outro)
+
+루트체인을 설정하는 과정은 이더리움 기반의 프라이빗 블록체인을 설정하는것과 실질적으로 같다. 다만 우리는 단순히 프라이빗 블록체인 하나를 만드는데 그치지 않고, 레이어2 토카막 플라즈마를 셋업을 위한 [다양한 스마트 컨트랙트](https://docs.tokamak.network/docs/ko/learn/advanced/plasma-evm-smart-contracts)를 미리 배포해 두었다. 이어지는 [자식체인 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually)과정을 통해서 본격적으로 루트체인과 연결된 레이어2 토카막 블록체인을 구성해보자.
 
 <!-TODO : should be update based on this contents ## 설정 완료 후 구조도 [루트 체인 설정 완료후](assets/guides_private_testnet_rootchain.png)->
