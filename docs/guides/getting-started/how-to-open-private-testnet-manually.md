@@ -76,9 +76,9 @@ plasma-evm$ build/bin/geth --nousb init \
 
 After [2. Initialize](#2-initialize) for childchain, The Operator should register an address of the rootchain contract to stake manager contract.
 
-After setup operator plasma chain, Operator must register an address of rootchain to Stake manager contract.
+After setting up the operator plasma chain, operator must register a rootchain contract address to the stake manager contract.
 
-Using `setManagers` sub-command of `manage-staking`, Set the stake contract addresses for running Operator's plasma chain.
+Using `setManagers` sub-command of `manage-staking`, set the stake contract addresses to run operator's plasma chain.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking setManagers manager.json  \
@@ -94,7 +94,7 @@ INFO [01-01|00:00:00.000] Set address                              name=SeigMana
 INFO [01-01|00:00:00.000] Set address                              name=PowerTON          addr=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
 ```
 
-Check the information of stake contract addresses with `getManagers` sub-command of `manage-staking` in Operator chaindata.
+Check if the information of stake contract address is included in the operator chaindata with `getManagers` sub-command of `manage-staking`.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb \
@@ -116,7 +116,7 @@ INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/hom
 
 ### 4. Register rootchain contract
 
-Make to receive stake seigniorage of TON with register an address of rootchain which setup by Operator to the stake manager contract.
+Register the rootchain address of operator plasma chain to the stake manager contract in order to receive seigniorage.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking register \
@@ -127,7 +127,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking register \
             --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
 ```
 
-If sucessfully registered the rootchain address, output as follows.
+If rootchain address is successfully registered, you will see the following message.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -183,7 +183,7 @@ plasma-evm$ build/bin/geth --nousb init \
 
 > Use same `genesis-operator1.json` file as in [Setup Operator Node - 2. Initialize](how-to-open-private-testnet-manually#2-initialize).
 
-### 2. Run User Node
+### 2. Running User Node
 
 You must [Setup User Node - 1. Initialize](how-to-open-private-testnet-rootchain#1-initialize) before running user node. It will use same `datadir` as in the initialization.
 

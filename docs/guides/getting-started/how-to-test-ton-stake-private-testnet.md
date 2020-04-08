@@ -4,26 +4,28 @@ title: Staking Test in Priavte Testnet
 sidebar_label: Private Testnet Staking test
 ---
 
-In this document, We will cover to staking TON token on private testnet which is two operator exists.
+In this document, we will cover how to stake TON token on a private testnet where two operators exist.
 
-> For common user, Recommand to use [dashboard](https://dashboard.faraday.tokamak.network/).
+Most of this document is about how to use `staking` and `manage-staking` command in `plasma-evm`. This command is quite useful for developers and operators.
+
+> For common users, we recommend using [dashboard](https://dashboard.faraday.tokamak.network).
 
 For this testing, you should proceed [Setup Rootchain in Private Testnet](how-to-open-private-testnet-rootchain) and [Setup Childchain in Private Testnet](how-to-open-private-testnet-manually). If you did not yet, please those two steps.
 
 > The usernode is not necessary in this section by [Setup Childhcain - Setup Usernode node](how-to-open-private-testnet-manually#setup-user-node).
 
-## Operator TON stake
+## Staking TON for Operators
 
-### Mint Test TON
+### Minting Test TON
 
-For this testing, have to mint test TON to each Operator who attend `stake` If `DepositManager` contract deployed as follow [Deploy TON Stake manager contract](how-to-open-private-testnet-manually#deploy-ton-stake-manager-contract).
+If the `DepositManager` contract is deployed ([Deploy TON Stake manager contract](how-to-open-private-testnet-rootchain#deploy-ton-stake-manager-contract)), you have to mint test TON to give out to participating operators.
 
-In this private testnet, we assumed that two operators are exist. Operator1 and Operator2 use following accounts.
+In this private testnet, we assumed that two operators exist. Operator1 and operator2 use the following accounts.
 
 - Operator1 : `0x3cd9f729c8d882b851f8c70fb36d22b391a288cd`
 - Operator2 : `0x57ab89f4eabdffce316809d790d5c93a49908510`
 
-As following command, Mint 10,000 TON to each Operator.
+Execute the following command to mint 10,000 TON to each operator.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd 10000.0 \
@@ -43,9 +45,9 @@ plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x57ab89f4eabdffce316
             --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
 ```
 
-### Check TON balance
+### Checking TON balance
 
-As following command, Check test TON balance of Operator1.
+Check test TON balance of operator1 with the following command.
 
 ```bash
 plasma-evm $ build/bin/geth staking balances 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
@@ -54,7 +56,7 @@ plasma-evm $ build/bin/geth staking balances 0x3cd9f729c8d882b851f8c70fb36d22b39
             --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
 ```
 
-If minted test TON and registered the address of rootchain in manager contract are sucessful, The balance of Operator1's TON as follows.
+You will be able to see the balance of 10,000 TON as below if test TON have been minted correctly and rootchain has been registered to the manager contract.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -74,15 +76,15 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTO
 INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
-### Operator1 stake TON
+### Staking TON for Operator1
 
-To stake test `TON`, have to convert it to `WTON`. then can be staked in `depositManager` contract.
+To stake test `TON`, it has to be converted to `WTON` first. Then, it will be available for staking in `depositManager` contract.
 
 Operator can stake only `WTON` to `depositManager` for operating plasma chain.
 
 As following command, Convert 1,000 TON into WTON.
 
-> Applying 1e9(1,000,000,000 wei) unit only when the decimal point is used as the input argument of `swapFromTON` sub-command.
+> You have to use decimal points in the input argument of `swapFromTON` sub-command in order to apply 1e9(1,000,000,000 wei) unit.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
@@ -103,7 +105,7 @@ WARN [01-01|00:00:00.000] Approved to deposit TON                  amount=1000.0
 INFO [01-01|00:00:00.000] Swap from TON to WTON                    amount="1000.0 TON" from=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD tx=4d15eb…904dd6
 ```
 
-Stake 500 WTON of 1,000 WTON converted with using `stake` sub-command of `staking`.
+Stake 500 of converted 1,000 WTON using `stake`, a sub-command of `staking`.
 
 ```bash
 plasma-evm $ build/bin/geth staking stakeWTON 500.0 \
@@ -125,11 +127,11 @@ plasma-evm $ build/bin/geth staking stakeTON 500.0 \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
 
-### Setup operator2 plasma chain and set stake contract address
+### Operator2 Plasma Chain and Stake Contract Address Setup
 
 As Operator2, follow the same as setup process in [Setup Childchain in Private Testnet](how-to-open-private-testnet-manually).
 
-Use `deploy` command to deploy rootchain contracts for running operator2 plasma chain.
+Use deploy command to deploy rootchain contracts necessary for running operator2 plasma chain.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb deploy ./.pls.staking/operator2/genesis-operator2.json 103 true 2 \
@@ -140,7 +142,7 @@ plasma-evm $ build/bin/geth --nousb deploy ./.pls.staking/operator2/genesis-oper
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
 
-As following command, Initialize the plasma chain with `genesis-operator2.json` file including an address of rootchain contract deployed by Operator2.
+Use following command to initialize the plasma chain with `genesis-operator2.json` file including the address of rootchain contract deployed by operator2.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb init ./.pls.staking/operator2/genesis-operator2.json  \
@@ -148,22 +150,22 @@ plasma-evm $ build/bin/geth --nousb init ./.pls.staking/operator2/genesis-operat
             --rootchain.url ws://127.0.0.1:8546
 ```
 
-Using `setManagers` sub-command of `manage-staking`, Set the stake contract addresses for running Operator2's plasma chain.
+Using `setManagers` sub-command of `manage-staking`, set the stake contract addresses to run operator2's plasma chain.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking setManagers manager.json  \
             --datadir ./.pls.staking/operator2
 ```
 
-Check the information of stake contract addresses with `getManagers` sub-command of `manage-staking` in Operator2 chaindata.
+Check if the information of stake contract address is included in the operator2 chaindata with `getManagers` sub-command of `manage-staking`.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./.pls.staking/operator2
 ```
 
-### Register operator2 rootchain contract and Check TON balance
+### Registering Operator2 Rootchain Contract and TON Balance Check
 
-Make to receive stake seigniorage of TON with register an address of rootchain which setup by Operator2 to the stake manager contract.
+Register the rootchain address of operator2 plasma chain to the stake manager contract in order to receive seigniorage.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking register \
@@ -174,7 +176,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking register \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
 
-If sucessfully registered the rootchain address, output as follows.
+If rootchain address is successfully registered, you will see the following message.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -186,7 +188,7 @@ INFO [01-01|00:00:00.000] Registered SeigManager to RootChain      registry=0x53
 INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=f7017e…d8fa00
 ```
 
-As following command, Check test TON balance of Operator2.
+Check test TON balance of operator2 with the following command.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -197,7 +199,7 @@ plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d79
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
 
-If minted test TON and registered the address of rootchain in manager contract are sucessful, The balance of Operator2's TON as follows.
+You will be able to see the balance of 10,000 TON as below if test TON have been minted correctly and rootchain has been registered to the manager contract.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -217,15 +219,15 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTO
 INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
-### Operator2 stake TON
+### Operator2 TON Staking
 
-To stake test `TON`, have to convert it to `WTON`. then can be staked in `depositManager` contract.
+To stake test `TON`, it has to be converted to `WTON` first. Then, it will be available for staking in `depositManager` contract.
 
-Actually, Operator can stake only `WTON` to `depositManager` for operating plasma chain.
+Operators can only stake `WTON` to `depositManager` in order to operate plasma chains.
 
-As following command, Convert 1,000 TON into WTON.
+Convert 1,000 TON into WTON using the following command.
 
-> Applying 1e9(1,000,000,000 wei) unit only when the decimal point is used as the input argument of `swapFromTON` sub-command.
+> You have to use decimal points in the input argument of `swapFromTON` sub-command in order to apply 1e9(1,000,000,000 wei) unit.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
@@ -236,7 +238,7 @@ plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
 
-Stake 500 WTON of 1,000 WTON converted with using `stake` sub-command of `staking`.
+Stake 500 of converted 1,000 WTON using `stake`, a sub-command of `staking`.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
@@ -258,16 +260,15 @@ plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
 
+## Checking TON Commit Rewards and Withdrawal
 
-## Check TON commit rewards and withdrawal
+Operator client submits Tx commits to rootchain when operator proceeds with mining child chain blocks.
 
-Operator client is going to submit an Tx commit to rootchain when Operator proceeds mining child chain block.
+Seigniorage rewards of TON will be calculated by the seigniorage manager contract based on how much `WTON` are staked by each operator.
 
-At this time, Seigniorage rewards of TON will be calculated as follow how much `WTON` staked by each operator in the seigniorage manager contract.
+### Running Operator1 chain
 
-### Run Operator1 chain
-
-As following command, Run Opreator1 node in private network.
+Run opreator1 node in a private network with the following command.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb \
@@ -279,16 +280,15 @@ plasma-evm $ build/bin/geth --nousb \
             --operator 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
 ```
 
-Connect a console of Operator1's node from new terminal with following command.
+Access operator1's node console from a new terminal with the following command.
 
 ```bash
 plasma-evm $ build/bin/geth attach --datadir ./.pls.staking/operator1
 ```
 
-Run command with `geth attach` then connect javascript console of geth.
+Run `geth attach` to connect to the javascript console of geth.
 
-console에 `eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], value: 0})` 입력하여 임의의 Tx를 생성하여 블록을 진행시킨다.
-To proceed operator1's child chain,  Send dummy tx insert with `eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], value: 0})` command into console.
+Send a dummy tx to advance the blocks by running `eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], value: 0})` command in console.
 
 ```javascript
 > web3.eth.accounts
@@ -299,19 +299,19 @@ To proceed operator1's child chain,  Send dummy tx insert with `eth.sendTransact
 "0x81130ae471f536c04cc6b9901962dd5a15bb72f3924422ea051a3b0494c0fade"
 ```
 
-Send dummy transaction, with 0 ETH to itself, More than twice.
+Generate more than two dummy transactions, sending 0 ETH to operator1.
 
-> For sending commit Tx in rootchain, Have to mine blocks more than `Epoch` number which used in deploying rootchain contract by Operator.
+> The rootchain Tx will occur when there are more blocks mined than the initial `Epoch` number in the rootchain contract.
 
-The Epoch Number is `2` used in this example.
+The Epoch Number used in this example is `2`.
 
-Close console connection with sending `exit` command at console.
+Close console connection by sending `exit` command at console.
 
-### Check seigniorage
+### Checking seigniorage
 
-Operator2 stake rewards has increased as `Uncommited` status because only operator1 chain proceed at [Run Operator1 chain](#run-operator1-chain).
+Operator2 stake reward status is currently `Uncommited` because only operator1 chain has been submitted to the rootchain on Running [Running Operator1 chain](#running-operator1-chain).
 
-In new terminal, Check Operator2 rewards of staked TON with using `staking balances`, like as following.
+In a new terminal, check operator2 TON stake rewards by using `staking balances` command.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -338,7 +338,7 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="100.0
 INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 ```
 
-The above result is an example(modified). Actual seigniorage WTON number will be float, the numbers with under decimal point, because it calculated by timestamp of block in rootchain.
+The above result is an example(modified). Actual seigniorage WTON number will be float type with decimal points, because it is calculated by the timestamp of block in rootchain.
 
 ### Withdrawal rewards
 

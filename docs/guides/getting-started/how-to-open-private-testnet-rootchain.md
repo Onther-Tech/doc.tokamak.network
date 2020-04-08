@@ -57,7 +57,7 @@ Operator and challenger account to be used in root chain must have enough ether 
 
 If operator account balance is too low, it cannot submit blocks to root chain.
 
-### Download Source Code of RootChain
+### Downloading Source Code for RootChain
 
 Download `go-ethereum` to be used for rootchain.
 
@@ -73,7 +73,6 @@ As following command, set same commit hash in the source.
 ```bash
 go-ethereum $ git reset 4f497552092e2d061c8636b58737bc462ba4a3d
 ```
-
 
 ### Check Script of RootChain
 
@@ -128,15 +127,15 @@ Setup an environment for TON staking test in rootchain which it already setup in
 
 In this parts for How to using `staking` and `manage-staking` command in `plasma-evm`. these commands are quite useful for developer and Operator.
 
-Let assume that one manager and two operators for staking in TON staking private testnet.
+Let's assume that there are one manager and two operators for this TON staking test on private testnet.
 
-The manager deploy and manage contracts for TON staking.
+The manager deploys and manages contract for TON staking.
 
-The operators stakes and un-stakes TON token, also they are oprating their own plasma chain.
+The operators stake and un-stake TON token, and also operate their own plasma chain.
 
-### Download Repository and Compile
+### Downloading Source Code for Plasma-evm
 
-First of all, Download `plasma-evm` repository with following below commands.
+First, download `plasma-evm` repository with the following commands.
 
 ```bash
 go-ethereum $ cd ~
@@ -155,9 +154,9 @@ plasma-evm $ make geth
 
 If you successfully compiled, The binary file `geth` will be located in `plasma-evm/build/bin`.
 
-### Generate accounts for Manager and Operators
+### Generating Accounts for Managers and Operators
 
-Create accounts for test.
+Create test accounts.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 \
@@ -175,7 +174,7 @@ Repeat password:
 Address: {71562b71999873db5b286df957af199ec94617f7}
 ```
 
-As following command, create accounts for two operators.
+Create accounts for two operators following the command below.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb account importKey bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5 \
@@ -187,23 +186,25 @@ plasma-evm $ build/bin/geth --nousb account importKey 067394195895a82e685b000e59
             --datadir ./.pls.staking/operator2
 ```
 
-As following below command, create empty password file as `pwd.pass` for all accounts we created.
+As following command, create an empty password file as `pwd.pass` for all accounts created.
 
 ```bash
 plasma-evm $ echo "" > pwd.pass
 ```
 
-### Deploy TON Stake manager contract
+### Deploy TON Stake Manager Contract
 
-`deployManagers` sub-command is in `manage-staking`, It is for deploying or management about contracts of TON staking by manager, not operator.
+Deploy staking related contracts on a running rootchain.
 
-`deployManagers` command required two input arguments, `withdrawalDelay` and `seigPerBlock`, to run.
+`deployManagers` s is a sub-command of `manage-staking`. It is used by managers for deploying or managing TON staking contracts.
+
+`deployManagers` command requires two input arguments to run, `withdrawalDelay` and `seigPerBlock`.
 
 The description of the input parameters is as follows.
 
-`withdrawalDelay` : Unit is the number of blocks in rootchain. Send `requestWithdrawal` transaction in order to convert staked WTON to un-staked WTON then it can be processed after this number of blocks in rootchain. For example, Let assume that this parameter set as `10`. If the request withdrawal tx processed in 100 block in rootchain, It can be valid `processRequest` transaction for this request after 110 block in rootchain.
+`withdrawalDelay` : Unit is the number of blocks in rootchain. In order to unstake WTON, you need to send a `requestWithdrawal` transaction which will be processed after this number of blocks in rootchain. For example, let's assume that this parameter is set as `10`. If the request withdrawal tx was processed in block `100` in rootchain, the `processRequest` transaction will be executed in block `110` which unstakes WTON.
 
-`seigPerBlock` : The amount of maximum seigniorage of TON per block. This parameter is effect to total inflation of TON token.
+`seigPerBlock` : The maximum amount of TON seigniorage per block. This parameter affects total inflation of TON token.
 
 ```bash
 plasma-evm $ make geth && build/bin/geth --nousb manage-staking deployManagers 10 1.5 \
@@ -214,7 +215,7 @@ plasma-evm $ make geth && build/bin/geth --nousb manage-staking deployManagers 1
             --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
 ```
 
-As following above command, All contracts for TON stake will be deployed.
+The above command will deploy all contracts for staking TON.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -242,15 +243,15 @@ INFO [01-01|00:00:00.000] Set SeigManager to target cotnract       target=WTON  
 INFO [01-01|00:00:00.000] Staking manager contract deployed        TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 ```
 
-### Deploy PowerTON contract
+### Deploy PowerTON Contract
 
 Deploy `PowerTON` contract with the following command.
 
-An input argument of `deployPowerTON` sub-command is powerton round time. Set it 60 seconds for testing.
+`deployPowerTON` sub-command is the round time of powerTON. Set to 60 seconds for testing.
 
-The powerton round time refers to a cycle in which un-issued seigniorage distributed as powerton rule. For example, If it set `60s`, an operator who receives un-issued seigniorage of TON is selected every 60 seconds.
+The powerTON round time refers to the cycle in which un-issued seigniorage is distributed based on the rules. For example, If it is set to `60s`, an operator who receives un-issued seigniorage of TON is selected every 60 seconds.
 
-More information about `PowerTon` in [Here]().
+More information about powerTon is available [Here]().
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking deployPowerTON 60s \
@@ -261,11 +262,11 @@ plasma-evm $ build/bin/geth --nousb manage-staking deployPowerTON 60s \
             --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
 ```
 
-### Information of deployed contracts
+### Data of Deployed Contracts
 
-The information of deployed contracts with sub-command `deployManager` of `manage-staking` command is saved in `.pls.staking/manager` as rawdb.
+Data of deployed contracts is saved in `.pls.staking/manager` as rawdb through sub-command `deployManager` of `manage-staking` command.
 
-As following command, Extract all information about deployed stake contract in rootchain then save in `manager.json` file.
+The following command extracts all information about deployed stake contract in rootchain and saves them in `manager.json` file.
 
 ```bash
 plasam-evm $ build/bin/geth --nousb manage-staking getManagers manager.json --datadir ./.pls.staking/manager
@@ -286,15 +287,15 @@ INFO [01-01|00:00:00.000] Exported manager contracts               path=manager.
 }
 ```
 
-Total 6 contract addresses, include `PowerTON` contract address, are stored in `manager.json`.
+A total of six contract addresses, including `powerTON` contract address, is stored in `manager.json`.
 
-## Setup TON Stake
+## Setting up TON Stake Contracts
 
-### Activate PowerTON
+### Activating PowerTON
 
-Use `startPowerTON`, a sub-command of `manage-staking`, to activate `PowerTON` which has the rule of un-issued seigniorage of TON.
+`startPowerTON`, which is a sub-command of `manage-staking`, is used to activate `powerTON`, a rule of distributing un-issued seigniorage of TON.
 
-As following command, Send transaction for activating `PowerTON`.
+Send a transaction for activating `powerTON` through the following command.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking startPowerTON \
