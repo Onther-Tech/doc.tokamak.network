@@ -216,6 +216,6 @@ plasma-evm$ build/bin/geth \
 
 ## 마무리하며
 
-이제 만들어진 사용자 노드에 JSON-RPC 통신을 이용해 간단한 트랜잭션을 날려보자. 토카막 플라즈마의 경우 트랜잭션이 없다면 블록이 생기지 않는데, 이는 [토카막 네트워크의 독특한 구조](https://docs.tokamak.network/docs/ko/learn/advanced/plasma-evm-architecture)에서 기인한다. 또한 간단한 [요청가능한 컨트랙트](https://docs.tokamak.network/docs/ko/learn/advanced/examples-and-best-practices#requestablesimpletoken)를 루트체인과 자식체인 모두에 배포하고 [진입과 탈출](https://docs.tokamak.network/docs/ko/learn/basic/enter-and-exit) 트랜잭션도 만들어보자. 이러한 과정은 통해 토카막 네트워크의 강력한 상호운용성을 이해하는데 도움을 줄 것이다.
+이제 만들어진 사용자 노드에 JSON-RPC 통신을 이용해 간단한 트랜잭션을 날려보자. 토카막 플라즈마의 경우 트랜잭션이 없다면 블록이 생기지 않는데, 이는 [토카막 네트워크의 독특한 구조](https://docs.tokamak.network/docs/ko/learn/advanced/plasma-evm-architecture)에서 기인한다. 또한 간단한 [요청가능한 컨트랙트](https://docs.tokamak.network/docs/ko/learn/advanced/examples-and-best-practices#requestablesimpletoken)를 루트체인과 자식체인 모두에 배포하고 [진입과 탈출](https://docs.tokamak.network/docs/ko/learn/basic/enter-and-exit) 트랜잭션도 만들어보자. 이러한 과정은 토카막 네트워크의 강력한 상호운용성을 이해하는데 도움을 줄 것이다.
 
 <!--### 설정 완료 후 구조도![자식 체인 설정 완료 후 개요도](assets/guides_private_testnet_manually.png)-->
