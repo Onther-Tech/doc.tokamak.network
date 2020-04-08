@@ -4,10 +4,11 @@ title: Setup Childchain in Private Testnet
 sidebar_label: Setup Childchain
 ---
 
-루트체인이 구동되고 있는 환경에서 자식 체인을 실행해야 하므로, [루트체인 설정](how-to-open-private-testnet-rootchain#루트-체인-설정)을 먼저 진행한다.
+## 들어가기
+
+[루트체인 설정하기](how-to-open-private-testnet-rootchain)를 통해서 성공적으로 루트체인을 배포했다면, 이번에는 자식체인을 구동시켜보자. 자식체인이란 루트체인에 의존하는 토카막의 레이어2 블록체인을 뜻한다. 더불어 이 과정은 [루트체인 설정하기](how-to-open-private-testnet-rootchain)를 동일한 머신에서 수행 했음을 가정하고 있다.
 
 ## 오퍼레이터 노드 설정
-[루트체인 설정](how-to-open-private-testnet-rootchain#%EB%B6%80%EB%AA%A8-%EC%B2%B4%EC%9D%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0) 수행하였음을 전제로 한다.
 
 > 루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 챌린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다.
 특히, 챌린저 계정에 최소 0.5 ETH 이상이 있어야 오퍼레이터 노드가 정상적으로 실행된다.
@@ -212,5 +213,9 @@ plasma-evm$ build/bin/geth \
 ```
 
 > `syncmode`는 `full` 또는 `archive`를 입력해야 오퍼레이터 노드와 동기화 된다.
+
+## 마무리하며
+
+이제 만들어진 사용자 노드에 JSON-RPC 통신을 이용해 간단한 트랜잭션을 날려보자. 토카막 플라즈마의 경우 트랜잭션이 없다면 블록이 생기지 않는데, 이는 [토카막 네트워크의 독특한 구조](https://docs.tokamak.network/docs/ko/learn/advanced/plasma-evm-architecture)에서 기인한다. 또한 간단한 [요청가능한 컨트랙트](https://docs.tokamak.network/docs/ko/learn/advanced/examples-and-best-practices#requestablesimpletoken)를 루트체인과 자식체인 모두에 배포하고 [진입과 탈출](https://docs.tokamak.network/docs/ko/learn/basic/enter-and-exit) 트랜잭션도 만들어보자. 이러한 과정은 통해 토카막 네트워크의 강력한 상호운용성을 이해하는데 도움을 줄 것이다.
 
 <!--### 설정 완료 후 구조도![자식 체인 설정 완료 후 개요도](assets/guides_private_testnet_manually.png)-->
