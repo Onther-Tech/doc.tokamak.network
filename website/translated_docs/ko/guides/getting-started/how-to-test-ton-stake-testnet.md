@@ -246,25 +246,6 @@ plasma-evm $ curl -X POST \
 
 `{"error":"Already registered","description":"Something went wrong. Please try again or contact support."}`
 
-### 커미션 설정
-
-오퍼레이터가 아닌 일반 사용자들로부터 `TON`을 위임받을 수 있다. 이때, 오퍼레이터는 위임 받은 `TON` 토큰에서 발생한 시뇨리지에 대한 커미션, 즉 수수료를 받을 수 있다.
-
-초기 루트체인 컨트랙트를 등록하거나, 오퍼레이터가 자식체인을 운영하는 도중에서도 변경 가능하다.
-
-커미션 비율은 최소 0.01 부터 1.0 까지, 100분위로 설정 할 수 있다. 예를 들어 아래와 같이 커미션 비율을 `0.01`로 설정한 경우 위임으로 인해 발생한 시뇨리지의 1% 를 오퍼레이터 계정에 지급된다. 커미션 비율은 0 또는 최소 0.0000000000000000000000001(=1e25) 부터 1.0 까지 설정 가능하다.
-
-아래 `setCommissionRate` 명령어를 통해 오퍼레이터의 커미션을 설정할 수 있다.
-
-```bash
-plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
-            --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
-            --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
-```
-
 ### TON 잔고 확인
 
 아래 명령어를 통해, 오퍼레이터의 `TON` 잔고를 확인한다.
