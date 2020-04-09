@@ -6,7 +6,7 @@ sidebar_label: Setup Childchain
 
 ## Intro
 
-If you successfully deployed rootchain with [Setup Rootchain](how-to-open-private-testnet-rootchain), Let's run childchain in this time.
+If you successfully deployed rootchain with [Setup Rootchain](how-to-open-private-testnet-rootchain), Let's run childchain at this time.
 The childchain is layer-2 blockchain of Tokamak which depends on rootchain. In this section, Assumed that you had [Setup Rootchain](how-to-open-private-testnet-rootchain) with in the same machine.
 
 ## Setup Operator Node
@@ -221,7 +221,7 @@ plasma-evm$ build/bin/geth \
 
 ## Next
 
-Try to send a simple transaction using JSON-RPC protocol to the usernode which setup in previous step. If no transaction, The childchain, tokamak plasma, does not generate block due to [Unique structure of the Tokamak network](https://docs.tokamak.network/docs/en/learn/advanced/plasma-evm-architecture)
+Try to send a simple transaction using JSON-RPC protocol to the usernode which setup in the previous step. If no transaction, The childchain, tokamak plasma, does not generate block due to [Unique structure of the Tokamak network](https://docs.tokamak.network/docs/en/learn/advanced/plasma-evm-architecture)
 
 Also, try to deploy [requestable contract](https://docs.tokamak.network/docs/en/learn/advanced/examples-and-best-practices#requestablesimpletoken) to both the rootchain and the childchain, and send some transaction with [Enter and Exit](https://docs.tokamak.network/docs/en/learn/basic/enter-and-exit). these process will help to understand a powerful interoperability of Tokamak network.
 
