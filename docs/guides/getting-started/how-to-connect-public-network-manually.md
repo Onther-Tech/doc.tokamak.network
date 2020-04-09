@@ -23,7 +23,7 @@ plasma-evm$ build/bin/geth init \
 
 You can set location of chain data with `--datadir` flag. **This path must be same as in running plasma-evm**.
 
-### 2. Run User Node
+### 2. Running User Node
 
 You should use same `datadir` as in [1. Initialization](how-to-connect-public-testnet-manually#1-initialization).
 
