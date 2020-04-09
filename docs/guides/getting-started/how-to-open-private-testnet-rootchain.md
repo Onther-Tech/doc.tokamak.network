@@ -4,6 +4,11 @@ title: Setup Rootchain in Private Testnet
 sidebar_label: Setup Rootchain
 ---
 
+## Intro
+
+This document contains how to setup layer-2 blockchain based on private blockchain as rootchain.
+The rootchain is a basechain of Tokamak network, using layer-2 blockchain based on plasma. For more details refer to ["What is Plasma"](https://docs.tokamak.network/docs/en/learn/basic/tokamak-network#what-is-plasma)
+
 ## Setup Local Environment
 
 This Instructions are provided for Linux(Ubuntu 18.04)
@@ -312,5 +317,10 @@ INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] PowerTON started                         PowerTON=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
 ```
+
+## Next
+
+The process of setup the rootchain is practically the same as setup ethereum based private blockchain.
+However, we are not just creating a single private blockchain, but have deployed various smart contracts for setup the layer-2 Tokamak plasma. Let's construct a layer-2 Tokamak plasma which connected the rootchain through following [Setup Childchain](https://docs.tokamak.network/docs/en/guides/getting-started/how-to-open-private-testnet-manually)
 
 <!--## Architecture Diagram ![Architecture after Setup RootChain](assets/guides_private_testnet_rootchain.png)-->
