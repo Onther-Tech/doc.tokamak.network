@@ -6,8 +6,8 @@ sidebar_label: Setup Childchain
 
 ## Intro
 
-If you successfully deployed rootchain with [Setup Rootchain](how-to-open-private-testnet-rootchain), Let's run childchain at this time.
-The childchain is layer-2 blockchain of Tokamak which depends on rootchain. In this section, Assumed that you had [Setup Rootchain](how-to-open-private-testnet-rootchain) with in the same machine.
+If you successfully deployed rootchain with [Setup Rootchain](how-to-open-private-testnet-rootchain), let's run childchain at this time.
+The childchain is layer-2 blockchain of Tokamak which depends on rootchain. In this section, assumed that you had [Setup Rootchain](how-to-open-private-testnet-rootchain) with in the same machine.
 
 ## Setup Operator Node
 
