@@ -131,7 +131,7 @@ plasma-evm $ build/bin/geth staking stakeTON 500.0 \
 
 As Operator2, follow the same as setup process in [Setup Childchain in Private Testnet](how-to-open-private-testnet-manually).
 
-Use deploy command to deploy rootchain contracts necessary for running operator2 plasma chain.
+Use `deploy` command to deploy rootchain contracts necessary for running operator2 plasma chain.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb deploy ./.pls.staking/operator2/genesis-operator2.json 103 true 2 \

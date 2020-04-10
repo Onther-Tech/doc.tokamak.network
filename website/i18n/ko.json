@@ -31,7 +31,7 @@
       },
       "guides/getting-started/rinkeby-testnet-staking": {
         "title": "테스트넷 스테이크",
-        "sidebar_label": "테스트넷 스테이크"
+        "sidebar_label": "Rinkeby 테스트넷 스테이크"
       },
       "guides/getting-started/mainnet-staking": {
         "title": "메인넷 TON 스테이크",
