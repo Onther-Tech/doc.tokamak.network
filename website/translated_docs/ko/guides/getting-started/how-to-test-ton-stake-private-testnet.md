@@ -64,14 +64,14 @@ INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.stakin
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 INFO [01-01|00:00:00.000] TON Balance                              amount="10000.0 TON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] WON Balance                              amount="0 WTON"      depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WTON Balance                              amount="0 WTON"      depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Total Stake                              amount="0 WTON"
 INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
 ### 오퍼레이터1 TON 스테이킹
@@ -213,14 +213,14 @@ INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.stakin
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 INFO [01-01|00:00:00.000] TON Balance                              amount="10000.0 TON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] WON Balance                              amount="0 WTON"      depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WTON Balance                              amount="0 WTON"      depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Total Stake                              amount="500.0 WTON"
 INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
 ### 오퍼레이터2 TON 스테이킹
@@ -336,14 +336,14 @@ INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.stakin
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator2/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
-INFO [01-01|00:00:00.000] WON Balance                              amount="500.0 WTON" depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] WTON Balance                              amount="500.0 WTON" depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 INFO [01-01|00:00:00.000] Deposit                                  amount="500.0 WTON" rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON"     rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 INFO [01-01|00:00:00.000] Total Stake                              amount="1100.0 WTON"
 INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="1100.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="100.0 WTON"    rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="100.0 WTON"    rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Committed Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 ```
 
 위 결과는 예시이며, 실제 테스트시에는 경과 시간에 따라 시뇨리지 WTON이 계산되기 때문에 소수점까지 사용하는 다양한 스테이킹 보상 수치를 확인할 수 있을것이다.
@@ -394,13 +394,13 @@ INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.stakin
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] WON Balance                              amount="500.0 WTON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WTON Balance                              amount="500.0 WTON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Deposit                                  amount="500.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=1
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="510.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
+INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
 24305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="10 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                           amount="10 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
 최종 인출을 위해 `processWithdrawal` 명령어를 사용한다.
@@ -429,13 +429,13 @@ INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.stakin
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] WON Balance                              amount="1010.0 WTON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WTON Balance                              amount="1010.0 WTON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
+INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
 24305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                           amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
 ## 하위 명령어 정리
@@ -461,13 +461,13 @@ plasma-evm 의 `geth` 는 TON 스테이킹 기능을 위해 `manage-staking` 과
 
 ### `staking` 하위 명령어
 
-다음은 `staking` 명령어가 지원하는 하위 명령어들과 입련 인자(Arguments) 들에 대한 정리이다.
+다음은 `staking` 명령어가 지원하는 하위 명령어들과 입력 인자(Arguments) 들에 대한 정리이다.
 
 | Sub-command    | Argument        | Unit    | Describes   |
 |----------------|------------------|---------|--------|
-| balances   |  address*         | address       | 입력인자로 입력한 주소가 가지고 있는 `TON`, `WTON`, `staked WTON(==deposit)`, `reward WTON(==(Un)Comitted)` 등과 같은 정보를 출력한다. |
-| swapFromTON  |  amount*            | Float or Int       | `WTON`을 `TON` 으로 변환하는 트랜잭션을 전송한다. `WTON` 으로 변환할 `TON`의 수량을 입력인자로 사용한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. |
-| swapToTON  |  amount*            | Float or Int       | `TON`을 `WTON` 으로 변환하는 트랜잭션을 전송한다. `TON` 으로 변환할 `WTON`의 수량을 입력인자리 사용한다.대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다.  |
+| balances   |  address*         | address       | 입력인자로 입력한 주소가 가지고 있는 `TON`, `WTON`, `staked WTON(==deposit)`, `reward WTON(==(Un)Committed)` 등과 같은 정보를 출력한다. |
+| swapFromTON  |  amount*            | Float or Int       | `TON`을 `WTON` 으로 변환하는 트랜잭션을 전송한다. `WTON` 으로 변환할 `TON`의 수량을 입력인자로 사용한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. |
+| swapToTON  |  amount*            | Float or Int       | `WTON`을 `TON` 으로 변환하는 트랜잭션을 전송한다. `TON` 으로 변환할 `WTON`의 수량을 입력인자로 사용한다.대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다.  |
 | stakeTON   |  amount*            | Float or Int  | 이 명령어는 `swapFromTON` 과 `stakeWTON` 을 하나의 명령어로 처리. 오퍼레이터가 입력한 `amount`의 만큼의 `TON`을 스테이크된 상태(staked status)로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
 | stakeWTON  |  amount*            | Float or Int  | TON의 시뇨리지를 받기 위해 `WTON`을 스테이크 해야 한다. 오퍼레이터가 입력한 `amount`의 만큼의 `WTON`을 스테이크된 상태로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
 | requestWithdrawal  |  amount*            | Float or Int       | 스테이크된 상태의 `WTON` 을 언스테이크 상태로 전환하는 트랜잭션을 전송한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. 언스테이크 요청(i.e requestWithdrawal) 은 `depositManager` 에서 설정한 `withdrawalDelay` 만큼의 블록이 진행된 이후 처리가능한 상태가 된다. |
