@@ -76,19 +76,18 @@
 <p><a href="how-to-open-private-testnet-rootchain">루트체인 설정하기</a>를 통해서 성공적으로 루트체인을 배포했다면, 이번에는 자식체인을 구동시켜보자. 자식체인이란 루트체인에 의존하는 토카막의 레이어2 블록체인을 뜻한다. 더불어 이 과정은 <a href="how-to-open-private-testnet-rootchain">루트체인 설정하기</a>를 동일한 머신에서 수행 했음을 가정하고 있다.</p>
 <h2><a class="anchor" aria-hidden="true" id="오퍼레이터-노드-설정"></a><a href="#오퍼레이터-노드-설정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터 노드 설정</h2>
 <blockquote>
-<p>루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 챌린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다.
-특히, 챌린저 계정에 최소 0.5 ETH 이상이 있어야 오퍼레이터 노드가 정상적으로 실행된다.</p>
+<p>이 테스트 과정에서 이용되는 오퍼레이터(Operator)와 챌린저(Challenger) 계정은, 루트체인(rootchain)에 충분한 ETH 잔고(Balance)가 있어야 한다. 만약 여러분이 앞서 진행된 &lt;루트체인 설정하기&gt; 과정을 문제없이 통과했다면 이미 각 계정에 이미 충분한 ETH 잔고가 있을 것이다.</p>
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="1-루트체인-컨트랙트-배포"></a><a href="#1-루트체인-컨트랙트-배포" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. 루트체인 컨트랙트 배포</h3>
-<p>루트체인 컨트랙트 배포 커맨드인 <code>deploy</code>에 대한 설명이다.</p>
-<p><code>deploy</code> 커맨드의 입력인자는 &lt;출력할 genesis 파일 이름&gt;, &lt;체인아이디(CHAINID)&gt;, &lt;프리 에셋(PRE-ASSET)&gt;, &lt;에폭(EPOCH)&gt;.</p>
+<p>루트체인 컨트랙트(RootChain Contract)는 자식체인에서 루트체인으로 진행되는 플라즈마 블록에 관한 커밋을 관리한다.</p>
+<p>루트체인 컨트랙트 배포를 위해서는 <code>deploy</code>를 활용한다.</p>
+<p><code>deploy</code> 커맨드는 입력인자로 &lt;출력할 genesis 파일 이름&gt;, &lt;체인아이디(CHAINID)&gt;, &lt;프리 에셋(PRE-ASSET)&gt;, &lt;에폭(EPOCH)&gt;을 받는다. 각 인자의 대한 설명은 다음과 같다.</p>
 <ul>
 <li><code>CHAINID</code> : 오퍼레이터가 임의로 정할 수 있는 체인 고유의 숫자.</li>
-<li><code>PRE-ASSET</code> : <code>genesis</code> 파일에 미리 PETH를 부여할지에 대한 여부. <code>true</code> 경우 자식체인 계정들에 PETH 잔고가 생성됨.</li>
-<li><code>EPOCH</code> : 루트체인에 커밋할 자식체인의 블록갯수.</li>
+<li><code>PRE-ASSET</code> : <code>genesis</code> 파일에 미리 PETH를 부여할지에 대한 여부. <code>true</code> 경우 자식체인 계정들에 PETH 잔고가 생성된다. 테스트 환경에서는 이 값을 true로 두는 것이 좋다.</li>
+<li><code>EPOCH</code> : 루트체인에 커밋할 자식체인의 블록 단위. 예를들어 <code>2</code>로 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송한다.</li>
 </ul>
-<p>예) <code>2</code> 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송.</p>
-<p>아래 커맨드로 <code>deploy.operator1.sh</code> 스크립트 파일을 생성한다.</p>
+<p>아래 커맨드로 간단한 스크립트 파일(<code>deploy.operator1.sh</code>)을 만들어 루트체인 컨트랙트를 배포해보자.</p>
 <pre><code class="hljs css language-sh">plasma-evm$ cat &gt; deploy.operator1.sh &lt;&lt; <span class="hljs-string">"EOF"</span>
 <span class="hljs-meta">#!/bin/bash</span>
 OPERATOR_KEY=<span class="hljs-string">"bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5"</span>
@@ -112,21 +111,21 @@ make geth &amp;&amp; build/bin/geth \
 <span class="hljs-comment"># you can checkout "$geth deploy --help" for more information</span>
 EOF
 </code></pre>
-<p>생성된 <code>deploy.operator.sh</code> 스크립트는 아래 명령어로 실행한다.</p>
+<p>생성된 <code>deploy.operator.sh</code> 스크립트를 아래 명령어로 실행한다.</p>
 <pre><code class="hljs css language-sh">plasma-evm$ bash deploy.operator1.sh
 </code></pre>
-<p>스크립트를 통해 생성한 <code>genesis-operator1.json</code> 파일은 <code>plasma-evm</code> 디렉토리 내에 위치한다.</p>
+<p>스크립트 실행 이후 생성된 <code>genesis-operator1.json</code> 파일은 <code>plasma-evm</code> 디렉토리 내에 위치하게 된다(plasma-evm디렉토리에서 스크립트를 실행한 경우).</p>
 <h3><a class="anchor" aria-hidden="true" id="2-초기화"></a><a href="#2-초기화" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. 초기화</h3>
-<p>오퍼레이터 노드 실행전에 체인 데이터를 초기화 해야한다.</p>
-<p>아래 명령어를 통해 체인데이터를 초기화한다.</p>
+<p>오퍼레이터 노드 실행전에 체인 데이터를 초기화 작업이 선행되어야 한다.</p>
+<p>아래 명령어를 통해 체인데이터를 초기화시킨다.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth --nousb init \
             --datadir .pls.staking/operator1 \
             --rootchain.url ws://localhost:8546 \
             genesis-operator1.json
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="3-매니저-컨트랙트-설정"></a><a href="#3-매니저-컨트랙트-설정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. 매니저 컨트랙트 설정</h3>
-<p>오퍼레이터 체인 시작을 위해 <a href="#2-초기화">초기화</a> 이후, 스테이크 메니저 컨트랙트에 각 오퍼레이터의 루트체인 컨트랙트 주소를 등록 해야 한다.</p>
-<p>아래 <code>manage-staking</code>의 하위 명령어인 <code>setManagers</code> 사용하여 오퍼레이터의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.</p>
+<p>초기화를 진행한 이후, 루트체인 설정 과정에서 추출했던 매니저 컨트랙트 정보들을 자식체인 노드에 등록해준다.</p>
+<p>아래 <code>manage-staking</code>의 하위 명령인 <code>setManagers</code> 사용하여 오퍼레이터의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소들을 잡아준다.</p>
 <pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb \
             manage-staking setManagers manager.json  \
             --datadir ./.pls.staking/operator1
@@ -140,7 +139,7 @@ INFO [01-01|00:00:00.000] Set address                              name=RootChai
 INFO [01-01|00:00:00.000] Set address                              name=SeigManager       addr=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 INFO [01-01|00:00:00.000] Set address                              name=PowerTON          addr=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
 </code></pre>
-<p><code>manage-staking</code> 의 하위 명령어인 <code>getManagers</code> 를 실행하여 오퍼레이터 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.</p>
+<p><code>manage-staking</code>의 하위 명령어인 <code>getManagers</code>를 실행하여 오퍼레이터 체인데이터에 앞서 잡아준 스테이크 컨트랙트 주소들이 등록되어 있는지 확인한다.</p>
 <pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb \
             manage-staking getManagers \
             --datadir ./.pls.staking/operator1
@@ -158,7 +157,7 @@ INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/hom
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="4-루트체인-등록"></a><a href="#4-루트체인-등록" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. 루트체인 등록</h3>
-<p>오퍼레이터 이 설정한 플라즈마 체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.</p>
+<p><code>manage-staking</code>-<code>register</code> 명령을 통해 배포된 루트체인 컨트랙트가 스테이크 컨트랙트를 통해 시뇨리지를 받을 수 있도록 등록 작업을 진행한다.</p>
 <pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking register \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
@@ -166,7 +165,7 @@ INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/hom
             --password pwd.pass \
             --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
 </code></pre>
-<p>오퍼레이터 의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.</p>
+<p>오퍼레이터의 루트체인 컨트랙트가 스테이크 컨트랙트에 정상적으로 등록되면 아래와 같은 로그가 출력된다.</p>
 <pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
@@ -176,7 +175,7 @@ INFO [01-01|00:00:00.000] Registered SeigManager to RootChain      registry=0x53
 INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=6904c9…bc07a5
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="5-노드-실행"></a><a href="#5-노드-실행" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. 노드 실행</h3>
-<p>아래 명령어를 통해서 오퍼레이터 노드를 실행한다.</p>
+<p>이제 아래 명령어를 통해서 오퍼레이터 노드를 실행한다(드디어 노드를 올릴 수 있게 되었다!).</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth \
     --nousb \
     --datadir ./.pls.staking/operator1 \
@@ -195,13 +194,13 @@ INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x53
     --miner.gaslimit 10000000
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="사용자-노드-설정"></a><a href="#사용자-노드-설정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사용자 노드 설정</h2>
-<p>챌린저 계정 설정 없이 사용자 노드 실행이 가능하므로, 이 가이드에서는 챌린저 계정 없이 사용자 노드를 실행한다.</p>
+<p>사용자 노드는 챌린저 계정 설정 없이 실행 가능하다.</p>
 <blockquote>
-<p>챌린저 플래그에 계정을 추가 하는 경우 챌린저 역할을 수행하는 노드가 될 수 있다. 챌린저 계정은 최소한 요구되는 이더리움 잔고(기본값 0.5 ETH) 이상 되어야 하며, 이보다 낮은 경우 첼린저 플래그를 사용한 사용자 노드는 실행 되지 않는다.</p>
+<p>챌린저 플래그에 계정을 추가 하는 경우 이 노드는 챌린저 역할을 수행하는 사용자 노드가 될 수 있다. 다만 이때 사용될 챌린저 계정은 최소한 요구되는 이더리움 잔고(기본값 0.5 ETH)를 필요로 하며, 이보다 낮은 경우 챌린저 플래그를 사용한 사용자 노드는 실행 되지 않는다.</p>
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="1-초기화"></a><a href="#1-초기화" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. 초기화</h3>
 <p><code>--rootchain.url</code> 플래그 입력 인자로 루트체인 컨트랙트가 배포된 루트체인 접속 주소(URL)를 입력한다.</p>
-<p><a href="how-to-open-private-testnet-rootchain#루트-체인-설정">루트 체인 설정</a> 통해 실행중인 루트체인 접속 주소를 사용한다.</p>
+<p><a href="how-to-open-private-testnet-rootchain#루트-체인-설정">루트 체인 설정</a>을 통해 실행중인 루트체인 접속 주소를 사용한다.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth --nousb init \
             --datadir ./.pls.staking/usernode \
             --rootchain.url ws://localhost:8546 \
@@ -212,7 +211,7 @@ INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x53
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="2-사용자-노드-실행"></a><a href="#2-사용자-노드-실행" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. 사용자 노드 실행</h3>
 <p><a href="how-to-open-private-testnet-manually#1-초기화">사용자 노드 설정 - 1. 초기화</a> 과정을 반드시 진행해야 한다. 초기화와 동일한 <code>datadir</code>을 사용한다.</p>
-<p>만약, 챌린저 역할도 수행하고자 한다면 <code>--rootchain.challenger 0x0...</code> 을 입력인자로 추가해 실행한다.</p>
+<p>만약, 챌린저 역할도 수행하고자 한다면 <code>--rootchain.challenger 0x0...</code> 을 입력인자로 추가할 수 있다.</p>
 <pre><code class="hljs css language-bash">plasma-evm$ build/bin/geth \
     --nousb \
     --datadir ./.pls.staking/usernode \
@@ -238,6 +237,6 @@ INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x53
 <p><code>syncmode</code>는 <code>full</code> 또는 <code>archive</code>를 입력해야 오퍼레이터 노드와 동기화 된다.</p>
 </blockquote>
 <h2><a class="anchor" aria-hidden="true" id="마무리하며"></a><a href="#마무리하며" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>마무리하며</h2>
-<p>이제 만들어진 사용자 노드에 JSON-RPC 통신을 이용해 간단한 트랜잭션을 날려보자. 토카막 플라즈마의 경우 트랜잭션이 없다면 블록이 생기지 않는데, 이는 <a href="https://docs.tokamak.network/docs/ko/learn/advanced/plasma-evm-architecture">토카막 네트워크의 독특한 구조</a>에서 기인한다. 또한 간단한 <a href="https://docs.tokamak.network/docs/ko/learn/advanced/examples-and-best-practices#requestablesimpletoken">요청가능한 컨트랙트</a>를 루트체인과 자식체인 모두에 배포하고 <a href="https://docs.tokamak.network/docs/ko/learn/basic/enter-and-exit">진입과 탈출</a> 트랜잭션도 만들어보자. 이러한 과정은 토카막 네트워크의 강력한 상호운용성을 이해하는데 도움을 줄 것이다.</p>
+<p>여러분은 <a href="how-to-open-private-testnet-rootchain">루트체인 설정하기</a>와 이어진 자식체인 설정하기 과정을 통해 루트체인으로 사용되는 1개의 프라이빗 블록체인과, 여기에 종속된 1개의 오퍼레이터 노드, 그리고 이 오퍼레이터 노드와 연결된 1개의 유저노드를 구동시켰다. 이제 이렇게 만들어진 사용자 노드(혹은 오퍼레이터 노드)에 JSON-RPC 통신을 이용해 간단한 트랜잭션을 날려보자. 토카막 플라즈마의 경우 트랜잭션이 없다면 블록이 생기지 않는데, 이는 <a href="https://docs.tokamak.network/docs/ko/learn/advanced/plasma-evm-architecture">토카막 네트워크의 독특한 구조</a>에서 기인한다. 익숙해졌다면, 간단한 <a href="https://docs.tokamak.network/docs/ko/learn/advanced/examples-and-best-practices#requestablesimpletoken">요청가능한 토큰 컨트랙트</a>를 루트체인과 자식체인 모두에 배포하고 <a href="https://docs.tokamak.network/docs/ko/learn/basic/enter-and-exit">진입과 탈출</a> 트랜잭션을 이용해 루트체인과 자식체인간에 교환되는 토큰을 만들어보자. 이 모든 과정은 토카막 네트워크의 강력한 상호운용성(interoperability)을 이해하는데 큰 도움을 줄 것이다.</p>
 <!--### 설정 완료 후 구조도![자식 체인 설정 완료 후 개요도](/docs/assets/guides_private_testnet_manually.png)-->
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-4-8 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain"><span class="arrow-prev">← </span><span>루트체인 설정</span></a><a class="docs-next button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-puppeth"><span>Puppeth 사용하여 부모-자식체인 설정</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#들어가기">들어가기</a></li><li><a href="#오퍼레이터-노드-설정">오퍼레이터 노드 설정</a><ul class="toc-headings"><li><a href="#1-루트체인-컨트랙트-배포">1. 루트체인 컨트랙트 배포</a></li><li><a href="#2-초기화">2. 초기화</a></li><li><a href="#3-매니저-컨트랙트-설정">3. 매니저 컨트랙트 설정</a></li><li><a href="#4-루트체인-등록">4. 루트체인 등록</a></li><li><a href="#5-노드-실행">5. 노드 실행</a></li></ul></li><li><a href="#사용자-노드-설정">사용자 노드 설정</a><ul class="toc-headings"><li><a href="#1-초기화">1. 초기화</a></li><li><a href="#2-사용자-노드-실행">2. 사용자 노드 실행</a></li></ul></li><li><a href="#마무리하며">마무리하며</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-4-10 by ggs134</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain"><span class="arrow-prev">← </span><span>루트체인 설정</span></a><a class="docs-next button" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-puppeth"><span>Puppeth 사용하여 부모-자식체인 설정</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#들어가기">들어가기</a></li><li><a href="#오퍼레이터-노드-설정">오퍼레이터 노드 설정</a><ul class="toc-headings"><li><a href="#1-루트체인-컨트랙트-배포">1. 루트체인 컨트랙트 배포</a></li><li><a href="#2-초기화">2. 초기화</a></li><li><a href="#3-매니저-컨트랙트-설정">3. 매니저 컨트랙트 설정</a></li><li><a href="#4-루트체인-등록">4. 루트체인 등록</a></li><li><a href="#5-노드-실행">5. 노드 실행</a></li></ul></li><li><a href="#사용자-노드-설정">사용자 노드 설정</a><ul class="toc-headings"><li><a href="#1-초기화">1. 초기화</a></li><li><a href="#2-사용자-노드-실행">2. 사용자 노드 실행</a></li></ul></li><li><a href="#마무리하며">마무리하며</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://chat.tokamak.network/">Chat Tokemak</a><a href="https://twitter.com/ontherinfo" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
