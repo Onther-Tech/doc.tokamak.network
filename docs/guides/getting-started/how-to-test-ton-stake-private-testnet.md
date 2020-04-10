@@ -1,6 +1,6 @@
 ---
 id: private-testnet-staking
-title: Staking Test in Priavte Testnet
+title: Staking Test in Private Testnet
 sidebar_label: Private Testnet Staking test
 ---
 
@@ -12,7 +12,7 @@ Most of this document is about how to use `staking` and `manage-staking` command
 
 For this testing, you should proceed [Setup Rootchain in Private Testnet](how-to-open-private-testnet-rootchain) and [Setup Childchain in Private Testnet](how-to-open-private-testnet-manually). If you did not yet, please those two steps.
 
-> The usernode is not necessary in this section by [Setup Childhcain - Setup Usernode node](how-to-open-private-testnet-manually#setup-user-node).
+> The usernode is not necessary in this section by [Setup Childchain - Setup Usernode node](how-to-open-private-testnet-manually#setup-user-node).
 
 ## Staking TON for Operators
 
@@ -72,8 +72,8 @@ INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Total Stake                              amount="0 WTON"
 INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
 ### Staking TON for Operator1
@@ -215,8 +215,8 @@ INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Total Stake                              amount="500.0 WTON"
 INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
 ### Operator2 TON Staking
@@ -268,7 +268,7 @@ Seigniorage rewards of TON will be calculated by the seigniorage manager contrac
 
 ### Running Operator1 chain
 
-Run opreator1 node in a private network with the following command.
+Run operator1 node in a private network with the following command.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb \
@@ -334,21 +334,21 @@ INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON"     rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 INFO [01-01|00:00:00.000] Total Stake                              amount="1100.0 WTON"
 INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="1100.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="100.0 WTON"    rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="100.0 WTON"    rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Committed Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 ```
 
 The above result is an example(modified). Actual seigniorage WTON number will be float type with decimal points, because it is calculated by the timestamp of block in rootchain.
 
-### Withdrawal rewards
+### Withdrawing Rewards
 
-Both Operator1 and Operator2 are received rewards of seigniorage of staked TON due to Operator1 tx commit.
+Both operator1 and operator2 have received seigniorage rewards from staked TON after operator1's tx commit.
 
-The rewards is additionally issued in `WTON` for each operator account.
+The rewards are accumulated on each operators' account in `WTON`.
 
-In this part, we are going to withdraw `WTON` including the seigniorage of staked in Operator1.
+In this section, we are going to withdraw the seigniorage reward of operator1.
 
-For withdraw 510 WTON, use `requestWithdrawal` sub-command of `staking` for request withdrwaing as following.
+We will be using `requestWithdrawal`, a sub-command of `staking` to request withdrawal. Run the following command to request withdrawal for 510 WTON.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 510.0 \
@@ -359,7 +359,7 @@ plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 510.0 \
               --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
 ```
 
-If Operator1 has 510 WTON or more, the withdraw request is successfully processed.
+If operator1 balance is more than 510 WTON, the withdrawal request will be successfully processed.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -371,7 +371,7 @@ INFO [01-01|00:00:00.000] Withdrawal requested                     rootchain=0x1
 b07f4d
 ```
 
-And re-check Operator1 balance, you can see the amount of 510 WTON in a line start with `Pending withdrawal ..`.
+If you check operator1 balance, you can see 510 WTON in a line that starts with `Pending withdrawal ..`.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
@@ -390,12 +390,12 @@ INFO [01-01|00:00:00.000] WON Balance                              amount="500.0
 INFO [01-01|00:00:00.000] Deposit                                  amount="500.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=1
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="510.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
+INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
 24305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="10 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                           amount="10 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
-To finalize withdrawal request, use `processWithdrawal` sub-command as follow.
+To finalize withdrawal request, use `processWithdrawal` sub-command as follows.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
@@ -406,7 +406,7 @@ plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
               --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
 ```
 
-If `processWithDrawal` tx is successfully processed, then you can check 1,010 WTON in `WTON Balance` in result of using `balances`.
+When the `processWithdrawal` tx is successfully processed, you can see the balance total of 1,010 WTON in `WTON Balance`
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
@@ -421,50 +421,50 @@ INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.stakin
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] WON Balance                              amount="1010.0 WTON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WTON Balance                              amount="1010.0 WTON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
+INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
 24305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                           amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
-## Appendix sub-commands
+## List of Sub-commands
 
-Plasma-evm has a new commands `manage-staking` and  `staking` for deploying and managements of TON token staking.
+`manage-staking` and  `staking` commands have been added to plasma-evm `geth` for TON staking features.
 
-### `manage-staking` sub-commands
+### `manage-staking` Sub-commands
 
-This table is about sub-commands of `manage-staking` and its arguments.
+This table is a list of sub-commands form `manage-staking` and its arguments.
 
-| Sub-command    | Argument        | Unit    | Describes   |
+| Sub-command    | Argument        | Unit    | Description   |
 |----------------|------------------|---------|--------|
-| deployManager  | withdrawalDelay* | Int     | In order to convert a staked WTON to a un-staked WTON, have to send `requestWithdrawal` transaction. It can be processible after the number of this parameter blocks increased in rootchain.  |
-|                | seigPerBlock*    | Float   | The amount of maximum seigniorage of TON per block. This parameter is effect to total inflation of TON token. |
-| deployPowerTON | roundDuration*   | Int(Seconds) | Deploy `PowerTON` contract. this sub-command required `roundDuration`, unit is seconds. for example, If deployed `PowerTON` contract with `60s` as round duration.  an operator who receives un-issued seigniorage of TON is selected every 60 seconds.
-| startPowerTON  |  None            | -       | Activate `PowerTON` contract which deployed with `deployPowerTON` sub-command. |
-| getManagers    | filename      | string       | Extract the addressses of the stake manager contracts from the db, located with `--datadir` and save the addresses as `<filename>.json`. In most cases, the path for  `--datadir` should be specified same as `deployManager` sub-command.  |
-| setManagers  |  filename*      | string       | Read the target file (e.g `manager.json`) that contains the addresses of stake manager contracts then set addresses for running the operator's plasma chain. the path of `--datadir` should place in the operator chaindata location. |
-| register    |  None            | -       | Operator have to register own rootchain contract address to seigniroage manager contract in order to receive seigniorage TON. the path of `--datadir` should place in the operator chaindata location, which was set stake manager contracts by `setManager` sub-command.  |
-| mintTON  |  amount*            | Float or Int       | Generate test TON token as much as input argument.  |
+| deployManager  | withdrawalDelay* | Int     | In order to convert the status of WTON from staked to un-staked, you have to send `requestWithdrawal` transaction. The `requestWithdrawal` will be processible after the number of blocks set in this argument are mined in rootchain.  |
+|                | seigPerBlock*    | Float   | The amount of maximum TON seigniorage per block. This parameter affects the total inflation of TON token. |
+| deployPowerTON | roundDuration*   | Int(Seconds) | Deploys `PowerTON` contract. The unit of `roundDuration` is seconds. For example, if the round duration is set to `60s`, an operator will be selected every 60 seconds to receive unissued seigniorage of TON. |
+| startPowerTON  |  None            | -       | Activates `PowerTON` contract which is deployed with `deployPowerTON` sub-command. |
+| getManagers    | filename      | string       | Extracts the addresses of stake manager contracts from the db(located with `--datadir`) and saves the addresses as `<filename>.json`. In most cases, the path for  `--datadir` should be specified when running `deployManager` sub-command.  |
+| setManagers  |  filename*      | string       | Reads the target file (e.g. `manager.json`) that contains the addresses of stake manager contracts then sets required addresses to operate the plasma chain. the path of `--datadir` would be the operator chaindata location. |
+| register    |  None            | -       | To receive TON seigniorage, Operators have to register their rootchain contract address in the seigniorage manager contract. The path of `--datadir` should be placed in the operator chaindata location, with stake manager contracts already set up by `setManager` sub-command.  |
+| mintTON  |  amount*            | Float or Int       | Generates test TON token.  |
 
 > Input argument with "*" is required.
 
-### `staking` sub-commands
+### `staking` Sub-commands
 
-This table is about sub-commands of `staking` and its arguments.
+This table is a list of sub-commands from `staking` and its arguments.
 
-| Sub-command    | Argument        | Unit    | Describes   |
+| Sub-command    | Argument        | Unit    | Description   |
 |----------------|------------------|---------|--------|
-| balances   |  address*         | address       | Output information about how much this address has `TON`, `WTON`, `staked WTON(==deposit)`, `reward WTON(==(Un)Committed)` and others. |
-| swapFromTON  |  amount*            | Float or Int       | Send transaction for convert `WTON` to `TON` token. the argument is how much will be convert. Target address must be specified `--rootchain.sender` flag. |
-| swapToTON  |  amount*            | Float or Int       |  Send transaction that convert `TON` to `WTON` token. the argument is how much will be convert. Target address must be specified `--rootchain.sender` flag. |
-| stakeTON   |  amount*            | Float or Int  | Combined `swapFromTON` and `stakeWTON`, convert and stake at once. Send transaction that the operator's `TON` to the `stake` state with this amount. Target address must be specified `--rootchain.sender` flag. |
-| stakeWTON  |  amount*            | Float or Int  | In order to receive seigniorage of TON token, Operator have to stake `WTON`. Send transaction that the operator's `WTON` to the `stake` state with this amount. Target address must be specified `--rootchain.sender` flag. |
-| requestWithdrawal  |  amount*            | Float or Int       | Send transaction that convert  `WTON` state from `stake` to `un-stake`.  Target address must be specified `--rootchain.sender` flag. this un-stake request will be valid after the number of blocks, `withdrawalDelay` specified in `depositManager`, increased in rootchain.  |
-| processWithdrawal  | numRequests         | Int       | Finalize un-stake requests. Without using argument, it will finalize all valid requests. |
+| balances   |  address*         | address       | Prints information about the address balance of `TON`, `WTON`, `staked WTON(==deposit)`, `reward WTON(==(Un)Committed)` and others. |
+| swapFromTON  |  amount*            | Float or Int       | Send transaction to convert `TON` to `WTON` token. The argument is the amount to convert. Target address must be specified in the `--rootchain.sender` flag. |
+| swapToTON  |  amount*            | Float or Int       |  Send transaction to convert `WTON` to `TON` token. The argument is the amount to convert. Target address must be specified in the `--rootchain.sender` flag. |
+| stakeTON   |  amount*            | Float or Int  | Combines `swapFromTON` and `stakeWTON` to convert `TON` to `WTON` and stake `WTON` in a single command. Converts the input `amount` of `TON` staked status. Target address must be specified in the `--rootchain.sender` flag. |
+| stakeWTON  |  amount*            | Float or Int  | In order to receive seigniorage of TON token, operators have to stake `WTON`. This sub-command converts the state of `WTON` to staked. Target address must be specified in the `--rootchain.sender` flag. |
+| requestWithdrawal  |  amount*            | Float or Int       | Sends transaction that converts `WTON` state from `stake` to `un-stake`.  Target address must be specified in the `--rootchain.sender` flag. Un-stake request will be valid after a number of blocks are increased in rootchain, specified in `withdrawalDelay` of`depositManager`.  |
+| processWithdrawal  | numRequests         | Int       | Finalizes un-stake requests registered through `requestWithdrawal`. All valid requests will be finalized if no arguments are set. |
 
 > Input argument with "*" is required.
 
-> Not applying 1e9 unit without decimal point in `amount`.
+> 1e9 units will not be applied without a decimal point in `amount`.
