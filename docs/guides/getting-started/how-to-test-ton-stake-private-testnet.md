@@ -430,7 +430,7 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTO
 INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
-## Appendix sub-commands
+## information of sub-commands
 
 Plasma-evm has a new commands `manage-staking` and  `staking` for deploying and managements of TON token staking.
 
