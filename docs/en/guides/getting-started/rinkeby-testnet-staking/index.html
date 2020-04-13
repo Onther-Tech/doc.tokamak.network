@@ -1,0 +1,368 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Staking in Rinkeby Testnet · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="이 문서는 오퍼레이터가 TON을 스테이크 하는 방법에대해 다룬다."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Staking in Rinkeby Testnet · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="이 문서는 오퍼레이터가 TON을 스테이크 하는 방법에대해 다룬다."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/learn/basic/tokamak-network" target="_self">Docs</a></li><li class=""><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ko/guides/getting-started/rinkeby-testnet-staking">한국어</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/getting-started/how-to-test-ton-stake-testnet.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Staking in Rinkeby Testnet</h1></header><article><div><span><p>이 문서는 오퍼레이터가 TON을 스테이크 하는 방법에대해 다룬다.
+This document covers how to stake by operator with TON in rinkeby testnet.</p>
+<blockquote>
+<p>일반 사용자의 경우 <a href="https://dashboard.tokamak.network">dashboard for rinkeby</a>를 사용한다.
+For common users, we recommend using <a href="https://dashboard.tokamak.network?network=rinkeby">dashboard for rinkeby</a>.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="오퍼레이터-준비"></a><a href="#오퍼레이터-준비" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터 준비</h2>
+<h2><a class="anchor" aria-hidden="true" id="preparing-operator"></a><a href="#preparing-operator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preparing Operator</h2>
+<h3><a class="anchor" aria-hidden="true" id="ton-컨트랙트-정보"></a><a href="#ton-컨트랙트-정보" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TON 컨트랙트 정보</h3>
+<h3><a class="anchor" aria-hidden="true" id="information-ton-contracts"></a><a href="#information-ton-contracts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Information TON contracts</h3>
+<p><code>TON</code> 토큰 및 스테이크 매니저 컨트랙트 주소는 다음과 같다.
+<code>TON</code> token and stake manager contracts are like below.</p>
+<p><strong>컨트렉트 정보</strong>
+<strong>Contract Information</strong></p>
+<pre><code class="hljs">&quot;TON&quot;: &quot;0xbe41233606e135f17de0865790e94fc26338afd3&quot;,
+&quot;WTON&quot;: &quot;0xad7cf0421998e6223b0c55ed251607d8c3d2f319&quot;,
+&quot;DepositManager&quot;: &quot;0x425835cfedcc2e634cc742628fb94e8ad5485464&quot;,
+&quot;RootChainRegistry&quot;: &quot;0x2b7f58b8ba55d22e29b6aa638018e9bb7a038986&quot;,
+&quot;SeigManager&quot;: &quot;0x6f00c47bbb6266942f2fcb0605400e02e42d65b7&quot;,
+&quot;PowerTON&quot;: &quot;0x5278a437b8c53c9019f5887ab6ac8f2e458f7cb9&quot;
+</code></pre>
+<p>해당 정보는 <a href="https://dashboard-api.tokamak.network/managers">Tokamak Network - Dashboard api</a>를 통해서 확인 할 수 있다.
+You can check these addresses in <a href="https://dashboard-api.tokamak.network/managers?network=rinkeby">Tokamak Network - Dashboard api</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="루트체인-접속-주소"></a><a href="#루트체인-접속-주소" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>루트체인 접속 주소</h3>
+<h3><a class="anchor" aria-hidden="true" id="rootchain-end-point"></a><a href="#rootchain-end-point" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rootchain End-Point</h3>
+<p>오퍼레이터 노드를 실행하기 위해 루트체인 접속 주소가 필요하다. 여러 방법이 있지만, <code>Infura</code>를 통해 제공되는 <code>Rinkeby</code> 테스트넷 노드 주소를 사용하는것이 간편하다. <code>Infura</code>를 통해 접속 가능한 주소를 확보한다.
+For running operator node, need rootchain end-point address. There is simple way in <code>Rinkeby</code> testnet node address in by <code>Infura</code>.</p>
+<p>만약, <code>Infura</code> 계정이 없다면 <a href="https://infura.io/">infura.io</a> 회원가입을 통해 접속 주소(URL)를 얻을 수 있다.</p>
+<p>사이트 가입이 완료된 경우, <code>Dashboard</code>의 좌측 <code>Ethereum</code> 아이콘을 선택한 후  <code>&quot;CREATE NEW PROJECT&quot;</code> 버튼을 클릭하여 프로젝트를 생성한다.</p>
+<p>그 다음, 아래와 같이 <code>PROJECT ID</code>가 조합된 <code>ENDPOINTS</code> 주소를 사용한다.</p>
+<p><code>wss://rinkeby.infura.io/ws/v3/[PROJECT ID]</code></p>
+<p><img src="/docs/assets/guides_create-infura-rinkeby-node.png" alt="Infura node ID">
+예) <code>wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748</code></p>
+<p>만약 자신이 운영하고 있는 이더리움 노드가 있다면, 해당 노드의 접속 주소를 <code>Infura</code> 주소 대신 사용할 수 있다.</p>
+<h3><a class="anchor" aria-hidden="true" id="chainid-확인"></a><a href="#chainid-확인" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ChainID</code> 확인</h3>
+<p>토카막 네트워크는 여러 오퍼레이터가 각자 자신의 자식체인을 운영하는 구조를 가지고 있다. 이때, 루트체인 컨트랙트 배포시 사용되는 <code>ChainID</code> 가 중복 될 수 있다.</p>
+<p>이는 <a href="https://medium.com/coinmonks/what-is-a-replay-attack-b0e2c3b1dec4"><code>Replay Attack</code></a> 이 가능한 요소이다. 예를들어 오퍼레이터A 와 오퍼레이터B 모두 동일한 <code>ChainID</code>를 사용하여 루트체인을 배포 하였다면, 오퍼레이터A 자식체인에서 처리된 트랜잭션을 누구나 가져와 오퍼레이터B의 자식체인에서도 사용 할 수 있다.</p>
+<p>이 <code>Replay Attack</code>을 방지하기 위해서는 오퍼레이터 서로가 겹치지 않은 고유의 <code>ChainID</code>를 사용해야 한다.</p>
+<p>오퍼레이터는 루트체인 컨트랙트를 배포하기 전에 반드시 아래 링크에서 자신이 사용하고자 하는 <code>ChainID</code> 가 이미 등록되어 있는지 확인해야 한다.</p>
+<pre><code class="hljs css language-baash">$ curl -g https:<span class="hljs-comment">//dashboard-api.tokamak.network/chainids</span>
+[<span class="hljs-number">1021</span>, <span class="hljs-number">7777</span>]
+</code></pre>
+<p>현재까지 등록된 자식체인들의 ID가 <code>List</code> 형태로 출력된다.</p>
+<h3><a class="anchor" aria-hidden="true" id="테스트-ton-받기"></a><a href="#테스트-ton-받기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>테스트 TON 받기</h3>
+<!-  TODO : check out faucet need ->
+<p>Rinkeby 테스트넷의 TON 을 받기 위해서는 <code>info@onther.io</code> 메일로 연락 바란다.</p>
+<h2><a class="anchor" aria-hidden="true" id="오퍼레이터-자식체인-설정"></a><a href="#오퍼레이터-자식체인-설정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터 자식체인 설정</h2>
+<h3><a class="anchor" aria-hidden="true" id="plasma-evm-실행-환경-구성"></a><a href="#plasma-evm-실행-환경-구성" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Plasma-evm 실행 환경 구성</h3>
+<p>Plasma-evm 소스코드 컴파일 환경 구성은 <a href="how-to-open-private-testnet-rootchain#로컬-환경-설정">루트체인 설정 - 로컬 환경 설정</a> 을 참고한다.</p>
+<p><a href="how-to-open-private-testnet-rootchain#저장소-다운로드-및-컴파일">프라이빗 테스트넷 시작</a> 과정을 통해 <code>plasma-evm</code> 의 <code>geth</code> 실행이 가능하다면 다음 단계로 넘어가도 된다.</p>
+<p>먼저, 소스코드를 다운로드 받는다.</p>
+<pre><code class="hljs css language-bash">$ git <span class="hljs-built_in">clone</span> -b v0.0.0-rc6.0 https://github.com/onther-tech/plasma-evm
+</code></pre>
+<blockquote>
+<p>이 문서는 master 브랜치의 <a href="https://github.com/Onther-Tech/plasma-evm/tree/16e9e0310fa180a360a870dac88e1c098489826b">v0.0.0-rc6.0 : 16e9e0310fa180a360a870dac88e1c098489826b</a> 커밋을 기준으로 작성되었다.</p>
+</blockquote>
+<p>소스코드 다운로드 후, <code>plasma-evm</code> 디렉토리로 이동하여 아래 <code>make</code> 명령어로 실행 가능한 <code>geth</code> 파일을 생성한다.</p>
+<pre><code class="hljs css language-bash">$ <span class="hljs-built_in">cd</span> plasma-evm
+plasma-evm $ make geth
+</code></pre>
+<p>해당 과정이 정상적으로 종료되면, <code>plasma-evm/build/bin</code> 위치에 <code>geth</code>파일이 생성된다.</p>
+<h3><a class="anchor" aria-hidden="true" id="오퍼레이터-계정-생성"></a><a href="#오퍼레이터-계정-생성" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터 계정 생성</h3>
+<p>먼저, 아래 <code>geth account new</code> 명령어를 통해 오퍼레이터 계정을 생성한다.</p>
+<p>오퍼레이터 노드에서 사용할 키파일 암호를 <code>Password</code> 에 입력한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth account new --datadir ./operator
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+Your new account is locked with a password. Please give a password. Do not forget this password.
+Password:
+Repeat password:
+
+Your new key was generated
+
+Public address of the key:   0x57ab89f4eabdffce316809d790d5c93a49908510
+Path of the secret key file: operator/keystore/UTC--2020-01-01T00-00-00.000000000Z--57ab89f4eabdffce316809d790d5c93a49908510
+
+- You can share your public address with anyone. Others need it to interact with you.
+- You must NEVER share the secret key with anyone! The key controls access to your funds!
+- You must BACKUP your key file! Without the key, it<span class="hljs-string">'s impossible to access account funds!
+- You must REMEMBER your password! Without the password, it'</span>s impossible to decrypt the key!
+</code></pre>
+<p><code>--datadir</code> 입력한 경로인 <code>plasma-evm/operator</code> 에 해당 키파일이 생성된다.</p>
+<p>위에서 입력한 암호를 담고 있는 파일을 생성해야 한다. 바로 위 계정생성에 사용한 암호를 <code>&lt;password&gt;</code> 대신 사용하여 아래 명령어를 입력한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ <span class="hljs-built_in">echo</span> <span class="hljs-string">"&lt;password&gt;"</span> &gt; pwd.pass
+</code></pre>
+<p>해당 키파일 이름은 <code>geth</code>의 <code>--password</code> 플래그의 인자로 <code>pwd.pass</code> 사용된다.</p>
+<h3><a class="anchor" aria-hidden="true" id="루트체인-컨트랙트-배포"></a><a href="#루트체인-컨트랙트-배포" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>루트체인 컨트랙트 배포</h3>
+<p><code>plasma-evm/operator</code> 폴더 안에 키파일이 생성된다. 이 키파일은 오퍼레이터 노드 운영에 있어 중요한 파일이므로 보안에 유의하여야 한다.</p>
+<p>다음은 루트체인 컨트랙트 배포 커맨드인 <code>deploy</code>에 대한 설명이다.</p>
+<p><code>deploy</code> 커맨드의 입력인자는 &lt;출력할 genesis 파일 이름&gt;, &lt;체인아이디(CHAINID)&gt;, &lt;프리 에셋(PRE-ASSET)&gt;, &lt;에폭(EPOCH)&gt;.</p>
+<p><code>CHAINID</code> : 오퍼레이터가 임의로 정할 수 있는 체인 고유의 숫자.</p>
+<p><code>PRE-ASSET</code> : <code>genesis</code> 파일에 미리 PETH를 부여할지에 대한 여부. <code>true</code> 경우 자식체인 계정들에 PETH 잔고가 생성됨.</p>
+<p><code>EPOCH</code> : 루트체인에 커밋할 자식체인의 블록갯수.
+예) <code>2</code> 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송.</p>
+<p>아래, <code>deploy</code> 명령어를 사용하여 루트체인 컨트랙트를 루트체인에 배포한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 <span class="hljs-literal">true</span> 2 \
+            --datadir ./operator \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+</code></pre>
+<p>오퍼레이터가 배포한 <code>rootchain</code> 컨트랙트 정보가 포함되어 있는 <code>genesis.json</code> 파일을 통해 플라즈마 체인을 초기화 한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb init genesis.json \
+            --datadir ./operator  \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="스테이크-주소-설정"></a><a href="#스테이크-주소-설정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>스테이크 주소 설정</h3>
+<p>이더리움 메인넷에 배포되어 있는 컨트렉트 정보를 <code>json</code> 파일로 저장한다.</p>
+<pre><code class="hljs css language-bash">curl -o managers.json <span class="hljs-string">'https://dashboard-api.tokamak.network/managers?network=rinkeby'</span>
+</code></pre>
+<p>아래 <code>manage-staking</code>의 하위 명령어인 <code>setManagers</code> 사용하여 오퍼레이터의 자식체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking setManagers managers.json  \
+            --datadir ./operator
+</code></pre>
+<p><code>manage-staking</code> 의 하위 명령어인 <code>getManagers</code> 를 실행하여 오퍼레이터의 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./operator
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="루트체인-등록"></a><a href="#루트체인-등록" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>루트체인 등록</h3>
+<p>오퍼레이터가 설정한 자식체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking register \
+            --datadir ./operator \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+</code></pre>
+<p>오퍼레이터의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.</p>
+<pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/operator/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] Registered SeigManager to RootChain      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=a63891…0a9d9a
+INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=f7017e…d8fa00
+</code></pre>
+<p>메니저 컨트렉트에 등록된 후, <code>dashboard</code> 에도 등록을 해주어야 일반 사용자로 부터 위임을 받을 수 있다.</p>
+<p>아래 명령어를 통해 <code>dashboard.tokamak.network</code> API 서버로 등록한 <code>rootchain</code> 주소 및 정보를 전송한다.</p>
+<p>입력해야 하는 정보는 다음과 같다.</p>
+<ul>
+<li><code>GENESIS</code> : 오퍼레이터가 배포한 <code>rootchain</code> 컨트랙트 주소 및 고유 <code>chainId</code>가 포함되어 있는 <code>genesis</code> 파일.</li>
+<li><code>NAME</code> : <code>dashboard</code>에 표기될 오퍼레이터 이름.</li>
+<li><code>WEBSITE</code> : 오퍼레이터 공식 웹페이지 주소. 없다면 &quot;&quot; 사용.</li>
+<li><code>DESCRIPTION</code> : 오퍼레이터 소개란. 없다면 &quot;&quot; 사용.</li>
+</ul>
+<p>위 정보들은 <a href="https://dashboard.tokamak.network"><code>dashboard.tokamak.network</code></a> 에 등록된다.</p>
+<p>각 환경변수를 등록한다. <code>GENESIS</code> 환경변수에 <code>genesis.json</code> 파일 전체를 입력해야 하므로, 해당 파일이 위치한 <code>plasma-evm</code> 에서 아래 명령어를 실행한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ GENESIS=<span class="hljs-string">"<span class="hljs-variable">$(cat genesis.json)</span>"</span>
+plasma-evm $ NAME=<span class="hljs-string">"Operator"</span>
+plasma-evm $ WEBSITE=<span class="hljs-string">"https://tokamak.network"</span>
+plasma-evm $ DESCRIPTION=<span class="hljs-string">"This is test operator"</span>
+</code></pre>
+<p>아래 명령어를 실행하여 등록한 환경 변수들을 <code>json</code> 타입 데이터로 변환하고, <code>curl</code>을 사용하여 변환된 데이터를 토카막 네트워크 <code>dashboard</code> API로 전송한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ ROOTCHAIN_REGISTRY=$(jq -n \
+                   --arg genesis <span class="hljs-variable">$GENESIS</span> \
+                   --arg name <span class="hljs-string">"<span class="hljs-variable">$NAME</span>"</span> \
+                   --arg website <span class="hljs-string">"<span class="hljs-variable">$WEBSITE</span>"</span> \
+                   --arg description <span class="hljs-string">"<span class="hljs-variable">$DESCRIPTION</span>"</span> \
+                   <span class="hljs-string">'{genesis: $genesis, name: $name, website: $website, description: $description}'</span>)
+
+plasma-evm $ curl -X POST \
+              -H <span class="hljs-string">"Content-Type: application/json"</span> \
+              --data <span class="hljs-string">"<span class="hljs-variable">$ROOTCHAIN_REGISTRY</span>"</span> \
+              <span class="hljs-string">"https://dashboard-api.tokamak.network/operators?network=rinkeby"</span>
+</code></pre>
+<p>이미 <code>ChainId</code>가 등록되어 있는 경우 아래와 같은 응답메시지가 수신된다.</p>
+<p><code>{&quot;error&quot;:&quot;Already registered&quot;,&quot;description&quot;:&quot;Something went wrong. Please try again or contact support.&quot;}</code></p>
+<h3><a class="anchor" aria-hidden="true" id="ton-잔고-확인"></a><a href="#ton-잔고-확인" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TON 잔고 확인</h3>
+<p>아래 명령어를 통해, 오퍼레이터의 <code>TON</code> 잔고를 확인한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --datadir ./operator \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748
+</code></pre>
+<p>아래 예시와 같이, 오퍼레이터 계정이 보유하고 있는 잔고를 <code>TON Balance</code> 란에서 확인할 수 있다.</p>
+<pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.operator/geth/genesis.json
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Home/ubuntu/operator/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] TON Balance                              amount=<span class="hljs-string">"10000.0 TON"</span> depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WON Balance                              amount=<span class="hljs-string">"0 WTON"</span>      depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Deposit                                  amount=<span class="hljs-string">"0 WTON"</span>      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount=<span class="hljs-string">"0 WTON"</span>      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Total Stake                              amount=<span class="hljs-string">"500.0 WTON"</span>
+INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount=<span class="hljs-string">"0 WTON"</span>      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount=<span class="hljs-string">"0 WTON"</span>      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Comitted Stake                           amount=<span class="hljs-string">"0 WTON"</span>      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+</code></pre>
+<p>위 예시는 <code>0x3cD9F7...</code> 계정에 10,000 TON 을 보유하고 있다.</p>
+<h3><a class="anchor" aria-hidden="true" id="ton-스테이크"></a><a href="#ton-스테이크" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TON 스테이크</h3>
+<p><code>TON</code>을 스테이크 하려면 <code>WTON</code>으로 변환한 후, <code>WTON</code>을 <code>depositManager</code> 컨트랙트에 <code>stake</code> 해주어야 한다.</p>
+<p>실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이크 되는 토큰은 WTON 이다.</p>
+<p>아래 명령어를 사용하여, 1,000 TON을 WTON으로 변환한다.</p>
+<blockquote>
+<p>이때 하위 명령어인 <code>swapFromTON</code> 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.</p>
+</blockquote>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
+            --datadir ./operator \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+</code></pre>
+<p><code>staking</code>의 하위 명령어인 <code>stake</code> 를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이크 한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
+            --datadir ./operator \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+</code></pre>
+<p>또는, 위 두 과정을 <code>stakeTON</code> 명령어로 한번에 처리 할 수 있다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
+            --datadir ./operator \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="ton-커밋-보상-확인-및-인출"></a><a href="#ton-커밋-보상-확인-및-인출" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TON 커밋 보상 확인 및 인출</h2>
+<p>오퍼레이터의 클라이언트가 루트체인에서 설정된 <code>Epoch</code> 주기로 루트체인에 Tx 커밋을 제출한다.</p>
+<p>루트체인 컨트랙트에 커밋 트랜잭션이 제출되면, 매니저 컨트랙트에서 모든 오퍼레이터들의 스테이크 된 자산을 고려하여 시뇨리지가 계산된다.</p>
+<h3><a class="anchor" aria-hidden="true" id="자식체인-실행"></a><a href="#자식체인-실행" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>자식체인 실행</h3>
+<p>아래 명령어를 통해 오퍼레이터 노드를 실행 한다.</p>
+<p>네트워크 외부에서 접근 하지 못하도록 보안적으로 닫혀 있어야 안전하다. 오직 <code>usernode</code>를 설정하여 실제 사용자의 트랜잭션을 받도록 구성해야 한다.</p>
+<p><code>usernode</code> 설정에 대한 부분은 <a href="how-to-open-private-testnet-manually#사용자-노드-설정">자식체인 설정 - 사용자 노드 설정</a> 을 참고한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb \
+            --datadir ./operator \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+            --operator 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --operator.password pwd.pass
+</code></pre>
+<p>새로운 터미널에서 오퍼레이터의 콘솔에 접속한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth attach --datadir ./operator
+</code></pre>
+<p><code>geth attach</code> 를 실행하면, <code>geth</code>의 javasciprt console에 접속된다.</p>
+<p>console에 <code>eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], value: 0})</code> 입력하여 임의의 Tx를 생성하여 블록을 진행시킨다.</p>
+<pre><code class="hljs css language-javascript">&gt; web3.eth.accounts
+[<span class="hljs-string">"0x57ab89f4eabdffce316809d790d5c93a49908510"</span>]
+&gt; eth.sendTransaction({<span class="hljs-attr">from</span>: eth.accounts[<span class="hljs-number">0</span>], <span class="hljs-attr">to</span>:eth.accounts[<span class="hljs-number">0</span>], <span class="hljs-attr">value</span>: <span class="hljs-number">0</span>})
+<span class="hljs-string">"0x0a65e80eb105c448ffa1ca50430dc1d3f4b0da14ad1d4793a43ed36b6df0959c"</span>
+&gt; eth.sendTransaction({<span class="hljs-attr">from</span>: eth.accounts[<span class="hljs-number">0</span>], <span class="hljs-attr">to</span>:eth.accounts[<span class="hljs-number">0</span>], <span class="hljs-attr">value</span>: <span class="hljs-number">0</span>})
+<span class="hljs-string">"0x81130ae471f536c04cc6b9901962dd5a15bb72f3924422ea051a3b0494c0fade"</span>
+</code></pre>
+<p>위와 같이 오퍼레이터 이 자기 자신에게 0 ETH를 전송하는 더미 트랜잭션을 2회 이상 입력한다.</p>
+<blockquote>
+<p>오퍼레이터가 루트체인 컨트랙트 배포시 사용한 Epoch 숫자보다 많은 블록을 생성해야 루트체인에 Tx를 커밋하게 된다.</p>
+</blockquote>
+<p>이 예시에서 적용된 <code>Epoch</code> 은 <code>2</code> 이다.</p>
+<p><code>exit</code> 명령어로 <code>geth</code> console 접속을 종료 한다.</p>
+<h3><a class="anchor" aria-hidden="true" id="시뇨리지-확인"></a><a href="#시뇨리지-확인" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>시뇨리지 확인</h3>
+<p><code>staking balances</code> 명령어를 사용하여, 오퍼레이터가 받은 TON의 시뇨리지 발행을 확인한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --datadir ./operator \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=./operator/geth/genesis.json
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/operator/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] TON Balance                              amount=<span class="hljs-string">"9000.0 TON"</span> depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] WON Balance                              amount=<span class="hljs-string">"500.0 WTON"</span> depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Deposit                                  amount=<span class="hljs-string">"500.0 WTON"</span> rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount=<span class="hljs-string">"0 WTON"</span>     rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Total Stake                              amount=<span class="hljs-string">"1100.0 WTON"</span>
+INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount=<span class="hljs-string">"1100.0 WTON"</span>  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount=<span class="hljs-string">"100.0 WTON"</span>    rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Comitted Stake                           amount=<span class="hljs-string">"500.0 WTON"</span>  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+</code></pre>
+<p>위 결과는 예시이며, 실제 스테이크된 시간에 따라 시뇨리지 <code>WTON</code>이 계산되기 때문에 소수점자리까지 나타난다.</p>
+<p><a href="#자식체인-실행">자식체인 실행</a> 에서 오퍼레이터 자식체인만 루트체인에 커밋되 었으므로, 다른 오퍼레이터들의 스테이크 보상은 <code>Uncommited</code> 상태에 TON 잔고가 쌓이게 된다.</p>
+<h3><a class="anchor" aria-hidden="true" id="보상-인출"></a><a href="#보상-인출" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>보상 인출</h3>
+<p>발생한 시뇨리지는 <code>WTON</code> 형태로 추가 발행되어 스테이크 되어 있는 모든 오퍼레이터 계정에 쌓인다.</p>
+<p>오퍼레이터가 시뇨리지로 받은 <code>WTON</code>을 인출 해보고자 한다.</p>
+<p>먼저 인출 요청은 <code>staking</code>의 하위 명령어인 <code>requestWithdrawal</code> 을 사용한다. 510 WTON 인출을 위해 아래와 같이 입력한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 510.0 \
+              --datadir ./operator \
+              --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+              --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+              --password pwd.pass \
+              --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+</code></pre>
+<p>오퍼레이터의 WTON 잔고가 510 이상 있다면 출금 요청이 정상적으로 처리된다.</p>
+<pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/operator/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] Withdrawal requested                     rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 amount=<span class="hljs-string">"510.0 WTON"</span> tx=570061…
+b07f4d
+</code></pre>
+<p>다시 오퍼레이터의 잔고를 확인해보면 <code>Pending withdrawal ..</code> 에 요청한 510.0 WTON 가 나타난다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --datadir ./operator \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=operator/geth/genesis.json
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/operator/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] TON Balance                              amount=<span class="hljs-string">"9000.0 TON"</span> depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WON Balance                              amount=<span class="hljs-string">"500.0 WTON"</span> depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Deposit                                  amount=<span class="hljs-string">"500.0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Pending withdrawal requests              num=1
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount=<span class="hljs-string">"510.0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount=<span class="hljs-string">"0 WTON"</span>                                rootchain=0x17FB80e2E16b02faC9369334
+24305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Comitted Stake                           amount=<span class="hljs-string">"10 WTON"</span>                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+</code></pre>
+<p>최종 인출을 위해 <code>processWithdrawal</code> 명령어를 사용한다.</p>
+<p><code>requestWithdrawal</code> 이 포함된 블록</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
+              --datadir ./operator \
+              --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+              --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+              --password pwd.pass \
+              --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+</code></pre>
+<p><code>processWithDrawal</code> 이 정상적으로 처리된 경우 잔고 확인 해보면 510 증가된 1,010 WTON 확인 가능하다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --datadir ./operator \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748 \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=./operator/geth/genesis.json
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/operator/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] TON Balance                              amount=<span class="hljs-string">"9000.0 TON"</span> depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WON Balance                              amount=<span class="hljs-string">"1010.0 WTON"</span> depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Deposit                                  amount=<span class="hljs-string">"0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount=<span class="hljs-string">"0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount=<span class="hljs-string">"0 WTON"</span>                                rootchain=0x17FB80e2E16b02faC9369334
+24305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Comitted Stake                           amount=<span class="hljs-string">"0 WTON"</span>                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#오퍼레이터-준비">오퍼레이터 준비</a></li><li><a href="#preparing-operator">Preparing Operator</a><ul class="toc-headings"><li><a href="#ton-컨트랙트-정보">TON 컨트랙트 정보</a></li><li><a href="#information-ton-contracts">Information TON contracts</a></li><li><a href="#루트체인-접속-주소">루트체인 접속 주소</a></li><li><a href="#rootchain-end-point">Rootchain End-Point</a></li><li><a href="#chainid-확인"><code>ChainID</code> 확인</a></li><li><a href="#테스트-ton-받기">테스트 TON 받기</a></li></ul></li><li><a href="#오퍼레이터-자식체인-설정">오퍼레이터 자식체인 설정</a><ul class="toc-headings"><li><a href="#plasma-evm-실행-환경-구성">Plasma-evm 실행 환경 구성</a></li><li><a href="#오퍼레이터-계정-생성">오퍼레이터 계정 생성</a></li><li><a href="#루트체인-컨트랙트-배포">루트체인 컨트랙트 배포</a></li><li><a href="#스테이크-주소-설정">스테이크 주소 설정</a></li><li><a href="#루트체인-등록">루트체인 등록</a></li><li><a href="#ton-잔고-확인">TON 잔고 확인</a></li><li><a href="#ton-스테이크">TON 스테이크</a></li></ul></li><li><a href="#ton-커밋-보상-확인-및-인출">TON 커밋 보상 확인 및 인출</a><ul class="toc-headings"><li><a href="#자식체인-실행">자식체인 실행</a></li><li><a href="#시뇨리지-확인">시뇨리지 확인</a></li><li><a href="#보상-인출">보상 인출</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/onther-tech/plasma-evm" data-show-count="true" data-count-aria-label="# plasma-evm on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
