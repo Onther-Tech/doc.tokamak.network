@@ -55,16 +55,6 @@ class Footer extends React.Component {
             <h5>More</h5>
             <a href="http://blog.onther.io">Onther Blog</a>
             <a href="https://github.com/onther-tech/">Onther GitHub</a>
-            <a
-              className="github-button"
-              href={this.props.config.repoUrl}
-              data-icon="octicon-star"
-              data-count-href="/onther-tech/plasma-evm"
-              data-show-count="true"
-              data-count-aria-label="# plasma-evm on GitHub"
-              aria-label="Star this project on GitHub">
-              Star
-            </a>
             {this.props.config.twitterUsername && (
               <div className="social">
                 <a
