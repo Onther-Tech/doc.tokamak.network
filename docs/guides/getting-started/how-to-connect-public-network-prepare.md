@@ -68,6 +68,6 @@ Configure `RootChain` address as below.
 
 ![Infura node ID](assets/guides_create-infura-node.png)
 
-Ex) `wss://rinkeby.infura.io/ws/v3/c8a90eabc71448d1aaf6779752a22d26`
+Ex) `wss://rinkeby.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194`
 
 If you already have your own node of Rinkeby testnet, you can use it instead of `Infura`.
