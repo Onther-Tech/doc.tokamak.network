@@ -1,6 +1,6 @@
 ---
 id: private-testnet-staking
-title: Staking Test in Priavte Testnet
+title: Staking Test in Private Testnet
 sidebar_label: Private Testnet Staking test
 ---
 

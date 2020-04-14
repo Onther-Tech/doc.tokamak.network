@@ -64,7 +64,7 @@
         "ids": [
           "guides/getting-started/private-testnet-staking",
           "guides/getting-started/rinkeby-testnet-staking",
-          "guides/getting-started/mainnet-staking"
+          "guides/getting-started/mainnet-mton-staking"
         ]
       }
     ]

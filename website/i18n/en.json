@@ -29,9 +29,9 @@
         "title": "Setup Rootchain in Private Testnet",
         "sidebar_label": "Setup Rootchain"
       },
-      "guides/getting-started/mainnet-staking": {
-        "title": "How to stake TON in Mainnet",
-        "sidebar_label": "Mainnet staking"
+      "guides/getting-started/mainnet-mton-staking": {
+        "title": "How to stake MTON in Mainnet",
+        "sidebar_label": "Mainnet MTON staking"
       },
       "guides/getting-started/private-testnet-staking": {
         "title": "Staking Test in Priavte Testnet",

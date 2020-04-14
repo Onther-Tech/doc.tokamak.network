@@ -1,7 +1,7 @@
 ---
-id: mainnet-staking
-title: How to stake TON in Mainnet
-sidebar_label: Mainnet staking
+id: mainnet-mton-staking
+title: How to stake MTON in Mainnet
+sidebar_label: Mainnet MTON staking
 ---
 
 WIP

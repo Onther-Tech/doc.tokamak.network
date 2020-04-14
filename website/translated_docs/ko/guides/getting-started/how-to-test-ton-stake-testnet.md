@@ -456,7 +456,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="10 WT
 
 최종 인출을 위해 `processWithdrawal` 명령어를 사용한다.
 
-`requestWithdrawal` 이 포함된 블록
+`requestWithdrawal` 이 포함된 블록부터 10 블록이 경과된 시점에 `processWithdrawal` 트랜잭션이 가능하다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking processWithdrawal \

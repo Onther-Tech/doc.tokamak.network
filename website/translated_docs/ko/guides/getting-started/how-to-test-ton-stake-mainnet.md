@@ -1,18 +1,20 @@
 ---
-id: mainnet-staking
-title: How to stake TON in Mainnet
-sidebar_label: Mainnet staking
+id: mainnet-mton-staking
+title: How to stake MTON in Mainnet
+sidebar_label: Mainnet MTON staking
 ---
 
-이 문서는 오퍼레이터가 TON을 스테이크 하는 방법에대해 다룬다.
+이 문서는 오퍼레이터가 MTON을 스테이크 하는 방법에대해 다룬다.
+
+MTON 이란, 토카막 네트워크 마켓팅을 위해 이더리움 메인넷에 배포된 토큰이다. 차후 공식 TON 토큰으로 전환이 가능하다.
 
 > 일반 사용자의 경우 [dashboard](https://dashboard.tokamak.network)를 사용한다.
 
 ## 오퍼레이터 준비
 
-### TON 컨트랙트 정보
+### MTON 컨트랙트 정보
 
-`TON` 토큰 및 스테이크 매니저 컨트랙트 주소는 다음과 같다.
+`MTON` 토큰 및 스테이크 매니저 컨트랙트 주소는 다음과 같다.
 
 **컨트렉트 정보**
 
@@ -22,6 +24,8 @@ sidebar_label: Mainnet staking
     "DepositManager": "0xB993793d7a3641b8b7A099D0D2D7ae8A36F849FC",
     "SeigManager": "0x53B9d6c605B27FFDFea787566f21F776c0197805",
     "PowerTON": "0x21CDEDEF641Ea65F5BF7e0A0031b20647BD9d0eD"
+
+> 위 `TON` 토큰 주소는 `MTON` 토큰의 주소이다. 이후 CLI 에서 출력되는 `TON`에 대한 정보도 모두 `MTON`이다. 그리고 `MTON`에서 전환된 `WTON`은 차후에 발행될 `TON`에서 변환되는 `WTON` 과 다르며 호환되지 않는다.
 
 해당 정보는 [Tokamak Network - Dashboard api](https://dashboard-api.tokamak.network/managers)를 통해서 확인 할 수 있다.
 
@@ -65,7 +69,7 @@ $ curl -g https://dashboard-api.tokamak.network/chainids
 
 Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬 환경 설정](how-to-open-private-testnet-rootchain#로컬-환경-설정) 을 참고한다.
 
-[프라이빗 테스트넷 시작]() 과정을 통해 `plasma-evm` 의 `geth` 실행이 가능하다면 다음 단계로 넘어가도 된다.
+[프라이빗 테스트넷 시작](how-to-open-private-testnet-manually) 과정을 통해 `plasma-evm` 의 `geth` 실행이 가능하다면 다음 단계로 넘어가도 된다.
 
 먼저, 소스코드를 다운로드 받는다.
 
@@ -74,7 +78,6 @@ $ git clone -b v0.0.0-rc6.0 https://github.com/onther-tech/plasma-evm
 ```
 
 > 이 문서는 master 브랜치의 [v0.0.0-rc6.0 : 16e9e0310fa180a360a870dac88e1c098489826b](https://github.com/Onther-Tech/plasma-evm/tree/16e9e0310fa180a360a870dac88e1c098489826b) 커밋을 기준으로 작성되었다.
-
 
 소스코드 다운로드 후, `plasma-evm` 디렉토리로 이동하여 아래 `make` 명령어로 실행  가능한 `geth` 파일을 생성한다.
 
@@ -125,14 +128,13 @@ plasma-evm $ echo "<password>" > pwd.pass
 
 다음은 루트체인 컨트랙트 배포 커맨드인 `deploy`에 대한 설명이다.
 
-`deploy` 커맨드의 입력인자는 <출력할 genesis 파일 이름>, <체인아이디(CHAINID)>, <프리 에셋(PRE-ASSET)>, <에폭(EPOCH)>.
+`deploy` 커맨드는 입력인자로 <출력할 genesis 파일 이름>, <체인아이디(CHAINID)>, <프리 에셋(PRE-ASSET)>, <에폭(EPOCH)>을 받는다. 각 인자의 대한 설명은 다음과 같다..
 
-`CHAINID` : 오퍼레이터가 임의로 정할 수 있는 체인 고유의 숫자.
+- `CHAINID` : 오퍼레이터가 임의로 정할 수 있는 체인 고유의 숫자.
 
-`PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨.
+- `PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨.
 
-`EPOCH` : 루트체인에 커밋할 자식체인의 블록갯수.
-예) `2` 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송.
+- `EPOCH` : 루트체인에 커밋할 자식체인의 블록 단위. 예를들어 `2`로 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송한다.
 
 아래, `deploy` 명령어를 사용하여 루트체인 컨트랙트를 루트체인에 배포한다.
 
@@ -241,9 +243,9 @@ plasma-evm $ curl -X POST \
 
 `{"error":"Already registered","description":"Something went wrong. Please try again or contact support."}`
 
-### TON 잔고 확인
+### MTON 잔고 확인
 
-아래 명령어를 통해, 오퍼레이터의 `TON` 잔고를 확인한다.
+아래 명령어를 통해, 오퍼레이터의 `MTON` 잔고를 확인한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -251,7 +253,7 @@ plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d79
             --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194
 ```
 
-아래 예시와 같이, 오퍼레이터 계정이 보유하고 있는 잔고를 `TON Balance` 란에서 확인할 수 있다.
+아래 예시와 같이, 오퍼레이터 계정이 보유하고 있는 잔고를 `MTON Balance` 란에서 확인할 수 있다.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -271,15 +273,15 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTO
 INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 ```
 
-위 예시는 `0x3cD9F7...` 계정에 10,000 TON 을 보유하고 있다.
+위 예시는 `0x3cD9F7...` 계정에 10,000 MTON 을 보유하고 있다.
 
-### TON 스테이크
+### MTON 스테이크
 
-`TON`을 스테이크 하려면 `WTON`으로 변환한 후, `WTON`을 `depositManager` 컨트랙트에 `stake` 해주어야 한다.
+`MTON`을 스테이크 하려면 `WTON`으로 변환한 후, `WTON`을 `depositManager` 컨트랙트에 `stake` 해주어야 한다.
 
 실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이크 되는 토큰은 WTON 이다.
 
-아래 명령어를 사용하여, 1,000 TON을 WTON으로 변환한다.
+아래 명령어를 사용하여, 1,000 MTON을 WTON으로 변환한다.
 
 > 이때 하위 명령어인 `swapFromTON` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
 
@@ -314,7 +316,7 @@ plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
             --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
 ```
 
-## TON 커밋 보상 확인 및 인출
+## MTON 커밋 보상 확인 및 인출
 
 오퍼레이터의 클라이언트가 루트체인에서 설정된 `Epoch` 주기로 루트체인에 Tx 커밋을 제출한다.
 
@@ -365,7 +367,7 @@ console에 `eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], valu
 
 ### 시뇨리지 확인
 
-`staking balances` 명령어를 사용하여, 오퍼레이터가 받은 TON의 시뇨리지 발행을 확인한다.
+`staking balances` 명령어를 사용하여, 오퍼레이터가 받은 MTON의 시뇨리지 발행을 확인한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
@@ -394,7 +396,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0
 
 위 결과는 예시이며, 실제 스테이크된 시간에 따라 시뇨리지 `WTON`이 계산되기 때문에 소수점자리까지 나타난다.
 
-[자식체인 실행](#자식체인-실행) 에서 오퍼레이터 자식체인만 루트체인에 커밋되 었으므로, 다른 오퍼레이터들의 스테이크 보상은 `Uncommited` 상태에 TON 잔고가 쌓이게 된다.
+[자식체인 실행](#자식체인-실행) 에서 오퍼레이터 자식체인만 루트체인에 커밋되 었으므로, 다른 오퍼레이터들의 스테이크 보상은 `Uncommited` 상태에 MTON 잔고가 쌓이게 된다.
 
 ### 보상 인출
 
@@ -451,7 +453,7 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="10 WT
 
 최종 인출을 위해 `processWithdrawal` 명령어를 사용한다.
 
-`requestWithdrawal` 이 포함된 블록
+`requestWithdrawal` 이 포함된 블록부터 10 블록이 경과된 시점에 `processWithdrawal` 트랜잭션 전송이 가능하다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking processWithdrawal \

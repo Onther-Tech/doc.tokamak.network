@@ -33,9 +33,9 @@
         "title": "테스트넷 스테이크",
         "sidebar_label": "Rinkeby 테스트넷 스테이크"
       },
-      "guides/getting-started/mainnet-staking": {
-        "title": "메인넷 TON 스테이크",
-        "sidebar_label": "메인넷 스테이크"
+      "guides/getting-started/mainnet-mton-staking": {
+        "title": "메인넷 MTON 스테이크",
+        "sidebar_label": "메인넷 MTON 스테이크"
       },
       "guides/getting-started/how-to-open-private-testnet-rootchain": {
         "title": "프라이빗 테스트넷 루트체인 설정",
