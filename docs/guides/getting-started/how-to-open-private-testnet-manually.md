@@ -39,6 +39,8 @@ You can change stamina parameters by adding flags as follows. If not using stami
 
 The stamina feature is provided as a pre-compiled contract in childchain. The stamina contract address is `0x000000000000000000000000000000000000dead` in every tokamak plasma childchain.
 
+You can check [this](https://github.com/Onther-Tech/stamina) for more details about the stamina contract.
+
 Create `deploy.operator1.sh` by running following command.
 
 ```bash

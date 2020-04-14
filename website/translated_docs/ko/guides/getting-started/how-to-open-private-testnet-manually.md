@@ -37,6 +37,8 @@ sidebar_label: Setup Childchain
 
 스태미나 기능은 자식체인의 프리컴파일(Pre-compile)된 컨트랙트로 제공된다. 모든 토카막 자식체인의 스태미나 컨트렉트 주소는 `0x000000000000000000000000000000000000dead` 로 고정되어 있다.
 
+스태미나 컨트렉트에 대한 자세한 사항은 깃허브 저장소 [stamina](https://github.com/Onther-Tech/stamina)를 참고한다.
+
 아래 커맨드로 간단한 스크립트 파일(`deploy.operator1.sh`)을 만들어 루트체인 컨트랙트를 배포해보자.
 
 ```sh
