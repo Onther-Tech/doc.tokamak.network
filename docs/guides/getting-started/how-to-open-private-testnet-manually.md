@@ -24,13 +24,27 @@ This section explains about `deploy` command and its parameters for deploying ro
 
 - `CHAINID` : Chain id set by opertaor.
 - `PRE-ASSET` : Flag to allocate PETH to accounts in child chain at genesis or not.
-- `EPOCH` : Length of epoch.
-Ex) If `EPOCH` is `2`, it will submit epoch every 2 blocks.
+- `EPOCH` : Length of epoch. If `EPOCH` is `2`, childchain will submit epoch every 2 blocks.
+
+Tokamak Plasma's childchain provides `Stamina`, a fee payment method for childchain. For more details refer to [`Stamina`](https://docs.tokamak.network/docs/en/learn/economics/tx-fee#stamina).
+
+You can change stamina parameters by adding flags as follows. If not using stamina flag, set default parameters.
+
+- `--stamina.operatoramount` : Operator stamina amount at genesis block in ETH (default: 1)
+- `--stamina.mindeposit` : Minimum deposit amount in ETH (default: 0.5)
+- `--stamina.recoverepochlength` : The length of recovery epoch in block (default: 120960)
+- `--stamina.withdrawaldelay` : Withdrawal delay in block (default: 362880)
+
+> In the case of `stamina.withdrawaldelay`, a value of at least two times more than `stamina.recoverepochlength` should be used.
+
+The stamina feature is provided as a pre-compiled contract in childchain. The stamina contract address is `0x000000000000000000000000000000000000dead` in every tokamak plasma childchain.
+
+You can check [this](https://github.com/Onther-Tech/stamina) for more details about the stamina contract.
 
 Create `deploy.operator1.sh` by running following command.
 
 ```bash
-plasma-evm$ cat > deploy.operator.sh << "EOF"
+plasma-evm$ cat > deploy.operator1.sh << "EOF"
 #!/bin/bash
 OPERATOR_KEY="bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5"
 OPERATOR="0x3cd9f729c8d882b851f8c70fb36d22b391a288cd"
@@ -48,11 +62,16 @@ make geth && build/bin/geth \
     --unlock $OPERATOR \
     --password pwd.pass \
     --rootchain.sender $OPERATOR \
+    --stamina.operatoramount 1 \
+    --stamina.mindeposit 0.5 \
+    --stamina.recoverepochlength 120960 \
+    --stamina.withdrawaldelay 362880 \
     deploy "./genesis-operator1.json" 102 true 2
 
 # you can checkout "$geth deploy --help" for more information
 EOF
 ```
+
 
 You can run `deploy.operator1.sh` script as following command.
 

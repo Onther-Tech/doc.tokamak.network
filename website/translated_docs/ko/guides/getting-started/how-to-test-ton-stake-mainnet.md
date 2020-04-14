@@ -128,18 +128,35 @@ plasma-evm $ echo "<password>" > pwd.pass
 
 다음은 루트체인 컨트랙트 배포 커맨드인 `deploy`에 대한 설명이다.
 
-`deploy` 커맨드는 입력인자로 <출력할 genesis 파일 이름>, <체인아이디(CHAINID)>, <프리 에셋(PRE-ASSET)>, <에폭(EPOCH)>을 받는다. 각 인자의 대한 설명은 다음과 같다..
+`deploy` 커맨드는 입력인자로 <출력할 genesis 파일 이름>, <체인아이디(CHAINID)>, <프리 에셋(PRE-ASSET)>, <에폭(EPOCH)>을 받는다. 각 인자의 대한 설명은 다음과 같다.
 
 - `CHAINID` : 오퍼레이터가 임의로 정할 수 있는 체인 고유의 숫자.
-
 - `PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨.
-
 - `EPOCH` : 루트체인에 커밋할 자식체인의 블록 단위. 예를들어 `2`로 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송한다.
+
+토카막 플라즈마는 자식체인의 수수료 지불 수단인 `스태미나(Stamina)` 기능을 제공한다. 자세한 사항은 [스태미나](https://docs.tokamak.network/docs/ko/learn/economics/tx-fee#스태니마) 참고한다.
+
+다음과 같은 플래그를 추가하여 스태미나 기본 설정값을 변경 할 수 있다. 스태미나 플래그를 사용하지 않는경우 기본값이 선택된다.
+
+- `--stamina.operatoramount` : 제네시스 블록에서 오퍼레이터가 가지는 스태미나의 양. (기본값 : 1)
+- `--stamina.mindeposit` : 스태미나로 전환 가능한 최소 ETH 수량. (기본값 : 0.5)
+- `--stamina.recoverepochlength` : 스태미나 회복 블록 주기. (기본값 : 120960)
+- `--stamina.withdrawaldelay` : ETH 출금 요청에 대한 지연 블록. (기본값 : 362880)
+
+`stamina.withdrawaldelay` 의 경우 `stamina.recoverepochlength` 의 최소 두배이상의 값을 사용하여야 한다.
+
+스태미나 기능은 자식체인의 프리컴파일(Pre-compile)된 컨트랙트로 제공된다. 모든 토카막 자식체인의 스태미나 컨트렉트 주소는 `0x000000000000000000000000000000000000dead` 로 고정되어 있다.
+
+스태미나 컨트렉트에 대한 자세한 사항은 깃허브 저장소 [stamina](https://github.com/Onther-Tech/stamina)를 참고한다.
 
 아래, `deploy` 명령어를 사용하여 루트체인 컨트랙트를 루트체인에 배포한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 true 2 \
+            --stamina.operatoramount 1 \
+            --stamina.mindeposit 0.5 \
+            --stamina.recoverepochlength 120960 \
+            --stamina.withdrawaldelay 362880 \
             --datadir ./operator \
             --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
             --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
