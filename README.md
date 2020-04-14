@@ -1,4 +1,5 @@
 # Tokamak Documentation
+[![Discord](https://img.shields.io/badge/discord-join%20chat-blue.svg)](https://discord.gg/8wSpJKz)
 
 ## Running the website
 Need to install docusaurus before running server for seeing documentation page in local environment.
@@ -15,3 +16,4 @@ You can check this site for more details about docusaurus. https://docusaurus.io
 ## Contributing to Documentation
 
 ### Style Guide
+WIP

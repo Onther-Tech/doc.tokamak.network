@@ -4,19 +4,19 @@ title: Setup Rootchain in Private Testnet
 sidebar_label: Setup Rootchain
 ---
 
-## 들어가는말(Intro)
+## 들어가는말
 
-이 문서의 과정은 프라이빗 블록체인을 루트체인(rootchain)으로 사용하는 레이어2 블록체인의 구축 과정을 담고있다. 루트체인(rootchain)이란 플라즈마 기반의 레이어2 블록체인을 사용하는 토카막 네트워크의 베이스체인(레이어1 체인)을 뜻한다. 자세한 개념은 [플라즈마란 무엇인가](https://docs.tokamak.network/docs/ko/learn/basic/tokamak-network#플라즈마란) 참조.
+이 과정은 프라이빗 블록체인을 루트체인(rootchain)으로 사용하는 테스트용 레이어2 블록체인의 구축 절차를 담고있다. 루트체인(rootchain)이란 플라즈마 기반의 레이어2 블록체인을 사용하는 토카막 네트워크의 베이스체인(레이어1 체인)을 뜻한다. 자세한 개념은 [플라즈마란 무엇인가](https://docs.tokamak.network/docs/ko/learn/basic/tokamak-network#플라즈마란) 참조.
 
 ## 로컬 환경 설정
 
 운영체제는 Ubuntu 18.04 환경을 기준으로 한다.
 
-golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm 컴파일 가능한 환경을 만든다.
+golang이 구성되어 있지 않은 경우, 아래 과정을 통하여 plasam-evm이 컴파일 가능한 환경을 만든다.
 
 ### 시스템 업데이트 및 필수 패키지 설치
 
-아래 명령어로 컴파일 환경을 설정한다.
+아래 명령어로 컴파일 가능한 환경을 만든다.
 
 ```shell
 ~$ sudo apt-get update && sudo apt-get install tar wget make git build-essential -y
@@ -24,7 +24,7 @@ golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm �
 
 ### golang 환경 설정
 
-아래 명령어를 순차적으로 실행하여, go 실행파일을 `/usr/local/` 경로 아래 위치하게 한다.
+다음을 순차적으로 실행하여, go 실행파일을 `/usr/local/`경로 아래 위치시킨다.
 
 ```shell
 ~$ wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
@@ -32,7 +32,7 @@ golang이 구성되어 있지 않은 경우, 아래를 수행하여 plasam-evm �
 ~$ sudo mv go /usr/local
 ```
 
-GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 설정한다.
+GOPATH로 사용할 디렉토리를 생성하고, 환경변수를 잡는다.
 
 ```bash
 ~$ export GOROOT=/usr/local/go
@@ -54,15 +54,15 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 ## 루트 체인 설정
 
-실행 스크립트가 설정되어 있는 `onther-tech/go-ethereum` 를 사용하는 것이 편리하다.
+테스트용 루트체인의 경우 실행 스크립트가 이미 내장되어 있는 `onther-tech/go-ethereum`를 사용하는 것이 편리하다.
 
-루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 챌린저(Challenger) 계정에 이더 잔고(Balance)가 있어야 한다. 특히, <U>챌린저 계정에 최소 0.5 ETH 이상이</U> 있어야 오퍼레이터 노드가 정상적으로 실행된다.
+루트체인(rootchain)에서 사용할 오퍼레이터(Operator)와 챌린저(Challenger)로 사용되는 계정에는 테스트용 이더 잔고(Balance)가 충분해야 한다. 특히, <U>챌린저 계정에는 최소 0.5 ETH가</U> 있어야 오퍼레이터 노드가 정상적으로 실행된다.
 
-만약 오퍼레이터 계정의 이더 잔고가 부족한 경우, 오퍼레이터가 루트체인에 트랜잭션을 전송 할 수 없으므로 자식체인의 블록 생성이 멈춘다.
+만약 테스트용 루트체인의 오퍼레이터 계정에 ETH 잔고가 부족해질 경우 경우, 오퍼레이터가 루트체인에 트랜잭션을 전송 할 수 없으므로 자식체인의 블록 생성이 멈추게 된다.
 
 ### 루트체인 소스코드 다운로드
 
-루트체인으로 사용할 `go-ethereum`의 소스코드를 다운로드 받는다.
+루트체인으로 사용할 `go-ethereum` 소스코드를 다운로드 받는다.
 
 ```bash
 ~$ git clone https://github.com/Onther-Tech/go-ethereum
@@ -79,7 +79,7 @@ go-ethereum $ git reset 4f497552092e2d061c8636b58737bc462ba4a3d
 
 ### 루트체인 실행 스크립트 확인
 
-아래는 `onther-tech/go-ethereum`에 위치하고 있는 `run.rootchain.sh` 이다.
+아래는 `onther-tech/go-ethereum`에 위치하고 있는 `run.rootchain.sh`이다.
 
 ```bash
 # go-ethereum/run.rootchain.sh
@@ -111,10 +111,10 @@ make geth && build/bin/geth \
 
 위 스크립트로 실행되는 루트체인의 계정들은 다음과 같은 역할에 사용된다.
 
-- ADDR0 : TON 스테이크 매니저, TON 스테이킹 관련 컨트렉트들을 배포하고 설정.
-- ADDR1 : 오퍼레이터1, TON 스테이킹에 참여하면서 자식체인1을 운영.
-- ADDR2 : 오퍼레이터2, TON 스테이킹에 참여하면서 자식체인2을 운영.
-- ADDR3 : 첼린저, 자식체인 데이터 검증자 및 첼리저.
+- ADDR0 : TON 스테이킹 매니저 계정. TON 스테이킹 관련 컨트렉트들을 배포하고 설정.
+- ADDR1 : 오퍼레이터1 계정. TON 스테이킹에 참여하면서 자식체인1을 운영.
+- ADDR2 : 오퍼레이터2 계정. TON 스테이킹에 참여하면서 자식체인2를 운영.
+- ADDR3 : 챌린저 계정. 자식체인 데이터의 유효성을 검증하는 챌린저.
 
 ### 루트체인 실행
 
@@ -126,21 +126,22 @@ go-ethereum $ bash run.rootchain.sh
 
 ## TON 스테이크 컨트랙트 설정
 
-앞서 설정한 프라이빗 테스트 루트체인위에 TON 스테이크를 테스트 할 수 있는 환경을 구성한다.
+앞서 설정한 프라이빗 테스트 루트체인위에 TON 스테이킹을 테스트 할 수 있는 환경을 구성한다.
 
-이 파트의 대부분은 `plasma-evm`의 `staking` 과 `manage-staking`에 대한 명령어 사용에 대한 것이다. 이 명령어는 개발자 및 오퍼레이터(Operator) 에게 유용한 툴이다.
+이 파트의 대부분은 `plasma-evm`의 `staking`과 `manage-staking`명령어 사용에 관한 것이다. 이 명령어들은 오퍼레이터(Operator)가 운영하는 토카막 플라즈마 노드를 구축하는데 매우 유용하게 쓰일 수 있다.
 
-프라이빗 테스트넷 TON 스테이크 테스트에는 한명의 매니저가 있으며, 스테이크에 참여하는 두 오퍼레이터가 있다고 가정한다.
+앞으로 이어질 테스트는 ADDR0가 매니저 컨트랙트를 배포하고, 배포된 스테이크 컨트랙트에 ADDR1과 ADDR2가 각각 운영하는 두 오퍼레이터가 노드를 연결할 것이다.
 
-매니저는 테스트 TON 토큰 및 스테이크에 관련한 컨트랙트를 배포하고 관리한다.
+각 계정의 역할을 정리하면 다음과 같다.
 
-오퍼레이터들은 자신의 플라즈마 체인을 운영하면서 TON 토큰을 스테이크, 언스테이크 한다.
+- 매니저(ADDR0) : 테스트로 사용될 TON 토큰 및 스테이킹에 관련한 컨트랙트를 배포하고 관리.
+- 오퍼레이터(ADDR1, ADDR2) : 자신의 플라즈마 체인을 운영하면서 TON 토큰을 스테이킹, 언스테이킹.
 
 ### 저장소 다운로드 및 컴파일
 
-동작중인 rootchain에 스테이크 관련 컨트렉트를 배포한다.
+이 단계는 동작중인 루트체인 노드에 스테이킹 테스트를 위한 컨트렉트를 배포한다.
 
-우선, 아래 명령어를 통해 `plasma-evm` 저장소 다운로드 완료 한다.
+우선, 아래 명령어를 통해 `plasma-evm` 저장소를 다운로드 한다.
 
 ```bash
 go-ethereum $ cd ~
@@ -149,7 +150,7 @@ $ cd plasma-evm
 plasma-evm $
 ```
 
-이 문서는 master 브랜치의 [v0.0.0-rc6.0 : 16e9e0310fa180a360a870dac88e1c098489826b](https://github.com/Onther-Tech/plasma-evm/tree/16e9e0310fa180a360a870dac88e1c098489826b) 커밋에서 테스트 되었다.
+이 문서는 master 브랜치의 [v0.0.0-rc6.0 : 16e9e0310fa180a360a870dac88e1c098489826b](https://github.com/Onther-Tech/plasma-evm/tree/16e9e0310fa180a360a870dac88e1c098489826b) 커밋을 기준으로 진행된다.
 
 `Plasma-evm` 의 실행파일인 `geth` 생성을 위해 아래 명령어를 입력한다.
 
@@ -157,18 +158,18 @@ plasma-evm $
 plasma-evm $ make geth
 ```
 
-해당 과정이 정상적으로 종료되면, `plasma-evm/build/bin` 위치에 `geth`파일이 생성된다.
+컴파일을 정상적으로 마치면, `plasma-evm/build/bin`위치에 `geth`실행 파일이 생성된다.
 
-### 매니저 와 오퍼레이터 계정 생성
+### 매니저와 오퍼레이터 계정 입력
 
-테스트에 필요한 계정을 생성한다.
+아래의 명령은 plasma-evm노드가 사용할 데이터 디렉토리(datadir)에 매니저 계정(ADDR0)을 생성시킨다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb account importKey b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291 \
             --datadir ./.pls.staking/manager
 ```
 
-테스트 편의상 빈 패스워드를 지정한다.
+테스트의 편의를 위해 빈 패스워드를 지정한다.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -179,7 +180,7 @@ Repeat password:
 Address: {71562b71999873db5b286df957af199ec94617f7}
 ```
 
-아래 명령어를 통해, 각 오퍼레이터 계정을 생성한다.
+아래 명령은, 두 오퍼레이터 계정(ADDR1, ADDR2)을 생성한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb account importKey bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5 \
@@ -191,7 +192,7 @@ plasma-evm $ build/bin/geth --nousb account importKey 067394195895a82e685b000e59
             --datadir ./.pls.staking/operator2
 ```
 
-아래명령어를 사용하여 위 계정들의 암호를 저장하고 있는 `pwd.pass` 파일을 생성한다.
+아래 명령을 사용하여 위 계정들의 암호를 저장하고 있는 `pwd.pass` 파일을 생성한다. 앞선 과정에서 패스워드를 입력하지 않았기 때문에 공백("")을 pwd.pass파일에 넣는다.
 
 ```bash
 plasma-evm $ echo "" > pwd.pass
@@ -199,15 +200,15 @@ plasma-evm $ echo "" > pwd.pass
 
 ### 스테이크 매니저 컨트랙트 배포
 
-`deployManagers`는 `manage-staking` 명령어의 하위명령어로 매니저가 TON 토큰의 스테이킹에 대한 컨트랙트를 배포 및 관리하기 위한 기능을 가지고 있다.
+`deployManagers`는 `manage-staking`의 하위 명령어로 매니저가 TON 스테이킹에 관한 컨트랙트를 배포 및 관리하기 위해 만들어졌다.
 
-`deployManagers` 실행에 필요한 입력 파라미터는 `withdrawalDelay` 와 `seigPerBlock` 총 2개 이다.
+`deployManagers`은 입력 파라미터로 `withdrawalDelay`와 `seigPerBlock` 2개를 받는다.
 
-입력 파라미터에 대한 설명은 다음과 같다.
+각 입력 파라미터에 대한 설명은 다음과 같다.
 
-`withdrawalDelay` : 단위는 루트체인의 블록 갯수이다. 스테이크된 WTON 을 언스테이크 상태로 변환하기 위해서는 `requestWithdrawal` 트랜잭션을 전송하고, 해당 파라미터 동안 지연된후 처리된다. 예를 들어 `10` 으로 정한경우, 스테이크 TON에 대해 `requestWithdrawal` 을 100 블록에 처리되었다면, 루트체인 110번째 이후에 `processRequest` 트랜잭션이 실행됨으로써 요청한 WTON에 대해 언-스테이크 상태가 된다.
+- `withdrawalDelay` : 단위는 루트체인의 블록 갯수다. 스테이킹된 상태(staked status)의 WTON이 출금 요청(`requestWithdrawal` 트랜잭션)을 받게 되면 정해진 `withdrawalDelay`블록 만큼 지연된 이후 언-스테이크 상태(unstaked status)로 바뀐다. 그리고 언-스테이크 상태(unstaked status)가 된 WTON만이 출금되어 실제 TON으로 스왑될 수 있다. 예를 들어 현재 블록 높이가 100이고, `withdrawalDelay`값이 `10`인 경우, 스테이킹된 WTON에 출금 요청(`requestWithdrawal`)을 했다면, 루트체인이 (100 + `withdrawalDelay` = 110)번 높이이 다다른 이후에야 해당 WTON을 출금 및 스왑할 수 있다.
 
-`seigPerBlock` : 루트체인 블록당 발생할 수 있는 시뇨리지의 최대 TON 개수. 해당 파라미터에 의해 연 인플레이션이 영향을 받는다.
+- `seigPerBlock` : 루트체인 1 블록당 발생할 수 있는 시뇨리지 TON. 해당 파라미터에 의해 TON의 연 인플레이션률이 영향을 받게 된다.
 
 ```bash
 plasma-evm $ make geth && build/bin/geth --nousb manage-staking deployManagers 10 1.5 \
@@ -218,7 +219,7 @@ plasma-evm $ make geth && build/bin/geth --nousb manage-staking deployManagers 1
             --rootchain.sender 0x71562b71999873DB5b286dF957af199Ec94617F7
 ```
 
-위 명령어를 통해 TON 스테이크에 필요한 컨트랙트가 모두 배포된다.
+위 명령어를 입력하면 TON 스테이킹에 필요한 모든 컨트랙트가 루트체인에 배포된다.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -248,11 +249,9 @@ INFO [01-01|00:00:00.000] Staking manager contract deployed        TON=0x3A220f3
 
 ### PowerTON 컨트랙트 배포
 
-다음 명령어를 통해 `PowerTON` 컨트랙트를 배포한다.
+PowerTON컨트랙트를 배포하면 일정 기간 이내에서 스테이킹을 하던 오퍼레이터 중 일부가 랜덤으로 선발되어, 정해진 시뇨리지 보상보다 큰 시뇨리지(미발행되어 적립된 시뇨리지)를 일시에 받을 수 있게 된다. 다음 명령어을 통해 `PowerTON` 컨트랙트를 배포할 수 있다.
 
-`dpeloyPowerTON` 입력 인자는 파워톤 라운드 시간을 의미하며, 테스트를 위해 60초로 설정한다.
-
-여기서 파워톤 라운드 시간이란, 미발행 시뇨리지를 파워톤 규칙에 의해 재분배되는 주기를 말한다. 예를들어 `60s` 로 해당 값을 설정한 경우, 미발행 시뇨리지 WTON을 받는 오퍼레이터가 매 60초 마다 정해진다.
+- `dpeloyPowerTON` : 이어지는 파라미터는 파워톤 라운드(Round) 기간을 의미하며, 랜덤 선발은 라운드 단위로 이뤄지게 된다. 여기서는 테스트를 위해 60초로 설정한다.
 
 `PowerTON`에 대한 자세한 내용은 [여기]()를 참고한다.
 
@@ -267,9 +266,9 @@ plasma-evm $ build/bin/geth --nousb manage-staking deployPowerTON 60s \
 
 ### 배포 컨트랙트 정보
 
-배포한 컨트랙트의 정보는 `manage-staking`의 하위 명령어인 `deployManager` 통해 `.pls.staking/manager` 에 위치한 rawdb저장된다.
+앞선 과정을 통해 배포한 모든 컨트랙트의 정보는 `manage-staking`의 하위 명령인 `deployManager`를 이용해 모두 추출할 수 있다.
 
-아래 명령어를 통해, 루트체인에 배포한 스테이크 컨트랙트 정보들을 추출하여 `manager.json` 파일로 저장한다.
+아래 명령어를 이용해 루트체인에 배포한 스테이킹 컨트랙트 정보들을 `manager.json` 파일로 저장하자.
 
 ```bash
 plasam-evm $ build/bin/geth --nousb manage-staking getManagers manager.json --datadir ./.pls.staking/manager
@@ -290,13 +289,13 @@ INFO [01-01|00:00:00.000] Exported manager contracts               path=manager.
 }
 ```
 
-`PowerTON` 컨트랙트를 포함하여 6개의 컨트랙트 주소가 `manager.json` 에 저장된다.
+`TON`,`WTON`등 앞서 배포한 6개의 컨트랙트 주소가 `manager.json`에 저장되었다.
 
 ### PowerTON 실행
 
-미발행 시뇨리지 분배에 대한 규칙을 가지고 있는 `PowerTON` 활성화 하려면 `staking`의 하위 명령어인 `startPowerTON`을 사용한다.
+미발행 시뇨리지 분배에 대한 규칙을 가지고 있는 `PowerTON`의 라운드(Round)를 활성화하기 위해서는 `staking`의 하위 명령어인 `startPowerTON`를 실행해야 한다.
 
-아래 명령어를 실행하여 `PowerTON` 활성화 Tx를 전송한다.
+아래 명령어를 통해 `PowerTON`의 라운드 활성화 트랜잭션을 전송한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking startPowerTON \
@@ -314,8 +313,8 @@ INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/hom
 INFO [01-01|00:00:00.000] PowerTON started                         PowerTON=0xBcDfc870Ea0C6463C6EBb2B2217a4b32B93BCFB7
 ```
 
-## 다음으로(Outro)
+## 다음으로
 
-루트체인을 설정하는 과정은 이더리움 기반의 프라이빗 블록체인을 설정하는것과 실질적으로 같다. 다만 우리는 단순히 프라이빗 블록체인 하나를 만드는데 그치지 않고, 레이어2 토카막 플라즈마를 셋업을 위한 [다양한 스마트 컨트랙트](https://docs.tokamak.network/docs/ko/learn/advanced/plasma-evm-smart-contracts)를 미리 배포해 두었다. 이어지는 [자식체인 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually)과정을 통해서 본격적으로 루트체인과 연결된 레이어2 토카막 블록체인을 구성해보자.
+루트체인을 설정하는 과정은 이더리움 기반의 프라이빗 블록체인을 설정하는것과 실질적으로 같다. 다만 이 과정에서는 단순히 프라이빗 블록체인 하나를 만드는데 그치지 않고, 레이어2 토카막 플라즈마를 셋업을 위한 [다양한 스마트 컨트랙트](https://docs.tokamak.network/docs/ko/learn/advanced/plasma-evm-smart-contracts)까지 미리 배포해 두었다. 이어지는 [자식체인 설정](https://docs.tokamak.network/docs/ko/guides/getting-started/how-to-open-private-testnet-manually) 과정을 통해서 본격적으로 이렇게 환경설정을 마친 루트체인과 연결된 레이어2 토카막 플라즈마 체인을 본격적으로 구성해보자.
 
 <!-TODO : should be update based on this contents ## 설정 완료 후 구조도 [루트 체인 설정 완료후](assets/guides_private_testnet_rootchain.png)->
