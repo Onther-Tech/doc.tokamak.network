@@ -225,7 +225,9 @@ INFO [01-01|00:00:00.000] Committed Stake                           amount="0 WT
 
 ### 오퍼레이터2 TON 스테이킹
 
-테스트 `TON`을 스테이킹 하려면 `WTON`으로 변환한 후, `WTON`을 `depositManager` 컨트랙트에 `stake` 해주어야 한다.
+#### 방법 1 : TON -> WTON -> Stake
+
+이 테스트 방법은 `TON`을 `WTON`으로 변환한 후, 변환된 `WTON`을 `depositManager` 컨트랙트에 스테이킹 하는 과정을 담고 있다.
 
 실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이킹 되는 토큰은 WTON 이다.
 
@@ -242,7 +244,7 @@ plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
             --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
 ```
 
-`staking`의 하위 명령어인 `stake`를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.
+`staking`의 하위 명령어인 `stakeWTON`를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
@@ -252,6 +254,8 @@ plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
             --password pwd.pass \
             --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
 ```
+
+#### 방법 2 : TON -> Stake
 
 또는, 위 두 과정을 `stakeTON` 명령어로 한번에 처리 할 수 있다.
 
