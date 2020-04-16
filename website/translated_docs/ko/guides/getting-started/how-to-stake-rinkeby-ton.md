@@ -1,7 +1,7 @@
 ---
 id: rinkeby-testnet-staking
 title: Staking in Rinkeby Testnet
-sidebar_label: Testnet staking
+sidebar_label: Rinkeby Testnet Staking
 ---
 
 이 문서는 링키비(Rinkeby)테스트넷에 TON을 스테이킹 하는 과정을 담고있다.

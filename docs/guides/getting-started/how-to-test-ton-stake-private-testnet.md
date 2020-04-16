@@ -1,7 +1,7 @@
 ---
 id: private-testnet-staking
 title: Staking Test in Private Testnet
-sidebar_label: Private Testnet Staking test
+sidebar_label: Private Testnet Staking 
 ---
 
 In this document, we will cover how to stake TON token on a private testnet where two operators exist.

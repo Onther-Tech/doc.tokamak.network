@@ -30,16 +30,16 @@
         "sidebar_label": "Setup Rootchain"
       },
       "guides/getting-started/mainnet-mton-staking": {
-        "title": "How to stake MTON in Mainnet",
+        "title": "MTON Staking in Mainnet",
         "sidebar_label": "Mainnet MTON staking"
-      },
-      "guides/getting-started/private-testnet-staking": {
-        "title": "Staking Test in Private Testnet",
-        "sidebar_label": "Private Testnet Staking test"
       },
       "guides/getting-started/rinkeby-testnet-staking": {
         "title": "Staking in Rinkeby Testnet",
-        "sidebar_label": "Testnet staking"
+        "sidebar_label": "Rinkeby Testnet Staking"
+      },
+      "guides/getting-started/private-testnet-staking": {
+        "title": "Staking Test in Private Testnet",
+        "sidebar_label": "Private Testnet Staking"
       },
       "guides/manuals/guides_manuals_how-to-make-request": {
         "title": "How to make request",

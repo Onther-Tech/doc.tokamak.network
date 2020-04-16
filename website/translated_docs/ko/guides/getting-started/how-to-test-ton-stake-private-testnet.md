@@ -1,7 +1,7 @@
 ---
 id: private-testnet-staking
 title: Staking Test in Private Testnet
-sidebar_label: Private Testnet Staking test
+sidebar_label: Private Testnet Staking 
 ---
 
 이 문서는 프라이빗 테스트 루트체인에서 두 오퍼레이터가 TON 토큰을 스테이킹/언스테이킹하는 테스트 시나리오를 다루고 있다.
