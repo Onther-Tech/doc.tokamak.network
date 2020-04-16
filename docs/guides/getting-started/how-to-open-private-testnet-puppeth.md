@@ -144,31 +144,30 @@ Before running `Putppeth`, make `genesis` file including address of the `RootCha
 Make `deploy.rootchain.sh` with following command.
 
 ```bash
-plasma-evm$ tee deploy.rootchain.sh <<'EOF'
+plasma-evm$ cat > deploy.rootchain.sh << "EOF"
 #!/bin/bash
-
-OPERATOR_KEY="b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291"
-KEY2="78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a115"
-KEY3="067394195895a82e685b000e592f771f7899d77e87cc8c79110e53a2f0b0b8fc"
-KEY4="ae03e057a5b117295db86079ba4c8505df6074cdc54eec62f2050e677e5d4e66"
-KEY5="eda4515e1bc6c08e8606b51ffb6ffe70b3fe76781ed49872285e484064e3b634"
-CHALLENGER_KEY="78ae75d1cd5960d87e76a69760cb451a58928eee7890780c352186d23094a114"
+OPERATOR_KEY="86e60281da515184c825c3f46c7ec490b075af1e74607e2e9a66e3df0fa22122"
+OPERATOR="0x5e3230019fed7ab462e3ac277e7709b9b2716b4f"
 
 DATADIR=pls.data
-OPERATOR="0x71562b71999873DB5b286dF957af199Ec94617F7"
-CHALLENGER="0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8"
 
-ROOTCHAIN_IP=localhost # Onther Ropsten Geth Node IP.
+ROOTCHAIN_IP=127.0.0.1
 
 # Deploy contracts at rootchain
 echo "Deploy rootchain contract and others"
-make geth && build/bin/geth --nousb \
-    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \
-    --operator.key $OPERATOR_KEY \
+make geth && build/bin/geth \
+    --nousb \
     --datadir $DATADIR \
-    deploy "./genesis.json" 16 true 4096
+    --rootchain.url "ws://$ROOTCHAIN_IP:8546" \
+    --unlock $OPERATOR \
+    --password pwd.pass \
+    --rootchain.sender $OPERATOR \
+    --stamina.operatoramount 1 \
+    --stamina.mindeposit 0.5 \
+    --stamina.recoverepochlength 120960 \
+    --stamina.withdrawaldelay 362880 \
+    deploy "./genesis-operator1.json" 16 true 4096
 
-# deploy params : chainID, isInitialAsset, Epochlength
 # you can checkout "$geth deploy --help" for more information
 EOF
 ```
@@ -562,7 +561,7 @@ What should the node be called on the stats page?
 > operator
 
 Please paste the operator's key JSON:
-> {"address":"71562b71999873db5b286df957af199ec94617f7","crypto":{"cipher":"aes-128-ctr","ciphertext":"8b750c93fdecb295568a3a8f73531d2ce019393a65328de204bbdcae93ee7ba5","cipherparams":{"iv":"1c09cf80049e26f45d06f6d659df5194"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"9eb4b1b5b1374d977fec0754eac926fde62723b5ce2dd304b707db034199007f"},"mac":"42e15aa26aa6bb3e274c518530f75f02d385cb4706bc639a95913a4f33134eb8"},"id":"8be79bc9-06ea-4328-8d9c-89440f19a25d","version":3}
+> {"address":"b79749f25ef64f9ac277a4705887101d3311a0f4","crypto":{"cipher":"aes-128-ctr","ciphertext":"8b750c93fdecb295568a3a8f73531d2ce019393a65328de204bbdcae93ee7ba5","cipherparams":{"iv":"1c09cf80049e26f45d06f6d659df5194"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"9eb4b1b5b1374d977fec0754eac926fde62723b5ce2dd304b707db034199007f"},"mac":"42e15aa26aa6bb3e274c518530f75f02d385cb4706bc639a95913a4f33134eb8"},"id":"8be79bc9-06ea-4328-8d9c-89440f19a25d","version":3}
 
 What's the unlock password for the account? (won't be echoed)
 >
@@ -606,7 +605,7 @@ Step 4/7 : ADD challenger.json /challenger.json
 ---> b03d83cf4459
 Step 5/7 : ADD signer.pass /signer.pass
 ---> 2ba822bdd81b
-Step 6/7 : RUN   echo $'geth --cache 512 init --rootchain.url ws://172.17.0.1:8546 /genesis.json' > geth.sh && echo 'mkdir -p /root/.ethereum/keystore/' >> geth.sh &&   echo 'cp /operator.json /root/.ethereum/keystore/' >> geth.sh && echo 'cp /challenger.json /root/.ethereum/keystore/' >> geth.sh && echo $'exec geth --syncmode="full" --networkid 16 --rootchain.url ws://172.17.0.1:8546 --operator 0x71562b71999873DB5b286dF957af199Ec94617F7 --rootchain.challenger 0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8   --cache 512 --port 30305 --nat extip:52.198.169.75 --maxpeers 50  --ethstats \'tokamak-operator:ubuntu@52.198.169.75'   --unlock 0x71562b71999873DB5b286dF957af199Ec94617F7,0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8 --password /signer.pass --mine --miner.gastarget 7500000 --miner.gaslimit 10000000 --miner.gasprice 1000000000' >> geth.sh
+Step 6/7 : RUN   echo $'geth --cache 512 init --rootchain.url ws://172.17.0.1:8546 /genesis.json' > geth.sh && echo 'mkdir -p /root/.ethereum/keystore/' >> geth.sh &&   echo 'cp /operator.json /root/.ethereum/keystore/' >> geth.sh && echo 'cp /challenger.json /root/.ethereum/keystore/' >> geth.sh && echo $'exec geth --syncmode="full" --networkid 16 --rootchain.url ws://172.17.0.1:8546 --operator 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 --rootchain.challenger 0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8   --cache 512 --port 30305 --nat extip:52.198.169.75 --maxpeers 50  --ethstats \'tokamak-operator:ubuntu@52.198.169.75'   --unlock 0xb79749F25Ef64F9AC277A4705887101D3311A0F4,0x3616BE06D68dD22886505e9c2CaAa9EcA84564b8 --password /signer.pass --mine --miner.gastarget 7500000 --miner.gaslimit 10000000 --miner.gasprice 1000000000' >> geth.sh
 ---> Running in 9d7f43a35d30
 Removing intermediate container 9d7f43a35d30
 ---> 30948ea415b2
@@ -654,7 +653,7 @@ Deployed container result will be like below in `Puppeth` console.
 |                      |               |          | Gas floor (baseline target)  | 7.500 MGas                                   |
 |                      |               |          | Gas price (minimum accepted) | 1.000 GWei                                   |
 |                      |               |          | Listener port                | 30307                                        |
-|                      |               |          | Operator account             | 0x71562b71999873DB5b286dF957af199Ec94617F7   |
+|                      |               |          | Operator account             | 0xb79749F25Ef64F9AC277A4705887101D3311A0F4   |
 |                      |               |          | Peer count (all total)       | 50                                           |
 |                      |               |          | Peer count (light nodes)     | 0                                            |
 |                      |               |          | Root chain JSONRPC URL       | ws://172.17.0.1:8546                         |
