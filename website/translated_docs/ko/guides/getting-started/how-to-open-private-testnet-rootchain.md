@@ -124,7 +124,7 @@ make geth && build/bin/geth \
 go-ethereum $ bash run.rootchain.sh
 ```
 
-## TON 스테이크 컨트랙트 설정
+## TON 스테이킹 컨트랙트 설정
 
 앞서 설정한 프라이빗 테스트 루트체인위에 TON 스테이킹을 테스트 할 수 있는 환경을 구성한다.
 
@@ -135,7 +135,7 @@ go-ethereum $ bash run.rootchain.sh
 각 계정의 역할을 정리하면 다음과 같다.
 
 - 매니저(ADDR0) : 테스트로 사용될 TON 토큰 및 스테이킹에 관련한 컨트랙트를 배포하고 관리.
-- 오퍼레이터(ADDR1, ADDR2) : 자신의 플라즈마 체인을 운영하면서 TON 토큰을 스테이킹, 언스테이킹.
+- 오퍼레이터(ADDR1, ADDR2) : 자신의 플라즈마 체인을 운영하면서 TON 토큰을 스테이킹, 언-스테이킹.
 
 ### 저장소 다운로드 및 컴파일
 
@@ -268,12 +268,12 @@ plasma-evm $ build/bin/geth --nousb manage-staking deployPowerTON 60s \
 
 앞선 과정을 통해 배포한 모든 컨트랙트의 정보는 `manage-staking`의 하위 명령인 `deployManager`를 이용해 모두 추출할 수 있다.
 
-아래 명령어를 이용해 루트체인에 배포한 스테이킹 컨트랙트 정보들을 `manager.json` 파일로 저장하자.
+아래 명령어를 이용해 루트체인에 배포한 스테이크 컨트랙트 정보들을 `manager.json` 파일로 저장하자.
 
 ```bash
 plasam-evm $ build/bin/geth --nousb manage-staking getManagers manager.json --datadir ./.pls.staking/manager
 
-INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=5크
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/manager/geth/stakingdata ca
 che=16.00MiB handles=16

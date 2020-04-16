@@ -174,7 +174,7 @@ plasma-evm $ build/bin/geth --nousb init genesis.json \
             --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id>
 ```
 
-### 스테이크 주소 설정
+### 스테이킹 주소 설정
 
 이더리움 메인넷에 배포되어 있는 컨트렉트 정보를 `json` 파일로 저장한다.
 
@@ -197,7 +197,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./opera
 
 ### 루트체인 등록
 
-오퍼레이터가 설정한 자식체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이크 시뇨리지를 받을 수 있게 한다.
+오퍼레이터가 설정한 자식체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이킹 시뇨리지를 받을 수 있게 한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking register \
@@ -294,11 +294,11 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTO
 
 위 예시는 `0x3cD9F7...` 계정에 10,000 TON 을 보유하고 있다.
 
-### TON 스테이크
+### TON 스테이킹
 
-`TON`을 스테이크 하려면 `WTON`으로 변환한 후, `WTON`을 `depositManager` 컨트랙트에 `stake` 해주어야 한다.
+`TON`을 스테이킹 하려면 `WTON`으로 변환한 후, `WTON`을 `depositManager` 컨트랙트에 `stake` 해주어야 한다.
 
-실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이크 되는 토큰은 WTON 이다.
+실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이킹 되는 토큰은 WTON 이다.
 
 아래 명령어를 사용하여, 1,000 TON을 WTON으로 변환한다.
 
@@ -313,7 +313,7 @@ plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
             --rootchain.sender <use-your-own-account-address>
 ```
 
-`staking`의 하위 명령어인 `stake` 를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이크 한다.
+`staking`의 하위 명령어인 `stake` 를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
@@ -339,7 +339,7 @@ plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
 
 오퍼레이터의 클라이언트가 루트체인에서 설정된 `Epoch` 주기로 루트체인에 Tx 커밋을 제출한다.
 
-루트체인 컨트랙트에 커밋 트랜잭션이 제출되면, 매니저 컨트랙트에서 모든 오퍼레이터들의 스테이크 된 자산을 고려하여 시뇨리지가 계산된다.
+루트체인 컨트랙트에 커밋 트랜잭션이 제출되면, 매니저 컨트랙트에서 모든 오퍼레이터의 스테이킹된 자산을 고려하여 시뇨리지가 계산된다.
 
 ### 자식체인 실행
 
@@ -413,13 +413,13 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="100.0
 INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
 ```
 
-위 결과는 예시이며, 실제 스테이크된 시간에 따라 시뇨리지 `WTON`이 계산되기 때문에 소수점자리까지 나타난다.
+위 결과는 예시이며, 실제 스테이킹된 시간에 따라 시뇨리지 `WTON`이 계산되기 때문에 소수점자리까지 나타난다.
 
-[자식체인 실행](#자식체인-실행) 에서 오퍼레이터 자식체인만 루트체인에 커밋되 었으므로, 다른 오퍼레이터들의 스테이크 보상은 `Uncommited` 상태에 TON 잔고가 쌓이게 된다.
+[자식체인 실행](#자식체인-실행) 에서 오퍼레이터 자식체인만 루트체인에 커밋되 었으므로, 다른 오퍼레이터들의 스테이킹 보상은 `Uncommited` 상태에 TON 잔고가 쌓이게 된다.
 
 ### 보상 인출
 
-발생한 시뇨리지는 `WTON` 형태로 추가 발행되어 스테이크 되어 있는 모든 오퍼레이터 계정에 쌓인다.
+발생한 시뇨리지는 `WTON` 형태로 추가 발행되어 스테이킹 되어 있는 모든 오퍼레이터 계정에 쌓인다.
 
 오퍼레이터가 시뇨리지로 받은 `WTON`을 인출 해보고자 한다.
 
