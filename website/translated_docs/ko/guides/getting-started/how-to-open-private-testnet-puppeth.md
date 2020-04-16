@@ -144,28 +144,30 @@ Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-1057-aws x86_64)
 아래 커맨드로 `deploy.rootchain.sh` 스크립트 파일을 생성한다.
 
 ```bash
-plasma-evm$ tee deploy.rootchain.sh <<'EOF'
+plasma-evm$ cat > deploy.rootchain.sh << "EOF"
 #!/bin/bash
-
-OPERATOR_KEY="2628ca66087c6bc7f9eff7d70db7413d435e170040e8342e67b3db4e55ce752f"
-CHALLENGER_KEY="54a93b74538a7ab51062c7314ea9838519acae6b4ea3d47a7f367e866010364d"
+OPERATOR_KEY="86e60281da515184c825c3f46c7ec490b075af1e74607e2e9a66e3df0fa22122"
+OPERATOR="0x5e3230019fed7ab462e3ac277e7709b9b2716b4f"
 
 DATADIR=pls.data
-OPERATOR="0xb79749F25Ef64F9AC277A4705887101D3311A0F4"
-CHALLENGER="0xC927A0CF2d4a1B59775B5D0A35ec76d099e1FaD4"
 
-ROOTCHAIN_IP=localhost # Onther Ropsten Geth Node IP.
+ROOTCHAIN_IP=127.0.0.1
 
 # Deploy contracts at rootchain
 echo "Deploy rootchain contract and others"
-make geth && build/bin/geth --nousb \
+make geth && build/bin/geth \
+    --nousb \
+    --datadir $DATADIR \
     --rootchain.url "ws://$ROOTCHAIN_IP:8546" \
     --unlock $OPERATOR \
     --password pwd.pass \
     --rootchain.sender $OPERATOR \
-    deploy "./genesis.json" 16 true 4096
+    --stamina.operatoramount 1 \
+    --stamina.mindeposit 0.5 \
+    --stamina.recoverepochlength 120960 \
+    --stamina.withdrawaldelay 362880 \
+    deploy "./genesis-operator1.json" 16 true 4096
 
-# deploy params : chainID, isInitialAsset, Epochlength
 # you can checkout "$geth deploy --help" for more information
 EOF
 ```
