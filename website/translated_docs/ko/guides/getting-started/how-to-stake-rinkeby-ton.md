@@ -395,10 +395,7 @@ console에 `eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], valu
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
-            --unlock <use-your-own-account-address> \
-            --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id>
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
@@ -455,8 +452,7 @@ b07f4d
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id>
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
@@ -492,8 +488,7 @@ plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
             --datadir ./operator \
-            --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id>
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD

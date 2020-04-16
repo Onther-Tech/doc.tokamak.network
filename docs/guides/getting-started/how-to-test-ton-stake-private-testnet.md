@@ -45,37 +45,6 @@ plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x515b385bdc89bcc2907
             --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4
 ```
 
-### Checking TON balance
-
-Check test TON balance of operator1 with the following command.
-
-```bash
-plasma-evm $ build/bin/geth staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
-            --datadir ./.pls.staking/operator1 \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
-```
-
-You will be able to see the balance of 10,000 TON as below if test TON have been minted correctly and rootchain has been registered to the manager contract.
-
-```bash
-INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.staking/operator1/geth/genesis.json
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
-INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] TON Balance                              amount="10000.0 TON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] WTON Balance                              amount="0 WTON"      depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
-INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Total Stake                              amount="0 WTON"
-INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
-INFO [01-01|00:00:00.000] Uncommitted Stake                         amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Committed Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-```
-
 ### Staking TON for Operator1
 
 To stake test `TON`, it has to be converted to `WTON` first. Then, it will be available for staking in `depositManager` contract.
@@ -193,10 +162,7 @@ Check test TON balance of operator2 with the following command.
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
             --datadir ./.pls.staking/operator2 \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
-            --password pwd.pass \
-            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+            --rootchain.url ws://127.0.0.1:8546
 ```
 
 You will be able to see the balance of 10,000 TON as below if test TON have been minted correctly and rootchain has been registered to the manager contract.
@@ -316,10 +282,7 @@ In a new terminal, check operator2 TON stake rewards by using `staking balances`
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
             --datadir ./.pls.staking/operator2 \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
-            --password pwd.pass \
-            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+            --rootchain.url ws://127.0.0.1:8546
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x515B385bDc89bCc29077f2B00a88622883bfb498
@@ -376,8 +339,7 @@ If you check operator1 balance, you can see 510 WTON in a line that starts with 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
             --datadir ./.pls.staking/operator1 \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+            --rootchain.url ws://127.0.0.1:8546
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
@@ -411,8 +373,7 @@ When the `processWithdrawal` tx is successfully processed, you can see the balan
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
             --datadir ./.pls.staking/operator1 \
-            --rootchain.url ws://127.0.0.1:8546 \
-            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+            --rootchain.url ws://127.0.0.1:8546
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
