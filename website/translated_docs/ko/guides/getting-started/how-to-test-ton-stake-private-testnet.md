@@ -1,7 +1,7 @@
 ---
 id: private-testnet-staking
 title: Staking Test in Private Testnet
-sidebar_label: Private Testnet Staking test
+sidebar_label: Private Testnet Staking 
 ---
 
 이 문서는 프라이빗 테스트 루트체인에서 두 오퍼레이터가 TON 토큰을 스테이킹/언스테이킹하는 테스트 시나리오를 다루고 있다.
@@ -225,9 +225,9 @@ INFO [01-01|00:00:00.000] Committed Stake                           amount="0 WT
 
 ### 오퍼레이터2 TON 스테이킹
 
-테스트 `TON`을 스테이크 하려면 `WTON`으로 변환한 후, `WTON`을 `depositManager` 컨트랙트에 `stake` 해주어야 한다.
+테스트 `TON`을 스테이킹 하려면 `WTON`으로 변환한 후, `WTON`을 `depositManager` 컨트랙트에 `stake` 해주어야 한다.
 
-실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이크 되는 토큰은 WTON 이다.
+실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이킹 되는 토큰은 WTON 이다.
 
 아래 명령어를 사용하여 1,000 TON을 WTON으로 변환한다.
 
@@ -317,7 +317,7 @@ console에 `eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], valu
 
 ### 시뇨리지 확인
 
-[오퍼레이터1 체인 실행](#오퍼레이터1-체인-실행) 에서 오퍼레이터1 플라즈마 체인만 루트체인에 커밋하였으므로, 오퍼레이터2는 스테이킹 보상은 `Uncommited` 상태에 TON 잔고가 쌓이게 된다.
+[오퍼레이터1 체인 실행](#오퍼레이터1-체인-실행-및-더미-트랜잭션-생성) 에서 오퍼레이터1 플라즈마 체인만 루트체인에 커밋하였으므로, 오퍼레이터2는 스테이킹 보상은 `Uncommited` 상태에 TON 잔고가 쌓이게 된다.
 
 새로운 터미널에서 `staking balances` 명령어를 사용하여, 오퍼레이터2가 받은 TON의 시뇨리지 발행량을 확인할 수 있다.
 
@@ -448,7 +448,7 @@ plasma-evm 의 `geth` 는 TON 스테이킹 기능을 위해 `manage-staking` 과
 
 | Sub-command    | Argument        | Unit    | Describes   |
 |----------------|------------------|---------|--------|
-| deployManager  | withdrawalDelay* | Int     | 스테이킹된 WTON 을 언스테이크 상태로 변환하기 위해서는 `requestWithdrawal` 트랜잭션을 전송해야 한다. 해당 파라미터 숫자만큼 루트체인 블록이 진행 된 후, `requestWithdrawal` 이 처리 가능한 상태가 된다. |
+| deployManager  | withdrawalDelay* | Int     | 스테이킹된 WTON 을 언-스테이크 상태로 변환하기 위해서는 `requestWithdrawal` 트랜잭션을 전송해야 한다. 해당 파라미터 숫자만큼 루트체인 블록이 진행 된 후, `requestWithdrawal` 이 처리 가능한 상태가 된다. |
 |                | seigPerBlock*    | Float   | 블록당 발생가능한 최대 시뇨리지 수. 토큰의 인플레이션에 영향을 준다. |
 | deployPowerTON | roundDuration*   | Int(Seconds) | `PowerTON` 컨트랙트를 배포한다. 컨트랙트 배포에 필요한 `roundDuration` 단위는 초이다. 예를들어 `60s` 값으로 배포한 `PowerTON` 컨트랙트는 60초 주기로 미발행 TON 시뇨리지를 받아 갈 수 있는 오퍼레이터가 선정된다. |
 | startPowerTON  |  없음            | -       | `deployPowerTON`을 통해 배포된 `PowerTON` 컨트랙트를 활성화 시킨다. |
@@ -469,8 +469,8 @@ plasma-evm 의 `geth` 는 TON 스테이킹 기능을 위해 `manage-staking` 과
 | swapFromTON  |  amount*            | Float or Int       | `TON`을 `WTON` 으로 변환하는 트랜잭션을 전송한다. `WTON` 으로 변환할 `TON`의 수량을 입력인자로 사용한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. |
 | swapToTON  |  amount*            | Float or Int       | `WTON`을 `TON` 으로 변환하는 트랜잭션을 전송한다. `TON` 으로 변환할 `WTON`의 수량을 입력인자로 사용한다.대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다.  |
 | stakeTON   |  amount*            | Float or Int  | 이 명령어는 `swapFromTON` 과 `stakeWTON` 을 하나의 명령어로 처리. 오퍼레이터가 입력한 `amount`의 만큼의 `TON`을 스테이크된 상태(staked status)로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
-| stakeWTON  |  amount*            | Float or Int  | TON의 시뇨리지를 받기 위해 `WTON`을 스테이크 해야 한다. 오퍼레이터가 입력한 `amount`의 만큼의 `WTON`을 스테이크된 상태로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
-| requestWithdrawal  |  amount*            | Float or Int       | 스테이크된 상태의 `WTON` 을 언스테이크 상태로 전환하는 트랜잭션을 전송한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. 언스테이크 요청(i.e requestWithdrawal) 은 `depositManager` 에서 설정한 `withdrawalDelay` 만큼의 블록이 진행된 이후 처리가능한 상태가 된다. |
+| stakeWTON  |  amount*            | Float or Int  | TON의 시뇨리지를 받기 위해 `WTON`을 스테이킹 해야 한다. 오퍼레이터가 입력한 `amount`의 만큼의 `WTON`을 스테이크된 상태로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
+| requestWithdrawal  |  amount*            | Float or Int       | 스테이킹된 상태의 `WTON` 을 언-스테킹크 상태로 전환하는 트랜잭션을 전송한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. 언스테이크 요청(i.e requestWithdrawal) 은 `depositManager` 에서 설정한 `withdrawalDelay` 만큼의 블록이 진행된 이후 처리가능한 상태가 된다. |
 | processWithdrawal  | numRequests         | Int       | `requestWithdrawal` 을 통해 등록된 `WTON` 언스테이킹을 완료한다. 입력인자 미입력시 완료 가능한 모든 `requestWithdrawal`이 처리 된다. |
 
 > 입력인자에 `*` 가 붙은경우 필수 입력 인자이다.
