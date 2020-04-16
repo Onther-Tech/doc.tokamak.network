@@ -6,9 +6,7 @@ sidebar_label: Testnet staking
 
 이 문서는 링키비(Rinkeby)테스트넷에 TON을 스테이킹 하는 과정을 담고있다.
 
-> 일반 사용자의 경우 [dashboard](https://dashboard.tokamak.network)를 사용한다.
-
-<!-  TODO : 링키비에 설정한 대쉬보드 링크로 수정 필요. e.q. URL?network=rinkeby ->
+> 일반 사용자의 경우 [dashboard](https://dashboard.tokamak.network?network=rinkeby)를 사용한다.
 
 ## 오퍼레이터 준비
 
@@ -25,7 +23,7 @@ sidebar_label: Testnet staking
     "SeigManager": "0x6f00c47bbb6266942f2fcb0605400e02e42d65b7",
     "PowerTON": "0x5278a437b8c53c9019f5887ab6ac8f2e458f7cb9"
 
-해당 정보는 [Dashboard API](https://dashboard-api.tokamak.network/managers)를 통해 확인 할 수 있다.
+해당 정보는 [Dashboard API](https://dashboard-api.tokamak.network/managers?network=rinkeby)를 통해 확인 할 수 있다.
 
 ### 루트체인 접속 주소
 
@@ -50,12 +48,12 @@ sidebar_label: Testnet staking
 
 예를 들어 오퍼레이터A 와 오퍼레이터B 모두 동일한 `ChainID`를 사용하여 루트체인을 배포 하였다면, 오퍼레이터A 자식체인에서 처리된 트랜잭션을 누구나 가져와 오퍼레이터B의 자식체인에서도 사용 할 수 있다.
 
-`Replay Attack`을 방지하기 위해서는 오퍼레이터 각자가 고유의 `ChainID`를 사용해야 한다.
+[`Replay Attack`](https://medium.com/coinmonks/what-is-a-replay-attack-b0e2c3b1dec4)을 방지하기 위해서는 오퍼레이터 각자가 고유의 `ChainID`를 사용해야 한다.
 
 따라서 오퍼레이터는 루트체인 컨트랙트를 배포하기 전에 반드시 아래 링크에서 자신이 사용하고자 하는 `ChainID` 가 현재의 네트워크에 이미 등록되어 있는지 확인한 이후 중복되지 않는 새로운 `ChainID`를 사용하길 권장한다.
 
 ```baash
-$ curl -g https://dashboard-api.tokamak.network/chainids
+$ curl -g https://dashboard-api.tokamak.network/chainids?network=rinkeby
 [1021, 7777]
 ```
 
@@ -138,7 +136,7 @@ plasma-evm $ echo "<do-not-use-this-password-use-your-own-password>" > pwd.pass
 - `PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨.
 - `EPOCH` : 루트체인에 커밋할 자식체인의 블록 단위. 예를들어 `2`로 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송한다.
 
-토카막 플라즈마는 자식체인의 수수료 지불 수단인 `스태미나(Stamina)` 기능을 제공한다. 자세한 사항은 [스태미나](https://docs.tokamak.network/docs/ko/learn/economics/tx-fee#스태니마) 참고한다.
+토카막 플라즈마는 자식체인의 수수료 지불 수단인 `스태미나(Stamina)` 기능을 제공한다. 자세한 사항은 [스태미나](https://docs.tokamak.network/docs/ko/learn/economics/tx-fee#스태미나) 참고한다.
 
 다음과 같은 플래그를 추가하여 스태미나 기본 설정값을 변경 할 수 있다. 스태미나 플래그를 사용하지 않는경우 기본값이 선택된다.
 
@@ -224,7 +222,7 @@ INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x53
 
 메니저 컨트렉트에 등록된 후, `dashboard` 에도 등록을 해주어야 일반 사용자로 부터 위임을 받을 수 있다.
 
-아래 명령어를 통해 [dashboard.tokamak.network](https://dashboard.tokamak.network) API 서버로 등록한 `rootchain` 주소 및 정보를 전송한다.
+아래 명령어를 통해 [dashboard.tokamak.network](https://dashboard.tokamak.network?network=rinkeby) API 서버로 등록한 `rootchain` 주소 및 정보를 전송한다.
 
 입력해야 하는 정보는 다음과 같다.
 
@@ -233,7 +231,7 @@ INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x53
 - `WEBSITE` : 오퍼레이터 공식 웹페이지 주소. 없다면 "" 사용.
 - `DESCRIPTION` : 오퍼레이터 소개란. 없다면 "" 사용.
 
-위 정보들은 [dashboard.tokamak.network](https://dashboard.tokamak.network) 에 등록된다.
+위 정보들은 [dashboard.tokamak.network](https://dashboard.tokamak.network?network=rinkeby) 에 등록된다.
 
 각 환경변수를 등록한다. `GENESIS` 환경변수에 `genesis.json` 파일 전체를 입력해야 하므로, 해당 파일이 위치한 `plasma-evm` 에서 아래 명령어를 실행한다.
 

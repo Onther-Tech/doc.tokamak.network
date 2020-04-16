@@ -4,11 +4,11 @@ title: How to stake MTON in Mainnet
 sidebar_label: Mainnet MTON staking
 ---
 
-이 문서는 오퍼레이터가 MTON을 스테이크 하는 방법에대해 다룬다.
+이 문서는 이더리움 메인넷에 MTON을 스테이킹 하는 과정을 담고있다.
 
 MTON 이란, 토카막 네트워크 마켓팅을 위해 이더리움 메인넷에 배포된 토큰이다. 차후 공식 TON 토큰으로 전환이 가능하다.
 
-> 일반 사용자의 경우 [dashboard](https://dashboard.tokamak.network)를 사용한다.
+> 일반 사용자의 경우 [Dashboard](https://dashboard.tokamak.network)를 사용한다.
 
 ## 오퍼레이터 준비
 
@@ -27,7 +27,7 @@ MTON 이란, 토카막 네트워크 마켓팅을 위해 이더리움 메인넷�
 
 > 위 `TON` 토큰 주소는 `MTON` 토큰의 주소이다. 이후 CLI 에서 출력되는 `TON`에 대한 정보도 모두 `MTON`이다. 그리고 `MTON`에서 전환된 `WTON`은 차후에 발행될 `TON`에서 변환되는 `WTON` 과 다르며 호환되지 않는다.
 
-해당 정보는 [Tokamak Network - Dashboard api](https://dashboard-api.tokamak.network/managers)를 통해서 확인 할 수 있다.
+해당 정보는 [Dashboard API](https://dashboard-api.tokamak.network/managers)를 통해 확인 할 수 있다.
 
 ### 루트체인 접속 주소
 
@@ -46,15 +46,15 @@ MTON 이란, 토카막 네트워크 마켓팅을 위해 이더리움 메인넷�
 
 만약 자신이 운영하고 있는 이더리움 노드가 있다면, 해당 노드의 접속 주소를 `Infura` 주소 대신 사용할 수 있다.
 
-### `ChainID` 확인
+### ChainID 확인
 
-토카막 네트워크는 여러 오퍼레이터가 각자 자신의 자식체인을 운영하는 구조를 가지고 있다. 이때, 루트체인 컨트랙트 배포시 사용되는 `ChainID` 가 중복 될 수 있다.
+토카막 네트워크는 여러 오퍼레이터가 각자의 자식체인을 운영하는 구조를 가지고 있다. 이때, 루트체인 컨트랙트 배포시 사용되는 `ChainID`를 중복해서 사용할 경우, 중복 사용된 자식체인 사이에 [`Replay Attack`](https://medium.com/coinmonks/what-is-a-replay-attack-b0e2c3b1dec4)이 가해질 수 있다.
 
-이는 [`Replay Attack`]() 이 가능한 요소이다. 예를들어 오퍼레이터A 와 오퍼레이터B 모두 동일한 `ChainID`를 사용하여 루트체인을 배포 하였다면, 오퍼레이터A 자식체인에서 처리된 트랜잭션을 누구나 가져와 오퍼레이터B의 자식체인에서도 사용 할 수 있다.
+예를 들어 오퍼레이터A 와 오퍼레이터B 모두 동일한 `ChainID`를 사용하여 루트체인을 배포 하였다면, 오퍼레이터A 자식체인에서 처리된 트랜잭션을 누구나 가져와 오퍼레이터B의 자식체인에서도 사용 할 수 있다.
 
-이 `Replay Attack`을 방지하기 위해서는 오퍼레이터 서로가 겹치지 않은 고유의 `ChainID`를 사용해야 한다.
+`Replay Attack`을 방지하기 위해서는 오퍼레이터 각자가 고유의 `ChainID`를 사용해야 한다.
 
-오퍼레이터는 루트체인 컨트랙트를 배포하기 전에 반드시 아래 링크에서 자신이 사용하고자 하는 `ChainID` 가 이미 등록되어 있는지 확인해야 한다.
+따라서 오퍼레이터는 루트체인 컨트랙트를 배포하기 전에 반드시 아래 링크에서 자신이 사용하고자 하는 `ChainID` 가 현재의 네트워크에 이미 등록되어 있는지 확인한 이후 중복되지 않는 새로운 `ChainID`를 사용하길 권장한다.
 
 ```baash
 $ curl -g https://dashboard-api.tokamak.network/chainids
@@ -114,10 +114,10 @@ Path of the secret key file: operator/keystore/UTC--2020-01-01T00-00-00.00000000
 
 `--datadir` 입력한 경로인 `plasma-evm/operator` 에 해당 키파일이 생성된다.
 
-위에서 입력한 암호를 담고 있는 파일을 생성해야 한다. 바로 위 계정생성에 사용한 암호를 `<password>` 대신 사용하여 아래 명령어를 입력한다.
+위에서 입력한 암호를 담고 있는 파일을 생성해야 한다. 바로 위 계정생성에 사용한 암호를 `<do-not-use-this-password-use-your-own-password>` 대신 사용하여 아래 명령어를 입력한다.
 
 ```bash
-plasma-evm $ echo "<password>" > pwd.pass
+plasma-evm $ echo "<do-not-use-this-password-use-your-own-password>" > pwd.pass
 ```
 
 해당 키파일 이름은 `geth`의 `--password` 플래그의 인자로 `pwd.pass` 사용된다.
@@ -134,7 +134,7 @@ plasma-evm $ echo "<password>" > pwd.pass
 - `PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨.
 - `EPOCH` : 루트체인에 커밋할 자식체인의 블록 단위. 예를들어 `2`로 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송한다.
 
-토카막 플라즈마는 자식체인의 수수료 지불 수단인 `스태미나(Stamina)` 기능을 제공한다. 자세한 사항은 [스태미나](https://docs.tokamak.network/docs/ko/learn/economics/tx-fee#스태니마) 참고한다.
+토카막 플라즈마는 자식체인의 수수료 지불 수단인 `스태미나(Stamina)` 기능을 제공한다. 자세한 사항은 [스태미나](https://docs.tokamak.network/docs/ko/learn/economics/tx-fee#스태미나) 참고한다.
 
 다음과 같은 플래그를 추가하여 스태미나 기본 설정값을 변경 할 수 있다. 스태미나 플래그를 사용하지 않는경우 기본값이 선택된다.
 
@@ -158,10 +158,10 @@ plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 true 2 \
             --stamina.recoverepochlength 120960 \
             --stamina.withdrawaldelay 362880 \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.sender <use-your-own-account-address>
 ```
 
 오퍼레이터가 배포한 `rootchain` 컨트랙트 정보가 포함되어 있는 `genesis.json` 파일을 통해 플라즈마 체인을 초기화 한다.
@@ -169,7 +169,7 @@ plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 true 2 \
 ```bash
 plasma-evm $ build/bin/geth --nousb init genesis.json \
             --datadir ./operator  \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id>
 ```
 
 ### 스테이크 주소 설정
@@ -200,10 +200,10 @@ plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./opera
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking register \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.sender <use-your-own-account-address>
 ```
 
 오퍼레이터의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.
@@ -265,9 +265,9 @@ plasma-evm $ curl -X POST \
 아래 명령어를 통해, 오퍼레이터의 `MTON` 잔고를 확인한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id>
 ```
 
 아래 예시와 같이, 오퍼레이터 계정이 보유하고 있는 잔고를 `MTON Balance` 란에서 확인할 수 있다.
@@ -305,10 +305,10 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTO
 ```bash
 plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.sender <use-your-own-account-address>
 ```
 
 `staking`의 하위 명령어인 `stake` 를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이크 한다.
@@ -316,10 +316,10 @@ plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.sender <use-your-own-account-address>
 ```
 
 또는, 위 두 과정을 `stakeTON` 명령어로 한번에 처리 할 수 있다.
@@ -327,10 +327,10 @@ plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.sender <use-your-own-account-address>
 ```
 
 ## MTON 커밋 보상 확인 및 인출
@@ -350,8 +350,8 @@ plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
 ```bash
 plasma-evm $ build/bin/geth --nousb \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --operator 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --operator <use-your-own-account-address> \
             --operator.password pwd.pass
 ```
 
@@ -387,12 +387,12 @@ console에 `eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], valu
 `staking balances` 명령어를 사용하여, 오퍼레이터가 받은 MTON의 시뇨리지 발행을 확인한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.sender <use-your-own-account-address>
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
@@ -426,10 +426,10 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0
 ```bash
 plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 510.0 \
               --datadir ./operator \
-              --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-              --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+              --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+              --unlock <use-your-own-account-address> \
               --password pwd.pass \
-              --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+              --rootchain.sender <use-your-own-account-address>
 ```
 
 오퍼레이터의 WTON 잔고가 510 이상 있다면 출금 요청이 정상적으로 처리된다.
@@ -447,10 +447,10 @@ b07f4d
 다시 오퍼레이터의 잔고를 확인해보면 `Pending withdrawal ..` 에 요청한 510.0 WTON 가 나타난다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --rootchain.sender <use-your-own-account-address>
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
@@ -475,19 +475,19 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="10 WT
 ```bash
 plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
               --datadir ./operator \
-              --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-              --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+              --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+              --unlock <use-your-own-account-address> \
               --password pwd.pass \
-              --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+              --rootchain.sender <use-your-own-account-address>
 ```
 
 `processWithDrawal` 이 정상적으로 처리된 경우 잔고 확인 해보면 510 증가된 1,010 WTON 확인 가능하다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking balances 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
-            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --rootchain.sender <use-your-own-account-address>
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
