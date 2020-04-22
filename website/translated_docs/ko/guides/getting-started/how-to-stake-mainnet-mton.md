@@ -18,12 +18,12 @@ MTON 이란, 토카막 네트워크 마켓팅을 위해 이더리움 메인넷�
 
 **컨트렉트 정보**
 
-    "TON": "0xe3a87a9343d262f5f11280058ae807b45aa34669",
-    "WTON": "0x57b7D965082CB6015a89AE1E7df18231A39e1a30",
-    "RootChainRegistry": "0x5C7F8e605dC7B276a501A27EBc1de756c206c333",
-    "DepositManager": "0xB993793d7a3641b8b7A099D0D2D7ae8A36F849FC",
-    "SeigManager": "0x53B9d6c605B27FFDFea787566f21F776c0197805",
-    "PowerTON": "0x21CDEDEF641Ea65F5BF7e0A0031b20647BD9d0eD"
+    TON: "0xe3a87a9343D262F5f11280058ae807B45aa34669",
+    WTON: "0xaB60b3D3DE4921ff90C099382cd37c175b30a420"
+    RootChainRegistry: "0xd58aFe5d56651F32B12B103abf5E92d6Ac4525AA"
+    DepositManager: "0x93824AE96C32BecA71bFaf76622E760cbd160472"
+    SeigManager: "0x1c7c64BC54db07Ac8F9A827E7576e87EDA2CabD2"
+    PowerTON: "0xDfa6102bC115750D86CDBE37f64Dd9a3DB29Eb0b"
 
 > 위 `TON` 토큰 주소는 `MTON` 토큰의 주소이다. 이후 CLI 에서 출력되는 `TON`에 대한 정보도 모두 `MTON`이다. 그리고 `MTON`에서 전환된 `WTON`은 차후에 발행될 `TON`에서 변환되는 `WTON` 과 다르며 호환되지 않는다.
 
