@@ -470,6 +470,7 @@ plasma-evm 의 `geth` 는 TON 스테이킹 기능을 위해 `manage-staking` 과
 | swapToTON  |  amount*            | Float or Int       | `WTON`을 `TON` 으로 변환하는 트랜잭션을 전송한다. `TON` 으로 변환할 `WTON`의 수량을 입력인자로 사용한다.대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다.  |
 | stakeTON   |  amount*            | Float or Int  | 이 명령어는 `swapFromTON` 과 `stakeWTON` 을 하나의 명령어로 처리. 오퍼레이터가 입력한 `amount`의 만큼의 `TON`을 스테이크된 상태(staked status)로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
 | stakeWTON  |  amount*            | Float or Int  | TON의 시뇨리지를 받기 위해 `WTON`을 스테이킹 해야 한다. 오퍼레이터가 입력한 `amount`의 만큼의 `WTON`을 스테이크된 상태로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
+| restake  | numRequests         | Int       | `requestWithdrawal` 로 인해 인출 대기중인 `WTON`을 다시 스테이크 상태로 되돌린다. 다시말해 `requestWithdrawal`을 취소하는 트랜잭션을 전송한다. 기본값은 0이며, 이경우 Pending 상태의 모든 `requestWithdrawal` 을 취소한다. 입력인자값에 해당하는 `requestWithdrawal` 을 취소한다. |
 | requestWithdrawal  |  amount*            | Float or Int       | 스테이킹된 상태의 `WTON` 을 언-스테킹크 상태로 전환하는 트랜잭션을 전송한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. 언스테이크 요청(i.e requestWithdrawal) 은 `depositManager` 에서 설정한 `withdrawalDelay` 만큼의 블록이 진행된 이후 처리가능한 상태가 된다. |
 | processWithdrawal  | numRequests         | Int       | `requestWithdrawal` 을 통해 등록된 `WTON` 언스테이킹을 완료한다. 입력인자 미입력시 완료 가능한 모든 `requestWithdrawal`이 처리 된다. |
 
