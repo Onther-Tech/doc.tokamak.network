@@ -46,8 +46,8 @@ Create `deploy.operator1.sh` by running following command.
 ```bash
 plasma-evm$ cat > deploy.operator1.sh << "EOF"
 #!/bin/bash
-OPERATOR_KEY="bfaa65473b85b3c33b2f5ddb511f0f4ef8459213ada2920765aaac25b4fe38c5"
-OPERATOR="0x3cd9f729c8d882b851f8c70fb36d22b391a288cd"
+OPERATOR_KEY="86e60281da515184c825c3f46c7ec490b075af1e74607e2e9a66e3df0fa22122"
+OPERATOR="0x5e3230019fed7ab462e3ac277e7709b9b2716b4f"
 
 DATADIR=.pls.staking/operator1
 
@@ -146,16 +146,16 @@ Register the rootchain address of operator plasma chain to the stake manager con
 plasma-evm $ build/bin/geth --nousb manage-staking register \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
-            --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+            --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
             --password pwd.pass \
-            --rootchain.sender 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd
+            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
 ```
 
 If rootchain address is successfully registered, you will see the following message.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
 INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
@@ -174,11 +174,11 @@ plasma-evm$ build/bin/geth \
     --syncmode='full' \
     --networkid 102 \
     --rootchain.url ws://127.0.0.1:8546 \
-    --operator 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+    --operator 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
     --port 30306 \
     --nat extip:::1 \
     --maxpeers 50 \
-    --unlock 0x3cd9f729c8d882b851f8c70fb36d22b391a288cd \
+    --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
     --password pwd.pass \
     --nodekeyhex e854e2f029be6364f0f961bd7571fd4431f99355b51ab79d23c56506f5f1a7c3 \
     --mine \

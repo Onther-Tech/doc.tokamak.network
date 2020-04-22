@@ -294,7 +294,9 @@ INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTO
 
 ### MTON 스테이킹
 
-`MTON`을 스테이킹 하려면 `WTON`으로 변환한 후, `WTON`을 `depositManager` 컨트랙트에 `stake` 해주어야 한다.
+#### 방법 1 : MTON -> WTON -> Stake
+
+`MTON`을 스테이킹 하려면 `WTON`으로 변환한 후, 변환된 `WTON`을 `depositManager` 컨트랙트에 스테이킹 하는 과정을 담고 있다.
 
 실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이킹 되는 토큰은 WTON 이다.
 
@@ -311,7 +313,7 @@ plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
             --rootchain.sender <use-your-own-account-address>
 ```
 
-`staking`의 하위 명령어인 `stake` 를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.
+`staking`의 하위 명령어인 `stakeWTON`을 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
@@ -322,7 +324,9 @@ plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
             --rootchain.sender <use-your-own-account-address>
 ```
 
-또는, 위 두 과정을 `stakeTON` 명령어로 한번에 처리 할 수 있다.
+#### 방법 2 : TON -> Stake
+
+`stakeTON` 명령을 이용하면 TON을 WTON으로 스왑하지 않고 더 간편하게 스테이킹 하는것도 가능하다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
@@ -389,10 +393,7 @@ console에 `eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], valu
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
-            --unlock <use-your-own-account-address> \
-            --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id>
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
@@ -449,8 +450,7 @@ b07f4d
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id>
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
@@ -486,8 +486,7 @@ plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id>
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
