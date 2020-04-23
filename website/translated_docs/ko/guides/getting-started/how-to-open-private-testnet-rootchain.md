@@ -159,12 +159,12 @@ go-ethereum $ bash run.rootchain.sh
 
 ```bash
 go-ethereum $ cd ~
-$ git clone -b v0.0.0-rc6.0 https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc7.1 https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm
 plasma-evm $
 ```
 
-이 문서는 master 브랜치의 [v0.0.0-rc6.0 : 16e9e0310fa180a360a870dac88e1c098489826b](https://github.com/Onther-Tech/plasma-evm/tree/16e9e0310fa180a360a870dac88e1c098489826b) 커밋을 기준으로 진행된다.
+이 문서는 master 브랜치의 [v0.0.0-rc7.1 : 22f9189cff2e6df84272e07df6e785eafe2dab13](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.1) 커밋을 기준으로 진행된다.
 
 `Plasma-evm` 의 실행파일인 `geth` 생성을 위해 아래 명령어를 입력한다.
 
