@@ -17,11 +17,11 @@ sidebar_label: Rinkeby Testnet Staking
 **컨트렉트 정보**
 
       TON: "0xDb9dF6d0bf6cB810B81463fe0f7D12fC7450D95b"
-      WTON: "0x2a074b5a09eF1bB39B7bc2b858DC32e2D36e972F"
-      RootChainRegistry: "0x49f9D1a305367612EDD499a57B07588cDb4265b6"
-      DepositManager: "0x231A9b71b105B35252F9C7d9D3Af4d11Abd99f53"
-      SeigManager: "0x5d7B58680a2105415A9BE3Cf9c4529d05D07ce82"
-      PowerTON: "0x2062e4D15Bb30c605fdc2C6a0FB63152450635a5"
+      WTON: "0x47cd159dDae862E08e878702aDd376dA822dfC11"
+      RootChainRegistry: "0xc35c7CbE81249E421627C6a796858Eb77682DC88"
+      DepositManager: "0x10BB979D7e37AE2a3cc08619988B4c55714d0C8C"
+      SeigManager: "0x9e2bec5836D0c3A561b5E2554A6BC5D80ce2e0c3"
+      PowerTON: "0xF7b5a164348483dB1758f923e3be9a03bDbE0639"
 
 해당 정보는 [Dashboard API](https://dashboard-api.tokamak.network/managers?network=rinkeby)를 통해 확인 할 수 있다.
 
@@ -261,6 +261,43 @@ plasma-evm $ curl -X POST \
 이미 `ChainId`가 등록되어 있는 경우 아래와 같은 응답메시지가 수신된다.
 
 `{"error":"Already registered","description":"Something went wrong. Please try again or contact support."}`
+
+### 커미션 설정
+
+오퍼레이터가 아닌 일반 사용자들로부터 `TON`을 위임받을 수 있다. 이때, 오퍼레이터는 위임 받은 `TON` 에서 발생한 시뇨리지의 커미션, 즉 수수료를 정할 수 있다.
+
+커미션 비율은 초기 루트체인 컨트랙트를 등록하거나, 오퍼레이터가 자식체인을 운영하는 도중에서도 변경 가능하다.
+
+커미션 비율은 최소 0.01 부터 1.0 까지, 100분위로 설정 할 수 있다. 예를 들어 아래와 같이 커미션 비율을 `0.01`로 설정한 경우 위임으로 인해 발생한 시뇨리지의 1% 를 오퍼레이터 계정에 지급된다.
+
+또한, 마이너스 커미션 또한 설정이 가능하다. 이는 최대 -0.01 부터 -1.0 까지 설정 할 수 있다. 예를들어 -0.05 로 설정한 경우 오퍼레이터는 위임자에게 시뇨리지를 50% 더 지급할 수 있다.
+
+정리하자면, 커미션 비율은 최소 -1.0 부터 +1.0 까지 설정 가능하고, -0.01  에서 +0.01 까지 는 설정 불가능 하다.
+
+아래 `setCommissionRate` 명령어를 통해 오퍼레이터의 커미션을 설정할 수 있다.
+
+```bash
+plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
+            --datadir ./operator \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+```
+
+만약, 마이너스 커미션을 설정하고 싶다면 가장 마지막에 입력인자를 `--` 와 함께 사용한다.
+
+```bash
+plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate \
+            --datadir ./operator \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            -- -0.01
+```
+
+커미션을 설정을 하지 않는다면, 기본값인 0으로 설정된다. 이때는 위임에 따른 수수료 또는 추가적인 보상이 발생하지 않는다.
 
 ### TON 잔고 확인
 

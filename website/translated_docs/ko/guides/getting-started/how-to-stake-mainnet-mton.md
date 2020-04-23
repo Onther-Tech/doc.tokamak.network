@@ -19,11 +19,11 @@ MTON 이란, 토카막 네트워크 마켓팅을 위해 이더리움 메인넷�
 **컨트렉트 정보**
 
     TON: "0xe3a87a9343D262F5f11280058ae807B45aa34669",
-    WTON: "0xaB60b3D3DE4921ff90C099382cd37c175b30a420"
-    RootChainRegistry: "0xd58aFe5d56651F32B12B103abf5E92d6Ac4525AA"
-    DepositManager: "0x93824AE96C32BecA71bFaf76622E760cbd160472"
-    SeigManager: "0x1c7c64BC54db07Ac8F9A827E7576e87EDA2CabD2"
-    PowerTON: "0xDfa6102bC115750D86CDBE37f64Dd9a3DB29Eb0b"
+    WTON: "0x2285D7dE7b89F87D3a5F2B1395f204e948Ed0842"
+    RootChainRegistry: "0xD0547b1A072BaCAD9F806Ed192229d3586A53d6d"
+    DepositManager: "0xb70c9ad366ada1c68181cf45eeb210a4c3358e91"
+    SeigManager: "0x3d3C6783De2B42AeCd7a04fCDb73f5ffF1863018"
+    PowerTON: "0xebdf5570da6268fa281a47bac7bc5fe906eadb52"
 
 > 위 `TON` 토큰 주소는 `MTON` 토큰의 주소이다. 이후 CLI 에서 출력되는 `TON`에 대한 정보도 모두 `MTON`이다. 그리고 `MTON`에서 전환된 `WTON`은 차후에 발행될 `TON`에서 변환되는 `WTON` 과 다르며 호환되지 않는다.
 
@@ -259,6 +259,43 @@ plasma-evm $ curl -X POST \
 이미 `ChainId`가 등록되어 있는 경우 아래와 같은 응답메시지가 수신된다.
 
 `{"error":"Already registered","description":"Something went wrong. Please try again or contact support."}`
+
+### 커미션 설정
+
+오퍼레이터가 아닌 일반 사용자들로부터 `TON`을 위임받을 수 있다. 이때, 오퍼레이터는 위임 받은 `TON` 에서 발생한 시뇨리지의 커미션, 즉 수수료를 정할 수 있다.
+
+커미션 비율은 초기 루트체인 컨트랙트를 등록하거나, 오퍼레이터가 자식체인을 운영하는 도중에서도 변경 가능하다.
+
+커미션 비율은 최소 0.01 부터 1.0 까지, 100분위로 설정 할 수 있다. 예를 들어 아래와 같이 커미션 비율을 `0.01`로 설정한 경우 위임으로 인해 발생한 시뇨리지의 1% 를 오퍼레이터 계정에 지급된다.
+
+또한, 마이너스 커미션 또한 설정이 가능하다. 이는 최대 -0.01 부터 -1.0 까지 설정 할 수 있다. 예를들어 -0.05 로 설정한 경우 오퍼레이터는 위임자에게 시뇨리지를 50% 더 지급할 수 있다.
+
+정리하자면, 커미션 비율은 최소 -1.0 부터 +1.0 까지 설정 가능하고, -0.01  에서 +0.01 까지 는 설정 불가능 하다.
+
+아래 `setCommissionRate` 명령어를 통해 오퍼레이터의 커미션을 설정할 수 있다.
+
+```bash
+plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
+            --datadir ./operator \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510
+```
+
+만약, 마이너스 커미션을 설정하고 싶다면 가장 마지막에 입력인자를 `--` 와 함께 사용한다.
+
+```bash
+plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate \
+            --datadir ./operator \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194 \
+            --unlock 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            --password pwd.pass \
+            --rootchain.sender 0x57ab89f4eabdffce316809d790d5c93a49908510 \
+            -- -0.01
+```
+
+커미션을 설정을 하지 않는다면, 기본값인 0으로 설정된다. 이때는 위임에 따른 수수료 또는 추가적인 보상이 발생하지 않는다.
 
 ### MTON 잔고 확인
 
