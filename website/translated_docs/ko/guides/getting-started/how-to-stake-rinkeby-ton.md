@@ -17,11 +17,11 @@ sidebar_label: Rinkeby Testnet Staking
 **컨트렉트 정보**
 
       TON: "0xDb9dF6d0bf6cB810B81463fe0f7D12fC7450D95b"
-      WTON: "0x47cd159dDae862E08e878702aDd376dA822dfC11"
-      RootChainRegistry: "0xc35c7CbE81249E421627C6a796858Eb77682DC88"
-      DepositManager: "0x10BB979D7e37AE2a3cc08619988B4c55714d0C8C"
-      SeigManager: "0x9e2bec5836D0c3A561b5E2554A6BC5D80ce2e0c3"
-      PowerTON: "0xF7b5a164348483dB1758f923e3be9a03bDbE0639"
+      WTON: "0xb51c4B4685B800E1159799d8BeD5CA042f0C48B6"
+      RootChainRegistry: "0x93c7f2d4a01bA2f18D404580c05d89E34D7CF4b0"
+      DepositManager: "0xC304773D35DdD4774d741EA91f34B15D6d46A322"
+      SeigManager: "0x1186b2af95f49902d5C8889FB8a958CE64da8488"
+      PowerTON: "0xfC079387CD35270E9A067A72a1372249169121c6"
 
 해당 정보는 [Dashboard API](https://dashboard-api.tokamak.network/managers?network=rinkeby)를 통해 확인 할 수 있다.
 

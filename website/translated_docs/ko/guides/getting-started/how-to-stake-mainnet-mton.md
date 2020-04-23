@@ -19,11 +19,11 @@ MTON 이란, 토카막 네트워크 마켓팅을 위해 이더리움 메인넷�
 **컨트렉트 정보**
 
     TON: "0xe3a87a9343D262F5f11280058ae807B45aa34669",
-    WTON: "0x2285D7dE7b89F87D3a5F2B1395f204e948Ed0842"
-    RootChainRegistry: "0xD0547b1A072BaCAD9F806Ed192229d3586A53d6d"
-    DepositManager: "0xb70c9ad366ada1c68181cf45eeb210a4c3358e91"
-    SeigManager: "0x3d3C6783De2B42AeCd7a04fCDb73f5ffF1863018"
-    PowerTON: "0xebdf5570da6268fa281a47bac7bc5fe906eadb52"
+    WTON: "0xcDB18cd1f6763a93287d20598427A50d3Ba9977f"
+    RootChainRegistry: "0xeE0aF430528311d2b48880E9055FB9f26fd64022"
+    DepositManager: "0xa8f67b988f3227158146da1C1c4854d2DCcdE67D"
+    SeigManager: "0x2104cEC955b6FaBF603d8B2Ee0c28EA88886fa8C"
+    PowerTON: "0x8a5A36F16dd9eD0032cfce1a0496e543B6c72098"
 
 > 위 `TON` 토큰 주소는 `MTON` 토큰의 주소이다. 이후 CLI 에서 출력되는 `TON`에 대한 정보도 모두 `MTON`이다. 그리고 `MTON`에서 전환된 `WTON`은 차후에 발행될 `TON`에서 변환되는 `WTON` 과 다르며 호환되지 않는다.
 
