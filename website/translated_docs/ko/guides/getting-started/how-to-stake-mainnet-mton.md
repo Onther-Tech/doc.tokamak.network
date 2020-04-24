@@ -18,12 +18,12 @@ MTON 이란, 토카막 네트워크 마켓팅을 위해 이더리움 메인넷�
 
 **컨트렉트 정보**
 
-    "TON": "0xe3a87a9343d262f5f11280058ae807b45aa34669",
-    "WTON": "0x57b7D965082CB6015a89AE1E7df18231A39e1a30",
-    "RootChainRegistry": "0x5C7F8e605dC7B276a501A27EBc1de756c206c333",
-    "DepositManager": "0xB993793d7a3641b8b7A099D0D2D7ae8A36F849FC",
-    "SeigManager": "0x53B9d6c605B27FFDFea787566f21F776c0197805",
-    "PowerTON": "0x21CDEDEF641Ea65F5BF7e0A0031b20647BD9d0eD"
+    TON: "0xe3a87a9343D262F5f11280058ae807B45aa34669",
+    WTON: "0xcDB18cd1f6763a93287d20598427A50d3Ba9977f"
+    RootChainRegistry: "0xeE0aF430528311d2b48880E9055FB9f26fd64022"
+    DepositManager: "0xa8f67b988f3227158146da1C1c4854d2DCcdE67D"
+    SeigManager: "0x2104cEC955b6FaBF603d8B2Ee0c28EA88886fa8C"
+    PowerTON: "0x8a5A36F16dd9eD0032cfce1a0496e543B6c72098"
 
 > 위 `TON` 토큰 주소는 `MTON` 토큰의 주소이다. 이후 CLI 에서 출력되는 `TON`에 대한 정보도 모두 `MTON`이다. 그리고 `MTON`에서 전환된 `WTON`은 차후에 발행될 `TON`에서 변환되는 `WTON` 과 다르며 호환되지 않는다.
 
@@ -74,10 +74,10 @@ Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬
 먼저, 소스코드를 다운로드 받는다.
 
 ```bash
-$ git clone -b v0.0.0-rc6.0 https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc7.1 https://github.com/onther-tech/plasma-evm
 ```
 
-> 이 문서는 master 브랜치의 [v0.0.0-rc6.0 : 16e9e0310fa180a360a870dac88e1c098489826b](https://github.com/Onther-Tech/plasma-evm/tree/16e9e0310fa180a360a870dac88e1c098489826b) 커밋을 기준으로 작성되었다.
+> 이 문서는 master 브랜치의 [v0.0.0-rc7.1 : 22f9189cff2e6df84272e07df6e785eafe2dab13](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.1) 커밋을 기준으로 작성되었다.
 
 소스코드 다운로드 후, `plasma-evm` 디렉토리로 이동하여 아래 `make` 명령어로 실행  가능한 `geth` 파일을 생성한다.
 
@@ -260,6 +260,60 @@ plasma-evm $ curl -X POST \
 
 `{"error":"Already registered","description":"Something went wrong. Please try again or contact support."}`
 
+### 커미션 설정
+
+오퍼레이터가 아닌 일반 사용자들로부터 `MTON`을 위임받을 수 있다. 이때, 오퍼레이터는 위임 받은 `MTON` 에서 발생한 시뇨리지의 커미션, 즉 수수료를 정할 수 있다.
+
+커미션 비율은 초기 루트체인 컨트랙트를 등록하거나, 오퍼레이터가 자식체인을 운영하는 도중에서도 변경 가능하다.
+
+커미션 비율은 최소 -1.00 부터 1.00 까지 입력값을 사용하여, -100% 부터 100% 까지 설정 할 수 있다.
+
+다음은, 오퍼레이터의 커미션 설정에 따른 시뇨리지 보상에 대한 예시이다.
+
+- Commission Rate `0.0` : 기본값 설정값. 사용자는 위임한 토큰에 대한 시뇨리지 보상을 그대로 가져가게 되며, 오퍼레이터는 자신이 스테이킹한 `MTON`의 보상만 받게 된다.
+- Commission Rate `0.5` : 사용자가 위임한 `MTON`에서 발생한 시뇨리지의 50% 를 오퍼레이터 계정에 수수료로 지급. 사용자는 시뇨리지의 50% 를 받게 된다.
+- Commission Rate `1.0` : 오퍼레이터는 자신에게 위임받은 `MTON`의 시뇨리지를 모두 갖는다. 사용자는 자신이 위임한 `MTON`에 대한 시뇨리지 보상을 받지 못한다.
+- Commission Rate `-0.5` : 오퍼레이터가 스테이킹한 `MTON`에서 발생한 시뇨리지의 50%를 위임한 사용자들에게 추가로 보상된다.
+- Commission Rate `-1.0` : `MTON`을 위임한 사용자는 오퍼레이터의 스테이킹한 `MTON`에서 발생한 **모든** 시뇨리지를 추가로 분배 받는다.
+
+오퍼레이터가 150 `MTON` 을 스테이킹 하고, 사용자 A와 B 는 각각 50, 100 `MTON`을 위임하였다고 가정해보자. 그리고 이에 대한 시뇨리지 보상인 30 `WTON` 이 생성된다고 가정할때, 커미션에 따라 사용자와 오퍼레이터가 받는 시뇨리지 보상을 정리하자면 다음과 같다.
+
+| Commission Rate | User A(Delegated : 50)   | User B(Delegated : 100)   | Operator(Staked : 150)   | Seigniorage of 300 TON |
+|-----------------|--------------------------|---------------------------|--------------------------|------------------------|
+| 0               | 5                        | 10                        | 15                       | 30 WTON                |
+| 0.01            | 4.95                     | 9                         | 16.5                     | 30 WTON                |
+| 0.5             | 2.5                      | 5                         | 22.5                     | 30 WTON                |
+| 1.0             | 0                        | 0                         | 30                       | 30 WTON                |
+| -0.5            | 7.5                      | 15                        | 7.5                      | 30 WTON                |
+| -1.0            | 10                       | 20                        | 0                        | 30 WTON                |
+
+> 커미션이 없는 0은 제외 하고, -0.009 ~ +0.009 값은 커미션 비율로 설정 할 수 없다.
+
+아래 `setCommissionRate` 명령어를 통해 오퍼레이터의 커미션을 설정할 수 있다.
+
+```bash
+plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
+            --datadir ./operator \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --unlock <use-your-own-account-address> \
+            --password pwd.pass \
+            --rootchain.sender <use-your-own-account-address>
+```
+
+만약, 마이너스 커미션을 설정하고 싶다면 가장 마지막에 입력인자를 `--` 와 함께 사용한다.
+
+```bash
+plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate \
+            --datadir ./operator \
+            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --unlock <use-your-own-account-address> \
+            --password pwd.pass \
+            --rootchain.sender <use-your-own-account-address>
+            -- -0.01
+```
+
+커미션을 설정을 하지 않는다면, 기본값인 0으로 설정된다. 이때 위임에 따른 수수료 또는 마이너스 커미션에 따른 추가적인 보상이 발생하지 않는다.
+
 ### MTON 잔고 확인
 
 아래 명령어를 통해, 오퍼레이터의 `MTON` 잔고를 확인한다.
@@ -287,7 +341,8 @@ INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTO
 INFO [01-01|00:00:00.000] Total Stake                              amount="500.0 WTON"
 INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
 INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                          amount="0 WTON"      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 ```
 
 위 예시는 `0x3cD9F7...` 계정에 10,000 MTON 을 보유하고 있다.
@@ -409,7 +464,8 @@ INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTO
 INFO [01-01|00:00:00.000] Total Stake                              amount="1100.0 WTON"
 INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="1100.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080
 INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="100.0 WTON"    rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Committed Stake                           amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x57ab89f4eAbDfFCe316809D790D5c93a49908510
+INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 ```
 
 위 결과는 예시이며, 실제 스테이킹된 시간에 따라 시뇨리지 `WTON`이 계산되기 때문에 소수점자리까지 나타난다.
@@ -463,9 +519,9 @@ INFO [01-01|00:00:00.000] WON Balance                              amount="500.0
 INFO [01-01|00:00:00.000] Deposit                                  amount="500.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=1
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="510.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
-24305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="10 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                           amount="10 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 ```
 
 최종 인출을 위해 `processWithdrawal` 명령어를 사용한다.
@@ -499,7 +555,7 @@ INFO [01-01|00:00:00.000] WON Balance                              amount="1010.
 INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
-24305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
-INFO [01-01|00:00:00.000] Comitted Stake                           amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                           amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 ```
