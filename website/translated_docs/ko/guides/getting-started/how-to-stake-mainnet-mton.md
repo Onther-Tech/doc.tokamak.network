@@ -353,11 +353,13 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 
 ### MTON 스테이킹
 
-`TON`을 스테이킹 하려면, `staking`의 하위 명령어인 `stakeTON`을 사용한다.
+> `MTON`을 얻는 방법에 대해서는 [What is MTON](https://medium.com/onther-tech/what-is-mton-80c011bb927e)을 참고한다.
+
+`MTON`을 스테이킹 하려면, `staking`의 하위 명령어인 `stakeTON`을 사용한다.
 
 > 이때 하위 명령어인 `stakeTON` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
 
-아래, `stakeTON` 하위 명령어를 사용하여 `TON`을 스테이킹 한다.
+아래, `stakeTON` 하위 명령어를 사용하여 `MTON`을 스테이킹 한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
