@@ -355,6 +355,8 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 
 > `MTON`을 얻는 방법에 대해서는 [What is MTON](https://medium.com/onther-tech/what-is-mton-80c011bb927e)을 참고한다.
 
+오퍼레이터 계정에 반드시 스테이킹을 위한 `MTON` 잔고가 있어야 한다. 아직 오퍼레이터 계정에 `MTON` 잔고가 없다면, `MTON` 보유하고 있는 계정에서 옮겨와야 한다.
+
 `MTON`을 스테이킹 하려면, `staking`의 하위 명령어인 `stakeTON`을 사용한다.
 
 > 이때 하위 명령어인 `stakeTON` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
