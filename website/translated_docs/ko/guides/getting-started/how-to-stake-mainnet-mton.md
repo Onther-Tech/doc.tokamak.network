@@ -124,6 +124,8 @@ plasma-evm $ echo "<do-not-use-this-password-use-your-own-password>" > pwd.pass
 
 ### 루트체인 컨트랙트 배포
 
+> 오퍼레이터 계정에는 최소 0.5 ETH 이상 잔고가 있어야 컨트랙트 배포가 원할하다.
+
 `plasma-evm/operator` 폴더 안에 키파일이 생성된다. 이 키파일은 오퍼레이터 노드 운영에 있어 중요한 파일이므로 보안에 유의하여야 한다.
 
 다음은 루트체인 컨트랙트 배포 커맨드인 `deploy`에 대한 설명이다.
