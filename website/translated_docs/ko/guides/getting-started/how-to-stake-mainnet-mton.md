@@ -262,6 +262,8 @@ plasma-evm $ curl -X POST \
 
 `{"error":"Already registered","description":"Something went wrong. Please try again or contact support."}`
 
+위 메시지가 출력되는경우, [ChainID 확인](#chainid-확인)을 다시 수행하여 중복되는 `ChainId`가 있는지 확인한다.
+
 ### 커미션 설정
 
 오퍼레이터가 아닌 일반 사용자들로부터 `MTON`을 위임받을 수 있다. 이때, 오퍼레이터는 위임 받은 `MTON` 에서 발생한 시뇨리지의 커미션, 즉 수수료를 정할 수 있다.
