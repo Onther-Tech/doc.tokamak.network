@@ -349,39 +349,11 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 
 ### MTON 스테이킹
 
-#### 방법 1 : MTON -> WTON -> Stake
+`TON`을 스테이킹 하려면, `staking`의 하위 명령어인 `stakeTON`을 사용한다.
 
-`MTON`을 스테이킹 하려면 `WTON`으로 변환한 후, 변환된 `WTON`을 `depositManager` 컨트랙트에 스테이킹 하는 과정을 담고 있다.
+> 이때 하위 명령어인 `stakeTON` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
 
-실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이킹 되는 토큰은 WTON 이다.
-
-아래 명령어를 사용하여, 1,000 MTON을 WTON으로 변환한다.
-
-> 이때 하위 명령어인 `swapFromTON` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
-
-```bash
-plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
-            --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
-            --unlock <use-your-own-account-address> \
-            --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
-```
-
-`staking`의 하위 명령어인 `stakeWTON`을 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.
-
-```bash
-plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
-            --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
-            --unlock <use-your-own-account-address> \
-            --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
-```
-
-#### 방법 2 : TON -> Stake
-
-`stakeTON` 명령을 이용하면 TON을 WTON으로 스왑하지 않고 더 간편하게 스테이킹 하는것도 가능하다.
+아래, `stakeTON` 하위 명령어를 사용하여 `TON`을 스테이킹 한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
@@ -391,6 +363,8 @@ plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
             --password pwd.pass \
             --rootchain.sender <use-your-own-account-address>
 ```
+
+실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 `depositManager`에 스테이킹 되는 토큰은 WTON 이다.
 
 ## MTON 커밋 보상 확인 및 인출
 
