@@ -66,7 +66,7 @@ plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 WARN [01-01|00:00:00.000] Allowances is inefficient                current=0 target=1000.0 diff=1000.0
 WARN [01-01|00:00:00.000] Approve to deposit TON                   amount=1000.0
@@ -176,7 +176,7 @@ INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
 INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.staking/operator1/geth/genesis.json
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 INFO [01-01|00:00:00.000] TON Balance                              amount="10000.0 TON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
 INFO [01-01|00:00:00.000] WTON Balance                             amount="0 WTON"      depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
@@ -301,7 +301,7 @@ INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x515B385bDc89bCc29077f2B00a88622883bfb498
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
 INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.staking/operator2/geth/genesis.json
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator2/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator2/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
 INFO [01-01|00:00:00.000] WTON Balance                             amount="500.0 WTON" depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
@@ -309,9 +309,9 @@ INFO [01-01|00:00:00.000] Deposit                                  amount="500.0
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
 INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON"     rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
 INFO [01-01|00:00:00.000] Total Stake                              amount="1100.0 WTON"
-INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="1100.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080
-INFO [01-01|00:00:00.000] Uncommitted Stake                        amount="100.0 WTON"    rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
-INFO [01-01|00:00:00.000] Committed Stake                          amount="500.0 WTON"  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
+INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="1100.0 WTON" rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080
+INFO [01-01|00:00:00.000] Uncommitted Stake                        amount="0 WTON" rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
+INFO [01-01|00:00:00.000] Committed Stake                          amount="600.0 WTON" rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
 INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 ```
 
@@ -325,10 +325,10 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 
 이 과정은 `오퍼레이터1`이 받은 시뇨리지에 대한 인출 과정을 담고있다.
 
-TON의 인출을 위해서는 `staking`의 하위 명령어인 `requestWithdrawal`을 사용한다. 505 WTON 인출을 위해 아래와 같이 입력한다.
+TON의 인출을 위해서는 `staking`의 하위 명령어인 `requestWithdrawal`을 사용한다. 550 WTON 인출을 위해 아래와 같이 입력한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 505.0 \
+plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 550.0 \
               --datadir ./.pls.staking/operator1 \
               --rootchain.url ws://127.0.0.1:8546 \
               --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -336,19 +336,18 @@ plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 505.0 \
               --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
 ```
 
-`오퍼레이터1`의 WTON 잔고가 505 이상 있다면 출금 요청이 정상적으로 처리된다.
+`오퍼레이터1`의 `Committed Stake` 잔고가 550 이상 있다면 출금 요청이 정상적으로 처리된다.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] Withdrawal requested                     rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 amount="505.0 WTON" tx=570061…
-b07f4d
+INFO [01-01|00:00:00.000] Withdrawal requested                     rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 amount="550.0 WTON" tx=570061…b07f4d
 ```
 
-다시 오퍼레이터1의 잔고를 확인해보면 `Pending withdrawal ..` 에 요청한 505.0 WTON이 나타난다.
+다시 오퍼레이터1의 잔고를 확인해보면 `Pending withdrawal ..` 에 요청한 550.0 WTON이 나타난다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -356,18 +355,20 @@ plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277
             --rootchain.url ws://127.0.0.1:8546
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.staking/operator1/geth/genesis.json
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=operator/geth/genesis.json
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/operator/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] WTON Balance                             amount="500.0 WTON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Deposit                                  amount="500.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WON Balance                              amount="500.0 WTON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Deposit                                  amount="500.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=1
-INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="505.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Uncommitted Stake                        amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Committed Stake                          amount="10 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="550.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Total Stake                              amount="1100.0 WTON"
+INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                          amount="50.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 ```
 
@@ -382,7 +383,7 @@ plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
               --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
 ```
 
-`processWithDrawal`이 정상적으로 처리된 이후에 잔고가 505 WTON이 증가된 1,005 WTON으로 늘어난 것을 확인할 수 있다.
+`processWithDrawal`이 정상적으로 처리된 이후에 잔고가 550 WTON이 증가된 1,050 WTON으로 늘어난 것을 확인할 수 있다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -390,19 +391,20 @@ plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277
             --rootchain.url ws://127.0.0.1:8546
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
-INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.staking/operator1/geth/genesis.json
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=./operator/geth/genesis.json
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/operator/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] WTON Balance                             amount="1005.0 WTON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WON Balance                              amount="1050.0 WTON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
-INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Uncommitted Stake                        amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
-24305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Committed Stake                          amount="5 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Total Stake                              amount="550.0 WTON"
+INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                          amount="50.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 ```
 
@@ -412,10 +414,10 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 
 `staking`의 하위 명령어인 `restake`사용 하여, `Pending` 상태의 요청이 `processWithdrawal`을 통해 처리되기 전에 취소 가능하다.
 
-먼저, `Pending` 상태의 요청을 만들기 위해 `staking`의 하위 명령어인 `requestWithdrawal`을 사용한다. 5 WTON 인출을 위해 아래와 같이 입력한다.
+먼저, `Pending` 상태의 요청을 만들기 위해 `staking`의 하위 명령어인 `requestWithdrawal`을 사용한다. 50 WTON 인출을 위해 아래와 같이 입력한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 5.0 \
+plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 50.0 \
               --datadir ./.pls.staking/operator1 \
               --rootchain.url ws://127.0.0.1:8546 \
               --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -423,7 +425,7 @@ plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 5.0 \
               --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
 ```
 
-오퍼레이터1의 잔고를 확인해보면 `Pending withdrawal ..` 에 요청한 5.0 WTON이 나타난다.
+오퍼레이터1의 잔고를 확인해보면 `Pending withdrawal ..` 에 요청한 50.0 WTON이 나타난다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -431,19 +433,20 @@ plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277
             --rootchain.url ws://127.0.0.1:8546
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
-INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
 INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.staking/operator1/geth/genesis.json
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
-INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] WTON Balance                             amount="1005.0 WTON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WTON Balance                             amount="1050.0 WTON" depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=1
-INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="5 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Uncommitted Stake                        amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
-24305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Committed Stake                          amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="50.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Total Stake                              amount="550.0 WTON"
+INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="0.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                          amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 ```
 
@@ -451,14 +454,14 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking restake \
-              --datadir ./.pls.staking/operator2 \
-              --rootchain.url ws://127.0.0.1:8546
-              --unlock 0x515B385bDc89bCc29077f2B00a88622883bfb498 \
+              --datadir ./.pls.staking/operator1 \
+              --rootchain.url ws://127.0.0.1:8546 \
+              --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
               --password pwd.pass \
-              --rootchain.sender 0x515B385bDc89bCc29077f2B00a88622883bfb498
+              --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
 ```
 
-`restake`가 정상적으로 처리된 후, `Pending withdrawal WTON`이 5.0 WTON 만큼 감소되고 `Committed Stake`가 5.0 WTON 만큼 증가된 부분을 확인 할 수 있다.
+`restake`가 정상적으로 처리된 후, `Pending withdrawal WTON`이 50.0 WTON 만큼 감소되고 `Committed Stake`가 50.0 WTON 만큼 증가된 부분을 확인 할 수 있다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -469,17 +472,18 @@ INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
 INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.staking/operator1/geth/genesis.json
-INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/Users/jinhwan/gitrepo/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
 INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
 INFO [01-01|00:00:00.000] TON Balance                              amount="9000.0 TON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] WTON Balance                             amount="1005.0 WTON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] WTON Balance                             amount="1050.0 WTON" depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Deposit                                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
-INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Uncommitted Stake                        amount="0 WTON"                                rootchain=0x17FB80e2E16b02faC9369334
-24305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Committed Stake                          amount="5 WTON"                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
-INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Total Stake                              amount="550.0 WTON"
+INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount="50.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount="0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                          amount="50.0 WTON" rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 ```
 
 ## 하위 명령어 정리
