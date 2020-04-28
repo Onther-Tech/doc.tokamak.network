@@ -114,7 +114,9 @@ Path of the secret key file: operator/keystore/UTC--2020-01-01T00-00-00.00000000
 - You must REMEMBER your password! Without the password, it's impossible to decrypt the key!
 ```
 
-`--datadir` 입력한 경로인 `plasma-evm/operator` 에 해당 키파일이 생성된다.
+`--datadir` 입력한 경로인 `plasma-evm/operator` 에 해당 키파일이 생성된다. 이 키파일은 오퍼레이터 노드 운영에 있어 중요한 파일이므로 보안에 유의하여야 한다.
+
+이 과정에서 생성된 계정은 오퍼레이터 계정으로 사용되며, 앞으로 이글에서 `<use-your-own-account-address>`로 지칭한다.
 
 위에서 입력한 암호를 담고 있는 파일을 생성해야 한다. 바로 위 계정생성에 사용한 암호를 `<do-not-use-this-password-use-your-own-password>` 대신 사용하여 아래 명령어를 입력한다.
 
@@ -124,9 +126,33 @@ plasma-evm $ echo "<do-not-use-this-password-use-your-own-password>" > pwd.pass
 
 해당 키파일 이름은 `geth`의 `--password` 플래그의 인자로 `pwd.pass` 사용된다.
 
+### 오퍼레이터 계정 준비
+
+위 [오퍼레이터 계정 생성](#오퍼레이터-계정-생성)에서 생성한 계정("use-your-own-account-address")에 0.3 이상의 `ETH`와 스테이킹할 `TON`을 보내야한다.
+
+**METAMASK 설치 및 토큰추가**
+
+`TON` 과 `ETH` 전송은 메타마스크를 사용하는것이 편리하다.
+
+- 메타마스크에 대한 설치는 [여기](https://metamask.zendesk.com/hc/en-us/articles/360015489531-Getting-Started-With-MetaMask-Part-1-)를 참고한다.
+
+- 메타마스크에 `TON`을 추가하기 위해서는 [여기](https://metamask.zendesk.com/hc/en-us/articles/360015489031-How-to-View-Your-Tokens)를 참고한다.
+
+> `Rinkeby` 테스트 네트워크의 `TON` 토큰의 주소는 `"0xDb9dF6d0bf6cB810B81463fe0f7D12fC7450D95b"`이다.
+
+**`ETH`, `TON` 잔고 확인**
+
+메타마스크를 통해 잔고 확인이 어려운 경우, 오퍼레이터 계정으로 사용할 `<use-your-own-account-address>`주소의 `ETH` 잔고 확인은 [rinkeby.etherscan.io](https://rinkeby.etherscan.io/)를 사용한다.
+
+![Check TON balance in rinkeby.etherscan](assets/guides_check_mton_balance_etherscan.png)
+
+`TON` 잔고는 [TON Contract - rinkeby.etherscan.io](https://rinkeby.etherscan.io/token/0xDb9dF6d0bf6cB810B81463fe0f7D12fC7450D95b)에서 `Find`에 `<use-your-own-account-address>`주소를 입력하여 확인 가능하다.
+
+![TON balance result in rinkeby.etherscan](assets/guides_result_mton_balance_etherscan.png)
+
 ### 루트체인 컨트랙트 배포
 
-> 오퍼레이터 계정에는 최소 0.2 ETH 이상 잔고가 있어야 컨트랙트 배포가 원할하다.
+> [오퍼레이터 계정 준비](#오퍼레이터-계정-준비)를 통해 오퍼레이터 계정으로 사용할 `<use-your-own-account-address>`에 `ETH` 와 `TON`이 준비 되어야 한다.
 
 `plasma-evm/operator` 폴더 안에 키파일이 생성된다. 이 키파일은 오퍼레이터 노드 운영에 있어 중요한 파일이므로 보안에 유의하여야 한다.
 
