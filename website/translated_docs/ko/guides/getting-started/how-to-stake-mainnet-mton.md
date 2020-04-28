@@ -304,16 +304,20 @@ plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
             --rootchain.sender <use-your-own-account-address>
 ```
 
-만약, 마이너스 커미션을 설정하고 싶다면 가장 마지막에 입력인자를 `--` 와 함께 사용한다.
+만약, 마이너스 커미션을 설정하고 싶다면 커미션 비율 뒤에 `true` 를 추가한다.
+
+`setCommissionRate` 명령어는 입력인자 `<rate>`뒤에 추가적으로 마이너스 여부인 `<isCommissionRateNegative>`값을 받을 수 있다.
+아래와 같이 커미션 비율을 마이너스로 설정하고 싶은경우 `true` 추가 해준다.
+
+`<isCommissionRateNegative>`의 입력값이 없는 경우 기본값인 `false`가 선택된다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate \
+plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 true \
             --datadir ./operator \
             --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
             --rootchain.sender <use-your-own-account-address>
-            -- -0.01
 ```
 
 커미션을 설정을 하지 않는다면, 기본값인 0으로 설정된다. 이때 위임에 따른 수수료 또는 마이너스 커미션에 따른 추가적인 보상이 발생하지 않는다.
