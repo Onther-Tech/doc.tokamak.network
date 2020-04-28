@@ -162,29 +162,10 @@ plasma-evm $ echo "<do-not-use-this-password-use-your-own-password>" > pwd.pass
 - `PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨.
 - `EPOCH` : 루트체인에 커밋할 자식체인의 블록 단위. 예를들어 `2`로 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송한다.
 
-토카막 플라즈마는 자식체인의 수수료 지불 수단인 `스태미나(Stamina)` 기능을 제공한다. 자세한 사항은 [스태미나](https://docs.tokamak.network/docs/ko/learn/economics/tx-fee#스태미나) 참고한다.
-
-다음과 같은 플래그를 추가하여 스태미나 기본 설정값을 변경 할 수 있다. 스태미나 플래그를 사용하지 않는경우 기본값이 선택된다.
-
-- `--stamina.operatoramount` : 제네시스 블록에서 오퍼레이터가 가지는 스태미나의 양. (기본값 : 1)
-- `--stamina.mindeposit` : 스태미나로 전환 가능한 최소 ETH 수량. (기본값 : 0.5)
-- `--stamina.recoverepochlength` : 스태미나 회복 블록 주기. (기본값 : 120960)
-- `--stamina.withdrawaldelay` : ETH 출금 요청에 대한 지연 블록. (기본값 : 362880)
-
-`stamina.withdrawaldelay` 의 경우 `stamina.recoverepochlength` 의 최소 두배이상의 값을 사용하여야 한다.
-
-스태미나 기능은 자식체인의 프리컴파일(Pre-compile)된 컨트랙트로 제공된다. 모든 토카막 자식체인의 스태미나 컨트렉트 주소는 `0x000000000000000000000000000000000000dead` 로 고정되어 있다.
-
-스태미나 컨트렉트에 대한 자세한 사항은 깃허브 저장소 [stamina](https://github.com/Onther-Tech/stamina)를 참고한다.
-
 아래, `deploy` 명령어를 사용하여 루트체인 컨트랙트를 루트체인에 배포한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 false 2 \
-            --stamina.operatoramount 1 \
-            --stamina.mindeposit 0.5 \
-            --stamina.recoverepochlength 120960 \
-            --stamina.withdrawaldelay 362880 \
             --datadir ./operator \
             --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
@@ -358,7 +339,7 @@ plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-addre
             --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id>
 ```
 
-아래 예시와 같이, 오퍼레이터 계정이 보유하고 있는 잔고를 `MTON Balance` 란에서 확인할 수 있다.
+아래 예시와 같이, 오퍼레이터 계정이 보유하고 있는 잔고를 `TON Balance` 란에서 확인할 수 있다.
 
 ```bash
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
