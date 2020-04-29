@@ -438,7 +438,7 @@ INFO [01-01|00:00:00.000] Committed Stake                          amount=<span 
 INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 </code></pre>
 <p>최종 인출을 위해 <code>processWithdrawal</code> 명령어를 사용한다.</p>
-<p><code>requestWithdrawal</code> 이 포함된 블록부터 10 블록이 경과된 시점에 <code>processWithdrawal</code> 트랜잭션 전송이 가능하다.</p>
+<p><code>requestWithdrawal</code> 이 포함된 블록부터 93046 블록(약 14일)이 경과된 시점에 <code>processWithdrawal</code> 트랜잭션 전송이 가능하다.</p>
 <pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
               --datadir ./operator \
               --rootchain.url wss://mainnet.infura.io/ws/v3/&lt;use-your-own-infura-project-id&gt; \
