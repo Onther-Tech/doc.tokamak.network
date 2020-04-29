@@ -130,19 +130,9 @@ plasma-evm $ echo "<do-not-use-this-password-use-your-own-password>" > pwd.pass
 
 위 [오퍼레이터 계정 생성](#오퍼레이터-계정-생성)에서 생성한 계정("use-your-own-account-address")에 0.3 이상의 `ETH`와 스테이킹할 `MTON`을 보내야한다.
 
-**METAMASK 설치 및 토큰추가**
-
-`MTON` 과 `ETH` 전송은 메타마스크를 사용하는것이 편리하다.
-
-- 메타마스크에 대한 설치는 [여기](https://metamask.zendesk.com/hc/en-us/articles/360015489531-Getting-Started-With-MetaMask-Part-1-)를 참고한다.
-
-- 메타마스크에 `MTON`을 추가하기 위해서는 [여기](https://metamask.zendesk.com/hc/en-us/articles/360015489031-How-to-View-Your-Tokens)를 참고한다.
-
 > 이더리움 메인넷의 `MTON` 토큰의 주소는 `"0xe3a87a9343D262F5f11280058ae807B45aa34669"`이다.
 
-**`ETH`, `MTON` 잔고 확인**
-
-메타마스크를 통해 잔고 확인이 어려운 경우, 오퍼레이터 계정으로 사용할 `<use-your-own-account-address>`주소의 `ETH` 잔고 확인은 [etherscan.io](https://etherscan.io/)를 사용한다.
+오퍼레이터 계정으로 사용할 `<use-your-own-account-address>`주소의 `ETH` 잔고 확인은 [etherscan.io](https://etherscan.io/)를 사용한다.
 
 ![Check MTON balance in etherscan](assets/guides_check_mton_balance_etherscan.png)
 
@@ -522,7 +512,7 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 
 최종 인출을 위해 `processWithdrawal` 명령어를 사용한다.
 
-`requestWithdrawal` 이 포함된 블록부터 10 블록이 경과된 시점에 `processWithdrawal` 트랜잭션 전송이 가능하다.
+`requestWithdrawal` 이 포함된 블록부터 93046 블록(약 14일)이 경과된 시점에 `processWithdrawal` 트랜잭션 전송이 가능하다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
