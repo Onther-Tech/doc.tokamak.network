@@ -33,12 +33,14 @@ sidebar_label: Rinkeby Testnet Staking
 
 사이트 가입이 완료된 경우, `Dashboard`의 좌측 `Ethereum` 아이콘을 선택한 후  `"CREATE NEW PROJECT"` 버튼을 클릭하여 프로젝트를 생성한다.
 
-그 다음, 아래와 같이 `PROJECT ID`가 조합된 `ENDPOINTS` 주소를 사용한다.
+그 다음, 아래와 같이 `"ENDPOINTS"`를 기본설정값인 `Mainnet`에서 `Rinkeby`로 변경하고 그 아래 `PROJECT ID`가 조합된 웹소켓(`"wss://.."`)주소를 사용한다.
 
 `wss://rinkeby.infura.io/ws/v3/[PROJECT ID]`
 
 ![Infura node ID](assets/guides_create-infura-rinkeby-node.png)
 예) `wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748`
+
+> 이 문서는 `Rinkeby` 테스트넷을 기반으로 하고 있으므로, 루트체인 접속주소가 `Rinkeby` 테스트넷이어야 한다.
 
 만약 자신이 운영하고 있는 이더리움 노드가 있다면, 해당 노드의 접속 주소를 `Infura` 주소 대신 사용할 수 있다.
 
