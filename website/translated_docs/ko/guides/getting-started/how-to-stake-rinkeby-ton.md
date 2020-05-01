@@ -16,12 +16,12 @@ sidebar_label: Rinkeby Testnet Staking
 
 **컨트렉트 정보**
 
-      TON: "0xDb9dF6d0bf6cB810B81463fe0f7D12fC7450D95b"
-      WTON: "0xb51c4B4685B800E1159799d8BeD5CA042f0C48B6"
-      RootChainRegistry: "0x93c7f2d4a01bA2f18D404580c05d89E34D7CF4b0"
-      DepositManager: "0xC304773D35DdD4774d741EA91f34B15D6d46A322"
-      SeigManager: "0x1186b2af95f49902d5C8889FB8a958CE64da8488"
-      PowerTON: "0xfC079387CD35270E9A067A72a1372249169121c6"
+      TON: "0x3a4e4f7da26fd2b19ce0e2634906a3bb83cff3e9"
+      WTON: "0x981b2533528145e593c574fa20e54f9a55fbeee9"
+      RootChainRegistry: "0x1d5f6ac3ae4acb9c4e0c40e03d73b02b84427604"
+      DepositManager: "0x5eed93b0a36b318a04825e326a0fa834e78ff74d"
+      SeigManager: "0x51b9e54a85f6ac61bd281270aac1ce09cc29554d"
+      PowerTON: "0x63f2a55b025865de4c647c40da5eebd734b75f2a"
 
 해당 정보는 [Dashboard API](https://dashboard-api.tokamak.network/managers?network=rinkeby)를 통해 확인 할 수 있다.
 
@@ -76,10 +76,10 @@ Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬
 먼저, 소스코드를 다운로드 받는다.
 
 ```bash
-$ git clone -b v0.0.0-rc7.1 https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc7.3 https://github.com/onther-tech/plasma-evm
 ```
 
-> 이 문서는 master 브랜치의 [v0.0.0-rc7.1 : 22f9189cff2e6df84272e07df6e785eafe2dab13](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.1) 커밋을 기준으로 작성되었다.
+> 이 문서는 master 브랜치의 [v0.0.0-rc7.3 : 4313eeb43b1238a69b54853e5a31ede7d619c68b](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.3) 커밋을 기준으로 작성되었다.
 
 소스코드 다운로드 후, `plasma-evm` 디렉토리로 이동하여 아래 `make` 명령어로 실행 가능한 `geth` 파일을 생성한다.
 

@@ -158,12 +158,12 @@ First, download `plasma-evm` repository with the following commands.
 
 ```bash
 go-ethereum $ cd ~
-$ git clone -b v0.0.0-rc7.1 https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc7.3 https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm
 plasma-evm $
 ```
 
-This document well tested in [v0.0.0-rc7.1 : 22f9189cff2e6df84272e07df6e785eafe2dab13](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.1) commit of master branch.
+This document well tested in [v0.0.0-rc7.3 : 4313eeb43b1238a69b54853e5a31ede7d619c68b](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.3) commit of master branch.
 
 As following command, make executable binary file `geth` of `Plasma-evm`.
 
