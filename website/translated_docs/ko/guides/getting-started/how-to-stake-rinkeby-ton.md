@@ -76,10 +76,10 @@ Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬
 먼저, 소스코드를 다운로드 받는다.
 
 ```bash
-$ git clone -b v0.0.0-rc7.3 https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc7.4 https://github.com/onther-tech/plasma-evm
 ```
 
-> 이 문서는 master 브랜치의 [v0.0.0-rc7.3 : 4313eeb43b1238a69b54853e5a31ede7d619c68b](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.3) 커밋을 기준으로 작성되었다.
+> 이 문서는 master 브랜치의 [v0.0.0-rc7.4 : 3e4a453930aa26c71a0e56167a98aa1a832ac4b0](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.4) 커밋을 기준으로 작성되었다.
 
 소스코드 다운로드 후, `plasma-evm` 디렉토리로 이동하여 아래 `make` 명령어로 실행 가능한 `geth` 파일을 생성한다.
 
