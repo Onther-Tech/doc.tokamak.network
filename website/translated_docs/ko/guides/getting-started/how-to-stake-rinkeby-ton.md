@@ -326,7 +326,7 @@ plasma-evm $ curl -X POST \
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
             --rootchain.sender <use-your-own-account-address>
@@ -342,7 +342,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 true \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
             --rootchain.sender <use-your-own-account-address>
@@ -394,7 +394,7 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 ```bash
 plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
             --rootchain.sender <use-your-own-account-address>
