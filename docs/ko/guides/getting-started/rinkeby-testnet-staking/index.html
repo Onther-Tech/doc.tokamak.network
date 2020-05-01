@@ -92,7 +92,7 @@
 <p>오퍼레이터 노드를 실행하기 위해 루트체인 접속 주소가 필요하다. 여러 방법이 있지만, <code>Infura</code>를 통해 제공되는 <code>Rinkeby</code> 테스트넷 노드 주소를 사용하는것이 간편하다. <code>Infura</code>를 통해 접속 가능한 주소를 확보한다.</p>
 <p>만약, <code>Infura</code> 계정이 없다면 <a href="https://infura.io/">infura.io</a> 회원가입을 통해 접속 주소(URL)를 얻을 수 있다.</p>
 <p>사이트 가입이 완료된 경우, <code>Dashboard</code>의 좌측 <code>Ethereum</code> 아이콘을 선택한 후  <code>&quot;CREATE NEW PROJECT&quot;</code> 버튼을 클릭하여 프로젝트를 생성한다.</p>
-<p>그 다음, 아래와 같이 <code>PROJECT ID</code>가 조합된 <code>ENDPOINTS</code> 주소를 사용한다.</p>
+<p>그 다음, 아래와 같이 <code>&quot;ENDPOINTS&quot;</code>를 <code>Rinkeby</code> 로 변경하고 그 아래 <code>PROJECT ID</code>가 조합된 웹소켓(<code>&quot;wss://..&quot;</code>)주소를 사용한다.</p>
 <p><code>wss://rinkeby.infura.io/ws/v3/[PROJECT ID]</code></p>
 <p><img src="/docs/assets/guides_create-infura-rinkeby-node.png" alt="Infura node ID">
 예) <code>wss://rinkeby.infura.io/ws/v3/8078ab9afd3e48cf881c86ab84527748</code></p>
@@ -298,7 +298,7 @@ plasma-evm $ curl -X POST \
 <p>아래 <code>setCommissionRate</code> 명령어를 통해 오퍼레이터의 커미션을 설정할 수 있다.</p>
 <pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/&lt;use-your-own-infura-project-id&gt; \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/&lt;use-your-own-infura-project-id&gt; \
             --unlock &lt;use-your-own-account-address&gt; \
             --password pwd.pass \
             --rootchain.sender &lt;use-your-own-account-address&gt;
@@ -309,7 +309,7 @@ plasma-evm $ curl -X POST \
 <p><code>&lt;isCommissionRateNegative&gt;</code>의 입력값이 없는 경우 기본값인 <code>false</code>가 선택된다.</p>
 <pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 <span class="hljs-literal">true</span> \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/&lt;use-your-own-infura-project-id&gt; \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/&lt;use-your-own-infura-project-id&gt; \
             --unlock &lt;use-your-own-account-address&gt; \
             --password pwd.pass \
             --rootchain.sender &lt;use-your-own-account-address&gt;
@@ -348,7 +348,7 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 <p>아래, <code>stakeTON</code> 하위 명령어를 사용하여 <code>TON</code>을 스테이킹 한다.</p>
 <pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
             --datadir ./operator \
-            --rootchain.url wss://mainnet.infura.io/ws/v3/&lt;use-your-own-infura-project-id&gt; \
+            --rootchain.url wss://rinkeby.infura.io/ws/v3/&lt;use-your-own-infura-project-id&gt; \
             --unlock &lt;use-your-own-account-address&gt; \
             --password pwd.pass \
             --rootchain.sender &lt;use-your-own-account-address&gt;
