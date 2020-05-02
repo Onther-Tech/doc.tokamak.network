@@ -71,7 +71,7 @@ Rinkeby 테스트넷의 TON 을 받기 위해서는 `info@onther.io` 메일로 �
 
 ### Plasma-evm 실행 환경 구성
 
-Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬 환경 설정](how-to-open-private-testnet-rootchain#로컬-환경-설정) 을 참고한다.
+Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬 환경 설정](how-to-open-private-testnet-rootchain#로컬-환경-설정)을 참고한다.
 
 [프라이빗 테스트넷 시작](how-to-open-private-testnet-rootchain#저장소-다운로드-및-컴파일) 과정을 통해 `plasma-evm` 의 `geth` 실행이 가능하다면 다음 단계로 넘어가도 된다.
 
@@ -273,6 +273,8 @@ plasma-evm $ DESCRIPTION="This is test operator"
 ```
 
 아래 명령어를 실행하여 등록한 환경 변수들을 `json` 타입 데이터로 변환하고, `curl`을 사용하여 변환된 데이터를 토카막 네트워크 `dashboard` API로 전송한다.
+
+> 아래 명령어는 [루트체인 설정 - 로컬 환경 설정](how-to-open-private-testnet-rootchain#시스템-업데이트-및-필수-패키지-설치)을 통해 `jq` 가 설치되어 있어야 정상적으로 작동 한다.
 
 ```bash
 plasma-evm $ ROOTCHAIN_REGISTRY=$(jq -n \

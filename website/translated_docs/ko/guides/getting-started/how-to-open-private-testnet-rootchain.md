@@ -19,7 +19,7 @@ golang이 구성되어 있지 않은 경우, 아래 과정을 통하여 plasam-e
 아래 명령어로 컴파일 가능한 환경을 만든다.
 
 ```shell
-~$ sudo apt-get update && sudo apt-get install tar wget make git build-essential -y
+~$ sudo apt-get update && sudo apt-get install jq tar wget make git build-essential -y
 ```
 
 ### golang 환경 설정
