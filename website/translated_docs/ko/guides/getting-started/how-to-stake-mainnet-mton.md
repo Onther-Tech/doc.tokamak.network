@@ -155,7 +155,7 @@ plasma-evm $ echo "<do-not-use-this-password-use-your-own-password>" > pwd.pass
 아래, `deploy` 명령어를 사용하여 루트체인 컨트랙트를 루트체인에 배포한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 false 2 \
+plasma-evm $ build/bin/geth --nousb deploy genesis.json <use-your-own-chainID> false 2 \
             --datadir ./operator \
             --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
