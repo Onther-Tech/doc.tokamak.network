@@ -51,7 +51,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x515b385bdc89bcc2907
 
 실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 `depositManager`에 스테이킹 되는 토큰은 WTON이다.
 
-아래 명령릏 이용하여 1,000 TON을 WTON으로 변환한다.
+아래 명령을 이용하여 1,000 TON을 WTON으로 변환한다.
 
 > 이때 하위 명령어인 `swapFromTON` 의 입력인자로 소수점(.0)을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
 
