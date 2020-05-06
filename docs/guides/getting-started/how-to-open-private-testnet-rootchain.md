@@ -76,7 +76,7 @@ This document well tested [4bf7d7e315e19a2b31683935e866ae952b32ab7d](https://git
 As following command, set same commit hash in the source.
 
 ```bash
-go-ethereum $ git reset 4f497552092e2d061c8636b58737bc462ba4a3d
+go-ethereum $ git reset 4bf7d7e315e19a2b31683935e866ae952b32ab7d
 ```
 
 ### Check Script of RootChain

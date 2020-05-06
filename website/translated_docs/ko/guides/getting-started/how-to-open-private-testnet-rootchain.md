@@ -74,7 +74,7 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 아래 명령어를 통해 소스코드 커밋을 맞춘다.
 
 ```bash
-go-ethereum $ git reset 4f497552092e2d061c8636b58737bc462ba4a3d
+go-ethereum $ git reset 4bf7d7e315e19a2b31683935e866ae952b32ab7d
 ```
 
 ### 루트체인 실행 스크립트 확인
