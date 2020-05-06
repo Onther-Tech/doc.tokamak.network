@@ -12,7 +12,7 @@ sidebar_label: Setup with Puppeth
 
 - `sealnode` : 오퍼레이터 노드, 블록을 생성하는 마이너 노드.
 
-- `boodnode` : 사용자 노드, 트랜잭션을 오퍼레이터 노드에 전달하고 오퍼레이터 노드 동기화.
+- `bootnode` : 사용자 노드, 트랜잭션을 오퍼레이터 노드에 전달하고 오퍼레이터 노드 동기화.
 
 ## `Puppeth` 환경 준비
 

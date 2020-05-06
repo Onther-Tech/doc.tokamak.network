@@ -12,7 +12,7 @@ Keywords in `Puppeth` are as follows.
 
 - `sealnode` : operator node, miner node
 
-- `boodnode` : user node, sending transactions to operator node and synchronize with it.
+- `bootnode` : user node, sending transactions to operator node and synchronize with it.
 
 ## Setup Environment for 'Puppeth'
 
