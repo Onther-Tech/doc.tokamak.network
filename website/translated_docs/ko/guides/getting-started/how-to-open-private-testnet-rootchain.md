@@ -164,7 +164,7 @@ $ cd plasma-evm
 plasma-evm $
 ```
 
-이 문서는 master 브랜치의 [v0.0.0-rc7.3 : 4313eeb43b1238a69b54853e5a31ede7d619c68b](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.3) 커밋을 기준으로 진행된다.
+이 문서는 [tags/v0.0.0-rc7.3 : 4313eeb43b1238a69b54853e5a31ede7d619c68b](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.3) 커밋을 기준으로 진행된다.
 
 `Plasma-evm` 의 실행파일인 `geth` 생성을 위해 아래 명령어를 입력한다.
 

@@ -163,7 +163,7 @@ $ cd plasma-evm
 plasma-evm $
 ```
 
-This document well tested in [v0.0.0-rc7.3 : 4313eeb43b1238a69b54853e5a31ede7d619c68b](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.3) commit of master branch.
+This document well tested in [tags/v0.0.0-rc7.3 : 4313eeb43b1238a69b54853e5a31ede7d619c68b](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.3) commit.
 
 As following command, make executable binary file `geth` of `Plasma-evm`.
 
