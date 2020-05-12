@@ -76,10 +76,9 @@ Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬
 먼저, 소스코드를 다운로드 받는다.
 
 ```bash
+#TODO : change version
 $ git clone -b v0.0.0-rc7.3 https://github.com/onther-tech/plasma-evm
 ```
-
-> 이 문서는 master 브랜치의 [v0.0.0-rc7.3 : 4313eeb43b1238a69b54853e5a31ede7d619c68b](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.3) 커밋을 기준으로 작성되었다.
 
 소스코드 다운로드 후, `plasma-evm` 디렉토리로 이동하여 아래 `make` 명령어로 실행 가능한 `geth` 파일을 생성한다.
 
@@ -114,7 +113,9 @@ Path of the secret key file: operator/keystore/UTC--2020-01-01T00-00-00.00000000
 - You must REMEMBER your password! Without the password, it's impossible to decrypt the key!
 ```
 
-`--datadir` 입력한 경로인 `plasma-evm/operator` 에 해당 키파일이 생성된다. 이 키파일은 오퍼레이터 노드 운영에 있어 중요한 파일이므로 보안에 유의하여야 한다.
+`--datadir` 입력한 경로인 `plasma-evm/operator/keystore` 에 해당 키파일이 생성된다. 이 키파일은 오퍼레이터 노드 운영에 있어 중요한 파일이므로 보안에 유의하여야 한다.
+
+> `plasma-evm/operator/keystore` 디렉토리에 만들어진 키파일(.json)이 분실 혹은 도난된다면 어떠한 방법으로도 이 계정에 있는 자산을 되찾을 수 없다. 안전한 곳에 백업해두기를 당부한다.
 
 이 과정에서 생성된 계정은 오퍼레이터 계정으로 사용되며, 앞으로 이글에서 `<use-your-own-account-address>`로 지칭한다.
 
@@ -128,70 +129,53 @@ plasma-evm $ echo "<do-not-use-this-password-use-your-own-password>" > pwd.pass
 
 ### 오퍼레이터 계정 준비
 
-위 [오퍼레이터 계정 생성](#오퍼레이터-계정-생성)에서 생성한 계정("use-your-own-account-address")에 0.3 이상의 `ETH`와 스테이킹할 `TON`을 보내야한다.
+위 [오퍼레이터 계정 생성](#오퍼레이터-계정-생성)에서 생성한 계정("use-your-own-account-address")에 0.3 이상의 링키비 `ETH`와 스테이킹할 링키비 `TON`을 보내야한다.
 
 **METAMASK 설치 및 토큰추가**
 
 `TON` 과 `ETH` 전송은 메타마스크를 사용하는것이 편리하다.
 
-- 메타마스크에 대한 설치는 [여기](https://metamask.zendesk.com/hc/en-us/articles/360015489531-Getting-Started-With-MetaMask-Part-1-)를 참고한다.
+- 메타마스크 설치는 [여기](https://metamask.zendesk.com/hc/en-us/articles/360015489531-Getting-Started-With-MetaMask-Part-1-)를 참고.
 
 - 메타마스크에 `TON`을 추가하기 위해서는 [여기](https://metamask.zendesk.com/hc/en-us/articles/360015489031-How-to-View-Your-Tokens)를 참고한다.
 
-> `Rinkeby` 테스트 네트워크의 `TON` 토큰의 주소는 `"0xDb9dF6d0bf6cB810B81463fe0f7D12fC7450D95b"`이다.
+> 메타마스크는 `Rinkeby` 테스트 네트워크로 세팅이 되어 있어야 하고, 링키비에서 사용되는 `TON` 토큰의 주소는 `"0xDb9dF6d0bf6cB810B81463fe0f7D12fC7450D95b"`이다.
 
 **`ETH`, `TON` 잔고 확인**
 
-메타마스크를 통해 잔고 확인이 어려운 경우, 오퍼레이터 계정으로 사용할 `<use-your-own-account-address>`주소의 `ETH` 잔고 확인은 [rinkeby.etherscan.io](https://rinkeby.etherscan.io/)를 사용한다.
+오퍼레이터 계정으로 사용할 `<use-your-own-account-address>`주소로 링키비 `ETH`와 `TON`을 보낸 이후에 공개 익스플로러를 통해 잔고를 확인할 수 있다. [rinkeby.etherscan.io](https://rinkeby.etherscan.io/)를 사용한다.
 
 ![Check TON balance in rinkeby.etherscan](assets/guides_check_mton_balance_etherscan.png)
 
-`TON` 잔고는 [TON Contract - rinkeby.etherscan.io](https://rinkeby.etherscan.io/token/0xDb9dF6d0bf6cB810B81463fe0f7D12fC7450D95b)에서 `Find`에 `<use-your-own-account-address>`주소를 입력하여 확인 가능하다.
+링키비 `TON`의 잔고는 [TON Contract - rinkeby.etherscan.io](https://rinkeby.etherscan.io/token/0xDb9dF6d0bf6cB810B81463fe0f7D12fC7450D95b)에서 `Find`필드에 `<use-your-own-account-address>`주소를 입력하면 확인이 가능하다.
 
 ![TON balance result in rinkeby.etherscan](assets/guides_result_mton_balance_etherscan.png)
 
 ### 루트체인 컨트랙트 배포
 
-> [오퍼레이터 계정 준비](#오퍼레이터-계정-준비)를 통해 오퍼레이터 계정으로 사용할 `<use-your-own-account-address>`에 `ETH` 와 `TON`이 준비 되어야 한다.
+> 다시한번 말하지만 이 과정은 [오퍼레이터 계정 준비](#오퍼레이터-계정-준비)를 통해 오퍼레이터 계정으로 사용할 `<use-your-own-account-address>`에 `ETH` 와 `TON`이 준비 되어야 한다.
 
 `plasma-evm/operator` 폴더 안에 키파일이 생성된다. 이 키파일은 오퍼레이터 노드 운영에 있어 중요한 파일이므로 보안에 유의하여야 한다.
 
 다음은 루트체인 컨트랙트 배포 커맨드인 `deploy`에 대한 설명이다.
+<!-- TODO : deploy command에 사용법 링크와 설명 추가-->
 
 `deploy` 커맨드는 입력인자로 <출력할 genesis 파일 이름>, <체인아이디(CHAINID)>, <프리 에셋(PRE-ASSET)>, <에폭(EPOCH)>을 받는다. 각 인자의 대한 설명은 다음과 같다.
 
-- `CHAINID` : 오퍼레이터가 임의로 정할 수 있는 체인 고유의 숫자.
-- `PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨.
-- `EPOCH` : 루트체인에 커밋할 자식체인의 블록 단위. 예를들어 `2`로 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송한다.
-
-토카막 플라즈마는 자식체인의 수수료 지불 수단인 `스태미나(Stamina)` 기능을 제공한다. 자세한 사항은 [스태미나](https://docs.tokamak.network/docs/ko/learn/economics/tx-fee#스태미나) 참고한다.
-
-다음과 같은 플래그를 추가하여 스태미나 기본 설정값을 변경 할 수 있다. 스태미나 플래그를 사용하지 않는경우 기본값이 선택된다.
-
-- `--stamina.operatoramount` : 제네시스 블록에서 오퍼레이터가 가지는 스태미나의 양. (기본값 : 1)
-- `--stamina.mindeposit` : 스태미나로 전환 가능한 최소 ETH 수량. (기본값 : 0.5)
-- `--stamina.recoverepochlength` : 스태미나 회복 블록 주기. (기본값 : 120960)
-- `--stamina.withdrawaldelay` : ETH 출금 요청에 대한 지연 블록. (기본값 : 362880)
-
-`stamina.withdrawaldelay` 의 경우 `stamina.recoverepochlength` 의 최소 두배이상의 값을 사용하여야 한다.
-
-스태미나 기능은 자식체인의 프리컴파일(Pre-compile)된 컨트랙트로 제공된다. 모든 토카막 자식체인의 스태미나 컨트렉트 주소는 `0x000000000000000000000000000000000000dead` 로 고정되어 있다.
-
-스태미나 컨트렉트에 대한 자세한 사항은 깃허브 저장소 [stamina](https://github.com/Onther-Tech/stamina)를 참고한다.
+- `CHAINID` : 오퍼레이터가 임의로 정할 수 있는 체인 고유의 숫자. 아래의 명령어 예시에서는 `1010` 값을 쓰고 있다.
+- `PRE-ASSET` : `genesis` 파일에 미리 PETH를 부여할지에 대한 여부. `true` 경우 자식체인 계정들에 PETH 잔고가 생성됨. 아래에서는 `false`값을 사용하고 있다.
+- `EPOCH` : 루트체인에 커밋할 자식체인의 블록 단위. 예를 들어 아래의 예시와 같이 `2`로 설정하는 경우, 자식체인 2개 블록 마다 루트체인에 1회 커밋 트랜잭션을 전송한다.
 
 아래, `deploy` 명령어를 사용하여 루트체인 컨트랙트를 루트체인에 배포한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 false 2 \
-            --stamina.operatoramount 1 \
-            --stamina.mindeposit 0.5 \
-            --stamina.recoverepochlength 120960 \
-            --stamina.withdrawaldelay 362880 \
             --datadir ./operator \
             --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.sender <use-your-own-account-address> \
+            --rootchain.deploygasprice 10000000000
 ```
 
 오퍼레이터가 배포한 `rootchain` 컨트랙트 정보가 포함되어 있는 `genesis.json` 파일을 통해 플라즈마 체인을 초기화 한다.
@@ -210,22 +194,22 @@ plasma-evm $ build/bin/geth --nousb init genesis.json \
 curl -o managers.json 'https://dashboard-api.tokamak.network/managers?network=rinkeby'
 ```
 
-아래 `manage-staking`의 하위 명령어인 `setManagers` 사용하여 오퍼레이터의 자식체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
+아래 `manage-staking`의 하위 명령어인 `set-managers` 사용하여 오퍼레이터의 자식체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking setManagers managers.json  \
+plasma-evm $ build/bin/geth --nousb manage-staking set-managers managers.json  \
             --datadir ./operator
 ```
 
-`manage-staking` 의 하위 명령어인 `getManagers` 를 실행하여 오퍼레이터의 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.
+`manage-staking` 의 하위 명령어인 `get-managers` 를 실행하여 오퍼레이터의 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./operator
+plasma-evm $ build/bin/geth --nousb manage-staking get-managers --datadir ./operator
 ```
 
 ### 루트체인 등록
 
-오퍼레이터가 설정한 자식체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이킹 시뇨리지를 받을 수 있게 한다.
+`manage-staking` 의 하위 명령어인 `register`를 통해 오퍼레이터가 설정한 자식체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이킹 시뇨리지를 받을 수 있게 한다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb manage-staking register \
@@ -233,7 +217,8 @@ plasma-evm $ build/bin/geth --nousb manage-staking register \
             --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.sender <use-your-own-account-address> \
+            --rootchain.deploygasprice 10000000000
 ```
 
 오퍼레이터의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.
@@ -321,31 +306,33 @@ plasma-evm $ curl -X POST \
 
 > 커미션이 없는 0은 제외 하고, -0.009 ~ +0.009 값은 커미션 비율로 설정 할 수 없다.
 
-아래 `setCommissionRate` 명령어를 통해 오퍼레이터의 커미션을 설정할 수 있다.
+아래 `set-commission-rate` 명령어를 통해 오퍼레이터의 커미션을 설정할 수 있다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
+plasma-evm $ build/bin/geth --nousb manage-staking set-commission-rate 0.01 \
             --datadir ./operator \
             --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.sender <use-your-own-account-address> \
+            --rootchain.gasprice 10000000000 #TODO : need to check if it is ok
 ```
 
 만약, 마이너스 커미션을 설정하고 싶다면 커미션 비율 뒤에 `true` 를 추가한다.
 
-`setCommissionRate` 명령어는 입력인자 `<rate>`뒤에 추가적으로 마이너스 여부인 `<isCommissionRateNegative>`값을 받을 수 있다.
+`set-commission-rate` 명령어는 입력인자 `<rate>`뒤에 추가적으로 마이너스 여부인 `<isCommissionRateNegative>`인자값을 받을 수 있다.
 아래와 같이 커미션 비율을 마이너스로 설정하고 싶은경우 `true` 추가 해준다.
 
-`<isCommissionRateNegative>`의 입력값이 없는 경우 기본값인 `false`가 선택된다.
+`<isCommissionRateNegative>`인자값을 전달하지 않은 경우 기본값인 `false`가 사용된다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 true \
+plasma-evm $ build/bin/geth --nousb manage-staking set-commission-rate 0.01 true \
             --datadir ./operator \
             --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.sender <use-your-own-account-address> \
+            --rootchain.gasprice 10000000000
 ```
 
 커미션을 설정을 하지 않는다면, 기본값인 0으로 설정된다. 이때 위임에 따른 수수료 또는 마이너스 커미션에 따른 추가적인 보상이 발생하지 않는다.
@@ -385,22 +372,23 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 
 ### TON 스테이킹
 
-`TON`을 스테이킹 하려면, `staking`의 하위 명령어인 `stakeTON`을 사용한다.
+`TON`을 스테이킹 하려면, `staking`의 하위 명령어인 `stake-ton`을 사용한다.
 
-> 이때 하위 명령어인 `stakeTON` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
+> 이때 하위 명령어인 `stake-ton` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
 
-아래, `stakeTON` 하위 명령어를 사용하여 `TON`을 스테이킹 한다.
+아래, `staking` 하위 명령어인 `stake-ton`을 사용하여 `TON`을 스테이킹 한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
+plasma-evm $ build/bin/geth --nousb staking stake-ton 500.0 \
             --datadir ./operator \
             --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.sender <use-your-own-account-address> \
+            --rootchain.gasprice 10000000000
 ```
 
-실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 `depositManager`에 스테이킹 되는 토큰은 WTON 이다.
+내부적으로 오퍼레이터가 플라즈마 체인 운영을 위해 `depositManager` 컨트랙트에 스테이킹 되는 토큰은 WTON 이다.
 
 ## TON 커밋 보상 확인 및 인출
 
@@ -490,15 +478,16 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 
 오퍼레이터가 시뇨리지로 받은 `WTON`을 인출 해보고자 한다.
 
-먼저 인출 요청은 `staking`의 하위 명령어인 `requestWithdrawal` 을 사용한다. 550 WTON 인출을 위해 아래와 같이 입력한다.
+먼저 인출 요청은 `staking`의 하위 명령어인 `request-withdrawal` 을 사용한다. 550 WTON 인출을 위해 아래와 같이 입력한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 550.0 \
+plasma-evm $ build/bin/geth --nousb staking request-withdrawal 550.0 \
               --datadir ./operator \
               --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
               --unlock <use-your-own-account-address> \
               --password pwd.pass \
-              --rootchain.sender <use-your-own-account-address>
+              --rootchain.sender <use-your-own-account-address> \
+              --rootchain.gasprice 10000000000
 ```
 
 오퍼레이터의 `Committed Stake` 잔고가 550 이상 있다면 출금 요청이 정상적으로 처리된다.
@@ -537,20 +526,21 @@ INFO [01-01|00:00:00.000] Committed Stake                          amount="50.0 
 INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 ```
 
-최종 인출을 위해 `processWithdrawal` 명령어를 사용한다.
+최종 인출을 위해 `process-withdrawal` 명령어를 사용한다.
 
-`requestWithdrawal` 이 포함된 블록부터 10 블록이 경과된 시점에 `processWithdrawal` 트랜잭션이 가능하다.
+`request-withdrawal` 이 포함된 블록부터 10 블록이 경과된 시점에 `process-withdrawal` 트랜잭션이 가능하다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
+plasma-evm $ build/bin/geth --nousb staking process-withdrawal \
               --datadir ./operator \
               --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
               --unlock <use-your-own-account-address> \
               --password pwd.pass \
-              --rootchain.sender <use-your-own-account-address>
+              --rootchain.sender <use-your-own-account-address> \
+              --rootchain.gasprice 10000000000
 ```
 
-`processWithDrawal` 이 정상적으로 처리된 경우 잔고 확인 해보면 550 증가된 1,050 WTON 확인 가능하다.
+`process-withDrawal` 이 정상적으로 처리된 경우 잔고 확인 해보면 550 증가된 1,050 WTON 확인 가능하다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances <use-your-own-account-address> \
@@ -577,19 +567,20 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 
 ### 보상 인출 취소
 
-`requestWithdrawal`을 통한 출금 요청 상태의 `WTON`을 다시 스테이크 상태로 되돌릴 수 있다.
+`restake`명령을 이용하면 출금 요청 상태의 `WTON`을 다시 스테이크 상태로 되돌릴 수 있다.
 
-`staking`의 하위 명령어인 `restake`사용 하여, `Pending` 상태의 요청이 `processWithdrawal`을 통해 처리되기 전에 취소 가능하다.
+다시 말하면 `Pending` 상태의 출금 요청은 `process-withdrawal`을 통해 출금을 취소하고 다시 스테이킹을 하는것이 가능하다.
 
-먼저, `Pending` 상태의 요청을 만들기 위해 `staking`의 하위 명령어인 `requestWithdrawal`을 사용한다. 50 WTON 인출을 위해 아래와 같이 입력한다.
+먼저, `Pending` 상태의 요청을 만들기 위해 `staking`의 하위 명령어인 `request-withdrawal`을 사용한다. 50 WTON 인출을 위해 아래와 같이 입력한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 50.0 \
+plasma-evm $ build/bin/geth --nousb staking request-withdrawal 50.0 \
               --datadir ./operator \
               --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
               --unlock <use-your-own-account-address> \
               --password pwd.pass \
-              --rootchain.sender <use-your-own-account-address>
+              --rootchain.sender <use-your-own-account-address> \
+              --rootchain.gasprice 10000000000
 ```
 
 오퍼레이터1의 잔고를 확인해보면 `Pending withdrawal ..` 에 요청한 50.0 WTON이 나타난다.
@@ -625,7 +616,8 @@ plasma-evm $ build/bin/geth --nousb staking restake \
               --rootchain.url wss://rinkeby.infura.io/ws/v3/<use-your-own-infura-project-id> \
               --unlock <use-your-own-account-address> \
               --password pwd.pass \
-              --rootchain.sender <use-your-own-account-address>
+              --rootchain.sender <use-your-own-account-address> \
+              --rootchain.gasprice 10000000000
 ```
 
 `restake`가 정상적으로 처리된 후, `Pending withdrawal WTON`이 50.0 WTON 만큼 감소되고 `Committed Stake`가 50.0 WTON 만큼 증가된 부분을 확인 할 수 있다.
