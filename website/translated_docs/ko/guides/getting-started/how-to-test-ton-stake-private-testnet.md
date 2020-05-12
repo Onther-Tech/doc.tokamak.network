@@ -1,7 +1,7 @@
 ---
 id: private-testnet-staking
 title: Staking Test in Private Testnet
-sidebar_label: Private Testnet Staking 
+sidebar_label: Private Testnet Staking
 ---
 
 이 문서는 프라이빗 테스트 루트체인에서 두 오퍼레이터가 TON 토큰을 스테이킹/언스테이킹하는 테스트 시나리오를 다루고 있다.
@@ -26,21 +26,23 @@ sidebar_label: Private Testnet Staking
 아래 명령은 각각의 오퍼레이터에게 10,000 TON의 잔액을 만들어준다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f 10000.0 \
+plasma-evm $ build/bin/geth --nousb manage-staking mint-ton 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f 10000.0 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
             --password pwd.pass \
-            --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4
+            --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
+            --rootchain.gasprice 20000000000
 ```
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x515b385bdc89bcc29077f2b00a88622883bfb498 10000.0 \
+plasma-evm $ build/bin/geth --nousb manage-staking mint-ton 0x515b385bdc89bcc29077f2b00a88622883bfb498 10000.0 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
             --password pwd.pass \
-            --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4
+            --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
+            --rootchain.gasprice 20000000000
 ```
 
 ### 오퍼레이터1 TON 스테이킹
@@ -53,15 +55,16 @@ plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x515b385bdc89bcc2907
 
 아래 명령릏 이용하여 1,000 TON을 WTON으로 변환한다.
 
-> 이때 하위 명령어인 `swapFromTON` 의 입력인자로 소수점(.0)을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
+> 이때 하위 명령어인 `swap-from-ton` 의 입력인자로 소수점(.0)을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
+plasma-evm $ build/bin/geth --nousb staking swap-from-ton 1000.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
             --password pwd.pass \
-            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --rootchain.gasprice 20000000000
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
@@ -74,15 +77,16 @@ WARN [01-01|00:00:00.000] Approved to deposit TON                  amount=1000.0
 INFO [01-01|00:00:00.000] Swap from TON to WTON                    amount="1000.0 TON" from=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F tx=4d15eb…904dd6
 ```
 
-`staking`의 하위 명령어인 `stakeWTON`을 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.
+`staking`의 하위 명령어인 `stake-wton`을 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
+plasma-evm $ build/bin/geth --nousb staking stake-wton 500.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
             --password pwd.pass \
-            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --rootchain.gasprice 20000000000
 ```
 
 #### 방법 2 : TON -> Stake
@@ -90,12 +94,13 @@ plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
 `stakeTON` 명령을 이용하면 TON을 WTON으로 스왑하지 않고 더 간편하게 스테이킹 하는것도 가능하다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
+plasma-evm $ build/bin/geth --nousb staking stake-ton 500.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
             --password pwd.pass \
-            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --rootchain.gasprice 20000000000
 ```
 
 ### 오퍼레이터2 체인 설정 및 스테이킹 주소 설정
@@ -112,7 +117,8 @@ plasma-evm $ build/bin/geth --nousb deploy ./.pls.staking/operator2/operator2_ge
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
             --password pwd.pass \
-            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --rootchain.deploygasprice 20000000000
 ```
 
 `오퍼레이터2`가 배포한 `rootchain contract` 정보가 포함되어 있는 `operator2_genesis.json` 파일을 통해 `오퍼레이터2`의 플라즈마 체인을 초기화 한다.
@@ -123,17 +129,17 @@ plasma-evm $ build/bin/geth --nousb init ./.pls.staking/operator2/operator2_gene
             --rootchain.url ws://127.0.0.1:8546
 ```
 
-아래 `manage-staking`의 하위 명령어인 `setManagers` 사용하여 `오퍼레이터2`의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
+아래 `manage-staking`의 하위 명령어인 `set-managers` 사용하여 `오퍼레이터2`의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
 
 ```bash
-plasma-evm $ build/bin/geth manage-staking setManagers manager.json  \
+plasma-evm $ build/bin/geth --nousb manage-staking set-managers manager.json  \
             --datadir ./.pls.staking/operator2
 ```
 
-`manage-staking`의 하위 명령어인 `getManagers` 를 실행하여 오퍼레이터1 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.
+`manage-staking`의 하위 명령어인 `get-managers` 를 실행하여 오퍼레이터1 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./.pls.staking/operator2
+plasma-evm $ build/bin/geth --nousb manage-staking get-managers --datadir ./.pls.staking/operator2
 ```
 
 ### 오퍼레이터2 루트체인 등록 및 TON 잔고 확인
@@ -146,7 +152,8 @@ plasma-evm $ build/bin/geth --nousb manage-staking register \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
             --password pwd.pass \
-            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --rootchain.gasprice 20000000000
 ```
 
 `오퍼레이터2`의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.
@@ -200,21 +207,22 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 
 아래 명령어를 사용하여 1,000 TON을 WTON으로 변환한다.
 
-> 이때 하위 명령어인 `swapFromTON` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
+> 이때 하위 명령어인 `swap-from-ton` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
+plasma-evm $ build/bin/geth --nousb staking swap-from-ton 1000.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
             --password pwd.pass \
-            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --rootchain.gasprice 20000000000
 ```
 
-`staking`의 하위 명령어인 `stakeWTON`를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.
+`staking`의 하위 명령어인 `stake-wton`를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
+plasma-evm $ build/bin/geth --nousb staking stake-wton 500.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
@@ -224,15 +232,16 @@ plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
 
 #### 방법 2 : TON -> Stake
 
-또는, 위 두 과정을 `stakeTON` 명령어로 한번에 처리 할 수 있다.
+또는, 위 두 과정을 `stake-ton` 명령어로 한번에 처리 할 수 있다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
+plasma-evm $ build/bin/geth --nousb staking stake-ton 500.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
             --password pwd.pass \
-            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --rootchain.gasprice 20000000000
 ```
 
 ## TON 커밋 보상 확인 및 인출
@@ -325,10 +334,10 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 
 이 과정은 `오퍼레이터1`이 받은 시뇨리지에 대한 인출 과정을 담고있다.
 
-TON의 인출을 위해서는 `staking`의 하위 명령어인 `requestWithdrawal`을 사용한다. 550 WTON 인출을 위해 아래와 같이 입력한다.
+TON의 인출을 위해서는 `staking`의 하위 명령어인 `request-withdrawal`을 사용한다. 550 WTON 인출을 위해 아래와 같이 입력한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 550.0 \
+plasma-evm $ build/bin/geth --nousb staking request-withdrawal 550.0 \
               --datadir ./.pls.staking/operator1 \
               --rootchain.url ws://127.0.0.1:8546 \
               --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -372,10 +381,10 @@ INFO [01-01|00:00:00.000] Committed Stake                          amount="50.0 
 INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 ```
 
-최종 인출을 위해 `processWithdrawal` 명령어를 사용한다.
+최종 인출을 위해 `process-withdrawal` 명령어를 사용한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
+plasma-evm $ build/bin/geth --nousb staking process-withdrawal \
               --datadir ./.pls.staking/operator1 \
               --rootchain.url ws://127.0.0.1:8546 \
               --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -383,7 +392,7 @@ plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
               --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
 ```
 
-`processWithDrawal`이 정상적으로 처리된 이후에 잔고가 550 WTON이 증가된 1,050 WTON으로 늘어난 것을 확인할 수 있다.
+`process-withdrawal`이 정상적으로 처리된 이후에 잔고가 550 WTON이 증가된 1,050 WTON으로 늘어난 것을 확인할 수 있다.
 
 ```bash
 plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -412,12 +421,12 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 
 `requestWithdrawal`을 통한 출금 요청 상태의 `WTON`을 다시 스테이크 상태로 되돌릴 수 있다.
 
-`staking`의 하위 명령어인 `restake`사용 하여, `Pending` 상태의 요청이 `processWithdrawal`을 통해 처리되기 전에 취소 가능하다.
+`staking`의 하위 명령어인 `restake`사용 하여, `Pending` 상태의 요청이 `process-withdrawal`을 통해 처리되기 전에 취소 가능하다.
 
-먼저, `Pending` 상태의 요청을 만들기 위해 `staking`의 하위 명령어인 `requestWithdrawal`을 사용한다. 50 WTON 인출을 위해 아래와 같이 입력한다.
+먼저, `Pending` 상태의 요청을 만들기 위해 `staking`의 하위 명령어인 `request-withdrawal`을 사용한다. 50 WTON 인출을 위해 아래와 같이 입력한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 50.0 \
+plasma-evm $ build/bin/geth --nousb staking request-withdrawal 50.0 \
               --datadir ./.pls.staking/operator1 \
               --rootchain.url ws://127.0.0.1:8546 \
               --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -496,14 +505,14 @@ plasma-evm 의 `geth` 는 TON 스테이킹 기능을 위해 `manage-staking` 과
 
 | Sub-command    | Argument        | Unit    | Describes   |
 |----------------|------------------|---------|--------|
-| deployManager  | withdrawalDelay* | Int     | 스테이킹된 WTON 을 언-스테이크 상태로 변환하기 위해서는 `requestWithdrawal` 트랜잭션을 전송해야 한다. 해당 파라미터 숫자만큼 루트체인 블록이 진행 된 후, `requestWithdrawal` 이 처리 가능한 상태가 된다. |
+| deploy-manager  | withdrawalDelay* | Int     | 스테이킹된 WTON 을 언-스테이크 상태로 변환하기 위해서는 `requestWithdrawal` 트랜잭션을 전송해야 한다. 해당 파라미터 숫자만큼 루트체인 블록이 진행 된 후, `requestWithdrawal` 이 처리 가능한 상태가 된다. |
 |                | seigPerBlock*    | Float   | 블록당 발생가능한 최대 시뇨리지 수. 토큰의 인플레이션에 영향을 준다. |
-| deployPowerTON | roundDuration*   | Int(Seconds) | `PowerTON` 컨트랙트를 배포한다. 컨트랙트 배포에 필요한 `roundDuration` 단위는 초이다. 예를들어 `60s` 값으로 배포한 `PowerTON` 컨트랙트는 60초 주기로 미발행 TON 시뇨리지를 받아 갈 수 있는 오퍼레이터가 선정된다. |
-| startPowerTON  |  없음            | -       | `deployPowerTON`을 통해 배포된 `PowerTON` 컨트랙트를 활성화 시킨다. |
-| getManagers    | 파일이름    | string       | `--datadir` 로 입력받은 위치의 데이터베이스에서 스테이크 매니저 컨트랙트들의 주소들을 추출하여 <파일이름>.json 으로 저장한다. 대부분의 경우 스테이크 매니저 컨트랙트 배포 하위명령어인  `deployManager` 실행할때 지정한 `--datadir` 의 위치를 사용한다.  |
-| setManagers  |  파일이름*      | string       | 스테이크 매니저 컨트랙트 주소가 저장되어 있는 파일, (e,g `manager.json`), 을 읽어. 오퍼레이터의 플라즈마 체인 운영에 필요한 컨트랙트 주소들을 설정한다. 이때 사용하는 `--datadir` 의 위치는 오퍼레이터 체인데이터 위치가 된다. |
-| register    |  없음            | -       | 오퍼레이터가 TON 의 시뇨리지를 받기 위해서 시뇨리지 컨트랙트에 자신의 루트체인 주소를 등록해야 한다. `--datadir` 을 오퍼레이터 데이터 위치하여야 하며, 해당 위치에 `setManagers`를 통해 스테이크 매니저 컨트랙트 정보들을 이미 설정해 두어야 한다.  |
-| mintTON  |  amount*            | Float or Int       | 테스트를 위해 임의로 입력한 `amount` 만큼의 TON을 생성할 수 있다. |
+| deploy-power-ton | roundDuration*   | Int(Seconds) | `PowerTON` 컨트랙트를 배포한다. 컨트랙트 배포에 필요한 `roundDuration` 단위는 초이다. 예를들어 `60s` 값으로 배포한 `PowerTON` 컨트랙트는 60초 주기로 미발행 TON 시뇨리지를 받아 갈 수 있는 오퍼레이터가 선정된다. |
+| start-powerton  |  없음            | -       | `deploy-powerton`을 통해 배포된 `PowerTON` 컨트랙트를 활성화 시킨다. |
+| get-managers    | 파일이름    | string       | `--datadir` 로 입력받은 위치의 데이터베이스에서 스테이크 매니저 컨트랙트들의 주소들을 추출하여 <파일이름>.json 으로 저장한다. 대부분의 경우 스테이크 매니저 컨트랙트 배포 하위명령어인  `deploy-manager` 실행할때 지정한 `--datadir` 의 위치를 사용한다.  |
+| set-managers  |  파일이름*      | string       | 스테이크 매니저 컨트랙트 주소가 저장되어 있는 파일, (e,g `manager.json`), 을 읽어. 오퍼레이터의 플라즈마 체인 운영에 필요한 컨트랙트 주소들을 설정한다. 이때 사용하는 `--datadir` 의 위치는 오퍼레이터 체인데이터 위치가 된다. |
+| register    |  없음            | -       | 오퍼레이터가 TON 의 시뇨리지를 받기 위해서 시뇨리지 컨트랙트에 자신의 루트체인 주소를 등록해야 한다. `--datadir` 을 오퍼레이터 데이터 위치하여야 하며, 해당 위치에 `set-managers`를 통해 스테이크 매니저 컨트랙트 정보들을 이미 설정해 두어야 한다.  |
+| mint-ton  |  amount*            | Float or Int       | 테스트를 위해 임의로 입력한 `amount` 만큼의 TON을 생성할 수 있다. |
 
 > 입력인자에 `*` 가 붙은경우 필수 입력 인자이다.
 
@@ -514,13 +523,13 @@ plasma-evm 의 `geth` 는 TON 스테이킹 기능을 위해 `manage-staking` 과
 | Sub-command    | Argument        | Unit    | Describes   |
 |----------------|------------------|---------|--------|
 | balances   |  address*         | address       | 입력인자로 입력한 주소가 가지고 있는 `TON`, `WTON`, `staked WTON(==deposit)`, `reward WTON(==(Un)Committed)` 등과 같은 정보를 출력한다. |
-| swapFromTON  |  amount*            | Float or Int       | `TON`을 `WTON` 으로 변환하는 트랜잭션을 전송한다. `WTON` 으로 변환할 `TON`의 수량을 입력인자로 사용한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. |
-| swapToTON  |  amount*            | Float or Int       | `WTON`을 `TON` 으로 변환하는 트랜잭션을 전송한다. `TON` 으로 변환할 `WTON`의 수량을 입력인자로 사용한다.대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다.  |
-| stakeTON   |  amount*            | Float or Int  | 이 명령어는 `swapFromTON` 과 `stakeWTON` 을 하나의 명령어로 처리. 오퍼레이터가 입력한 `amount`의 만큼의 `TON`을 스테이크된 상태(staked status)로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
-| stakeWTON  |  amount*            | Float or Int  | TON의 시뇨리지를 받기 위해 `WTON`을 스테이킹 해야 한다. 오퍼레이터가 입력한 `amount`의 만큼의 `WTON`을 스테이크된 상태로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
-| restake  | numRequests         | Int       | `requestWithdrawal` 로 인해 인출 대기중인 `WTON`을 다시 스테이크 상태로 되돌린다. 다시말해 `requestWithdrawal`을 취소하는 트랜잭션을 전송한다. 기본값은 0이며, 이경우 Pending 상태의 모든 `requestWithdrawal` 을 취소한다. 입력인자값에 해당하는 `requestWithdrawal` 을 취소한다. |
-| requestWithdrawal  |  amount*            | Float or Int       | 스테이킹된 상태의 `WTON` 을 언-스테킹크 상태로 전환하는 트랜잭션을 전송한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. 언스테이크 요청(i.e requestWithdrawal) 은 `depositManager` 에서 설정한 `withdrawalDelay` 만큼의 블록이 진행된 이후 처리가능한 상태가 된다. |
-| processWithdrawal  | numRequests         | Int       | `requestWithdrawal` 을 통해 등록된 `WTON` 언스테이킹을 완료한다. 입력인자 미입력시 완료 가능한 모든 `requestWithdrawal`이 처리 된다. |
+| swap-from-ton  |  amount*            | Float or Int       | `TON`을 `WTON` 으로 변환하는 트랜잭션을 전송한다. `WTON` 으로 변환할 `TON`의 수량을 입력인자로 사용한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. |
+| swap-to-ton  |  amount*            | Float or Int       | `WTON`을 `TON` 으로 변환하는 트랜잭션을 전송한다. `TON` 으로 변환할 `WTON`의 수량을 입력인자로 사용한다.대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다.  |
+| stake-ton   |  amount*            | Float or Int  | 이 명령어는 `swap-from-ton` 과 `stake-wton` 을 하나의 명령어로 처리. 오퍼레이터가 입력한 `amount`의 만큼의 `TON`을 스테이크된 상태(staked status)로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
+| stake-wton  |  amount*            | Float or Int  | TON의 시뇨리지를 받기 위해 `WTON`을 스테이킹 해야 한다. 오퍼레이터가 입력한 `amount`의 만큼의 `WTON`을 스테이크된 상태로 변환한다. 이때 대상이 되는 주소는 `--rootchain.sender` 로 지정한다. |
+| restake  | numRequests         | Int       | `request-withdrawal` 로 인해 인출 대기중인 `WTON`을 다시 스테이크 상태로 되돌린다. 다시말해 `request-withdrawal`을 취소하는 트랜잭션을 전송한다. 기본값은 0이며, 이경우 Pending 상태의 모든 `request-withdrawal` 을 취소한다. 입력인자값에 해당하는 `requestWithdrawal` 을 취소한다. |
+| request-withdrawal  |  amount*            | Float or Int       | 스테이킹된 상태의 `WTON` 을 언-스테킹크 상태로 전환하는 트랜잭션을 전송한다. 대상이 되는 주소는 `--rootchain.sender` 플래그로 지정한다. 언스테이크 요청(i.e requestWithdrawal) 은 `depositManager` 에서 설정한 `withdrawalDelay` 만큼의 블록이 진행된 이후 처리가능한 상태가 된다. |
+| process-withdrawal  | numRequests         | Int       | `request-withdrawal` 을 통해 등록된 `WTON` 언스테이킹을 완료한다. 입력인자 미입력시 완료 가능한 모든 `request-withdrawal`이 처리 된다. |
 
 > 입력인자에 `*` 가 붙은경우 필수 입력 인자이다.
 

@@ -155,20 +155,13 @@ go-ethereum $ bash run.rootchain.sh
 
 이 단계는 동작중인 루트체인 노드에 스테이킹 테스트를 위한 컨트렉트를 배포한다.
 
-우선, 아래 명령어를 통해 `plasma-evm` 저장소를 다운로드 한다.
+우선, 아래 명령어를 통해 `plasma-evm` 저장소를 다운로드하고 컴파일한다.
 
 ```bash
 go-ethereum $ cd ~
-$ git clone -b v0.0.0-rc7.3 https://github.com/onther-tech/plasma-evm
+#TODO : change version
+$ git clone -b v0.0.0-rc7.6 https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm
-plasma-evm $
-```
-
-이 문서는 master 브랜치의 [v0.0.0-rc7.3 : 4313eeb43b1238a69b54853e5a31ede7d619c68b](https://github.com/Onther-Tech/plasma-evm/tree/v0.0.0-rc7.3) 커밋을 기준으로 진행된다.
-
-`Plasma-evm` 의 실행파일인 `geth` 생성을 위해 아래 명령어를 입력한다.
-
-```bash
 plasma-evm $ make geth
 ```
 
@@ -179,7 +172,7 @@ plasma-evm $ make geth
 아래의 명령은 plasma-evm노드가 사용할 데이터 디렉토리(datadir)에 매니저 계정(ADDR0)을 생성시킨다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb account importKey 2628ca66087c6bc7f9eff7d70db7413d435e170040e8342e67b3db4e55ce752f \
+plasma-evm $ build/bin/geth --nousb account import-key 2628ca66087c6bc7f9eff7d70db7413d435e170040e8342e67b3db4e55ce752f \
             --datadir ./.pls.staking/manager
 ```
 
@@ -197,12 +190,12 @@ Address: {b79749f25ef64f9ac277a4705887101d3311a0f4}
 아래 명령은, 두 오퍼레이터 계정(ADDR1, ADDR2)을 생성한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb account importKey 86e60281da515184c825c3f46c7ec490b075af1e74607e2e9a66e3df0fa22122 \
+plasma-evm $ build/bin/geth --nousb account import-key 86e60281da515184c825c3f46c7ec490b075af1e74607e2e9a66e3df0fa22122 \
             --datadir ./.pls.staking/operator1
 ```
 
 ```bash
-plasma-evm $ build/bin/geth --nousb account importKey b77b291fab2b0a9e03b5ee0fb0f1140ff41780e93a39e534d54a05ccfad3eead \
+plasma-evm $ build/bin/geth --nousb account import-key b77b291fab2b0a9e03b5ee0fb0f1140ff41780e93a39e534d54a05ccfad3eead \
             --datadir ./.pls.staking/operator2
 ```
 
@@ -214,9 +207,9 @@ plasma-evm $ echo "" > pwd.pass
 
 ### 스테이크 매니저 컨트랙트 배포
 
-`deployManagers`는 `manage-staking`의 하위 명령어로 매니저가 TON 스테이킹에 관한 컨트랙트를 배포 및 관리하기 위해 만들어졌다.
+`deploy-managers`는 `manage-staking`의 하위 명령어로 매니저가 TON 스테이킹에 관한 컨트랙트를 배포 및 관리하기 위해 만들어졌다.
 
-`deployManagers`은 입력 파라미터로 `withdrawalDelay`와 `seigPerBlock` 2개를 받는다.
+`deploy-managers`은 입력 파라미터로 `withdrawalDelay`와 `seigPerBlock` 2개를 받는다.
 
 각 입력 파라미터에 대한 설명은 다음과 같다.
 
@@ -225,7 +218,7 @@ plasma-evm $ echo "" > pwd.pass
 - `seigPerBlock` : 루트체인 1 블록당 발생할 수 있는 시뇨리지 TON. 해당 파라미터에 의해 TON의 연 인플레이션률이 영향을 받게 된다.
 
 ```bash
-plasma-evm $ make geth && build/bin/geth --nousb manage-staking deployManagers 10 1.5 \
+plasma-evm $ make geth && build/bin/geth --nousb manage-staking deploy-managers 10 1.5 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
@@ -270,7 +263,7 @@ PowerTON컨트랙트를 배포하면 일정 기간 이내에서 스테이킹을 
 `PowerTON`에 대한 자세한 내용은 [여기]()를 참고한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking deployPowerTON 60s \
+plasma-evm $ build/bin/geth --nousb manage-staking deploy-powerton 60s \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
@@ -285,7 +278,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking deployPowerTON 60s \
 아래 명령어를 이용해 루트체인에 배포한 스테이크 컨트랙트 정보들을 `manager.json` 파일로 저장하자.
 
 ```bash
-plasam-evm $ build/bin/geth --nousb manage-staking getManagers manager.json --datadir ./.pls.staking/manager
+plasam-evm $ build/bin/geth --nousb manage-staking get-managers manager.json --datadir ./.pls.staking/manager
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=5크
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
@@ -312,7 +305,7 @@ INFO [01-01|00:00:00.000] Exported manager contracts               path=manager.
 아래 명령어를 통해 `PowerTON`의 라운드 활성화 트랜잭션을 전송한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking startPowerTON \
+plasma-evm $ build/bin/geth --nousb manage-staking start-powerton \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \

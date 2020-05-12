@@ -60,6 +60,7 @@ make geth && build/bin/geth \
     --unlock $OPERATOR \
     --password pwd.pass \
     --rootchain.sender $OPERATOR \
+    --rootchain.deploygasprice 20000000000 \
     --stamina.operatoramount 1 \
     --stamina.mindeposit 0.5 \
     --stamina.recoverepochlength 120960 \
@@ -99,7 +100,7 @@ plasma-evm$ build/bin/geth --nousb init \
 
 ```bash
 plasma-evm $ build/bin/geth --nousb \
-            manage-staking setManagers manager.json  \
+            manage-staking set-managers manager.json  \
             --datadir ./.pls.staking/operator1
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Set options for submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
@@ -116,7 +117,7 @@ INFO [01-01|00:00:00.000] Set address                              name=PowerTON
 
 ```bash
 plasma-evm $ build/bin/geth --nousb \
-            manage-staking getManagers \
+            manage-staking get-managers \
             --datadir ./.pls.staking/operator1
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Smartcard socket not found, disabling    err="stat /run/pcscd/pcscd.comm: no such file or directory"
