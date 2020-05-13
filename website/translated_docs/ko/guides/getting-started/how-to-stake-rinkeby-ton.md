@@ -187,7 +187,7 @@ plasma-evm $ build/bin/geth --nousb init genesis.json \
 
 ### 스테이킹 주소 설정
 
-이더리움 메인넷에 배포되어 있는 컨트렉트 정보를 `json` 파일로 저장한다.
+링키비 테스트넷에 배포되어 있는 컨트렉트 정보를 `json` 파일로 저장한다.
 
 ```bash
 curl -o managers.json 'https://dashboard-api.tokamak.network/managers?network=rinkeby'
@@ -217,7 +217,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking register \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
             --rootchain.sender <use-your-own-account-address> \
-            --rootchain.deploygasprice 10000000000
+            --rootchain.gasprice 10000000000
 ```
 
 오퍼레이터의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.
@@ -314,7 +314,7 @@ plasma-evm $ build/bin/geth --nousb manage-staking set-commission-rate 0.01 \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
             --rootchain.sender <use-your-own-account-address> \
-            --rootchain.gasprice 10000000000 #TODO : need to check if it is ok
+            --rootchain.gasprice 10000000000
 ```
 
 만약, 마이너스 커미션을 설정하고 싶다면 커미션 비율 뒤에 `true` 를 추가한다.

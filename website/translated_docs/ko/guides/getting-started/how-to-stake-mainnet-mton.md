@@ -74,7 +74,7 @@ Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬
 먼저, 소스코드를 다운로드 받는다.
 
 ```bash
-$ git clone -b v0.0.0-rc7.6 https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc7.7 https://github.com/onther-tech/plasma-evm
 ```
 
 소스코드 다운로드 후, `plasma-evm` 디렉토리로 이동하여 아래 `make` 명령어로 실행  가능한 `geth` 파일을 생성한다.
@@ -153,13 +153,13 @@ plasma-evm $ echo "<do-not-use-this-password-use-your-own-password>" > pwd.pass
 아래, `deploy` 명령어를 사용하여 루트체인 컨트랙트를 루트체인에 배포한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb deploy genesis.json 1010 false 2 \
+plasma-evm $ build/bin/geth --nousb deploy genesis.json <use-your-own-chain-id> false 2 \
             --datadir ./operator \
             --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
             --rootchain.sender <use-your-own-account-address> \
-            --rootchain.deployGasPrice <choose-based-on-network-congestion-e.q.20000000000>
+            --rootchain.deploygasprice <choose-enough-gas-price-consider-network-congestion-e.q.20000000000>
 ```
 
 오퍼레이터가 배포한 `rootchain` 컨트랙트 정보가 포함되어 있는 `genesis.json` 파일을 통해 플라즈마 체인을 초기화 한다.
@@ -175,20 +175,20 @@ plasma-evm $ build/bin/geth --nousb init genesis.json \
 이더리움 메인넷에 배포되어 있는 컨트렉트 정보를 `json` 파일로 저장한다.
 
 ```bash
-curl -o managers.json 'https://dashboard.tokamak.network/managers'
+curl -o managers.json 'https://dashboard-api.tokamak.network/managers'
 ```
 
-아래 `manage-staking`의 하위 명령어인 `setManagers` 사용하여 오퍼레이터의 자식체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
+아래 `manage-staking`의 하위 명령어인 `set-managers` 사용하여 오퍼레이터의 자식체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking setManagers managers.json  \
+plasma-evm $ build/bin/geth --nousb manage-staking set-managers managers.json  \
             --datadir ./operator
 ```
 
-`manage-staking` 의 하위 명령어인 `getManagers` 를 실행하여 오퍼레이터의 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.
+`manage-staking` 의 하위 명령어인 `get-managers` 를 실행하여 오퍼레이터의 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./operator
+plasma-evm $ build/bin/geth --nousb manage-staking get-managers --datadir ./operator
 ```
 
 ### 루트체인 등록
@@ -201,7 +201,9 @@ plasma-evm $ build/bin/geth --nousb manage-staking register \
             --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.sender <use-your-own-account-address> \
+            --rootchain.gasprice <choose-enough-gas-price-consider-network-congestion-e.q.20000000000>
+
 ```
 
 오퍼레이터의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.
@@ -292,12 +294,13 @@ plasma-evm $ curl -X POST \
 아래 `setCommissionRate` 명령어를 통해 오퍼레이터의 커미션을 설정할 수 있다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
+plasma-evm $ build/bin/geth --nousb manage-staking set-commission-rate 0.01 \
             --datadir ./operator \
             --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.sender <use-your-own-account-address> \
+            --rootchain.gasprice <choose-enough-gas-price-consider-network-congestion-e.q.20000000000>
 ```
 
 만약, 마이너스 커미션을 설정하고 싶다면 커미션 비율 뒤에 `true` 를 추가한다.
@@ -308,12 +311,13 @@ plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 \
 `<isCommissionRateNegative>`의 입력값이 없는 경우 기본값인 `false`가 선택된다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb manage-staking setCommissionRate 0.01 true \
+plasma-evm $ build/bin/geth --nousb manage-staking set-commission-rate 0.01 true \
             --datadir ./operator \
             --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.sender <use-your-own-account-address> \
+            --rootchain.gasprice <choose-enough-gas-price-consider-network-congestion-e.q.20000000000>
 ```
 
 커미션을 설정을 하지 않는다면, 기본값인 0으로 설정된다. 이때 위임에 따른 수수료 또는 마이너스 커미션에 따른 추가적인 보상이 발생하지 않는다.
@@ -357,19 +361,20 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 
 오퍼레이터 계정에 반드시 스테이킹을 위한 `MTON` 잔고가 있어야 한다. 아직 오퍼레이터 계정에 `MTON` 잔고가 없다면, `MTON` 보유하고 있는 계정에서 옮겨와야 한다.
 
-`MTON`을 스테이킹 하려면, `staking`의 하위 명령어인 `stakeTON`을 사용한다.
+`MTON`을 스테이킹 하려면, `staking`의 하위 명령어인 `stake-ton`을 사용한다.
 
-> 이때 하위 명령어인 `stakeTON` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
+> 이때 하위 명령어인 `stake-ton` 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.
 
-아래, `stakeTON` 하위 명령어를 사용하여 `MTON`을 스테이킹 한다.
+아래, `stake-ton` 명령을 이용하여 `MTON`을 스테이킹 한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
+plasma-evm $ build/bin/geth --nousb staking stake-ton 500.0 \
             --datadir ./operator \
             --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
             --unlock <use-your-own-account-address> \
             --password pwd.pass \
-            --rootchain.sender <use-your-own-account-address>
+            --rootchain.sender <use-your-own-account-address> \
+            --rootchain.gasprice <choose-enough-gas-price-consider-network-congestion-e.q.20000000000>
 ```
 
 실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 `depositManager`에 스테이킹 되는 토큰은 WTON 이다.
@@ -462,15 +467,16 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 
 오퍼레이터가 시뇨리지로 받은 `WTON`을 인출 해보고자 한다.
 
-먼저 인출 요청은 `staking`의 하위 명령어인 `requestWithdrawal` 을 사용한다. 550 WTON 인출을 위해 아래와 같이 입력한다.
+먼저 인출 요청은 `staking`의 하위 명령어인 `request-withdrawal` 을 사용한다. 550 WTON 인출을 위해 아래와 같이 입력한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 550.0 \
+plasma-evm $ build/bin/geth --nousb staking request-withdrawal 550.0 \
               --datadir ./operator \
               --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
               --unlock <use-your-own-account-address> \
               --password pwd.pass \
-              --rootchain.sender <use-your-own-account-address>
+              --rootchain.sender <use-your-own-account-address> \
+              --rootchain.gasprice <choose-enough-gas-price-consider-network-congestion-e.q.20000000000>
 ```
 
 오퍼레이터의 `Committed Stake` 잔고가 550 이상 있다면 출금 요청이 정상적으로 처리된다.
@@ -509,17 +515,18 @@ INFO [01-01|00:00:00.000] Committed Stake                          amount="50.0 
 INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 ```
 
-최종 인출을 위해 `processWithdrawal` 명령어를 사용한다.
+최종 인출을 위해 `process-withdrawal` 명령어를 사용한다.
 
 `requestWithdrawal` 이 포함된 블록부터 93046 블록(약 14일)이 경과된 시점에 `processWithdrawal` 트랜잭션 전송이 가능하다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
+plasma-evm $ build/bin/geth --nousb staking process-withdrawal \
               --datadir ./operator \
               --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
               --unlock <use-your-own-account-address> \
               --password pwd.pass \
-              --rootchain.sender <use-your-own-account-address>
+              --rootchain.sender <use-your-own-account-address> \
+              --rootchain.gasprice <choose-enough-gas-price-consider-network-congestion-e.q.20000000000>
 ```
 
 `processWithDrawal` 이 정상적으로 처리된 경우 잔고 확인 해보면 550 증가된 1,050 WTON 확인 가능하다.
@@ -553,15 +560,16 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.010
 
 `staking`의 하위 명령어인 `restake`사용 하여, `Pending` 상태의 요청이 `processWithdrawal`을 통해 처리되기 전에 취소 가능하다.
 
-먼저, `Pending` 상태의 요청을 만들기 위해 `staking`의 하위 명령어인 `requestWithdrawal`을 사용한다. 50 WTON 인출을 위해 아래와 같이 입력한다.
+먼저, `Pending` 상태의 요청을 만들기 위해 `staking`의 하위 명령어인 `request-withdrawal`을 사용한다. 50 WTON 인출을 위해 아래와 같이 입력한다.
 
 ```bash
-plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 50.0 \
+plasma-evm $ build/bin/geth --nousb staking request-withdrawal 50.0 \
               --datadir ./operator \
               --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
               --unlock <use-your-own-account-address> \
               --password pwd.pass \
-              --rootchain.sender <use-your-own-account-address>
+              --rootchain.sender <use-your-own-account-address> \
+              --rootchain.gasprice <choose-enough-gas-price-consider-network-congestion-e.q.20000000000>
 ```
 
 오퍼레이터1의 잔고를 확인해보면 `Pending withdrawal ..` 에 요청한 50.0 WTON이 나타난다.
@@ -597,7 +605,8 @@ plasma-evm $ build/bin/geth --nousb staking restake \
               --rootchain.url wss://mainnet.infura.io/ws/v3/<use-your-own-infura-project-id> \
               --unlock <use-your-own-account-address> \
               --password pwd.pass \
-              --rootchain.sender <use-your-own-account-address>
+              --rootchain.sender <use-your-own-account-address> \
+              --rootchain.gasprice <choose-enough-gas-price-consider-network-congestion-e.q.20000000000>
 ```
 
 `restake`가 정상적으로 처리된 후, `Pending withdrawal WTON`이 50.0 WTON 만큼 감소되고 `Committed Stake`가 50.0 WTON 만큼 증가된 부분을 확인 할 수 있다.
