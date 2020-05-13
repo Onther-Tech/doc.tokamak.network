@@ -76,8 +76,7 @@ Plasma-evm 소스코드 컴파일 환경 구성은 [루트체인 설정 - 로컬
 먼저, 소스코드를 다운로드 받는다.
 
 ```bash
-#TODO : change version
-$ git clone -b v0.0.0-rc7.3 https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc7.7 https://github.com/onther-tech/plasma-evm
 ```
 
 소스코드 다운로드 후, `plasma-evm` 디렉토리로 이동하여 아래 `make` 명령어로 실행 가능한 `geth` 파일을 생성한다.
@@ -115,7 +114,7 @@ Path of the secret key file: operator/keystore/UTC--2020-01-01T00-00-00.00000000
 
 `--datadir` 입력한 경로인 `plasma-evm/operator/keystore` 에 해당 키파일이 생성된다. 이 키파일은 오퍼레이터 노드 운영에 있어 중요한 파일이므로 보안에 유의하여야 한다.
 
-> `plasma-evm/operator/keystore` 디렉토리에 만들어진 키파일(.json)이 분실 혹은 도난된다면 어떠한 방법으로도 이 계정에 있는 자산을 되찾을 수 없다. 안전한 곳에 백업해두기를 당부한다.
+> `plasma-evm/operator/keystore` 디렉토리에 만들어진 키파일(.json)이 분실 혹은 도난된다면 어떠한 방법으로도 이 계정에 있는 자산을 되찾을 수 없다. 키파일은 반드시 안전한 곳에 백업을 해두어야 한다.
 
 이 과정에서 생성된 계정은 오퍼레이터 계정으로 사용되며, 앞으로 이글에서 `<use-your-own-account-address>`로 지칭한다.
 

@@ -159,8 +159,7 @@ go-ethereum $ bash run.rootchain.sh
 
 ```bash
 go-ethereum $ cd ~
-#TODO : change version
-$ git clone -b v0.0.0-rc7.6 https://github.com/onther-tech/plasma-evm
+$ git clone -b v0.0.0-rc7.7 https://github.com/onther-tech/plasma-evm
 $ cd plasma-evm
 plasma-evm $ make geth
 ```
