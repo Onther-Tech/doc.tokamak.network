@@ -89,19 +89,21 @@
 <li>오퍼레이터2 : <code>0x515b385bdc89bcc29077f2b00a88622883bfb498</code></li>
 </ul>
 <p>아래 명령은 각각의 오퍼레이터에게 10,000 TON의 잔액을 만들어준다.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f 10000.0 \
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking mint-ton 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f 10000.0 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
             --password pwd.pass \
-            --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4
+            --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
+            --rootchain.gasprice 20000000000
 </code></pre>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x515b385bdc89bcc29077f2b00a88622883bfb498 10000.0 \
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking mint-ton 0x515b385bdc89bcc29077f2b00a88622883bfb498 10000.0 \
             --datadir ./.pls.staking/manager \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
             --password pwd.pass \
-            --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4
+            --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
+            --rootchain.gasprice 20000000000
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="오퍼레이터1-ton-스테이킹"></a><a href="#오퍼레이터1-ton-스테이킹" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터1 TON 스테이킹</h3>
 <h4><a class="anchor" aria-hidden="true" id="방법-1--ton---wton---stake"></a><a href="#방법-1--ton---wton---stake" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>방법 1 : TON -&gt; WTON -&gt; Stake</h4>
@@ -109,14 +111,15 @@
 <p>실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 <code>depositManager</code>에 스테이킹 되는 토큰은 WTON이다.</p>
 <p>아래 명령릏 이용하여 1,000 TON을 WTON으로 변환한다.</p>
 <blockquote>
-<p>이때 하위 명령어인 <code>swapFromTON</code> 의 입력인자로 소수점(.0)을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.</p>
+<p>이때 하위 명령어인 <code>swap-from-ton</code> 의 입력인자로 소수점(.0)을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.</p>
 </blockquote>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking swap-from-ton 1000.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
             --password pwd.pass \
-            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --rootchain.gasprice 20000000000
 
 INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
@@ -128,22 +131,24 @@ WARN [01-01|00:00:00.000] Approve to deposit TON                   amount=1000.0
 WARN [01-01|00:00:00.000] Approved to deposit TON                  amount=1000.0 tx=5d9880…76506a
 INFO [01-01|00:00:00.000] Swap from TON to WTON                    amount=<span class="hljs-string">"1000.0 TON"</span> from=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F tx=4d15eb…904dd6
 </code></pre>
-<p><code>staking</code>의 하위 명령어인 <code>stakeWTON</code>을 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
+<p><code>staking</code>의 하위 명령어인 <code>stake-wton</code>을 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stake-wton 500.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
             --password pwd.pass \
-            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --rootchain.gasprice 20000000000
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="방법-2--ton---stake"></a><a href="#방법-2--ton---stake" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>방법 2 : TON -&gt; Stake</h4>
 <p><code>stakeTON</code> 명령을 이용하면 TON을 WTON으로 스왑하지 않고 더 간편하게 스테이킹 하는것도 가능하다.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stake-ton 500.0 \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
             --password pwd.pass \
-            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --rootchain.gasprice 20000000000
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="오퍼레이터2-체인-설정-및-스테이킹-주소-설정"></a><a href="#오퍼레이터2-체인-설정-및-스테이킹-주소-설정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터2 체인 설정 및 스테이킹 주소 설정</h3>
 <p><code>오퍼레이터1</code> 설정을 마쳤으니, 이제 테스트를 위한 두번째 노드인 <code>오페레이터2</code>를 구동시켜보자.</p>
@@ -154,19 +159,20 @@ INFO [01-01|00:00:00.000] Swap from TON to WTON                    amount=<span 
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
             --password pwd.pass \
-            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --rootchain.deploygasprice 20000000000
 </code></pre>
 <p><code>오퍼레이터2</code>가 배포한 <code>rootchain contract</code> 정보가 포함되어 있는 <code>operator2_genesis.json</code> 파일을 통해 <code>오퍼레이터2</code>의 플라즈마 체인을 초기화 한다.</p>
 <pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb init ./.pls.staking/operator2/operator2_genesis.json  \
             --datadir ./.pls.staking/operator2  \
             --rootchain.url ws://127.0.0.1:8546
 </code></pre>
-<p>아래 <code>manage-staking</code>의 하위 명령어인 <code>setManagers</code> 사용하여 <code>오퍼레이터2</code>의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth manage-staking setManagers manager.json  \
+<p>아래 <code>manage-staking</code>의 하위 명령어인 <code>set-managers</code> 사용하여 <code>오퍼레이터2</code>의 플라즈마 체인 운영에 필요한 스테이크 컨트랙트 주소를 설정한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking <span class="hljs-built_in">set</span>-managers manager.json  \
             --datadir ./.pls.staking/operator2
 </code></pre>
-<p><code>manage-staking</code>의 하위 명령어인 <code>getManagers</code> 를 실행하여 오퍼레이터1 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./.pls.staking/operator2
+<p><code>manage-staking</code>의 하위 명령어인 <code>get-managers</code> 를 실행하여 오퍼레이터1 체인데이터에 스테이크 컨트랙트 정보가 등록되어 있는지 확인한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking get-managers --datadir ./.pls.staking/operator2
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="오퍼레이터2-루트체인-등록-및-ton-잔고-확인"></a><a href="#오퍼레이터2-루트체인-등록-및-ton-잔고-확인" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터2 루트체인 등록 및 TON 잔고 확인</h3>
 <p><code>오퍼레이터2</code>가 설정한 플라즈마 체인의 루트체인 주소를 스테이크 매니저 컨트랙트에 등록하여 스테이킹 시뇨리지를 받을 수 있게 한다.</p>
@@ -175,7 +181,8 @@ INFO [01-01|00:00:00.000] Swap from TON to WTON                    amount=<span 
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
             --password pwd.pass \
-            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --rootchain.gasprice 20000000000
 </code></pre>
 <p><code>오퍼레이터2</code>의 루트체인 컨트랙트가 정상적으로 등록되면 아래와 같이 출력된다.</p>
 <pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
@@ -215,17 +222,18 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 <p>실질적으로 오퍼레이터가 플라즈마 체인 운영을 위해 depositManager에 스테이킹 되는 토큰은 WTON 이다.</p>
 <p>아래 명령어를 사용하여 1,000 TON을 WTON으로 변환한다.</p>
 <blockquote>
-<p>이때 하위 명령어인 <code>swapFromTON</code> 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.</p>
+<p>이때 하위 명령어인 <code>swap-from-ton</code> 의 입력인자로 소수점을 사용하여야 1e9(1,000,000,000 wei) 단위가 적용된다.</p>
 </blockquote>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking swap-from-ton 1000.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
             --password pwd.pass \
-            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --rootchain.gasprice 20000000000
 </code></pre>
-<p><code>staking</code>의 하위 명령어인 <code>stakeWTON</code>를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
+<p><code>staking</code>의 하위 명령어인 <code>stake-wton</code>를 사용하여, 변환된 1,000 WTON 중 500 WTON을 스테이킹 한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stake-wton 500.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
@@ -233,13 +241,14 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
             --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="방법-2--ton---stake-1"></a><a href="#방법-2--ton---stake-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>방법 2 : TON -&gt; Stake</h4>
-<p>또는, 위 두 과정을 <code>stakeTON</code> 명령어로 한번에 처리 할 수 있다.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
+<p>또는, 위 두 과정을 <code>stake-ton</code> 명령어로 한번에 처리 할 수 있다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stake-ton 500.0 \
             --datadir ./.pls.staking/operator2 \
             --rootchain.url ws://127.0.0.1:8546 \
             --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
             --password pwd.pass \
-            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --rootchain.gasprice 20000000000
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="ton-커밋-보상-확인-및-인출"></a><a href="#ton-커밋-보상-확인-및-인출" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TON 커밋 보상 확인 및 인출</h2>
 <p><code>오퍼레이터1</code> 또는 <code>오퍼레이터2</code> 각각이 플라즈마 체인 블록을 만드는 과정에서 이 오퍼레이터들은 각자의 블록의 루트해시를 모아 루트체인에 커밋 tx를 만들어낸다.</p>
@@ -305,8 +314,8 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 <p><code>오퍼레이터1</code>이 커밋을 했기 때문에 스테이킹된 테스트 TON의 시뇨리지는 <code>오퍼레이터1</code>과 <code>오퍼레이터2</code> 모두에게 발생하였다.</p>
 <p>발생한 시뇨리지는 WTON 형태로 오퍼레이터 계정에 쌓인다.</p>
 <p>이 과정은 <code>오퍼레이터1</code>이 받은 시뇨리지에 대한 인출 과정을 담고있다.</p>
-<p>TON의 인출을 위해서는 <code>staking</code>의 하위 명령어인 <code>requestWithdrawal</code>을 사용한다. 550 WTON 인출을 위해 아래와 같이 입력한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 550.0 \
+<p>TON의 인출을 위해서는 <code>staking</code>의 하위 명령어인 <code>request-withdrawal</code>을 사용한다. 550 WTON 인출을 위해 아래와 같이 입력한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking request-withdrawal 550.0 \
               --datadir ./.pls.staking/operator1 \
               --rootchain.url ws://127.0.0.1:8546 \
               --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -343,15 +352,15 @@ INFO [01-01|00:00:00.000] Uncomitted Stake                         amount=<span 
 INFO [01-01|00:00:00.000] Committed Stake                          amount=<span class="hljs-string">"50.0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
 INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 </code></pre>
-<p>최종 인출을 위해 <code>processWithdrawal</code> 명령어를 사용한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
+<p>최종 인출을 위해 <code>process-withdrawal</code> 명령어를 사용한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking process-withdrawal \
               --datadir ./.pls.staking/operator1 \
               --rootchain.url ws://127.0.0.1:8546 \
               --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
               --password pwd.pass \
               --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
 </code></pre>
-<p><code>processWithDrawal</code>이 정상적으로 처리된 이후에 잔고가 550 WTON이 증가된 1,050 WTON으로 늘어난 것을 확인할 수 있다.</p>
+<p><code>process-withdrawal</code>이 정상적으로 처리된 이후에 잔고가 550 WTON이 증가된 1,050 WTON으로 늘어난 것을 확인할 수 있다.</p>
 <pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
             --datadir ./.pls.staking/operator1 \
             --rootchain.url ws://127.0.0.1:8546
@@ -375,9 +384,9 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="보상-인출-취소"></a><a href="#보상-인출-취소" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>보상 인출 취소</h3>
 <p><code>requestWithdrawal</code>을 통한 출금 요청 상태의 <code>WTON</code>을 다시 스테이크 상태로 되돌릴 수 있다.</p>
-<p><code>staking</code>의 하위 명령어인 <code>restake</code>사용 하여, <code>Pending</code> 상태의 요청이 <code>processWithdrawal</code>을 통해 처리되기 전에 취소 가능하다.</p>
-<p>먼저, <code>Pending</code> 상태의 요청을 만들기 위해 <code>staking</code>의 하위 명령어인 <code>requestWithdrawal</code>을 사용한다. 50 WTON 인출을 위해 아래와 같이 입력한다.</p>
-<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 50.0 \
+<p><code>staking</code>의 하위 명령어인 <code>restake</code>사용 하여, <code>Pending</code> 상태의 요청이 <code>process-withdrawal</code>을 통해 처리되기 전에 취소 가능하다.</p>
+<p>먼저, <code>Pending</code> 상태의 요청을 만들기 위해 <code>staking</code>의 하위 명령어인 <code>request-withdrawal</code>을 사용한다. 50 WTON 인출을 위해 아래와 같이 입력한다.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking request-withdrawal 50.0 \
               --datadir ./.pls.staking/operator1 \
               --rootchain.url ws://127.0.0.1:8546 \
               --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
@@ -445,14 +454,14 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 <tr><th>Sub-command</th><th>Argument</th><th>Unit</th><th>Describes</th></tr>
 </thead>
 <tbody>
-<tr><td>deployManager</td><td>withdrawalDelay*</td><td>Int</td><td>스테이킹된 WTON 을 언-스테이크 상태로 변환하기 위해서는 <code>requestWithdrawal</code> 트랜잭션을 전송해야 한다. 해당 파라미터 숫자만큼 루트체인 블록이 진행 된 후, <code>requestWithdrawal</code> 이 처리 가능한 상태가 된다.</td></tr>
+<tr><td>deploy-manager</td><td>withdrawalDelay*</td><td>Int</td><td>스테이킹된 WTON 을 언-스테이크 상태로 변환하기 위해서는 <code>requestWithdrawal</code> 트랜잭션을 전송해야 한다. 해당 파라미터 숫자만큼 루트체인 블록이 진행 된 후, <code>requestWithdrawal</code> 이 처리 가능한 상태가 된다.</td></tr>
 <tr><td></td><td>seigPerBlock*</td><td>Float</td><td>블록당 발생가능한 최대 시뇨리지 수. 토큰의 인플레이션에 영향을 준다.</td></tr>
-<tr><td>deployPowerTON</td><td>roundDuration*</td><td>Int(Seconds)</td><td><code>PowerTON</code> 컨트랙트를 배포한다. 컨트랙트 배포에 필요한 <code>roundDuration</code> 단위는 초이다. 예를들어 <code>60s</code> 값으로 배포한 <code>PowerTON</code> 컨트랙트는 60초 주기로 미발행 TON 시뇨리지를 받아 갈 수 있는 오퍼레이터가 선정된다.</td></tr>
-<tr><td>startPowerTON</td><td>없음</td><td>-</td><td><code>deployPowerTON</code>을 통해 배포된 <code>PowerTON</code> 컨트랙트를 활성화 시킨다.</td></tr>
-<tr><td>getManagers</td><td>파일이름</td><td>string</td><td><code>--datadir</code> 로 입력받은 위치의 데이터베이스에서 스테이크 매니저 컨트랙트들의 주소들을 추출하여 &lt;파일이름&gt;.json 으로 저장한다. 대부분의 경우 스테이크 매니저 컨트랙트 배포 하위명령어인  <code>deployManager</code> 실행할때 지정한 <code>--datadir</code> 의 위치를 사용한다.</td></tr>
-<tr><td>setManagers</td><td>파일이름*</td><td>string</td><td>스테이크 매니저 컨트랙트 주소가 저장되어 있는 파일, (e,g <code>manager.json</code>), 을 읽어. 오퍼레이터의 플라즈마 체인 운영에 필요한 컨트랙트 주소들을 설정한다. 이때 사용하는 <code>--datadir</code> 의 위치는 오퍼레이터 체인데이터 위치가 된다.</td></tr>
-<tr><td>register</td><td>없음</td><td>-</td><td>오퍼레이터가 TON 의 시뇨리지를 받기 위해서 시뇨리지 컨트랙트에 자신의 루트체인 주소를 등록해야 한다. <code>--datadir</code> 을 오퍼레이터 데이터 위치하여야 하며, 해당 위치에 <code>setManagers</code>를 통해 스테이크 매니저 컨트랙트 정보들을 이미 설정해 두어야 한다.</td></tr>
-<tr><td>mintTON</td><td>amount*</td><td>Float or Int</td><td>테스트를 위해 임의로 입력한 <code>amount</code> 만큼의 TON을 생성할 수 있다.</td></tr>
+<tr><td>deploy-power-ton</td><td>roundDuration*</td><td>Int(Seconds)</td><td><code>PowerTON</code> 컨트랙트를 배포한다. 컨트랙트 배포에 필요한 <code>roundDuration</code> 단위는 초이다. 예를들어 <code>60s</code> 값으로 배포한 <code>PowerTON</code> 컨트랙트는 60초 주기로 미발행 TON 시뇨리지를 받아 갈 수 있는 오퍼레이터가 선정된다.</td></tr>
+<tr><td>start-powerton</td><td>없음</td><td>-</td><td><code>deploy-powerton</code>을 통해 배포된 <code>PowerTON</code> 컨트랙트를 활성화 시킨다.</td></tr>
+<tr><td>get-managers</td><td>파일이름</td><td>string</td><td><code>--datadir</code> 로 입력받은 위치의 데이터베이스에서 스테이크 매니저 컨트랙트들의 주소들을 추출하여 &lt;파일이름&gt;.json 으로 저장한다. 대부분의 경우 스테이크 매니저 컨트랙트 배포 하위명령어인  <code>deploy-manager</code> 실행할때 지정한 <code>--datadir</code> 의 위치를 사용한다.</td></tr>
+<tr><td>set-managers</td><td>파일이름*</td><td>string</td><td>스테이크 매니저 컨트랙트 주소가 저장되어 있는 파일, (e,g <code>manager.json</code>), 을 읽어. 오퍼레이터의 플라즈마 체인 운영에 필요한 컨트랙트 주소들을 설정한다. 이때 사용하는 <code>--datadir</code> 의 위치는 오퍼레이터 체인데이터 위치가 된다.</td></tr>
+<tr><td>register</td><td>없음</td><td>-</td><td>오퍼레이터가 TON 의 시뇨리지를 받기 위해서 시뇨리지 컨트랙트에 자신의 루트체인 주소를 등록해야 한다. <code>--datadir</code> 을 오퍼레이터 데이터 위치하여야 하며, 해당 위치에 <code>set-managers</code>를 통해 스테이크 매니저 컨트랙트 정보들을 이미 설정해 두어야 한다.</td></tr>
+<tr><td>mint-ton</td><td>amount*</td><td>Float or Int</td><td>테스트를 위해 임의로 입력한 <code>amount</code> 만큼의 TON을 생성할 수 있다.</td></tr>
 </tbody>
 </table>
 <blockquote>
@@ -466,13 +475,13 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 </thead>
 <tbody>
 <tr><td>balances</td><td>address*</td><td>address</td><td>입력인자로 입력한 주소가 가지고 있는 <code>TON</code>, <code>WTON</code>, <code>staked WTON(==deposit)</code>, <code>reward WTON(==(Un)Committed)</code> 등과 같은 정보를 출력한다.</td></tr>
-<tr><td>swapFromTON</td><td>amount*</td><td>Float or Int</td><td><code>TON</code>을 <code>WTON</code> 으로 변환하는 트랜잭션을 전송한다. <code>WTON</code> 으로 변환할 <code>TON</code>의 수량을 입력인자로 사용한다. 대상이 되는 주소는 <code>--rootchain.sender</code> 플래그로 지정한다.</td></tr>
-<tr><td>swapToTON</td><td>amount*</td><td>Float or Int</td><td><code>WTON</code>을 <code>TON</code> 으로 변환하는 트랜잭션을 전송한다. <code>TON</code> 으로 변환할 <code>WTON</code>의 수량을 입력인자로 사용한다.대상이 되는 주소는 <code>--rootchain.sender</code> 플래그로 지정한다.</td></tr>
-<tr><td>stakeTON</td><td>amount*</td><td>Float or Int</td><td>이 명령어는 <code>swapFromTON</code> 과 <code>stakeWTON</code> 을 하나의 명령어로 처리. 오퍼레이터가 입력한 <code>amount</code>의 만큼의 <code>TON</code>을 스테이크된 상태(staked status)로 변환한다. 이때 대상이 되는 주소는 <code>--rootchain.sender</code> 로 지정한다.</td></tr>
-<tr><td>stakeWTON</td><td>amount*</td><td>Float or Int</td><td>TON의 시뇨리지를 받기 위해 <code>WTON</code>을 스테이킹 해야 한다. 오퍼레이터가 입력한 <code>amount</code>의 만큼의 <code>WTON</code>을 스테이크된 상태로 변환한다. 이때 대상이 되는 주소는 <code>--rootchain.sender</code> 로 지정한다.</td></tr>
-<tr><td>restake</td><td>numRequests</td><td>Int</td><td><code>requestWithdrawal</code> 로 인해 인출 대기중인 <code>WTON</code>을 다시 스테이크 상태로 되돌린다. 다시말해 <code>requestWithdrawal</code>을 취소하는 트랜잭션을 전송한다. 기본값은 0이며, 이경우 Pending 상태의 모든 <code>requestWithdrawal</code> 을 취소한다. 입력인자값에 해당하는 <code>requestWithdrawal</code> 을 취소한다.</td></tr>
-<tr><td>requestWithdrawal</td><td>amount*</td><td>Float or Int</td><td>스테이킹된 상태의 <code>WTON</code> 을 언-스테킹크 상태로 전환하는 트랜잭션을 전송한다. 대상이 되는 주소는 <code>--rootchain.sender</code> 플래그로 지정한다. 언스테이크 요청(i.e requestWithdrawal) 은 <code>depositManager</code> 에서 설정한 <code>withdrawalDelay</code> 만큼의 블록이 진행된 이후 처리가능한 상태가 된다.</td></tr>
-<tr><td>processWithdrawal</td><td>numRequests</td><td>Int</td><td><code>requestWithdrawal</code> 을 통해 등록된 <code>WTON</code> 언스테이킹을 완료한다. 입력인자 미입력시 완료 가능한 모든 <code>requestWithdrawal</code>이 처리 된다.</td></tr>
+<tr><td>swap-from-ton</td><td>amount*</td><td>Float or Int</td><td><code>TON</code>을 <code>WTON</code> 으로 변환하는 트랜잭션을 전송한다. <code>WTON</code> 으로 변환할 <code>TON</code>의 수량을 입력인자로 사용한다. 대상이 되는 주소는 <code>--rootchain.sender</code> 플래그로 지정한다.</td></tr>
+<tr><td>swap-to-ton</td><td>amount*</td><td>Float or Int</td><td><code>WTON</code>을 <code>TON</code> 으로 변환하는 트랜잭션을 전송한다. <code>TON</code> 으로 변환할 <code>WTON</code>의 수량을 입력인자로 사용한다.대상이 되는 주소는 <code>--rootchain.sender</code> 플래그로 지정한다.</td></tr>
+<tr><td>stake-ton</td><td>amount*</td><td>Float or Int</td><td>이 명령어는 <code>swap-from-ton</code> 과 <code>stake-wton</code> 을 하나의 명령어로 처리. 오퍼레이터가 입력한 <code>amount</code>의 만큼의 <code>TON</code>을 스테이크된 상태(staked status)로 변환한다. 이때 대상이 되는 주소는 <code>--rootchain.sender</code> 로 지정한다.</td></tr>
+<tr><td>stake-wton</td><td>amount*</td><td>Float or Int</td><td>TON의 시뇨리지를 받기 위해 <code>WTON</code>을 스테이킹 해야 한다. 오퍼레이터가 입력한 <code>amount</code>의 만큼의 <code>WTON</code>을 스테이크된 상태로 변환한다. 이때 대상이 되는 주소는 <code>--rootchain.sender</code> 로 지정한다.</td></tr>
+<tr><td>restake</td><td>numRequests</td><td>Int</td><td><code>request-withdrawal</code> 로 인해 인출 대기중인 <code>WTON</code>을 다시 스테이크 상태로 되돌린다. 다시말해 <code>request-withdrawal</code>을 취소하는 트랜잭션을 전송한다. 기본값은 0이며, 이경우 Pending 상태의 모든 <code>request-withdrawal</code> 을 취소한다. 입력인자값에 해당하는 <code>requestWithdrawal</code> 을 취소한다.</td></tr>
+<tr><td>request-withdrawal</td><td>amount*</td><td>Float or Int</td><td>스테이킹된 상태의 <code>WTON</code> 을 언-스테킹크 상태로 전환하는 트랜잭션을 전송한다. 대상이 되는 주소는 <code>--rootchain.sender</code> 플래그로 지정한다. 언스테이크 요청(i.e requestWithdrawal) 은 <code>depositManager</code> 에서 설정한 <code>withdrawalDelay</code> 만큼의 블록이 진행된 이후 처리가능한 상태가 된다.</td></tr>
+<tr><td>process-withdrawal</td><td>numRequests</td><td>Int</td><td><code>request-withdrawal</code> 을 통해 등록된 <code>WTON</code> 언스테이킹을 완료한다. 입력인자 미입력시 완료 가능한 모든 <code>request-withdrawal</code>이 처리 된다.</td></tr>
 </tbody>
 </table>
 <blockquote>
@@ -481,4 +490,4 @@ INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
 <blockquote>
 <p><code>amount</code> 입력값에 소수점 붙지 않은 경우 1e9 단위가 적용되지 않는다.</p>
 </blockquote>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-4-27 by Jin</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/public-testnets"><span class="arrow-prev">← </span><span>퍼블릭 테스트넷 정보</span></a><a class="docs-next button" href="/docs/ko/guides/getting-started/rinkeby-testnet-staking"><span>Rinkeby 테스트넷 스테이킹</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#오퍼레이터-ton-스테이킹">오퍼레이터 TON 스테이킹</a><ul class="toc-headings"><li><a href="#테스트-ton-생성">테스트 TON 생성</a></li><li><a href="#오퍼레이터1-ton-스테이킹">오퍼레이터1 TON 스테이킹</a></li><li><a href="#오퍼레이터2-체인-설정-및-스테이킹-주소-설정">오퍼레이터2 체인 설정 및 스테이킹 주소 설정</a></li><li><a href="#오퍼레이터2-루트체인-등록-및-ton-잔고-확인">오퍼레이터2 루트체인 등록 및 TON 잔고 확인</a></li><li><a href="#오퍼레이터2-ton-스테이킹">오퍼레이터2 TON 스테이킹</a></li></ul></li><li><a href="#ton-커밋-보상-확인-및-인출">TON 커밋 보상 확인 및 인출</a><ul class="toc-headings"><li><a href="#오퍼레이터1-체인-실행-및-더미-트랜잭션-생성">오퍼레이터1 체인 실행 및 더미 트랜잭션 생성</a></li><li><a href="#시뇨리지-확인">시뇨리지 확인</a></li><li><a href="#보상-인출">보상 인출</a></li><li><a href="#보상-인출-취소">보상 인출 취소</a></li></ul></li><li><a href="#하위-명령어-정리">하위 명령어 정리</a><ul class="toc-headings"><li><a href="#manage-staking-하위-명령어"><code>manage-staking</code> 하위 명령어</a></li><li><a href="#staking-하위-명령어"><code>staking</code> 하위 명령어</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 5/12/2020 by ggs134</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/public-testnets"><span class="arrow-prev">← </span><span>퍼블릭 테스트넷 정보</span></a><a class="docs-next button" href="/docs/ko/guides/getting-started/rinkeby-testnet-staking"><span>Rinkeby 테스트넷 스테이킹</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#오퍼레이터-ton-스테이킹">오퍼레이터 TON 스테이킹</a><ul class="toc-headings"><li><a href="#테스트-ton-생성">테스트 TON 생성</a></li><li><a href="#오퍼레이터1-ton-스테이킹">오퍼레이터1 TON 스테이킹</a></li><li><a href="#오퍼레이터2-체인-설정-및-스테이킹-주소-설정">오퍼레이터2 체인 설정 및 스테이킹 주소 설정</a></li><li><a href="#오퍼레이터2-루트체인-등록-및-ton-잔고-확인">오퍼레이터2 루트체인 등록 및 TON 잔고 확인</a></li><li><a href="#오퍼레이터2-ton-스테이킹">오퍼레이터2 TON 스테이킹</a></li></ul></li><li><a href="#ton-커밋-보상-확인-및-인출">TON 커밋 보상 확인 및 인출</a><ul class="toc-headings"><li><a href="#오퍼레이터1-체인-실행-및-더미-트랜잭션-생성">오퍼레이터1 체인 실행 및 더미 트랜잭션 생성</a></li><li><a href="#시뇨리지-확인">시뇨리지 확인</a></li><li><a href="#보상-인출">보상 인출</a></li><li><a href="#보상-인출-취소">보상 인출 취소</a></li></ul></li><li><a href="#하위-명령어-정리">하위 명령어 정리</a><ul class="toc-headings"><li><a href="#manage-staking-하위-명령어"><code>manage-staking</code> 하위 명령어</a></li><li><a href="#staking-하위-명령어"><code>staking</code> 하위 명령어</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
