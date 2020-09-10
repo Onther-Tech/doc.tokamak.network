@@ -1,6 +1,6 @@
 ---
-id: rinkeby-testnet-staking
-title: Staking in Rinkeby Testnet
+id: how-to-commit
+title: Commit to Roochain
 sidebar_label: How to Commit
 ---
 
