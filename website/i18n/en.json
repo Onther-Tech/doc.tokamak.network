@@ -5,6 +5,10 @@
     "previous": "Previous",
     "tagline": "Plasma evm documents",
     "docs": {
+      "guides/getting-started/how-to-commit": {
+        "title": "Commit to Roochain",
+        "sidebar_label": "How to Commit"
+      },
       "guides/getting-started/how-to-connect-public-testnet-manually": {
         "title": "How to connect public testnet manually",
         "sidebar_label": "Manually"
@@ -29,6 +33,10 @@
         "title": "Setup Rootchain in Private Testnet",
         "sidebar_label": "Setup Rootchain"
       },
+      "guides/getting-started/how-to-set-operator": {
+        "title": "How to Set Operator",
+        "sidebar_label": "How to Set Operator"
+      },
       "guides/getting-started/mainnet-mton-staking": {
         "title": "MTON Staking in Mainnet",
         "sidebar_label": "Mainnet MTON staking"
@@ -40,14 +48,6 @@
       "guides/getting-started/private-testnet-staking": {
         "title": "Staking Test in Private Testnet",
         "sidebar_label": "Private Testnet Staking"
-      },
-      "guides/getting-started/how-to-commit": {
-        "title": "How to Commit",
-        "sidebar_label": "How to Commit"
-      },
-      "guides/getting-started/how-to-set-operator": {
-        "title": "How to Set Operator and Register",
-        "sidebar_label": "How to Set Operator and Register"
       },
       "guides/manuals/guides_manuals_how-to-make-request": {
         "title": "How to make request",
