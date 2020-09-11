@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>커밋 방법 · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="이 문서는 `Staking-script`를 이용해 오퍼레이터를 운영하는 방법을 담고 있다."/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="커밋 방법 · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="이 문서는 `Staking-script`를 이용해 오퍼레이터를 운영하는 방법을 담고 있다."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/guides/getting-started/how-to-commit">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>TON 스테이킹</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">배우기<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">기초</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/tokamak-network">토카막 네트워크</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/enter-and-exit">상호운용성: 진입 &amp; 퇴장</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/transaction-fee">편의성: 계정, 트랜잭션 수수료, 개발도구</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/layer-2-solutions">비교: 다른 확장성 솔루션</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">고급</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/design-rationale">디자인 원칙</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/plasma-evm-architecture">Plasma EVM 아키텍처</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/root-chain">루트체인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/child-chain">자식체인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/plasma-evm-smart-contracts">Plasma EVM 스마트 컨트랙트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/examples-and-best-practices">요청 가능한 컨트랙트 예제</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">토큰경제</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/child-chain">자식체인과 스테이킹</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/token-supply">토큰 공급과 분배</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/powerton">파워톤</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/tx-fee">트랜잭션 수수료 정책</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/challenge">챌린지</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/glossary">파라미터 정리</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">가이드<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">프라이빗 테스트넷 시작</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">루트체인 설정</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-manually">자식체인 설정</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-open-private-testnet-puppeth">Puppeth 사용하여 부모-자식체인 설정</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">퍼블릭 테스트넷 연결</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-prepare">연결 준비</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-manually">직접 연결</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-connect-public-testnet-puppeth">Puppeth 사용하여 연결</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/public-testnets">퍼블릭 테스트넷 정보</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">TON 스테이킹</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/private-testnet-staking">프라이빗 네트워크 스테이킹</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/rinkeby-testnet-staking">Rinkeby 테스트넷 스테이킹</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/mainnet-mton-staking">메인넷 MTON 스테이킹</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-set-operator">오퍼레이터 세팅 및 등록 방법</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ko/guides/getting-started/how-to-commit">커밋 방법</a></li></ul></div></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/getting-started/how-to-commit.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">커밋 방법</h1></header><article><div><span><p>이 문서는 <code>Staking-script</code>를 이용해 오퍼레이터를 운영하는 방법을 담고 있다.</p>
+<p>해당 스크립트에서 제공하는 기능은 <code>commit</code>, <code>stake</code>, <code>unstake</code>, <code>restake</code>, <code>withdrawal</code> 이 있다</p>
+<blockquote>
+<p>이 과정을 수행하기 위해서는 스태이킹을 진행중인 오퍼레이터를 소유하고 있어야 한다.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="스크립트-준비"></a><a href="#스크립트-준비" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>스크립트 준비</h2>
+<h3><a class="anchor" aria-hidden="true" id="소스코드-다운로드-및-패키지-설치"></a><a href="#소스코드-다운로드-및-패키지-설치" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>소스코드 다운로드 및 패키지 설치</h3>
+<p>아래 명령어를 이용해 소스코드를 복제하고 패키지들을 설치한다.</p>
+<pre><code class="hljs css language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/Onther-Tech/staking-script.git
+$ <span class="hljs-built_in">cd</span> staking-script &amp;&amp; npm install
+</code></pre>
+<p>패키지 설치를 마치면 이제 다음 단계를 진행하면 된다.</p>
+<h2><a class="anchor" aria-hidden="true" id="컨트랙트-주소-수정"></a><a href="#컨트랙트-주소-수정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>컨트랙트 주소 수정</h2>
+<blockquote>
+<p>해당 문서에서는 Rinkeby를 기준으로 설명 할 것이다. 만약 메인넷에서 진행한다고 한다면 네트워크를 메인넷으로 설정하면 된다.</p>
+</blockquote>
+<p>커밋을 위해서는 해당 오퍼레이터가 배포한 컨트랙트의 주소가 필요하다.
+아래 명령어를 이용해 <code>config.js</code> 파일을 수정하도록 한다.</p>
+<pre><code class="hljs css language-bash">$ vi config.js
+</code></pre>
+<p><code>config.js</code>의 내용은 다음과 같다.</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> config = {
+  <span class="hljs-string">'mainnet'</span>: {
+    <span class="hljs-string">'network'</span>: <span class="hljs-string">'1'</span>,
+    <span class="hljs-string">'contractAddress'</span>: {
+      <span class="hljs-string">'rootchain'</span>: <span class="hljs-string">''</span>,
+      <span class="hljs-string">'managers'</span>: {
+        <span class="hljs-string">'DepositManager'</span>: <span class="hljs-string">''</span>,
+        <span class="hljs-string">'TON'</span>: <span class="hljs-string">''</span>,
+        <span class="hljs-string">'WTON'</span>: <span class="hljs-string">''</span>,
+      },
+    },
+  },
+  <span class="hljs-string">'rinkeby'</span>: {
+    <span class="hljs-string">'network'</span>: <span class="hljs-string">'4'</span>,
+    <span class="hljs-string">'contractAddress'</span>: {
+      <span class="hljs-string">'rootchain'</span>: <span class="hljs-string">'0xfe40ecbd972675d3d6766d94d04373bf9d8896b6'</span>,
+      <span class="hljs-string">'managers'</span>: {
+        <span class="hljs-string">"TON"</span>:<span class="hljs-string">"0x3e136394a481f8c9595d63a1fa70d25c7f388c2c"</span>,
+        <span class="hljs-string">"WTON"</span>:<span class="hljs-string">"0x36bba598ca0b329eb4162ba011086d09111b4702"</span>,
+        <span class="hljs-string">"DepositManager"</span>:<span class="hljs-string">"0x95ff08f500ecb391778a3096ec767bdb18e17cf6"</span>,
+        <span class="hljs-string">"RootChainRegistry"</span>:<span class="hljs-string">"0x8dc9d372ebd9ed0d8f991226eaaf331ad11dbb4d"</span>,
+        <span class="hljs-string">"SeigManager"</span>:<span class="hljs-string">"0x32ccc91e3dd884090a580f45172c62393bd858c5"</span>,
+        <span class="hljs-string">"PowerTON"</span>:<span class="hljs-string">"0x4cc9b4cf3a4a6f8e7cadf8fcd442873c3f71ab73"</span>
+      },
+    },
+  },
+};
+
+exports.getConfig = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  
+  <span class="hljs-keyword">return</span> config.rinkeby;
+}
+</code></pre>
+<p>여기서 각 컨트랙트의 주소를 해당 오퍼레이터가 배포한 주소에 맞게 변경해야 한다. 여기서는 <code>rinkeby</code>를 기준으로 설명이 되어있지만 메인넷을 이용하고 싶은 경우 <code>config.rinkeby</code>를 <code>config.mainnet</code>으로 변경해야 한다.</p>
+<h2><a class="anchor" aria-hidden="true" id="infura-준비"></a><a href="#infura-준비" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Infura 준비</h2>
+<p>커밋을 위한 <code>RPC Privider URL</code>은 <code>Infura</code> 에서 제공하고 있는 <code>Rinkeby Testnet</code> 노드의 주소를 사용한다.
+접속 가능한 <code>Rinkeby Testnet</code> 노드가 없는 경우, <a href="how-to-connect-public-testnet-prepare">퍼블릭 테스트넷 연결 준비</a>에 <a href="how-to-connect-public-testnet-prepare#rinkeby-루트체인-접속-주소-생성">&quot;Rinkeby 루트체인 접속 주소 생성&quot;</a>를 수행하여 접속가능한 주소를 얻는다.</p>
+<h2><a class="anchor" aria-hidden="true" id="사용방법"></a><a href="#사용방법" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사용방법</h2>
+<p>이제 해당 스크립트를 사용하기 위한 모든 준비가 완료됐다. 다음과 같은 양식을 입력하여 수행하면 된다.</p>
+<pre><code class="hljs css language-bash">$ node app.js --provider-url https://rinkeby.infura.io/v3/*** -k &lt;privateKey&gt; -f &lt;<span class="hljs-keyword">function</span> name&gt; -p &lt;parameter&gt;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="파라미터"></a><a href="#파라미터" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>파라미터</h3>
+<p><code>Staking script</code>에서 제공하고 있는 파라미터들은 다음과 같다.</p>
+<pre><code class="hljs">-f, --function-name [value], required. function <span class="hljs-keyword">to</span> call
+-i, --network-id [value], required <span class="hljs-keyword">for</span> infura. ethereum<span class="hljs-built_in"> network </span>id. 1 <span class="hljs-keyword">for</span> mainsale, 3 <span class="hljs-keyword">for</span> rinkeby.
+-p, --parameters [value]&gt;, `arguments <span class="hljs-keyword">for</span> function split by comma.<span class="hljs-built_in"> default </span><span class="hljs-variable">${ defaultParameters }</span>`, parseParams
+-l, --provider-url [url], `web3 provider url.<span class="hljs-built_in"> default </span><span class="hljs-variable">${ defaultProviderUrl }</span>`
+-L, --gas-limit [value], `gas limit <span class="hljs-keyword">for</span> transaction.<span class="hljs-built_in"> default </span><span class="hljs-variable">${ defaultGasLimit }</span>`
+-P, --gas-price [value], `gas price <span class="hljs-keyword">for</span> transaction.<span class="hljs-built_in"> default </span><span class="hljs-variable">${ defaultGasPrice }</span>`
+-N, --nonce [value], `nonce <span class="hljs-keyword">for</span> transaction.<span class="hljs-built_in"> default </span><span class="hljs-variable">${ defaultNonce }</span>`
+-v, --verbose, show <span class="hljs-builtin-name">debug</span><span class="hljs-built_in"> logging
+</span>-k, --pk [value], required. transaction sender.
+</code></pre>
+<p>그리고 기본 파라미터는 아래와 같다.</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> defaultProviderUrl = <span class="hljs-string">"http://localhost:8545"</span>;
+<span class="hljs-keyword">const</span> defaultWeiAmount = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">const</span> defaultGasLimit = <span class="hljs-number">4500000</span>;
+<span class="hljs-keyword">const</span> defaultGasPrice = <span class="hljs-number">20e9</span>;
+<span class="hljs-keyword">const</span> defaultNonce = <span class="hljs-literal">null</span>;
+</code></pre>
+<p><code>Staking-script</code>에서 지원하는 함수들은 다음과 같다.</p>
+<h3><a class="anchor" aria-hidden="true" id="commit"></a><a href="#commit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Commit</h3>
+<pre><code class="hljs"><span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --provider-url https://rinkeby.<span class="hljs-literal">inf</span>ura.io/v3/*** -k <span class="hljs-tag">&lt;privateKey&gt;</span> -f commit
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="stake"></a><a href="#stake" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Stake</h3>
+<blockquote>
+<p>ex. 1 TON 스테이킹 하기</p>
+</blockquote>
+<p>1 TON을 스테이킹하기 위해서는 파라미터에 1e18에 해당하는 값을 넣어주어야 한다.</p>
+<pre><code class="hljs"><span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --provider-url https://rinkeby.<span class="hljs-literal">inf</span>ura.io/v3/*** -k <span class="hljs-tag">&lt;privateKey&gt;</span> -f approveAndCall -p <span class="hljs-number">1000000000000000000</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="unstake"></a><a href="#unstake" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unstake</h3>
+<p>1 TON 언스테이킹 하기</p>
+<blockquote>
+<p>언스테이킹은 ray를 단위로 사용하기 때문에 1 TON을 언스테이킹하기 위해서는 1e18이 아니라 1e27을 파라미터로 입력 해주어야 한다.</p>
+</blockquote>
+<pre><code class="hljs"><span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --provider-url https://rinkeby.<span class="hljs-literal">inf</span>ura.io/v3/*** -k <span class="hljs-tag">&lt;privateKey&gt;</span> -f requestWithdrawal -p <span class="hljs-number">1000000000000000000000000000</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="restake"></a><a href="#restake" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Restake</h3>
+<p>언스테이킹을 했던 TON을 다시 스테이킹하려면, 이 함수를 호출해야 한다.</p>
+<pre><code class="hljs"><span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --provider-url https://rinkeby.<span class="hljs-literal">inf</span>ura.io/v3/*** -k <span class="hljs-tag">&lt;privateKey&gt;</span> -f redepositMulti
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="withdrawal"></a><a href="#withdrawal" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Withdrawal</h3>
+<p>언스테이킹한 TON을 인출하려면 이 함수를 호출하면 된다.</p>
+<pre><code class="hljs"><span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --provider-url https://rinkeby.<span class="hljs-literal">inf</span>ura.io/v3/*** -k <span class="hljs-tag">&lt;privateKey&gt;</span> -f processRequests
+</code></pre>
+<p>각 함수가 성공적으로 실행되면 다음과 같은 형식의 로그가 출력될 것이다.</p>
+<pre><code class="hljs css language-text">{"tx":"0xca6b29f1f64239c0072ecd2db3bbcedef58259bc2694de8e1a75e9fec501ade0","receipt":{"blockHash":"0xbe2c1990f5efee0f18c56f16a32d375f01ca016d8acb1b2c40f5dbf6532dc815","blockNumber":6871009,"contractAddress":null,"cumulativeGasUsed":705612,"from":"0xf30eadcdc68f9551fe943a685c23fa07fde4b417","gasUsed":396475,
+...
+</code></pre>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020. 8. 4. by cd4761</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/getting-started/how-to-set-operator"><span class="arrow-prev">← </span><span>오퍼레이터 세팅 및 등록 방법</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#스크립트-준비">스크립트 준비</a><ul class="toc-headings"><li><a href="#소스코드-다운로드-및-패키지-설치">소스코드 다운로드 및 패키지 설치</a></li></ul></li><li><a href="#컨트랙트-주소-수정">컨트랙트 주소 수정</a></li><li><a href="#infura-준비">Infura 준비</a></li><li><a href="#사용방법">사용방법</a><ul class="toc-headings"><li><a href="#파라미터">파라미터</a></li><li><a href="#commit">Commit</a></li><li><a href="#stake">Stake</a></li><li><a href="#unstake">Unstake</a></li><li><a href="#restake">Restake</a></li><li><a href="#withdrawal">Withdrawal</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
