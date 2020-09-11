@@ -9,7 +9,7 @@ sidebar_label: How to Set Operator
 > 스테이킹을 직접하는 경우 상당량의 ETH를 소모하기 때문에, 특별한 목적이 아니라면 [Dashboard](https://staking.tokamak.network)의 `delegate` 사용을 권장한다.
 
 오퍼레이터 세팅을 위해 배포해야하는 컨트랙트는 `SubmitHandler`, `EpochHandler`, `Layer2` 컨트랙트이다.
-해당 컨트랙트 배포에 필요한 ETH는 가스 가격 10 gwei 기준으로 약 0.1 ETH 정도 소요된다.
+해당 컨트랙트 배포에 필요한 ETH는 가스 가격 10 gwei 기준으로 약 0.1 ETH 정도 소모된다.
 
 ## 오퍼레이터 준비
 
