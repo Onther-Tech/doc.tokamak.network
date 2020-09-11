@@ -37,9 +37,17 @@
         "title": "메인넷 MTON 스테이킹",
         "sidebar_label": "메인넷 MTON 스테이킹"
       },
+      "guides/getting-started/how-to-commit": {
+        "title": "커밋 방법",
+        "sidebar_label": "커밋 방법"
+      },
       "guides/getting-started/how-to-open-private-testnet-rootchain": {
         "title": "프라이빗 테스트넷 루트체인 설정",
         "sidebar_label": "루트체인 설정"
+      },
+      "guides/getting-started/how-to-set-operator": {
+        "title": "오퍼레이터 세팅 및 등록 방법",
+        "sidebar_label": "오퍼레이터 세팅 및 등록 방법"
       },
       "guides/guides_apis_npm-plasma-evm-contracts": {
         "title": "npm plasma-evm-contracts",

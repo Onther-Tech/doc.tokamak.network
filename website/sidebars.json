@@ -65,6 +65,7 @@
           "guides/getting-started/private-testnet-staking",
           "guides/getting-started/rinkeby-testnet-staking",
           "guides/getting-started/mainnet-mton-staking",
+          "guides/getting-started/how-to-set-operator",
           "guides/getting-started/how-to-commit"
         ]
       }

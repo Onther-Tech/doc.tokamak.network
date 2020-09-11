@@ -41,6 +41,14 @@
         "title": "Staking Test in Private Testnet",
         "sidebar_label": "Private Testnet Staking"
       },
+      "guides/getting-started/how-to-commit": {
+        "title": "How to Commit",
+        "sidebar_label": "How to Commit"
+      },
+      "guides/getting-started/how-to-set-operator": {
+        "title": "How to Set Operator and Register",
+        "sidebar_label": "How to Set Operator and Register"
+      },
       "guides/manuals/guides_manuals_how-to-make-request": {
         "title": "How to make request",
         "sidebar_label": "How to make request"
