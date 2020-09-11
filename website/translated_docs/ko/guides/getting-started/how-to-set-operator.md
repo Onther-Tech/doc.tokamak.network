@@ -4,20 +4,18 @@ title: How to Set Operator
 sidebar_label: How to Set Operator
 ---
 
-이 문서는 오퍼레이터를 세팅하고 스테이킹 대시보드에 등록하는 과정에 대한 설명을 담고 있다.
+해당 문서는 오퍼레이터에 운영에 필요한 스마트 컨트랙트 배포부터 스테이킹 대시보드에 해당 오퍼레이터를 등록하는 과정을 담고 있다.
 
-해당 스크립트는 기능은 오퍼레이터에 운영에 필요한 스마트 컨트랙트 배포부터 스테이킹 대시보드에 해당 오퍼레이터를 등록하는 과정을 담고 있다.
-
-> 스테이킹을 직접하는 경우 상당량의 ETH를 소모하기 때문에, 특별한 목적이 아니라면 [Dashboard](https://staking.tokamak.network)의 delegate사용을 권장한다.
+> 스테이킹을 직접하는 경우 상당량의 ETH를 소모하기 때문에, 특별한 목적이 아니라면 [Dashboard](https://staking.tokamak.network)의 `delegate` 사용을 권장한다.
 
 오퍼레이터 세팅을 위해 배포해야하는 컨트랙트는 `SubmitHandler`, `EpochHandler`, `Layer2` 컨트랙트이다.
 해당 컨트랙트 배포에 필요한 ETH는 가스 가격 10 gwei 기준으로 약 0.1 ETH 정도 소요된다.
 
 ## 오퍼레이터 준비
 
-### MTON 컨트랙트 정보
+### TON 컨트랙트 정보
 
-`MTON` 토큰 및 스테이크 매니저 컨트랙트 주소는 다음과 같다.
+`TON` 토큰 및 스테이크 매니저 컨트랙트 주소는 다음과 같다.
 
 **컨트렉트 정보**
 
@@ -220,7 +218,12 @@ layer2: 배포한 layer2 컨트랙트의 주소
 
 오퍼레이터를 등록하는 명령어는 다음과 같다.
 ```bash
-REGISTER=true chainid=<operator's chain id> layer2=<layer2-contract-address> website="<website address>" description="<description about operator>" operator_name="<operator's name>" truffle migrate --network mainnet
+plasma-evm-contracts $ REGISTER=true chainid=<operator's chain id> \
+                       layer2=<layer2-contract-address> \
+                       website="<website address>" \
+                       description="<description about operator>" \
+                       operator_name="<operator's name>" \
+                       truffle migrate --network mainnet
 ```
 
 만약 `chain id`가 중복된다면 `Duplicate chain id` 라는 에러가 뜰 것이다. 그럴 경우 `chain id`를 변경하여 다시 등록하면 된다.
