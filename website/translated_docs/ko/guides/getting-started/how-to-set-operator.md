@@ -72,6 +72,17 @@ $ npm install -g truffle
 
 트러플이 설치가 되었다면 이제 오퍼레이터 배포를 시작할 수 있다. 배포를 위해서는 위에서 언급한 이더리움 메인넷 접속 주소와 오퍼레이터가 될 계정의 개인키가 필요하다.
 
+배포하기 전에 [Eth Gas Station](https://ethgasstation.info/)을 통해 가스비를 확인하는 것이 좋다. 가스비를 확인하고 그에 맞게 `truffle-config.js` 에서 가스비를 조정해주면 된다.
+
+```javascript
+46  mainnet: {
+47    provider: () => new PrivateKeyProvider(process.env.MAINNET_PRIVATE_KEY, process.env.MAINNET_PROVIDER_URL),
+48    network_id: 1, // eslint-disable-line camelcase
+49    gasPrice: <adjust gas price>,
+50    skipDryRun: true,
+51  },
+```
+
 개인키가 준비되었다면 이제 배포를 시작하면 된다.
 
 ```bash
