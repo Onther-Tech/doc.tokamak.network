@@ -33,6 +33,7 @@ It can be checked through [Dashboard API] (https://dashboard-api.tokamak.network
 ```bash
 $ git clone https://github.com/Onther-Tech/plasma-evm-contracts.git
 $ cd plasma-evm-contracts && npm install
+$ git submodule update --init --recursive
 ```
 Once the package has been installed, you can proceed to the next step.
 

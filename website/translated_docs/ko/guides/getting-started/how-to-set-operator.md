@@ -33,6 +33,7 @@ sidebar_label: How to Set Operator
 ```bash
 $ git clone https://github.com/Onther-Tech/plasma-evm-contracts.git
 $ cd plasma-evm-contracts && npm install
+$ git submodule update --init --recursive
 ```
 패키지 설치가 완료되었다면 다음 단계를 진행하면 된다.
 
