@@ -11,6 +11,8 @@ sidebar_label: How to Set Operator
 오퍼레이터 세팅을 위해 배포해야하는 컨트랙트는 `SubmitHandler`, `EpochHandler`, `Layer2` 컨트랙트이다.
 해당 컨트랙트 배포에 필요한 ETH는 가스 가격 10 gwei 기준으로 약 0.1 ETH 정도 소모된다.
 
+해당 가이드는 Mac OS에서 수행되었다.
+
 ## 오퍼레이터 준비
 
 ### TON 컨트랙트 정보
@@ -230,7 +232,9 @@ layer2: 배포한 layer2 컨트랙트의 주소
 
 오퍼레이터를 등록하는 명령어는 다음과 같다.
 ```bash
-plasma-evm-contracts $ REGISTER=true chainid=<operator's chain id> \
+plasma-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
+                       REGISTER=true chainid=<operator's chain id> \
                        layer2=<layer2-contract-address> \
                        website="<website address>" \
                        description="<description about operator>" \
