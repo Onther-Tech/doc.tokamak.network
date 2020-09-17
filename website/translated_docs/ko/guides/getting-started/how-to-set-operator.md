@@ -11,7 +11,7 @@ sidebar_label: How to Set Operator
 오퍼레이터 세팅을 위해 배포해야하는 컨트랙트는 `SubmitHandler`, `EpochHandler`, `Layer2` 컨트랙트이다.
 해당 컨트랙트 배포에 필요한 ETH는 가스 가격 10 gwei 기준으로 약 0.1 ETH 정도 소모된다.
 
-해당 가이드는 Mac OS에서 수행되었다.
+해당 가이드는 Mac OS와 Linux 16.04에서 수행되었다.
 
 ## 오퍼레이터 준비
 
@@ -86,135 +86,67 @@ $ npm install -g truffle
 ```
 
 개인키가 준비되었다면 이제 배포를 시작하면 된다.
+컨트랙트 배포 순서는 `EpochHandler`, `SubmitHandler`, `Layer2` 컨트랙트 순으로 이루어 진다.
+
+먼저 `EpochHandler` 컨트랙트를 배포한다.
+```bash
+plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
+                       SET_OPERATOR=true epoch=true truffle migrate --network mainnet
+```
+
+그 다음, `SubmitHandler` 컨트랙트를 배포한다.
+```bash
+plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
+                       SET_OPERATOR=true submit=true truffle migrate --network mainnet
+```
+
+
+마지막으로 `Layer2` 컨트랙트를 배포한다.
+```bash
+plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
+                       SET_OPERATOR=true l2=true truffle migrate --network mainnet
+```
+`SubmitHandler` 컨트랙트 배포에는 `EpochHandler` 컨트랙트의 주소가 필요 하며, `Layer2` 컨트랙트 배포에는 `SubmitHandler`와 `EpochHandler` 컨트랙트의 주소가 필요하며 각 컨트랙트 배포시에 컨트랙트 주소들은 `l2.json` 파일에 저장된다. 만약 컨트랙트 배포 중 에러가 발생한다면 `l2.json`의 내용이 전부 사라지는 문제가 생길 수 있으며, 그럴 경우 배포 시에 출력되는 컨트랙트 주소를 확인여 다시 `l2.json`에 아래와 같은 형식으로 입력해주면 된다.
+
+```json
+{"EpochHandler":"0xaeb25ad2512c237820A7d2094194E1e46c279bDf","SubmitHandler":"0xb40faB9d05c9494abefEB502d71482Eb191fc629","Layer2":"0x5564AD50B6Ef6270DDb11bA5030AE86A9D562390"}
+```
+### 오퍼레이터 세팅
+
+컨트랙트 배포가 완료되었다면 아래 명령어를 통해 `Layer2` 컨트랙트를 세팅하고 `Layer2Registry` 컨트랙트에 등록하면 된다. 
 
 ```bash
 plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
                        MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
-                       SET_OPERATOR=true truffle migrate --network mainnet
+                       SET_OPERATOR=true setl2=true truffle migrate --network mainnet
 ```
-컨트랙트 배포 순서는 `EpochHandler`, `SubmitHandler`, `Layer2` 컨트랙트 순으로 이루어 진다.
-
-컨트랙트가 배포되던 중 아래와 같은 에러가 발생할 수 있다.
 
 ```bash
-  Replacing 'Layer2'
-   ------------------
-   > transaction hash:    0x4d8f5c50b44390f817b7a29daa929c638c9a8794f8778b3c0336a31cf7c3f201
-
-Error:  *** Deployment Failed ***
-
-"Layer2" received a generic error from Geth that
-can be caused by hitting revert in a contract constructor or running out of gas.
-   * gas required exceeds allowance (6721975) or always failing transaction.
-   * Try: + using the '--dry-run' option to reproduce this failure with clearer errors.
-          + verifying that your gas is adequate for this deployment.
+plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
+                       SET_OPERATOR=true registerl2=true truffle migrate --network mainnet
 ```
-그럴 경우 아래 와 같이 `EpochHandler`와 `SubmitHandler`의 컨트랙트 주소를 확인한다.
+
+위 두 명령어를 실행하기 위해서는 `Layer2`, `SeigManager`, `Layer2Registry` 컨트랙트 주소가 필요하다. 수행하기 전에 `l2.json`과 `deployed.json` 을 확인해서 두 컨트랙트 주소가 올바르게 입력되어 있는지 확인해야 한다. `Layer2` 컨트랙트 주소는 위 단계에서 배포한 컨트랙트 주소이며, `SeigManager` 의 컨트랙트 주소는 `0x710936500aC59e8551331871Cbad3D33d5e0D909` `Layer2Registry` 의 컨트랙트 주소는 `0x0b3E174A2170083e770D5d4Cf56774D221b7063e` 이다.
+
+<!-- 컨트랙트 배포 중 에러가 발생하면 아래와 같은 에러가 발생할 수 있다.
 
 ```bash
-  Replacing 'EpochHandler'
-   ------------------------
-   > transaction hash:    0xf04a1f976e92a60b2f10e61161b1d39c697d344b1a1c8ea0aea9c9f275ae3962
-   > Blocks: 1            Seconds: 17
-   > contract address:    0x8049Fc527c6193C533dbb5F32c0b141f3219e394
-   > block number:        7176803
-   > block timestamp:     1599808036
-   > account:             0xDf08F82De32B8d460adbE8D72043E3a7e25A3B39
-   > balance:             10.933293175498842592
-   > gas used:            2262572 (0x22862c)
-   > gas price:           5 gwei
-   > value sent:          0 ETH
-   > total cost:          0.01131286 ETH
+SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at module.exports (/Users/hwangjaeseung/workspace/temp/plasma-evm-contracts/migrations/3_deploy_rootchain.js:24:20)
+    at Migration._load (/usr/local/lib/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:54:1)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    at Migration.run (/usr/local/lib/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:171:1)
+    at Object.runMigrations (/usr/local/lib/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)
+    at Object.runFrom (/usr/local/lib/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)
+    at Object.run (/usr/local/lib/node_modules/truffle/build/webpack:/packages/migrate/index.js:87:1)
+    at runMigrations (/usr/local/lib/node_modules/truffle/build/webpack:/packages/core/lib/commands/migra
+``` -->
 
-
-   Replacing 'SubmitHandler'
-   -------------------------
-   > transaction hash:    0x6d60f6c4251f596c7d0bb1b9dbcf86a92c29666a7a0dcd86c286d6d4c40046c7
-   > Blocks: 0            Seconds: 9
-   > contract address:    0x2C60d0f259cA25Ac1dE8ff82480EcdBC0ac1148c
-   > block number:        7176804
-   > block timestamp:     1599808051
-   > account:             0xDf08F82De32B8d460adbE8D72043E3a7e25A3B39
-   > balance:             10.923717815498842592
-   > gas used:            1915072 (0x1d38c0)
-   > gas price:           5 gwei
-   > value sent:          0 ETH
-   > total cost:          0.00957536 ETH
-```
-
-그 다음 아래 코드를 참조해 `migrate/3_deploy_rootchain.js`의 코드를 변경해준다.
-
-```javascript
-module.exports = async function (deployer, network) {
-  // skip production network
-  if (process.env.SET_OPERATOR) {
-    let layer2;
-    let epochHandler;
-    const data = JSON.parse(fs.readFileSync('deployed.json').toString());
-    console.log(data);
-
-    await deployer.deploy(EpochHandler)
-      .then((_epochHandler) => { epochHandler = _epochHandler; })
-      .then(() => deployer.deploy(
-        SubmitHandler,
-        epochHandler.address,
-      )).then((submitHandler) => deployer.deploy(
-        Layer2,
-        epochHandler.address,
-        submitHandler.address,
-        etherToken,
-        development,
-        NRBEpochLength,
-        statesRoot,
-        transactionsRoot,
-        receiptsRoot))
-      .then(async () => { layer2 = await Layer2.deployed(); })
-      .then(() => layer2.setSeigManager(data.SeigManager))
-      .catch(e => { throw e; });
-
-    // await layer2.setSeigManager(data.SeigManager);
-    const registry = await Layer2Registry.at(data.Layer2Registry);
-
-    console.log('register and deploy...');
-    await registry.registerAndDeployCoinage(layer2.address, data.SeigManager);
-  }
-};
-```
-
-위와 같은 코드를 아래와 같이 변경해주면 된다.
-
-```javascript
-module.exports = async function (deployer, network) {
-  // skip production network
-  if (process.env.SET_OPERATOR) {
-    let layer2;
-    let epochHandler;
-    const data = JSON.parse(fs.readFileSync('deployed.json').toString());
-    console.log(data);
-
-    await deployer.deploy(
-        Layer2,
-        <epochHandler.address> // 배포된 EpochHandler의 컨트랙트 주소
-        <submitHandler.address> // 배포된 SubmitHandler의 컨트랙트 주소
-        etherToken,
-        development,
-        NRBEpochLength,
-        statesRoot,
-        transactionsRoot,
-        receiptsRoot))
-      .then(async () => { layer2 = await Layer2.deployed(); })
-      .then(() => layer2.setSeigManager(data.SeigManager))
-      .catch(e => { throw e; });
-
-    const registry = await Layer2Registry.at(data.Layer2Registry);
-
-    // register root chain and deploy coinage
-    console.log('register and deploy...');
-    await registry.registerAndDeployCoinage(layer2.address, data.SeigManager);
-  }
-};
-```
-`Layer2` 컨트랙트가 무사히 배포되었다면 컨트랙트 주소를 기억해 두고 있어야 한다.
 
 ## 오퍼레이터 등록
 
@@ -232,14 +164,14 @@ layer2: 배포한 layer2 컨트랙트의 주소
 
 오퍼레이터를 등록하는 명령어는 다음과 같다.
 ```bash
-plasma-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
-                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
-                       REGISTER=true chainid=<operator's chain id> \
+plasma-evm-contracts $ chainid=<operator's chain id> \
                        layer2=<layer2-contract-address> \
                        website="<website address>" \
                        description="<description about operator>" \
                        operator_name="<operator's name>" \
-                       truffle migrate --network mainnet
+                       node register.js
 ```
 
 만약 `chain id`가 중복된다면 `Duplicate chain id` 라는 에러가 뜰 것이다. 그럴 경우 `chain id`를 변경하여 다시 등록하면 된다.
+
+모든 과정이 성공적으로 완료되면 [Staking Dahsboard](https://staking.tokamak.network)에 접속하여 등록한 오퍼레이터를 확인할 수 있다.

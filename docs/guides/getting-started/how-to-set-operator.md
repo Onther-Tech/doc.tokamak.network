@@ -4,12 +4,14 @@ title: How to Set Operator
 sidebar_label: How to Set Operator
 ---
 
-The document includes the process of registering the operator on a staking dashboard, starting with the distribution of smart contracts needed to operate the operator.
+The document includes the process of registering the operator on a staking dashboard, starting with the deployment of smart contracts needed to operate the operator.
 
-> Because it consumes a significant amount of ETH when steaming directly, it is recommended to use the `delegate` on the Dashboard](https://staking.tokamak.network) unless it is intended for special purposes.
+> Because it consumes a significant amount of ETH when steaming directly, it is recommended to use the `delegate` on the [Dashboard](https://staking.tokamak.network) unless it is intended for special purposes.
 
-Contracts that need to be distributed to set up operators are `SubmitHandler`, `EpochHandler`, and `Layer 2` contracts.
+Contracts that need to be deployed to set up operators are `SubmitHandler`, `EpochHandler`, and `Layer 2` contracts.
 The ETH required for the deployment of the corresponding contract is consumed by about 0.1 ETH on a gas price basis of 10 gwei.
+
+The guide was performed on Mac OS and Linux 16.04.
 
 ## Set Operator
 
@@ -71,138 +73,66 @@ Operator deployment is carried out using truffle. If truffle is not installed, i
 $ npm install -g truffle
 ```
 
-Once the truffle has been installed, you can now start deploying the operator. The distribution requires the Ethereum mainnet access address mentioned above and the private key of the account to be an operator.
+Once the truffle has been installed, you can now start deploying the operator. The deployment requires the Ethereum mainnet access address mentioned above and the private key of the account to be an operator.
 
-If your private key is ready, you can now start distributing it.
+It is recommended that you check the gas price through [Eth Gas Station](https://ethgasstation.info/) before contract deployment. Check the gas cost and adjust the gas cost in `truffle-config.js`.
+
+```javascript
+46  mainnet: {
+47    provider: () => new PrivateKeyProvider(process.env.MAINNET_PRIVATE_KEY, process.env.MAINNET_PROVIDER_URL),
+48    network_id: 1, // eslint-disable-line camelcase
+49    gasPrice: <adjust gas price>,
+50    skipDryRun: true,
+51  },
+```
+
+If your private key is ready, you can now start deploying it.
+Contract deployment order is followed by `EpochHandler`, `SubmitHandler`, and `Layer 2`.
+
+First of all, it is going to deploy `EpochHandler` contract.
 
 ```bash
 plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
                        MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
-                       SET_OPERATOR=true truffle migrate --network mainnet
+                       SET_OPERATOR=true epoch=true truffle migrate --network mainnet
 ```
-Contract deployment order is followed by `EpochHandler`, `SubmitHandler`, and `Layer 2`.
 
-The following error may occur during the deployment of the contract.
+Next, it is going to deploy `SubmitHandler` contract.
+```bash
+plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
+                       SET_OPERATOR=true submit=true truffle migrate --network mainnet
+```
+
+
+The last turn is deploy `Layer2` contract.
+```bash
+plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
+                       SET_OPERATOR=true l2=true truffle migrate --network mainnet
+```
+Address of `EpochHandler` contract is required for deployment of 'SubmitHandler' contract, address of `SubmitHandler` and `EpochHandler` contract is required for deployment of `Layer2` contract, and contract addresses are stored in `l2.json` file for deployment of each contract. If an error occurs during contract deployment, there may be a problem that all contents of `l2.json` disappear. If so, you can check the contract address that is printed during deployment and input it into `l2.json` in the following format.
+
+```json
+{"EpochHandler":"0xaeb25ad2512c237820A7d2094194E1e46c279bDf","SubmitHandler":"0xb40faB9d05c9494abefEB502d71482Eb191fc629","Layer2":"0x5564AD50B6Ef6270DDb11bA5030AE86A9D562390"}
+```
+### Set Operator
+
+If contract deployment is successfully finished, you can set `Layer2` and register to `Layer2Registry` by using command below. 
 
 ```bash
-  Replacing 'Layer2'
-   ------------------
-   > transaction hash:    0x4d8f5c50b44390f817b7a29daa929c638c9a8794f8778b3c0336a31cf7c3f201
-
-Error:  *** Deployment Failed ***
-
-"Layer2" received a generic error from Geth that
-can be caused by hitting revert in a contract constructor or running out of gas.
-   * gas required exceeds allowance (6721975) or always failing transaction.
-   * Try: + using the '--dry-run' option to reproduce this failure with clearer errors.
-          + verifying that your gas is adequate for this deployment.
+plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
+                       SET_OPERATOR=true setl2=true truffle migrate --network mainnet
 ```
-In this case, the contract addresses of `EpochHandler` and `SubmitHandler` are checked as shown below.
 
 ```bash
-  Replacing 'EpochHandler'
-   ------------------------
-   > transaction hash:    0xf04a1f976e92a60b2f10e61161b1d39c697d344b1a1c8ea0aea9c9f275ae3962
-   > Blocks: 1            Seconds: 17
-   > contract address:    0x8049Fc527c6193C533dbb5F32c0b141f3219e394
-   > block number:        7176803
-   > block timestamp:     1599808036
-   > account:             0xDf08F82De32B8d460adbE8D72043E3a7e25A3B39
-   > balance:             10.933293175498842592
-   > gas used:            2262572 (0x22862c)
-   > gas price:           5 gwei
-   > value sent:          0 ETH
-   > total cost:          0.01131286 ETH
-
-
-   Replacing 'SubmitHandler'
-   -------------------------
-   > transaction hash:    0x6d60f6c4251f596c7d0bb1b9dbcf86a92c29666a7a0dcd86c286d6d4c40046c7
-   > Blocks: 0            Seconds: 9
-   > contract address:    0x2C60d0f259cA25Ac1dE8ff82480EcdBC0ac1148c
-   > block number:        7176804
-   > block timestamp:     1599808051
-   > account:             0xDf08F82De32B8d460adbE8D72043E3a7e25A3B39
-   > balance:             10.923717815498842592
-   > gas used:            1915072 (0x1d38c0)
-   > gas price:           5 gwei
-   > value sent:          0 ETH
-   > total cost:          0.00957536 ETH
+plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
+                       SET_OPERATOR=true registerl2=true truffle migrate --network mainnet
 ```
 
-Next, change the code of `migrate/3_deploy_rootchain.js` by referring to the code below.
-
-```javascript
-module.exports = async function (deployer, network) {
-  // skip production network
-  if (process.env.SET_OPERATOR) {
-    let layer2;
-    let epochHandler;
-    const data = JSON.parse(fs.readFileSync('deployed.json').toString());
-    console.log(data);
-
-    await deployer.deploy(EpochHandler)
-      .then((_epochHandler) => { epochHandler = _epochHandler; })
-      .then(() => deployer.deploy(
-        SubmitHandler,
-        epochHandler.address,
-      )).then((submitHandler) => deployer.deploy(
-        Layer2,
-        epochHandler.address,
-        submitHandler.address,
-        etherToken,
-        development,
-        NRBEpochLength,
-        statesRoot,
-        transactionsRoot,
-        receiptsRoot))
-      .then(async () => { layer2 = await Layer2.deployed(); })
-      .then(() => layer2.setSeigManager(data.SeigManager))
-      .catch(e => { throw e; });
-
-    // await layer2.setSeigManager(data.SeigManager);
-    const registry = await Layer2Registry.at(data.Layer2Registry);
-
-    console.log('register and deploy...');
-    await registry.registerAndDeployCoinage(layer2.address, data.SeigManager);
-  }
-};
-```
-
-You can change the code as below.
-
-```javascript
-module.exports = async function (deployer, network) {
-  // skip production network
-  if (process.env.SET_OPERATOR) {
-    let layer2;
-    let epochHandler;
-    const data = JSON.parse(fs.readFileSync('deployed.json').toString());
-    console.log(data);
-
-    await deployer.deploy(
-        Layer2,
-        <epochHandler.address> // 배포된 EpochHandler의 컨트랙트 주소
-        <submitHandler.address> // 배포된 SubmitHandler의 컨트랙트 주소
-        etherToken,
-        development,
-        NRBEpochLength,
-        statesRoot,
-        transactionsRoot,
-        receiptsRoot))
-      .then(async () => { layer2 = await Layer2.deployed(); })
-      .then(() => layer2.setSeigManager(data.SeigManager))
-      .catch(e => { throw e; });
-
-    const registry = await Layer2Registry.at(data.Layer2Registry);
-
-    // register root chain and deploy coinage
-    console.log('register and deploy...');
-    await registry.registerAndDeployCoinage(layer2.address, data.SeigManager);
-  }
-};
-```
-If `Layer2` contract is deployed safely, remember the contract address.
+To execute these two commands, `Layer2`, `SeigManager`, and `Layer2Registry` contract addresses are needed. Before performing this, check `l2.json` and `deployed.json` to make sure that both contract addresses are entered correctly. `Layer2` contract address is the contract address deployed at the above stage. The contract address for `SeigManager` contract address is `0x710936500aC59e8551331871Cbad3D33d5e0D909`, `Layer2Registry` contract address is `0x0b3E174A2170083e770D5d4Cf56774D221b7063e`.
 
 ## Registry Operator
 
@@ -229,3 +159,5 @@ plasma-evm-contracts $ REGISTER=true chainid=<operator's chain id> \
 ```
 
 If `chain id` is duplicated, there will be an error called `duplicate chain id`. In that case, change `chain id` and register again.
+
+If all of the process are sucessfully finished, you can check your operator in the [Staking Dahsboard](https://staking.tokamak.network).
