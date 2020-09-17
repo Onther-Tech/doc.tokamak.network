@@ -78,7 +78,7 @@
 </blockquote>
 <p>오퍼레이터 세팅을 위해 배포해야하는 컨트랙트는 <code>SubmitHandler</code>, <code>EpochHandler</code>, <code>Layer2</code> 컨트랙트이다.
 해당 컨트랙트 배포에 필요한 ETH는 가스 가격 10 gwei 기준으로 약 0.1 ETH 정도 소모된다.</p>
-<p>해당 가이드는 Mac OS에서 수행되었다.</p>
+<p>해당 가이드는 Mac OS와 Linux 16.04에서 수행되었다.</p>
 <h2><a class="anchor" aria-hidden="true" id="오퍼레이터-준비"></a><a href="#오퍼레이터-준비" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터 준비</h2>
 <h3><a class="anchor" aria-hidden="true" id="ton-컨트랙트-정보"></a><a href="#ton-컨트랙트-정보" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TON 컨트랙트 정보</h3>
 <p><code>TON</code> 토큰 및 스테이크 매니저 컨트랙트 주소는 다음과 같다.</p>
@@ -125,141 +125,72 @@ Web3.js v1.2.1
 50    skipDryRun: true,
 51  },
 </span></code></pre>
-<p>개인키가 준비되었다면 이제 배포를 시작하면 된다.</p>
+<p>개인키가 준비되었다면 이제 배포를 시작하면 된다.
+컨트랙트 배포 순서는 <code>EpochHandler</code>, <code>SubmitHandler</code>, <code>Layer2</code> 컨트랙트 순으로 이루어 진다.</p>
+<p>먼저 <code>EpochHandler</code> 컨트랙트를 배포한다.</p>
 <pre><code class="hljs css language-bash">plasam-evm-contracts $ MAINNET_PRIVATE_KEY=&lt;operator<span class="hljs-string">'s private key&gt; \        
                        MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/&lt;use-your-own-infura-project-id&gt; \
-                       SET_OPERATOR=true truffle migrate --network mainnet
+                       SET_OPERATOR=true epoch=true truffle migrate --network mainnet
 </span></code></pre>
-<p>컨트랙트 배포 순서는 <code>EpochHandler</code>, <code>SubmitHandler</code>, <code>Layer2</code> 컨트랙트 순으로 이루어 진다.</p>
-<p>컨트랙트가 배포되던 중 아래와 같은 에러가 발생할 수 있다.</p>
-<pre><code class="hljs css language-bash">  Replacing <span class="hljs-string">'Layer2'</span>
-   ------------------
-   &gt; transaction <span class="hljs-built_in">hash</span>:    0x4d8f5c50b44390f817b7a29daa929c638c9a8794f8778b3c0336a31cf7c3f201
-
-Error:  *** Deployment Failed ***
-
-<span class="hljs-string">"Layer2"</span> received a generic error from Geth that
-can be caused by hitting revert <span class="hljs-keyword">in</span> a contract constructor or running out of gas.
-   * gas required exceeds allowance (6721975) or always failing transaction.
-   * Try: + using the <span class="hljs-string">'--dry-run'</span> option to reproduce this failure with clearer errors.
-          + verifying that your gas is adequate <span class="hljs-keyword">for</span> this deployment.
-</code></pre>
-<p>그럴 경우 아래 와 같이 <code>EpochHandler</code>와 <code>SubmitHandler</code>의 컨트랙트 주소를 확인한다.</p>
-<pre><code class="hljs css language-bash">  Replacing <span class="hljs-string">'EpochHandler'</span>
-   ------------------------
-   &gt; transaction <span class="hljs-built_in">hash</span>:    0xf04a1f976e92a60b2f10e61161b1d39c697d344b1a1c8ea0aea9c9f275ae3962
-   &gt; Blocks: 1            Seconds: 17
-   &gt; contract address:    0x8049Fc527c6193C533dbb5F32c0b141f3219e394
-   &gt; block number:        7176803
-   &gt; block timestamp:     1599808036
-   &gt; account:             0xDf08F82De32B8d460adbE8D72043E3a7e25A3B39
-   &gt; balance:             10.933293175498842592
-   &gt; gas used:            2262572 (0x22862c)
-   &gt; gas price:           5 gwei
-   &gt; value sent:          0 ETH
-   &gt; total cost:          0.01131286 ETH
-
-
-   Replacing <span class="hljs-string">'SubmitHandler'</span>
-   -------------------------
-   &gt; transaction <span class="hljs-built_in">hash</span>:    0x6d60f6c4251f596c7d0bb1b9dbcf86a92c29666a7a0dcd86c286d6d4c40046c7
-   &gt; Blocks: 0            Seconds: 9
-   &gt; contract address:    0x2C60d0f259cA25Ac1dE8ff82480EcdBC0ac1148c
-   &gt; block number:        7176804
-   &gt; block timestamp:     1599808051
-   &gt; account:             0xDf08F82De32B8d460adbE8D72043E3a7e25A3B39
-   &gt; balance:             10.923717815498842592
-   &gt; gas used:            1915072 (0x1d38c0)
-   &gt; gas price:           5 gwei
-   &gt; value sent:          0 ETH
-   &gt; total cost:          0.00957536 ETH
-</code></pre>
-<p>그 다음 아래 코드를 참조해 <code>migrate/3_deploy_rootchain.js</code>의 코드를 변경해준다.</p>
-<pre><code class="hljs css language-javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">deployer, network</span>) </span>{
-  <span class="hljs-comment">// skip production network</span>
-  <span class="hljs-keyword">if</span> (process.env.SET_OPERATOR) {
-    <span class="hljs-keyword">let</span> layer2;
-    <span class="hljs-keyword">let</span> epochHandler;
-    <span class="hljs-keyword">const</span> data = <span class="hljs-built_in">JSON</span>.parse(fs.readFileSync(<span class="hljs-string">'deployed.json'</span>).toString());
-    <span class="hljs-built_in">console</span>.log(data);
-
-    <span class="hljs-keyword">await</span> deployer.deploy(EpochHandler)
-      .then(<span class="hljs-function">(<span class="hljs-params">_epochHandler</span>) =&gt;</span> { epochHandler = _epochHandler; })
-      .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> deployer.deploy(
-        SubmitHandler,
-        epochHandler.address,
-      )).then(<span class="hljs-function">(<span class="hljs-params">submitHandler</span>) =&gt;</span> deployer.deploy(
-        Layer2,
-        epochHandler.address,
-        submitHandler.address,
-        etherToken,
-        development,
-        NRBEpochLength,
-        statesRoot,
-        transactionsRoot,
-        receiptsRoot))
-      .then(<span class="hljs-keyword">async</span> () =&gt; { layer2 = <span class="hljs-keyword">await</span> Layer2.deployed(); })
-      .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> layer2.setSeigManager(data.SeigManager))
-      .catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> { <span class="hljs-keyword">throw</span> e; });
-
-    <span class="hljs-comment">// await layer2.setSeigManager(data.SeigManager);</span>
-    <span class="hljs-keyword">const</span> registry = <span class="hljs-keyword">await</span> Layer2Registry.at(data.Layer2Registry);
-
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'register and deploy...'</span>);
-    <span class="hljs-keyword">await</span> registry.registerAndDeployCoinage(layer2.address, data.SeigManager);
-  }
-};
-</code></pre>
-<p>위와 같은 코드를 아래와 같이 변경해주면 된다.</p>
-<pre><code class="hljs css language-javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">deployer, network</span>) </span>{
-  <span class="hljs-comment">// skip production network</span>
-  <span class="hljs-keyword">if</span> (process.env.SET_OPERATOR) {
-    <span class="hljs-keyword">let</span> layer2;
-    <span class="hljs-keyword">let</span> epochHandler;
-    <span class="hljs-keyword">const</span> data = <span class="hljs-built_in">JSON</span>.parse(fs.readFileSync(<span class="hljs-string">'deployed.json'</span>).toString());
-    <span class="hljs-built_in">console</span>.log(data);
-
-    <span class="hljs-keyword">await</span> deployer.deploy(
-        Layer2,
-        &lt;epochHandler.address&gt; <span class="hljs-comment">// 배포된 EpochHandler의 컨트랙트 주소</span>
-        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">submitHandler.address</span>&gt;</span> // 배포된 SubmitHandler의 컨트랙트 주소
-        etherToken,
-        development,
-        NRBEpochLength,
-        statesRoot,
-        transactionsRoot,
-        receiptsRoot))
-      .then(async () =&gt; { layer2 = await Layer2.deployed(); })
-      .then(() =&gt; layer2.setSeigManager(data.SeigManager))
-      .catch(e =&gt; { throw e; });
-
-    const registry = await Layer2Registry.at(data.Layer2Registry);
-
-    // register root chain and deploy coinage
-    console.log('register and deploy...');
-    await registry.registerAndDeployCoinage(layer2.address, data.SeigManager);
-  }
-};
+<p>그 다음, <code>SubmitHandler</code> 컨트랙트를 배포한다.</p>
+<pre><code class="hljs css language-bash">plasam-evm-contracts $ MAINNET_PRIVATE_KEY=&lt;operator<span class="hljs-string">'s private key&gt; \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/&lt;use-your-own-infura-project-id&gt; \
+                       SET_OPERATOR=true submit=true truffle migrate --network mainnet
 </span></code></pre>
-<p><code>Layer2</code> 컨트랙트가 무사히 배포되었다면 컨트랙트 주소를 기억해 두고 있어야 한다.</p>
-<h2><a class="anchor" aria-hidden="true" id="오퍼레이터-등록"></a><a href="#오퍼레이터-등록" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터 등록</h2>
-<p>오퍼레이터를 등록하는 마지막 단계는 대시보드에 등록하는 것이다.</p>
-<p>대시보드에 등록하기 위해서는 몇 가지 파라미터가 필요하며 다음과 같다.</p>
-<pre><code class="hljs css language-bash">operator_name: 오퍼레이터의 이름
+<p>마지막으로 <code>Layer2</code> 컨트랙트를 배포한다.</p>
+<pre><code class="hljs css language-bash">plasam-evm-contracts $ MAINNET_PRIVATE_KEY=&lt;operator<span class="hljs-string">'s private key&gt; \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/&lt;use-your-own-infura-project-id&gt; \
+                       SET_OPERATOR=true l2=true truffle migrate --network mainnet
+</span></code></pre>
+<p><code>SubmitHandler</code> 컨트랙트 배포에는 <code>EpochHandler</code> 컨트랙트의 주소가 필요 하며, <code>Layer2</code> 컨트랙트 배포에는 <code>SubmitHandler</code>와 <code>EpochHandler</code> 컨트랙트의 주소가 필요하며 각 컨트랙트 배포시에 컨트랙트 주소들은 <code>l2.json</code> 파일에 저장된다. 만약 컨트랙트 배포 중 에러가 발생한다면 <code>l2.json</code>의 내용이 전부 사라지는 문제가 생길 수 있으며, 그럴 경우 배포 시에 출력되는 컨트랙트 주소를 확인여 다시 <code>l2.json</code>에 아래와 같은 형식으로 입력해주면 된다.</p>
+<pre><code class="hljs css language-json">{<span class="hljs-attr">"EpochHandler"</span>:<span class="hljs-string">"0xaeb25ad2512c237820A7d2094194E1e46c279bDf"</span>,<span class="hljs-attr">"SubmitHandler"</span>:<span class="hljs-string">"0xb40faB9d05c9494abefEB502d71482Eb191fc629"</span>,<span class="hljs-attr">"Layer2"</span>:<span class="hljs-string">"0x5564AD50B6Ef6270DDb11bA5030AE86A9D562390"</span>}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="오퍼레이터-세팅"></a><a href="#오퍼레이터-세팅" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오퍼레이터 세팅</h3>
+<p>컨트랙트 배포가 완료되었다면 아래 명령어를 통해 <code>Layer2</code> 컨트랙트를 세팅하고 <code>Layer2Registry</code> 컨트랙트에 등록하면 된다.</p>
+<pre><code class="hljs css language-bash">plasam-evm-contracts $ MAINNET_PRIVATE_KEY=&lt;operator<span class="hljs-string">'s private key&gt; \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/&lt;use-your-own-infura-project-id&gt; \
+                       SET_OPERATOR=true setl2=true truffle migrate --network mainnet
+</span></code></pre>
+<pre><code class="hljs css language-bash">plasam-evm-contracts $ MAINNET_PRIVATE_KEY=&lt;operator<span class="hljs-string">'s private key&gt; \        
+                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/&lt;use-your-own-infura-project-id&gt; \
+                       SET_OPERATOR=true registerl2=true truffle migrate --network mainnet
+</span></code></pre>
+<p>위 두 명령어를 실행하기 위해서는 <code>Layer2</code>, <code>SeigManager</code>, <code>Layer2Registry</code> 컨트랙트 주소가 필요하다. 수행하기 전에 <code>l2.json</code>과 <code>deployed.json</code> 을 확인해서 두 컨트랙트 주소가 올바르게 입력되어 있는지 확인해야 한다. <code>Layer2</code> 컨트랙트 주소는 위 단계에서 배포한 컨트랙트 주소이며, <code>SeigManager</code> 의 컨트랙트 주소는 <code>0x710936500aC59e8551331871Cbad3D33d5e0D909</code> <code>Layer2Registry</code> 의 컨트랙트 주소는 <code>0x0b3E174A2170083e770D5d4Cf56774D221b7063e</code> 이다.</p>
+<!-- 컨트랙트 배포 중 에러가 발생하면 아래와 같은 에러가 발생할 수 있다.
+<pre><code class="hljs css language-bash">SyntaxError: Unexpected end of JSON input
+    at JSON.parse (&lt;anonymous&gt;)
+    at module.exports (/Users/hwangjaeseung/workspace/temp/plasma-evm-contracts/migrations/3_deploy_rootchain.js:24:20)
+    at Migration._load (/usr/<span class="hljs-built_in">local</span>/lib/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:54:1)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    at Migration.run (/usr/<span class="hljs-built_in">local</span>/lib/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:171:1)
+    at Object.runMigrations (/usr/<span class="hljs-built_in">local</span>/lib/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)
+    at Object.runFrom (/usr/<span class="hljs-built_in">local</span>/lib/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)
+    at Object.run (/usr/<span class="hljs-built_in">local</span>/lib/node_modules/truffle/build/webpack:/packages/migrate/index.js:87:1)
+    at runMigrations (/usr/<span class="hljs-built_in">local</span>/lib/node_modules/truffle/build/webpack:/packages/core/lib/commands/migra
+``` --&gt;
+
+
+<span class="hljs-comment">## 오퍼레이터 등록</span>
+
+오퍼레이터를 등록하는 마지막 단계는 대시보드에 등록하는 것이다.
+
+대시보드에 등록하기 위해서는 몇 가지 파라미터가 필요하며 다음과 같다.
+
+```bash
+operator_name: 오퍼레이터의 이름
 chainid: 체인 아이디, 중복되면 안됨
 website: 오퍼레이터에 대해 알 수 있는 웹사이트
 description: 오퍼레이터에 대한 설명
 layer2: 배포한 layer2 컨트랙트의 주소
 </code></pre>
 <p>오퍼레이터를 등록하는 명령어는 다음과 같다.</p>
-<pre><code class="hljs css language-bash">plasma-evm-contracts $ MAINNET_PRIVATE_KEY=&lt;operator<span class="hljs-string">'s private key&gt; \        
-                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/&lt;use-your-own-infura-project-id&gt; \
-                       REGISTER=true chainid=&lt;operator'</span>s chain id&gt; \
+<pre><code class="hljs css language-bash">plasma-evm-contracts $ chainid=&lt;operator<span class="hljs-string">'s chain id&gt; \
                        layer2=&lt;layer2-contract-address&gt; \
-                       website=<span class="hljs-string">"&lt;website address&gt;"</span> \
-                       description=<span class="hljs-string">"&lt;description about operator&gt;"</span> \
-                       operator_name=<span class="hljs-string">"&lt;operator's name&gt;"</span> \
-                       truffle migrate --network mainnet
-</code></pre>
+                       website="&lt;website address&gt;" \
+                       description="&lt;description about operator&gt;" \
+                       operator_name="&lt;operator'</span>s name&gt;<span class="hljs-string">" \
+                       node register.js
+</span></code></pre>
 <p>만약 <code>chain id</code>가 중복된다면 <code>Duplicate chain id</code> 라는 에러가 뜰 것이다. 그럴 경우 <code>chain id</code>를 변경하여 다시 등록하면 된다.</p>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020. 9. 15. by cd4761</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/public-testnets"><span class="arrow-prev">← </span><span>퍼블릭 테스트넷 정보</span></a><a class="docs-next button" href="/docs/ko/guides/getting-started/private-testnet-staking"><span>프라이빗 네트워크 스테이킹</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#오퍼레이터-준비">오퍼레이터 준비</a><ul class="toc-headings"><li><a href="#ton-컨트랙트-정보">TON 컨트랙트 정보</a></li><li><a href="#소스코드-다운로드-및-패키지-설치">소스코드 다운로드 및 패키지 설치</a></li><li><a href="#이더리움-메인넷-접속-주소">이더리움 메인넷 접속 주소</a></li><li><a href="#오퍼레이터-배포">오퍼레이터 배포</a></li></ul></li><li><a href="#오퍼레이터-등록">오퍼레이터 등록</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
+<p>모든 과정이 성공적으로 완료되면 <a href="https://staking.tokamak.network">Staking Dahsboard</a>에 접속하여 등록한 오퍼레이터를 확인할 수 있다.</p>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020. 9. 17. by cd4761</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/public-testnets"><span class="arrow-prev">← </span><span>퍼블릭 테스트넷 정보</span></a><a class="docs-next button" href="/docs/ko/guides/getting-started/private-testnet-staking"><span>프라이빗 네트워크 스테이킹</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#오퍼레이터-준비">오퍼레이터 준비</a><ul class="toc-headings"><li><a href="#ton-컨트랙트-정보">TON 컨트랙트 정보</a></li><li><a href="#소스코드-다운로드-및-패키지-설치">소스코드 다운로드 및 패키지 설치</a></li><li><a href="#이더리움-메인넷-접속-주소">이더리움 메인넷 접속 주소</a></li><li><a href="#오퍼레이터-배포">오퍼레이터 배포</a></li><li><a href="#오퍼레이터-세팅">오퍼레이터 세팅</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2020 Onther Inc.</section></footer></div></body></html>
