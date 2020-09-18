@@ -61,6 +61,7 @@ Web3.js v1.2.1
 `https://mainnet.infura.io/v3/[ProjectID] `
 
 ![Infura node ID](assets/guides_create-infura-node.png)
+
 예) `https://mainnet.infura.io/ws/v3/07b1363d79a94e30af61da848ecfa194`
 
 만약 자신이 운영하고 있는 이더리움 노드가 있다면, 해당 노드의 접속 주소를 `Infura` 주소 대신 사용할 수 있다.
@@ -131,22 +132,6 @@ plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \
 ```
 
 위 두 명령어를 실행하기 위해서는 `Layer2`, `SeigManager`, `Layer2Registry` 컨트랙트 주소가 필요하다. 수행하기 전에 `l2.json`과 `deployed.json` 을 확인해서 두 컨트랙트 주소가 올바르게 입력되어 있는지 확인해야 한다. `Layer2` 컨트랙트 주소는 위 단계에서 배포한 컨트랙트 주소이며, `SeigManager` 의 컨트랙트 주소는 `0x710936500aC59e8551331871Cbad3D33d5e0D909` `Layer2Registry` 의 컨트랙트 주소는 `0x0b3E174A2170083e770D5d4Cf56774D221b7063e` 이다.
-
-<!-- 컨트랙트 배포 중 에러가 발생하면 아래와 같은 에러가 발생할 수 있다.
-
-```bash
-SyntaxError: Unexpected end of JSON input
-    at JSON.parse (<anonymous>)
-    at module.exports (/Users/hwangjaeseung/workspace/temp/plasma-evm-contracts/migrations/3_deploy_rootchain.js:24:20)
-    at Migration._load (/usr/local/lib/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:54:1)
-    at processTicksAndRejections (internal/process/task_queues.js:97:5)
-    at Migration.run (/usr/local/lib/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:171:1)
-    at Object.runMigrations (/usr/local/lib/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)
-    at Object.runFrom (/usr/local/lib/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)
-    at Object.run (/usr/local/lib/node_modules/truffle/build/webpack:/packages/migrate/index.js:87:1)
-    at runMigrations (/usr/local/lib/node_modules/truffle/build/webpack:/packages/core/lib/commands/migra
-``` -->
-
 
 ## 오퍼레이터 등록
 
