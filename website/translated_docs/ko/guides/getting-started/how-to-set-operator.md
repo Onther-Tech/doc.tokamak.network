@@ -125,12 +125,6 @@ plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \
                        SET_OPERATOR=true setl2=true truffle migrate --network mainnet
 ```
 
-```bash
-plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
-                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
-                       SET_OPERATOR=true registerl2=true truffle migrate --network mainnet
-```
-
 위 두 명령어를 실행하기 위해서는 `Layer2`, `SeigManager`, `Layer2Registry` 컨트랙트 주소가 필요하다. 수행하기 전에 `l2.json`과 `deployed.json` 을 확인해서 두 컨트랙트 주소가 올바르게 입력되어 있는지 확인해야 한다. `Layer2` 컨트랙트 주소는 위 단계에서 배포한 컨트랙트 주소이며, `SeigManager` 의 컨트랙트 주소는 `0x710936500aC59e8551331871Cbad3D33d5e0D909` `Layer2Registry` 의 컨트랙트 주소는 `0x0b3E174A2170083e770D5d4Cf56774D221b7063e` 이다.
 
 ## 오퍼레이터 등록

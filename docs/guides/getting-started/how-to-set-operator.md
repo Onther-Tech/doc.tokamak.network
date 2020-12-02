@@ -126,12 +126,6 @@ plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \
                        SET_OPERATOR=true setl2=true truffle migrate --network mainnet
 ```
 
-```bash
-plasam-evm-contracts $ MAINNET_PRIVATE_KEY=<operator's private key> \        
-                       MAINNET_PROVIDER_URL=https://mainnet.infura.io/v3/<use-your-own-infura-project-id> \
-                       SET_OPERATOR=true registerl2=true truffle migrate --network mainnet
-```
-
 To execute these two commands, `Layer2`, `SeigManager`, and `Layer2Registry` contract addresses are needed. Before performing this, check `l2.json` and `deployed.json` to make sure that both contract addresses are entered correctly. `Layer2` contract address is the contract address deployed at the above stage. The contract address for `SeigManager` contract address is `0x710936500aC59e8551331871Cbad3D33d5e0D909`, `Layer2Registry` contract address is `0x0b3E174A2170083e770D5d4Cf56774D221b7063e`.
 
 ## Registry Operator
