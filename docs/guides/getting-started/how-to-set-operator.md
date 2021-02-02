@@ -28,9 +28,9 @@ The guide was performed on Mac OS and Linux 16.04.
     SeigManager: "e0x710936500aC59e8551331871Cbad3D33d5e0D909"
     PowerTON: "0xd86d8950A4144D8a258930F6DD5f90CCE249E1CF"
 
-It can be checked through [Dashboard API] (https://dashboard-api.tokamak.network/managers).
+It can be checked through [Dashboard API](https://dashboard-api.tokamak.network/managers).
 
-### 소스코드 다운로드 및 패키지 설치
+### Download Source Code & Package Install 
 
 ```bash
 $ git clone https://github.com/Onther-Tech/plasma-evm-contracts.git
@@ -150,12 +150,12 @@ layer2: deployed layer2 contract address
 
 The commands for registering an operator are as follows.
 ```bash
-plasma-evm-contracts $ REGISTER=true chainid=<operator's chain id> \
+plasma-evm-contracts $ chainid=<operator's chain id> \
                        layer2=<layer2-contract-address> \
                        website="<website address>" \
                        description="<description about operator>" \
                        operator_name="<operator's name>" \
-                       truffle migrate --network mainnet
+                       node register.js
 ```
 
 If `chain id` is duplicated, there will be an error called `duplicate chain id`. In that case, change `chain id` and register again.
