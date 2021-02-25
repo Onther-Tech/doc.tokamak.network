@@ -78,6 +78,17 @@ class Footer extends React.Component {
               </div>
             )} */}
           </div>
+          <div>
+            <h5>Family site</h5>
+            <a href="https://tokamak.network">Tokamak Network</a>
+            {/* <a href="https://dao.tokamak.network">DAO Governance</a> */}
+            <a href="https://staking.tokamak.network">Original Staking</a>
+            <a href="https://simple.staking.tokamak.network">Simple Staking</a>
+            <a href="https://staking-simulator.tokamak.network">Staking Simulator</a>
+            <a href="https://price.tokamak.network">Price Dashboard</a>
+            <a href="https://vesting.tokamak.network">Vesting Dashboard</a>
+            <a href="https://wton-swapper.tokamak.network">TON-WTON Swapper</a>
+          </div>
         </section>
 
         <a
