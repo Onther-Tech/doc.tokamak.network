@@ -63,6 +63,7 @@
         "label": "TON Staking",
         "ids": [
           "guides/getting-started/how-to-set-operator",
+          "guides/getting-started/how-to-set-candidate",
           "guides/getting-started/private-testnet-staking",
           "guides/getting-started/rinkeby-testnet-staking",
           "guides/getting-started/how-to-commit"
