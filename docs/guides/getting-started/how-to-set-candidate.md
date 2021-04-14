@@ -74,7 +74,7 @@ It is recommended that you check the gas price through [Eth Gas Station](https:/
 Now, Candidate can be created when Ethereum private key and Ethereum mainnet access address are ready.
 
 ```bash
-tokamak-dao-contracts $ bash deploy/deploy.sh <mainnet-provider-url> deploy-candidate <private-key> <candidate-name>
+tokamak-dao-contracts $ bash deploy/deploy.sh <mainnet-provider-url> <private-key> deploy-candidate <candidate-name>
 ```
 
 <candidate-name> is the name of a Candidate that is entered to make it easier to distinguish it from other Candidate.

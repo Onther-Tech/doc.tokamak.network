@@ -33,13 +33,13 @@
         "title": "Setup Rootchain in Private Testnet",
         "sidebar_label": "Setup Rootchain"
       },
-      "guides/getting-started/how-to-set-operator": {
-        "title": "How to Set Operator",
-        "sidebar_label": "How to Set Operator"
-      },
       "guides/getting-started/how-to-set-candidate": {
         "title": "How to Set Candidate",
         "sidebar_label": "How to Set Candidate"
+      },
+      "guides/getting-started/how-to-set-operator": {
+        "title": "How to Set Operator",
+        "sidebar_label": "How to Set Operator"
       },
       "guides/getting-started/mainnet-mton-staking": {
         "title": "MTON Staking in Mainnet",

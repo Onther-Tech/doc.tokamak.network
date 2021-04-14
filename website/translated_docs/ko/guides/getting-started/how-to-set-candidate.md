@@ -75,7 +75,7 @@ Candidate가 되기위해 컨트랙트를 배포하기 위해서는 이더리움
 이제 이더리움 개인키와 이더리움 메인넷 접속 주소가 준비되면 Candidate를 생성할 수 있다.
 
 ```bash
-tokamak-dao-contracts $ bash deploy/deploy.sh <mainnet-provider-url> deploy-candidate <private-key> <candidate-name>
+tokamak-dao-contracts $ bash deploy/deploy.sh <mainnet-provider-url> <private-key> deploy-candidate <candidate-name>
 ```
 
 <candidate-name> 은 다른 Candidate와 구분을 쉽게 하기위해 입력하는 Candidate의 이름을 의미한다.
