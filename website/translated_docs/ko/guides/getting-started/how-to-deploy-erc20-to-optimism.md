@@ -109,3 +109,6 @@ Deploying L1 ERC20 Gateway...
 Initializing L2 ERC20...
 ```
 
+- [Optimism Monorepo](https://github.com/ethereum-optimism/optimism)
+- [Onther-Tech/l1-l2-deposit-withdrawal](https://github.com/Onther-Tech/l1-l2-deposit-withdrawal)
+- [Onther Blog](https://medium.com/onther-tech/%EC%98%B5%ED%8B%B0%EB%AF%B8%EC%8A%A4%ED%8B%B1-%EB%A1%A4%EC%97%85%EC%97%90%EC%84%9C-erc20-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-bc774f94d8b3)
