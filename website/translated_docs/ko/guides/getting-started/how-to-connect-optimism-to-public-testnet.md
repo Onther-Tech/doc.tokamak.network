@@ -125,7 +125,7 @@ RELAYER_PRIVATE_KEY=<private key>
 `.env` 파일을 모두 수정했으면 옵티미즘 구동에 필요한 컨트렉트를  배포한다.
 
 ```bash
-docker run --rm --name deploy_contract --env-file .env onthertech/optimism.deployer
+docker run --name deploy_contract --env-file .env onthertech/optimism.deployer
 ```
 실행 후 링키비(Rinkeby) 테스트넷에 모든 스마트 컨트렉트를 배포하고 종료된다.
 종료후에는 `addresses.json`과 `state-dump.latest.json` 파일을 가져온다.
