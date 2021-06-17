@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Staking Test in Private Testnet · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="In this document, we will cover how to stake TON token on a private testnet where two operators exist."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Staking Test in Private Testnet · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="In this document, we will cover how to stake TON token on a private testnet where two operators exist."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/en/guides/optimism/how-to-connect-optimism-to-public-testnet" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ko/guides/ton-staking/private-testnet-staking">한국어</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>TON Staking</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">General<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Basic</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/tokamak-network">Tokamak Network</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Optimistic Rollup<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Tokamak Optimism</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/how-to-connect-optimism-to-public-testnet">Connect Optimistic Rollup</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/how-to-deploy-erc20-to-optimism">Deploy ERC20 to Optimistic Rollup</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/how-to-deploy-erc721-to-optimism">Deploy ERC721 to Optimistic Rollup</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/how-to-deploy-uniswapv2-to-optimism">Deploy Uniswap V2 to Optimistic Rollup</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">DAO &amp; Staking<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">TON Staking</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/how-to-set-operator">How to Set Operator</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/how-to-set-candidate">How to Set Candidate</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/guides/ton-staking/private-testnet-staking">Private Testnet Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/rinkeby-testnet-staking">Rinkeby Testnet Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/how-to-commit">How to Commit</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Token Economics<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Token Economy</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/child-chain">Child Chain and Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/token-supply">Token Supply and Distribution</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/powerton">PowerTON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/tx-fee">Transaction Fee</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/challenge">Challenge</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/glossary">Parameters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Another Layer2<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Plasma EVM</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/enter-and-exit">Interoperability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/transaction-fee">Convenience</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/layer-2-solutions">Comparison with Other Solutions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/design-rationale">Design Rationale</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-architecture">Plasma EVM Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/root-chain">RootChain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/child-chain">Child Chain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-smart-contracts">Plasma EVM Smart Contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/examples-and-best-practices">Examples and Best Practices</a></li></ul></div></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/ton-staking/how-to-test-ton-stake-private-testnet.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Staking Test in Private Testnet</h1></header><article><div><span><p>In this document, we will cover how to stake TON token on a private testnet where two operators exist.</p>
+<p>Most of this document is about how to use <code>staking</code> and <code>manage-staking</code> command in <code>plasma-evm</code>. This command is quite useful for developers and operators.</p>
+<blockquote>
+<p>For common users, we recommend using <a href="https://dashboard.faraday.tokamak.network">dashboard</a>.</p>
+</blockquote>
+<p>For this testing, you should proceed <a href="how-to-open-private-testnet-rootchain">Setup Rootchain in Private Testnet</a> and <a href="how-to-open-private-testnet-manually">Setup Childchain in Private Testnet</a>. If you did not yet, please those two steps.</p>
+<blockquote>
+<p>The usernode is not necessary in this section by <a href="how-to-open-private-testnet-manually#setup-user-node">Setup Childchain - Setup Usernode node</a>.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="staking-ton-for-operators"></a><a href="#staking-ton-for-operators" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Staking TON for Operators</h2>
+<h3><a class="anchor" aria-hidden="true" id="minting-test-ton"></a><a href="#minting-test-ton" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Minting Test TON</h3>
+<p>If the <code>DepositManager</code> contract is deployed (<a href="how-to-open-private-testnet-rootchain#deploy-ton-stake-manager-contract">Deploy TON Stake manager contract</a>), you have to mint test TON to give out to participating operators.</p>
+<p>In this private testnet, we assumed that two operators exist. Operator1 and operator2 use the following accounts.</p>
+<ul>
+<li>Operator1 : <code>0x5e3230019fed7ab462e3ac277e7709b9b2716b4f</code></li>
+<li>Operator2 : <code>0x515b385bdc89bcc29077f2b00a88622883bfb498</code></li>
+</ul>
+<p>Execute the following command to mint 10,000 TON to each operator.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f 10000.0 \
+            --datadir ./.pls.staking/manager \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
+            --password pwd.pass \
+            --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4
+</code></pre>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking mintTON 0x515b385bdc89bcc29077f2b00a88622883bfb498 10000.0 \
+            --datadir ./.pls.staking/manager \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0xb79749F25Ef64F9AC277A4705887101D3311A0F4 \
+            --password pwd.pass \
+            --rootchain.sender 0xb79749F25Ef64F9AC277A4705887101D3311A0F4
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="staking-ton-for-operator1"></a><a href="#staking-ton-for-operator1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Staking TON for Operator1</h3>
+<p>To stake test <code>TON</code>, it has to be converted to <code>WTON</code> first. Then, it will be available for staking in <code>depositManager</code> contract.</p>
+<p>Operator can stake only <code>WTON</code> to <code>depositManager</code> for operating plasma chain.</p>
+<p>As following command, Convert 1,000 TON into WTON.</p>
+<blockquote>
+<p>You have to use decimal points in the input argument of <code>swapFromTON</code> sub-command in order to apply 1e9(1,000,000,000 wei) unit.</p>
+</blockquote>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
+            --datadir ./.pls.staking/operator1 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --password pwd.pass \
+            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+WARN [01-01|00:00:00.000] Allowances is inefficient                current=0 target=1000.0 diff=1000.0
+WARN [01-01|00:00:00.000] Approve to deposit TON                   amount=1000.0
+WARN [01-01|00:00:00.000] Approved to deposit TON                  amount=1000.0 tx=5d9880…76506a
+INFO [01-01|00:00:00.000] Swap from TON to WTON                    amount=<span class="hljs-string">"1000.0 TON"</span> from=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F tx=4d15eb…904dd6
+</code></pre>
+<p>Stake 500 of converted 1,000 WTON using <code>stake</code>, a sub-command of <code>staking</code>.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth staking stakeWTON 500.0 \
+            --datadir ./.pls.staking/operator1 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --password pwd.pass \
+            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+</code></pre>
+<p>Or, you can do the above two steps at once with using <code>stakeTON</code> sub-command.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth staking stakeTON 500.0 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --password pwd.pass \
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="operator2-plasma-chain-and-stake-contract-address-setup"></a><a href="#operator2-plasma-chain-and-stake-contract-address-setup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operator2 Plasma Chain and Stake Contract Address Setup</h3>
+<p>As Operator2, follow the same as setup process in <a href="how-to-open-private-testnet-manually">Setup Childchain in Private Testnet</a>.</p>
+<p>Use <code>deploy</code> command to deploy rootchain contracts necessary for running operator2 plasma chain.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb deploy ./.pls.staking/operator2/genesis-operator2.json 103 <span class="hljs-literal">true</span> 2 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --password pwd.pass \
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+</code></pre>
+<p>Use following command to initialize the plasma chain with <code>genesis-operator2.json</code> file including the address of rootchain contract deployed by operator2.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb init ./.pls.staking/operator2/genesis-operator2.json  \
+            --datadir ./.pls.staking/operator2  \
+            --rootchain.url ws://127.0.0.1:8546
+</code></pre>
+<p>Using <code>setManagers</code> sub-command of <code>manage-staking</code>, set the stake contract addresses to run operator2's plasma chain.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking setManagers manager.json  \
+            --datadir ./.pls.staking/operator2
+</code></pre>
+<p>Check if the information of stake contract address is included in the operator2 chaindata with <code>getManagers</code> sub-command of <code>manage-staking</code>.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking getManagers --datadir ./.pls.staking/operator2
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="registering-operator2-rootchain-contract-and-ton-balance-check"></a><a href="#registering-operator2-rootchain-contract-and-ton-balance-check" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Registering Operator2 Rootchain Contract and TON Balance Check</h3>
+<p>Register the rootchain address of operator2 plasma chain to the stake manager contract in order to receive seigniorage.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb manage-staking register \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --password pwd.pass \
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+</code></pre>
+<p>If rootchain address is successfully registered, you will see the following message.</p>
+<pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x515B385bDc89bCc29077f2B00a88622883bfb498
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator2/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] Registered SeigManager to RootChain      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=a63891…0a9d9a
+INFO [01-01|00:00:00.000] Registered RootChain to SeigManager      registry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 seigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC tx=f7017e…d8fa00
+</code></pre>
+<p>Check test TON balance of operator2 with the following command.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking balances 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546
+</code></pre>
+<p>You will be able to see the balance of 10,000 TON as below if test TON have been minted correctly and rootchain has been registered to the manager contract.</p>
+<pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.staking/operator1/geth/genesis.json
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] TON Balance                              amount=<span class="hljs-string">"10000.0 TON"</span> depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] WTON Balance                             amount=<span class="hljs-string">"0 WTON"</span>      depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Deposit                                  amount=<span class="hljs-string">"0 WTON"</span>      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount=<span class="hljs-string">"0 WTON"</span>      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Total Stake                              amount=<span class="hljs-string">"500.0 WTON"</span>
+INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount=<span class="hljs-string">"0 WTON"</span>      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
+INFO [01-01|00:00:00.000] Uncommitted Stake                        amount=<span class="hljs-string">"0 WTON"</span>      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Committed Stake                          amount=<span class="hljs-string">"0 WTON"</span>      rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="operator2-ton-staking"></a><a href="#operator2-ton-staking" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operator2 TON Staking</h3>
+<p>To stake test <code>TON</code>, it has to be converted to <code>WTON</code> first. Then, it will be available for staking in <code>depositManager</code> contract.</p>
+<p>Operators can only stake <code>WTON</code> to <code>depositManager</code> in order to operate plasma chains.</p>
+<p>Convert 1,000 TON into WTON using the following command.</p>
+<blockquote>
+<p>You have to use decimal points in the input argument of <code>swapFromTON</code> sub-command in order to apply 1e9(1,000,000,000 wei) unit.</p>
+</blockquote>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking swapFromTON 1000.0 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --password pwd.pass \
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+</code></pre>
+<p>Stake 500 of converted 1,000 WTON using <code>stake</code>, a sub-command of <code>staking</code>.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stakeWTON 500.0 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --password pwd.pass \
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+</code></pre>
+<p>Or, you can do the above two steps at once with using <code>stakeTON</code> sub-command.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking stakeTON 500.0 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --password pwd.pass \
+            --rootchain.sender 0x515b385bdc89bcc29077f2b00a88622883bfb498
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="checking-ton-commit-rewards-and-withdrawal"></a><a href="#checking-ton-commit-rewards-and-withdrawal" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checking TON Commit Rewards and Withdrawal</h2>
+<p>Operator client submits Tx commits to rootchain when operator proceeds with mining child chain blocks.</p>
+<p>Seigniorage rewards of TON will be calculated by the seigniorage manager contract based on how much <code>WTON</code> are staked by each operator.</p>
+<h3><a class="anchor" aria-hidden="true" id="running-operator1-chain"></a><a href="#running-operator1-chain" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Running Operator1 chain</h3>
+<p>Run operator1 node in a private network with the following command.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb \
+            --datadir ./.pls.staking/operator1 \
+            --rootchain.url ws://127.0.0.1:8546 \
+            --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --password pwd.pass \
+            --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --operator 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+</code></pre>
+<p>Access operator1's node console from a new terminal with the following command.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth attach --datadir ./.pls.staking/operator1
+</code></pre>
+<p>Run <code>geth attach</code> to connect to the javascript console of geth.</p>
+<p>Send a dummy tx to advance the blocks by running <code>eth.sendTransaction({from: eth.accounts[0], to:eth.accounts[0], value: 0})</code> command in console.</p>
+<pre><code class="hljs css language-javascript">&gt; web3.eth.accounts
+[<span class="hljs-string">"0x5e3230019fed7ab462e3ac277e7709b9b2716b4f"</span>]
+&gt; eth.sendTransaction({<span class="hljs-attr">from</span>: eth.accounts[<span class="hljs-number">0</span>], <span class="hljs-attr">to</span>:eth.accounts[<span class="hljs-number">0</span>], <span class="hljs-attr">value</span>: <span class="hljs-number">0</span>})
+<span class="hljs-string">"0x0a65e80eb105c448ffa1ca50430dc1d3f4b0da14ad1d4793a43ed36b6df0959c"</span>
+&gt; eth.sendTransaction({<span class="hljs-attr">from</span>: eth.accounts[<span class="hljs-number">0</span>], <span class="hljs-attr">to</span>:eth.accounts[<span class="hljs-number">0</span>], <span class="hljs-attr">value</span>: <span class="hljs-number">0</span>})
+<span class="hljs-string">"0x81130ae471f536c04cc6b9901962dd5a15bb72f3924422ea051a3b0494c0fade"</span>
+</code></pre>
+<p>Generate more than two dummy transactions, sending 0 ETH to operator1.</p>
+<blockquote>
+<p>The rootchain Tx will occur when there are more blocks mined than the initial <code>Epoch</code> number in the rootchain contract.</p>
+</blockquote>
+<p>The Epoch Number used in this example is <code>2</code>.</p>
+<p>Close console connection by sending <code>exit</code> command at console.</p>
+<h3><a class="anchor" aria-hidden="true" id="checking-seigniorage"></a><a href="#checking-seigniorage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checking seigniorage</h3>
+<p>Operator2 stake reward status is currently <code>Uncommited</code> because only operator1 chain has been submitted to the rootchain on Running <a href="#running-operator1-chain">Running Operator1 chain</a>.</p>
+<p>In a new terminal, check operator2 TON stake rewards by using <code>staking balances</code> command.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking balances 0x515b385bdc89bcc29077f2b00a88622883bfb498 \
+            --datadir ./.pls.staking/operator2 \
+            --rootchain.url ws://127.0.0.1:8546
+
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x515B385bDc89bCc29077f2B00a88622883bfb498
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.staking/operator2/geth/genesis.json
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator2/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] TON Balance                              amount=<span class="hljs-string">"9000.0 TON"</span> depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
+INFO [01-01|00:00:00.000] WTON Balance                             amount=<span class="hljs-string">"500.0 WTON"</span> depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
+INFO [01-01|00:00:00.000] Deposit                                  amount=<span class="hljs-string">"500.0 WTON"</span> rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
+INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount=<span class="hljs-string">"0 WTON"</span>     rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
+INFO [01-01|00:00:00.000] Total Stake                              amount=<span class="hljs-string">"1100.0 WTON"</span>
+INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount=<span class="hljs-string">"1100.0 WTON"</span>  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080
+INFO [01-01|00:00:00.000] Uncommitted Stake                        amount=<span class="hljs-string">"0 WTON"</span>    rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
+INFO [01-01|00:00:00.000] Committed Stake                          amount=<span class="hljs-string">"600.0 WTON"</span>  rootchain=0x8Bb208b42B2d1dA1606B3E06ad6648514b6aE080 depositor=0x515B385bDc89bCc29077f2B00a88622883bfb498
+INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
+</code></pre>
+<p>The above result is an example(modified). Actual seigniorage WTON number will be float type with decimal points, because it is calculated by the timestamp of block in rootchain.</p>
+<h3><a class="anchor" aria-hidden="true" id="withdrawing-rewards"></a><a href="#withdrawing-rewards" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Withdrawing Rewards</h3>
+<p>Both operator1 and operator2 have received seigniorage rewards from staked TON after operator1's tx commit.</p>
+<p>The rewards are accumulated on each operators' account in <code>WTON</code>.</p>
+<p>In this section, we are going to withdraw the seigniorage reward of operator1.</p>
+<p>We will be using <code>requestWithdrawal</code>, a sub-command of <code>staking</code> to request withdrawal. Run the following command to request withdrawal for 550 WTON.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking requestWithdrawal 550.0 \
+              --datadir ./.pls.staking/operator1 \
+              --rootchain.url ws://127.0.0.1:8546 \
+              --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+              --password pwd.pass \
+              --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+</code></pre>
+<p>If operator1 balance is more than 510 WTON, the withdrawal request will be successfully processed.</p>
+<pre><code class="hljs css language-bash">INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] Withdrawal requested                     rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 amount=<span class="hljs-string">"550.0 WTON"</span> tx=570061…b07f4d
+</code></pre>
+<p>If you check operator1 balance, you can see 510 WTON in a line that starts with <code>Pending withdrawal ..</code>.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --datadir ./.pls.staking/operator1 \
+            --rootchain.url ws://127.0.0.1:8546
+
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=./operator/geth/genesis.json
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/operator/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] TON Balance                              amount=<span class="hljs-string">"9000.0 TON"</span> depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] WON Balance                              amount=<span class="hljs-string">"1050.0 WTON"</span> depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Deposit                                  amount=<span class="hljs-string">"0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount=<span class="hljs-string">"0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Total Stake                              amount=<span class="hljs-string">"550.0 WTON"</span>
+INFO [01-01|00:00:00.000] Total Stake of Root Chain                amount=<span class="hljs-string">"0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9
+INFO [01-01|00:00:00.000] Uncomitted Stake                         amount=<span class="hljs-string">"0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Committed Stake                          amount=<span class="hljs-string">"50.0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x3cD9F729C8D882B851F8C70FB36d22B391A288CD
+INFO [01-01|00:00:00.000] Commission Rate                          rate=0.000
+</code></pre>
+<p>To finalize withdrawal request, use <code>processWithdrawal</code> sub-command as follows.</p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking processWithdrawal \
+              --datadir ./.pls.staking/operator1 \
+              --rootchain.url ws://127.0.0.1:8546 \
+              --unlock 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+              --password pwd.pass \
+              --rootchain.sender 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f
+</code></pre>
+<p>When the <code>processWithdrawal</code> tx is successfully processed, you can see the balance total of 1,010 WTON in <code>WTON Balance</code></p>
+<pre><code class="hljs css language-bash">plasma-evm $ build/bin/geth --nousb staking balances 0x5e3230019fed7ab462e3ac277e7709b9b2716b4f \
+            --datadir ./.pls.staking/operator1 \
+            --rootchain.url ws://127.0.0.1:8546
+
+INFO [01-01|00:00:00.000] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-01|00:00:00.000] Operator account is unlocked             address=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Set options <span class="hljs-keyword">for</span> submitting a block       mingaspirce=1000000000 maxgasprice=100000000000 resubmit=0s
+INFO [01-01|00:00:00.000] cfg.Node.DataDir                         v=.pls.staking/operator1/geth/genesis.json
+INFO [01-01|00:00:00.000] Allocated cache and file handles         database=/home/ubuntu/plasma-evm/.pls.staking/operator1/geth/stakingdata cache=16.00MiB handles=16
+INFO [01-01|00:00:00.000] Using manager contracts                  TON=0x3A220f351252089D385b29beca14e27F204c296A WTON=0xdB7d6AB1f17c6b31909aE466702703dAEf9269Cf DepositManager=0x880EC53Af800b5Cd051531672EF4fc4De233bD5d RootChainRegistry=0x537e697c7AB75A26f9ECF0Ce810e3154dFcaaf44 SeigManager=0x3Dc2cd8F2E345951508427872d8ac9f635fBe0EC
+INFO [01-01|00:00:00.000] TON Balance                              amount=<span class="hljs-string">"9000.0 TON"</span> depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] WTON Balance                              amount=<span class="hljs-string">"1010.0 WTON"</span> depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Deposit                                  amount=<span class="hljs-string">"0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Pending withdrawal requests              num=0
+INFO [01-01|00:00:00.000] Pending withdrawal WTON                  amount=<span class="hljs-string">"0 WTON"</span> rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Uncommitted Stake                        amount=<span class="hljs-string">"0 WTON"</span>                                rootchain=0x17FB80e2E16b02faC9369334
+24305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+INFO [01-01|00:00:00.000] Committed Stake                          amount=<span class="hljs-string">"0 WTON"</span>                                rootchain=0x17FB80e2E16b02faC936933424305d4F29F9d5D9 depositor=0x5E3230019fEd7aB462e3AC277E7709B9b2716b4F
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="list-of-sub-commands"></a><a href="#list-of-sub-commands" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>List of Sub-commands</h2>
+<p><code>manage-staking</code> and  <code>staking</code> commands have been added to plasma-evm <code>geth</code> for TON staking features.</p>
+<h3><a class="anchor" aria-hidden="true" id="manage-staking-sub-commands"></a><a href="#manage-staking-sub-commands" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>manage-staking</code> Sub-commands</h3>
+<p>This table is a list of sub-commands form <code>manage-staking</code> and its arguments.</p>
+<table>
+<thead>
+<tr><th>Sub-command</th><th>Argument</th><th>Unit</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>deployManager</td><td>withdrawalDelay*</td><td>Int</td><td>In order to convert the status of WTON from staked to un-staked, you have to send <code>requestWithdrawal</code> transaction. The <code>requestWithdrawal</code> will be processible after the number of blocks set in this argument are mined in rootchain.</td></tr>
+<tr><td></td><td>seigPerBlock*</td><td>Float</td><td>The amount of maximum TON seigniorage per block. This parameter affects the total inflation of TON token.</td></tr>
+<tr><td>deployPowerTON</td><td>roundDuration*</td><td>Int(Seconds)</td><td>Deploys <code>PowerTON</code> contract. The unit of <code>roundDuration</code> is seconds. For example, if the round duration is set to <code>60s</code>, an operator will be selected every 60 seconds to receive unissued seigniorage of TON.</td></tr>
+<tr><td>startPowerTON</td><td>None</td><td>-</td><td>Activates <code>PowerTON</code> contract which is deployed with <code>deployPowerTON</code> sub-command.</td></tr>
+<tr><td>getManagers</td><td>filename</td><td>string</td><td>Extracts the addresses of stake manager contracts from the db(located with <code>--datadir</code>) and saves the addresses as <code>&lt;filename&gt;.json</code>. In most cases, the path for  <code>--datadir</code> should be specified when running <code>deployManager</code> sub-command.</td></tr>
+<tr><td>setManagers</td><td>filename*</td><td>string</td><td>Reads the target file (e.g. <code>manager.json</code>) that contains the addresses of stake manager contracts then sets required addresses to operate the plasma chain. the path of <code>--datadir</code> would be the operator chaindata location.</td></tr>
+<tr><td>register</td><td>None</td><td>-</td><td>To receive TON seigniorage, Operators have to register their rootchain contract address in the seigniorage manager contract. The path of <code>--datadir</code> should be placed in the operator chaindata location, with stake manager contracts already set up by <code>setManager</code> sub-command.</td></tr>
+<tr><td>mintTON</td><td>amount*</td><td>Float or Int</td><td>Generates test TON token.</td></tr>
+</tbody>
+</table>
+<blockquote>
+<p>Input argument with &quot;*&quot; is required.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="staking-sub-commands"></a><a href="#staking-sub-commands" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>staking</code> Sub-commands</h3>
+<p>This table is a list of sub-commands from <code>staking</code> and its arguments.</p>
+<table>
+<thead>
+<tr><th>Sub-command</th><th>Argument</th><th>Unit</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>balances</td><td>address*</td><td>address</td><td>Prints information about the address balance of <code>TON</code>, <code>WTON</code>, <code>staked WTON(==deposit)</code>, <code>reward WTON(==(Un)Committed)</code> and others.</td></tr>
+<tr><td>swapFromTON</td><td>amount*</td><td>Float or Int</td><td>Send transaction to convert <code>TON</code> to <code>WTON</code> token. The argument is the amount to convert. Target address must be specified in the <code>--rootchain.sender</code> flag.</td></tr>
+<tr><td>swapToTON</td><td>amount*</td><td>Float or Int</td><td>Send transaction to convert <code>WTON</code> to <code>TON</code> token. The argument is the amount to convert. Target address must be specified in the <code>--rootchain.sender</code> flag.</td></tr>
+<tr><td>stakeTON</td><td>amount*</td><td>Float or Int</td><td>Combines <code>swapFromTON</code> and <code>stakeWTON</code> to convert <code>TON</code> to <code>WTON</code> and stake <code>WTON</code> in a single command. Converts the input <code>amount</code> of <code>TON</code> staked status. Target address must be specified in the <code>--rootchain.sender</code> flag.</td></tr>
+<tr><td>stakeWTON</td><td>amount*</td><td>Float or Int</td><td>In order to receive seigniorage of TON token, operators have to stake <code>WTON</code>. This sub-command converts the state of <code>WTON</code> to staked. Target address must be specified in the <code>--rootchain.sender</code> flag.</td></tr>
+<tr><td>requestWithdrawal</td><td>amount*</td><td>Float or Int</td><td>Sends transaction that converts <code>WTON</code> state from <code>stake</code> to <code>un-stake</code>.  Target address must be specified in the <code>--rootchain.sender</code> flag. Un-stake request will be valid after a number of blocks are increased in rootchain, specified in <code>withdrawalDelay</code> of<code>depositManager</code>.</td></tr>
+<tr><td>processWithdrawal</td><td>numRequests</td><td>Int</td><td>Finalizes un-stake requests registered through <code>requestWithdrawal</code>. All valid requests will be finalized if no arguments are set.</td></tr>
+</tbody>
+</table>
+<blockquote>
+<p>Input argument with &quot;*&quot; is required.</p>
+</blockquote>
+<blockquote>
+<p>1e9 units will not be applied without a decimal point in <code>amount</code>.</p>
+</blockquote>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/guides/ton-staking/how-to-set-candidate"><span class="arrow-prev">← </span><span>How to Set Candidate</span></a><a class="docs-next button" href="/docs/en/guides/ton-staking/rinkeby-testnet-staking"><span>Rinkeby Testnet Staking</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#staking-ton-for-operators">Staking TON for Operators</a><ul class="toc-headings"><li><a href="#minting-test-ton">Minting Test TON</a></li><li><a href="#staking-ton-for-operator1">Staking TON for Operator1</a></li><li><a href="#operator2-plasma-chain-and-stake-contract-address-setup">Operator2 Plasma Chain and Stake Contract Address Setup</a></li><li><a href="#registering-operator2-rootchain-contract-and-ton-balance-check">Registering Operator2 Rootchain Contract and TON Balance Check</a></li><li><a href="#operator2-ton-staking">Operator2 TON Staking</a></li></ul></li><li><a href="#checking-ton-commit-rewards-and-withdrawal">Checking TON Commit Rewards and Withdrawal</a><ul class="toc-headings"><li><a href="#running-operator1-chain">Running Operator1 chain</a></li><li><a href="#checking-seigniorage">Checking seigniorage</a></li><li><a href="#withdrawing-rewards">Withdrawing Rewards</a></li></ul></li><li><a href="#list-of-sub-commands">List of Sub-commands</a><ul class="toc-headings"><li><a href="#manage-staking-sub-commands"><code>manage-staking</code> Sub-commands</a></li><li><a href="#staking-sub-commands"><code>staking</code> Sub-commands</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a></div><div><h5>Family site</h5><a href="https://tokamak.network">Tokamak Network</a><a href="https://staking.tokamak.network">Original Staking</a><a href="https://simple.staking.tokamak.network">Simple Staking</a><a href="https://staking-simulator.tokamak.network">Staking Simulator</a><a href="https://price.tokamak.network">Price Dashboard</a><a href="https://vesting.tokamak.network">Vesting Dashboard</a><a href="https://wton-swapper.tokamak.network">TON-WTON Swapper</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2021 Onther Inc.</section></footer></div></body></html>

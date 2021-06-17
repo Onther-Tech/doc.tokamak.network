@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Commit to Roochain · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This document contains the process of operating an operator by using `Staking-script`."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Commit to Roochain · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="This document contains the process of operating an operator by using `Staking-script`."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/en/guides/optimism/how-to-connect-optimism-to-public-testnet" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ko/guides/ton-staking/how-to-commit">한국어</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>TON Staking</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">General<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Basic</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/tokamak-network">Tokamak Network</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Optimistic Rollup<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Tokamak Optimism</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/how-to-connect-optimism-to-public-testnet">Connect Optimistic Rollup</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/how-to-deploy-erc20-to-optimism">Deploy ERC20 to Optimistic Rollup</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/how-to-deploy-erc721-to-optimism">Deploy ERC721 to Optimistic Rollup</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/how-to-deploy-uniswapv2-to-optimism">Deploy Uniswap V2 to Optimistic Rollup</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">DAO &amp; Staking<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">TON Staking</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/how-to-set-operator">How to Set Operator</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/how-to-set-candidate">How to Set Candidate</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/private-testnet-staking">Private Testnet Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/rinkeby-testnet-staking">Rinkeby Testnet Staking</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/guides/ton-staking/how-to-commit">How to Commit</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Token Economics<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Token Economy</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/child-chain">Child Chain and Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/token-supply">Token Supply and Distribution</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/powerton">PowerTON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/tx-fee">Transaction Fee</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/challenge">Challenge</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/glossary">Parameters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Another Layer2<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Plasma EVM</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/enter-and-exit">Interoperability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/transaction-fee">Convenience</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/layer-2-solutions">Comparison with Other Solutions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/design-rationale">Design Rationale</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-architecture">Plasma EVM Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/root-chain">RootChain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/child-chain">Child Chain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-smart-contracts">Plasma EVM Smart Contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/examples-and-best-practices">Examples and Best Practices</a></li></ul></div></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/ton-staking/how-to-commit.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Commit to Roochain</h1></header><article><div><span><p>This document contains the process of operating an operator by using <code>Staking-script</code>.</p>
+<p>This script provide <code>commit</code>, <code>stake</code>, <code>unstake</code>, <code>restake</code>, <code>withdrawal</code> function.</p>
+<blockquote>
+<p>In order to carry out this process, you must own an operator in the process of steaking.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="prepare-script"></a><a href="#prepare-script" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prepare Script</h2>
+<h3><a class="anchor" aria-hidden="true" id="source-code-download--package-installation"></a><a href="#source-code-download--package-installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Source Code Download &amp; Package Installation</h3>
+<p>Use the command below to clone the source code and install the packages.</p>
+<pre><code class="hljs css language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/Onther-Tech/staking-script.git
+$ <span class="hljs-built_in">cd</span> staking-script &amp;&amp; npm install
+</code></pre>
+<p>After you have finished installing the package, you can now proceed to the next step.</p>
+<h2><a class="anchor" aria-hidden="true" id="modify-contract-address"></a><a href="#modify-contract-address" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modify Contract Address</h2>
+<blockquote>
+<p>This document will explain based on Rinkeby. If you want to proceed on the Mainnet, you can set the network as the mainnet.</p>
+</blockquote>
+<p>Commit requires the address of the contract distributed by the operator.
+Use the command below to modify the <code>config.js</code> file.</p>
+<pre><code class="hljs css language-bash">$ vi config.js
+</code></pre>
+<p>The contents of <code>config.js</code> are as follows.</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> config = {
+  <span class="hljs-string">'mainnet'</span>: {
+    <span class="hljs-string">'network'</span>: <span class="hljs-string">'1'</span>,
+    <span class="hljs-string">'contractAddress'</span>: {
+      <span class="hljs-string">'rootchain'</span>: <span class="hljs-string">''</span>,
+      <span class="hljs-string">'managers'</span>: {
+        <span class="hljs-string">'DepositManager'</span>: <span class="hljs-string">''</span>,
+        <span class="hljs-string">'TON'</span>: <span class="hljs-string">''</span>,
+        <span class="hljs-string">'WTON'</span>: <span class="hljs-string">''</span>,
+      },
+    },
+  },
+  <span class="hljs-string">'rinkeby'</span>: {
+    <span class="hljs-string">'network'</span>: <span class="hljs-string">'4'</span>,
+    <span class="hljs-string">'contractAddress'</span>: {
+      <span class="hljs-string">'rootchain'</span>: <span class="hljs-string">'0xfe40ecbd972675d3d6766d94d04373bf9d8896b6'</span>,
+      <span class="hljs-string">'managers'</span>: {
+        <span class="hljs-string">"TON"</span>:<span class="hljs-string">"0x3e136394a481f8c9595d63a1fa70d25c7f388c2c"</span>,
+        <span class="hljs-string">"WTON"</span>:<span class="hljs-string">"0x36bba598ca0b329eb4162ba011086d09111b4702"</span>,
+        <span class="hljs-string">"DepositManager"</span>:<span class="hljs-string">"0x95ff08f500ecb391778a3096ec767bdb18e17cf6"</span>,
+        <span class="hljs-string">"RootChainRegistry"</span>:<span class="hljs-string">"0x8dc9d372ebd9ed0d8f991226eaaf331ad11dbb4d"</span>,
+        <span class="hljs-string">"SeigManager"</span>:<span class="hljs-string">"0x32ccc91e3dd884090a580f45172c62393bd858c5"</span>,
+        <span class="hljs-string">"PowerTON"</span>:<span class="hljs-string">"0x4cc9b4cf3a4a6f8e7cadf8fcd442873c3f71ab73"</span>
+      },
+    },
+  },
+};
+
+exports.getConfig = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  
+  <span class="hljs-keyword">return</span> config.rinkeby;
+}
+</code></pre>
+<p>Where each contract's address must be changed to match the address distributed by the operator concerned. Although it is explained based on <code>rinkeby</code>, if you want to use mainnet, you need to change <code>config.rinkeby</code> to <code>config.mainnet</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="change-private-key"></a><a href="#change-private-key" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Change Private Key</h2>
+<p>The next step is enter the operator's private key.</p>
+<pre><code class="hljs css language-bash">$ vi app.js
+</code></pre>
+<p>Near line 54 in <code>app.js</code> is as follows.</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-number">53</span>  <span class="hljs-keyword">const</span> logger = Logger(verbose);
+<span class="hljs-number">54</span>  <span class="hljs-keyword">const</span> privatekey = <span class="hljs-string">"&lt;insert private key&gt;"</span>;
+<span class="hljs-number">55</span>  <span class="hljs-keyword">const</span> { web3, <span class="hljs-keyword">from</span> } = loadWeb3FromMnemonic(providerUrl, privatekey);
+</code></pre>
+<p>From here, you can change the value of the 54th line 'confident key' to the operator's private key.</p>
+<h2><a class="anchor" aria-hidden="true" id="prepare-infura"></a><a href="#prepare-infura" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prepare Infura</h2>
+<p>Use your own infura URL which you got from <a href="how-to-connect-public-testnet-prepare#get-endpoint-url-of-rootchain-node">&quot;Requirements for Connecting Public Testnet - Get Endpoint URL of <code>RootChain</code> Node&quot;</a> for <code>~ root chain JSONRPC?</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="how-to-use-it"></a><a href="#how-to-use-it" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to use it</h2>
+<p>You are now ready to use that script. This can be done by entering the following form.</p>
+<pre><code class="hljs css language-bash">$ node app.js --provider-url https://rinkeby.infura.io/v3/*** -k &lt;privateKey&gt; -f &lt;<span class="hljs-keyword">function</span> name&gt; -p &lt;parameter&gt;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="parameters"></a><a href="#parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h3>
+<p>The following parameters are provided by the <code>staking-script</code>.</p>
+<pre><code class="hljs">-f, --function-name [value], required. function <span class="hljs-keyword">to</span> call
+-i, --network-id [value], required <span class="hljs-keyword">for</span> infura. ethereum<span class="hljs-built_in"> network </span>id. 1 <span class="hljs-keyword">for</span> mainsale, 3 <span class="hljs-keyword">for</span> rinkeby.
+-p, --parameters [value]&gt;, `arguments <span class="hljs-keyword">for</span> function split by comma.<span class="hljs-built_in"> default </span><span class="hljs-variable">${ defaultParameters }</span>`, parseParams
+-l, --provider-url [url], `web3 provider url.<span class="hljs-built_in"> default </span><span class="hljs-variable">${ defaultProviderUrl }</span>`
+-L, --gas-limit [value], `gas limit <span class="hljs-keyword">for</span> transaction.<span class="hljs-built_in"> default </span><span class="hljs-variable">${ defaultGasLimit }</span>`
+-P, --gas-price [value], `gas price <span class="hljs-keyword">for</span> transaction.<span class="hljs-built_in"> default </span><span class="hljs-variable">${ defaultGasPrice }</span>`
+-N, --nonce [value], `nonce <span class="hljs-keyword">for</span> transaction.<span class="hljs-built_in"> default </span><span class="hljs-variable">${ defaultNonce }</span>`
+-v, --verbose, show <span class="hljs-builtin-name">debug</span><span class="hljs-built_in"> logging
+</span>-k, --pk [value], required. transaction sender.
+</code></pre>
+<p>And, here are default parameters.</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> defaultParameters = [];
+<span class="hljs-keyword">const</span> defaultProviderUrl = <span class="hljs-string">"http://localhost:8545"</span>;
+<span class="hljs-keyword">const</span> defaultWeiAmount = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">const</span> defaultGasLimit = <span class="hljs-number">4500000</span>;
+<span class="hljs-keyword">const</span> defaultGasPrice = <span class="hljs-number">20e9</span>;
+<span class="hljs-keyword">const</span> defaultNonce = <span class="hljs-literal">null</span>;
+</code></pre>
+<p>The functions supported by 'Staking-script' are as follows.</p>
+<h3><a class="anchor" aria-hidden="true" id="commit"></a><a href="#commit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Commit</h3>
+<pre><code class="hljs"><span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --provider-url https://rinkeby.<span class="hljs-literal">inf</span>ura.io/v3/*** -k <span class="hljs-tag">&lt;privateKey&gt;</span> -f commit
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="stake"></a><a href="#stake" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Stake</h3>
+<p>stake 1 TON</p>
+<p>If you want to stake 1 TON, insert 1e18 as a parameter.</p>
+<pre><code class="hljs"><span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --provider-url https://rinkeby.<span class="hljs-literal">inf</span>ura.io/v3/*** -k <span class="hljs-tag">&lt;privateKey&gt;</span> -f approveAndCall -p <span class="hljs-number">1000000000000000000</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="unstake"></a><a href="#unstake" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unstake</h3>
+<p>Unstake 1 TON</p>
+<blockquote>
+<p>unstake uses ray as a unit of token, so if you want unstake 1 TON, You have to insert 1e27 instead 1e18 as a parameter.</p>
+</blockquote>
+<pre><code class="hljs"><span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --provider-url https://rinkeby.<span class="hljs-literal">inf</span>ura.io/v3/*** -k <span class="hljs-tag">&lt;privateKey&gt;</span> -f requestWithdrawal -p <span class="hljs-number">1000000000000000000000000000</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="restake"></a><a href="#restake" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Restake</h3>
+<p>When you want to restake the token, use this method.</p>
+<pre><code class="hljs"><span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --provider-url https://rinkeby.<span class="hljs-literal">inf</span>ura.io/v3/*** -k <span class="hljs-tag">&lt;privateKey&gt;</span> -f redepositMulti
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="withdrawal"></a><a href="#withdrawal" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Withdrawal</h3>
+<p>When you want to withdraw token, use this method.</p>
+<pre><code class="hljs"><span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --provider-url https://rinkeby.<span class="hljs-literal">inf</span>ura.io/v3/*** -k <span class="hljs-tag">&lt;privateKey&gt;</span> -f processRequests
+</code></pre>
+<p>When the commit is successfully completed, the following logs will be output:</p>
+<pre><code class="hljs css language-text">{"tx":"0xca6b29f1f64239c0072ecd2db3bbcedef58259bc2694de8e1a75e9fec501ade0","receipt":{"blockHash":"0xbe2c1990f5efee0f18c56f16a32d375f01ca016d8acb1b2c40f5dbf6532dc815","blockNumber":6871009,"contractAddress":null,"cumulativeGasUsed":705612,"from":"0xf30eadcdc68f9551fe943a685c23fa07fde4b417","gasUsed":396475,
+...
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/guides/ton-staking/rinkeby-testnet-staking"><span class="arrow-prev">← </span><span>Rinkeby Testnet Staking</span></a><a class="docs-next button" href="/docs/en/learn/economics/ton"><span>TON</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#prepare-script">Prepare Script</a><ul class="toc-headings"><li><a href="#source-code-download--package-installation">Source Code Download &amp; Package Installation</a></li></ul></li><li><a href="#modify-contract-address">Modify Contract Address</a></li><li><a href="#change-private-key">Change Private Key</a></li><li><a href="#prepare-infura">Prepare Infura</a></li><li><a href="#how-to-use-it">How to use it</a><ul class="toc-headings"><li><a href="#parameters">Parameters</a></li><li><a href="#commit">Commit</a></li><li><a href="#stake">Stake</a></li><li><a href="#unstake">Unstake</a></li><li><a href="#restake">Restake</a></li><li><a href="#withdrawal">Withdrawal</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a></div><div><h5>Family site</h5><a href="https://tokamak.network">Tokamak Network</a><a href="https://staking.tokamak.network">Original Staking</a><a href="https://simple.staking.tokamak.network">Simple Staking</a><a href="https://staking-simulator.tokamak.network">Staking Simulator</a><a href="https://price.tokamak.network">Price Dashboard</a><a href="https://vesting.tokamak.network">Vesting Dashboard</a><a href="https://wton-swapper.tokamak.network">TON-WTON Swapper</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2021 Onther Inc.</section></footer></div></body></html>
