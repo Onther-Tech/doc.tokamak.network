@@ -1,29 +1,40 @@
 {
   "docs": {
-    "Learn": [
+    "General": [
       {
         "type": "subcategory",
         "label": "Basic",
         "ids": [
-          "learn/basic/tokamak-network",
-          "learn/basic/enter-and-exit",
-          "learn/basic/transaction-fee",
-          "learn/basic/layer-2-solutions"
+          "learn/basic/tokamak-network"
         ]
-      },
+      }
+    ],
+    "Optimistic Rollup": [
       {
         "type": "subcategory",
-        "label": "Advanced",
+        "label": "Tokamak Optimism",
         "ids": [
-          "learn/advanced/design-rationale",
-          "learn/advanced/plasma-evm-architecture",
-          "learn/advanced/root-chain",
-          "learn/advanced/child-chain",
-          "learn/advanced/continuous-rebase",
-          "learn/advanced/plasma-evm-smart-contracts",
-          "learn/advanced/examples-and-best-practices"
+          "guides/optimism/how-to-connect-optimism-to-public-testnet",
+          "guides/optimism/how-to-deploy-erc20-to-optimism",
+          "guides/optimism/how-to-deploy-erc721-to-optimism",
+          "guides/optimism/how-to-deploy-uniswapv2-to-optimism"
         ]
-      },
+      }
+    ],
+    "DAO & Staking": [
+      {
+        "type": "subcategory",
+        "label": "TON Staking",
+        "ids": [
+          "guides/ton-staking/how-to-set-operator",
+          "guides/ton-staking/how-to-set-candidate",
+          "guides/ton-staking/private-testnet-staking",
+          "guides/ton-staking/rinkeby-testnet-staking",
+          "guides/ton-staking/how-to-commit"
+        ]
+      }
+    ],
+    "Token Economics": [
       {
         "type": "subcategory",
         "label": "Token Economy",
@@ -38,45 +49,21 @@
         ]
       }
     ],
-    "Guide": [
+    "Another Layer2": [
       {
         "type": "subcategory",
-        "label": "Getting Started Private Testnet",
+        "label": "Plasma EVM",
         "ids": [
-          "guides/getting-started/how-to-open-private-testnet-rootchain",
-          "guides/getting-started/how-to-open-private-testnet-manually",
-          "guides/getting-started/how-to-open-private-testnet-puppeth"
-        ]
-      },
-      {
-        "type": "subcategory",
-        "label": "Connect Public Testnet",
-        "ids": [
-          "guides/getting-started/how-to-connect-public-testnet-prepare",
-          "guides/getting-started/how-to-connect-public-testnet-manually",
-          "guides/getting-started/how-to-connect-public-testnet-puppeth",
-          "guides/public-testnets"
-        ]
-      },
-      {
-        "type": "subcategory",
-        "label": "TON Staking",
-        "ids": [
-          "guides/getting-started/how-to-set-operator",
-          "guides/getting-started/how-to-set-candidate",
-          "guides/getting-started/private-testnet-staking",
-          "guides/getting-started/rinkeby-testnet-staking",
-          "guides/getting-started/how-to-commit"
-        ]
-      },
-      {
-        "type": "subcategory",
-        "label": "Tokamak Optimism",
-        "ids": [
-          "guides/getting-started/how-to-connect-optimism-to-public-testnet",
-          "guides/getting-started/how-to-deploy-erc20-to-optimism",
-          "guides/getting-started/how-to-deploy-erc721-to-optimism",
-          "guides/getting-started/how-to-deploy-uniswapv2-to-optimism"
+          "learn/basic/enter-and-exit",
+          "learn/basic/transaction-fee",
+          "learn/basic/layer-2-solutions",
+          "learn/advanced/design-rationale",
+          "learn/advanced/plasma-evm-architecture",
+          "learn/advanced/root-chain",
+          "learn/advanced/child-chain",
+          "learn/advanced/continuous-rebase",
+          "learn/advanced/plasma-evm-smart-contracts",
+          "learn/advanced/examples-and-best-practices"
         ]
       }
     ]

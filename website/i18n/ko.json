@@ -5,6 +5,46 @@
     "previous": "Previous",
     "tagline": "plasma evm documents",
     "docs": {
+      "guides/optimism/how-to-connect-optimism-to-public-testnet": {
+        "title": "테스트 넷에 옵티미스틱 올업 연결하기",
+        "sidebar_label": "옵티미스틱 롤업 연결하기"
+      },
+      "guides/optimism/how-to-deploy-erc20-to-optimism": {
+        "title": "옵티미스틱 롤업에 ERC20 배포하가",
+        "sidebar_label": "ERC20 배포"
+      },
+      "guides/optimism/how-to-deploy-erc721-to-optimism": {
+        "title": "옵티미스틱 롤업에 ERC721 배포하기",
+        "sidebar_label": "ERC721 배포"
+      },
+      "guides/optimism/how-to-deploy-uniswapv2-to-optimism": {
+        "title": "옵티미스틱 롤업에 기존 컨트랙트 포팅하기",
+        "sidebar_label": "기존 컨트랙트 포팅"
+      },
+      "guides/ton-staking/how-to-commit": {
+        "title": "스크립트를 이용한 커밋 방법",
+        "sidebar_label": "커밋 방법"
+      },
+      "guides/ton-staking/how-to-set-candidate": {
+        "title": "캔디데이트 세팅하기",
+        "sidebar_label": "캔디데이트 세팅하기"
+      },
+      "guides/ton-staking/how-to-set-operator": {
+        "title": "How to Set Operator",
+        "sidebar_label": "How to Set Operator"
+      },
+      "guides/ton-staking/mainnet-mton-staking": {
+        "title": "MTON Staking in Mainnet",
+        "sidebar_label": "Mainnet MTON staking"
+      },
+      "guides/ton-staking/rinkeby-testnet-staking": {
+        "title": "링키비 테스트넷에 스테이킹하기",
+        "sidebar_label": "링키비 테스트넷에 스테이킹하기"
+      },
+      "guides/ton-staking/private-testnet-staking": {
+        "title": "프라이빗 테스트넷에 스테이킹하기",
+        "sidebar_label": "프라이빗 테스트넷에 스테이킹하기"
+      },
       "guides/getting-started/how-to-connect-public-testnet-manually": {
         "title": "퍼블릿 테스트넷 직접 연결",
         "sidebar_label": "직접 연결"
@@ -167,6 +207,7 @@
       "Guide": "가이드",
       "Basic": "기초",
       "Advanced": "고급",
+      "Tokamak Optimism": "토카막 옵티미즘",
       "TON Staking": "TON 스테이킹",
       "Token Economy": "토큰경제",
       "Getting Started Private Testnet": "프라이빗 테스트넷 시작",

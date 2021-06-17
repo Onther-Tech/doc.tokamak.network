@@ -15,7 +15,7 @@ const siteConfig = {
       label: 'Docs'
     },
     {
-      doc: 'guides/getting-started/how-to-open-private-testnet-rootchain',
+      doc: 'guides/optimism/how-to-connect-optimism-to-public-testnet',
       label: 'Getting Started'
     },
     { languages: true },

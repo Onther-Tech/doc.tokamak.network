@@ -80,10 +80,10 @@ class Index extends React.Component {
     const {baseUrl} = siteConfig;
 
     // grid contents translations, for links.
-    const basic_title = <translate>Basic</translate>;
+    const basic_title = <translate>General</translate>;
     const basic_content = <translate>Learn basics of Tokamak Network</translate>;
-    const advanced_title = <translate>Advanced</translate>;
-    const advanced_content = <translate>Deep dive into Tokamak Network</translate>;
+    const advanced_title = <translate>Run Optimistic Rollup</translate>;
+    const advanced_content = <translate>Guides to run Tokamak Network Optimistic Rollup</translate>;
 
     return (
       <div>
@@ -106,11 +106,11 @@ class Index extends React.Component {
                   content: `[${basic_content}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/basic/tokamak-network.html)`,
                 },
                 {
-                  title: `[${advanced_title}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/advanced/design-rationale)`,
+                  title: `[${advanced_title}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/guides/optimism/how-to-connect-optimism-to-public-testnet)`,
                   image: "/img/index_advance.png",
-                  imageLink: `/docs/${language}/learn/advanced/design-rationale`,
+                  imageLink: `/docs/${language}/guides/optimism/how-to-connect-optimism-to-public-testnet`,
                   // imageAlign	: 'center',
-                  content: `[${advanced_content}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/advanced/design-rationale)`,
+                  content: `[${advanced_content}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/guides/optimism/how-to-connect-optimism-to-public-testnet)`,
                 },
               ]}
             />

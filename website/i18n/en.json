@@ -5,9 +5,8 @@
     "previous": "Previous",
     "tagline": "Plasma evm documents",
     "docs": {
-      "guides/getting-started/how-to-commit": {
-        "title": "Commit to Roochain",
-        "sidebar_label": "How to Commit"
+      "guides/getting-started/how-to-bridging-erc20-between-l1-l2": {
+        "title": "guides/getting-started/how-to-bridging-erc20-between-l1-l2"
       },
       "guides/getting-started/how-to-connect-public-testnet-manually": {
         "title": "How to connect public testnet manually",
@@ -33,26 +32,6 @@
         "title": "Setup Rootchain in Private Testnet",
         "sidebar_label": "Setup Rootchain"
       },
-      "guides/getting-started/how-to-set-candidate": {
-        "title": "How to Set Candidate",
-        "sidebar_label": "How to Set Candidate"
-      },
-      "guides/getting-started/how-to-set-operator": {
-        "title": "How to Set Operator",
-        "sidebar_label": "How to Set Operator"
-      },
-      "guides/getting-started/mainnet-mton-staking": {
-        "title": "MTON Staking in Mainnet",
-        "sidebar_label": "Mainnet MTON staking"
-      },
-      "guides/getting-started/rinkeby-testnet-staking": {
-        "title": "Staking in Rinkeby Testnet",
-        "sidebar_label": "Rinkeby Testnet Staking"
-      },
-      "guides/getting-started/private-testnet-staking": {
-        "title": "Staking Test in Private Testnet",
-        "sidebar_label": "Private Testnet Staking"
-      },
       "guides/manuals/guides_manuals_how-to-make-request": {
         "title": "How to make request",
         "sidebar_label": "How to make request"
@@ -61,9 +40,49 @@
         "title": "How to manage STAMINA",
         "sidebar_label": "How to manage STAMINA"
       },
+      "guides/optimism/how-to-connect-optimism-to-public-testnet": {
+        "title": "How to connect Optimistic Rollup to public testnet",
+        "sidebar_label": "Connect Optimistic Rollup"
+      },
+      "guides/optimism/how-to-deploy-erc20-to-optimism": {
+        "title": "How to deploy ERC20 to Optimistic Rollup",
+        "sidebar_label": "Deploy ERC20 to Optimistic Rollup"
+      },
+      "guides/optimism/how-to-deploy-erc721-to-optimism": {
+        "title": "How to deploy ERC721 to Optimistic Rollup",
+        "sidebar_label": "Deploy ERC721 to Optimistic Rollup"
+      },
+      "guides/optimism/how-to-deploy-uniswapv2-to-optimism": {
+        "title": "How to deploy Uniswap V2 to Optimistic Rollup",
+        "sidebar_label": "Deploy Uniswap V2 to Optimistic Rollup"
+      },
       "guides/public-testnets": {
         "title": "Tokamak Public Testnet Information",
         "sidebar_label": "Public Testnet Information"
+      },
+      "guides/ton-staking/how-to-commit": {
+        "title": "Commit to Roochain",
+        "sidebar_label": "How to Commit"
+      },
+      "guides/ton-staking/how-to-set-candidate": {
+        "title": "How to Set Candidate",
+        "sidebar_label": "How to Set Candidate"
+      },
+      "guides/ton-staking/how-to-set-operator": {
+        "title": "How to Set Operator",
+        "sidebar_label": "How to Set Operator"
+      },
+      "guides/ton-staking/mainnet-mton-staking": {
+        "title": "MTON Staking in Mainnet",
+        "sidebar_label": "Mainnet MTON staking"
+      },
+      "guides/ton-staking/rinkeby-testnet-staking": {
+        "title": "Staking in Rinkeby Testnet",
+        "sidebar_label": "Rinkeby Testnet Staking"
+      },
+      "guides/ton-staking/private-testnet-staking": {
+        "title": "Staking Test in Private Testnet",
+        "sidebar_label": "Private Testnet Staking"
       },
       "learn/advanced/child-chain": {
         "title": "Child Chain",
@@ -143,18 +162,21 @@
       "Getting Started": "Getting Started"
     },
     "categories": {
-      "Learn": "Learn",
-      "Guide": "Guide"
+      "General": "General",
+      "Optimistic Rollup": "Optimistic Rollup",
+      "DAO & Staking": "DAO & Staking",
+      "Token Economics": "Token Economics",
+      "Another Layer2": "Another Layer2"
     }
   },
   "pages-strings": {
     "Tokamak Network Documents|no description given": "Tokamak Network Documents",
     "Plasma EVM Doc|no description given": "Plasma EVM Doc",
     "Getting Started|no description given": "Getting Started",
-    "Basic|no description given": "Basic",
+    "General|no description given": "General",
     "Learn basics of Tokamak Network|no description given": "Learn basics of Tokamak Network",
-    "Advanced|no description given": "Advanced",
-    "Deep dive into Tokamak Network|no description given": "Deep dive into Tokamak Network",
+    "Run Optimistic Rollup|no description given": "Run Optimistic Rollup",
+    "Guides to run Tokamak Network Optimistic Rollup|no description given": "Guides to run Tokamak Network Optimistic Rollup",
     "Help Translate|recruit community translators for your project": "Help Translate",
     "Edit this Doc|recruitment message asking to edit the doc source": "Edit",
     "Translate this Doc|recruitment message asking to translate the docs": "Translate"
