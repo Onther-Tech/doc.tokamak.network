@@ -68,6 +68,16 @@
           "guides/getting-started/rinkeby-testnet-staking",
           "guides/getting-started/how-to-commit"
         ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Tokamak Optimism",
+        "ids": [
+          "guides/getting-started/how-to-connect-optimism-to-public-testnet",
+          "guides/getting-started/how-to-deploy-erc20-to-optimism",
+          "guides/getting-started/how-to-deploy-erc721-to-optimism",
+          "guides/getting-started/how-to-deploy-uniswapv2-to-optimism"
+        ]
       }
     ]
   }
