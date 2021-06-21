@@ -44,6 +44,10 @@
         "title": "Build new Optimism layer2",
         "sidebar_label": "Build new Optimism layer2"
       },
+      "guides/optimism/porting-contract-l1-to-optimism": {
+        "title": "Porting smart contract L1 to Optimism",
+        "sidebar_label": "Porting smart contract L1 to Optimism"
+      },
       "guides/optimism/test-and-deploy-optimism-erc20": {
         "title": "Test and deploy Optimism-ERC20",
         "sidebar_label": "Test and deploy Optimism-ERC20"
@@ -51,10 +55,6 @@
       "guides/optimism/test-and-deploy-optimism-erc721": {
         "title": "Test and deploy Optimism-ERC721",
         "sidebar_label": "Test and deploy Optimism-ERC721"
-      },
-      "guides/optimism/porting-contract-l1-to-optimism": {
-        "title": "Porting smart contract L1 to Optimism",
-        "sidebar_label": "Porting smart contract L1 to Optimism"
       },
       "guides/public-testnets": {
         "title": "Tokamak Public Testnet Information",
