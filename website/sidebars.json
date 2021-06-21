@@ -26,7 +26,6 @@
         "type": "subcategory",
         "label": "TON Staking",
         "ids": [
-          "guides/ton-staking/how-to-set-operator",
           "guides/ton-staking/how-to-set-candidate",
           "guides/ton-staking/private-testnet-staking",
           "guides/ton-staking/rinkeby-testnet-staking",
