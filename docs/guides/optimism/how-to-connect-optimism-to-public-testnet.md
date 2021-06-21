@@ -128,8 +128,8 @@ After all the `.env` files have been modified, the contract required to run Opti
 docker run --name deploy_contract --env-file .env ethereumoptimism/deployer:0.3.4
 ```
 
-실행 후 링키비(Rinkeby) 테스트넷에 모든 스마트 컨트렉트를 배포하고 종료된다.
-종료후에는 `addresses.json`과 `state-dump.latest.json` 파일을 가져온다.
+After execution, all smart contracts are deployed on the Linkeby testnet and terminated.
+After completion, import `addresses.json` and `state-dump.latest.json` files.
 
 ```bash
 mkdir -p data/contract_dumps
