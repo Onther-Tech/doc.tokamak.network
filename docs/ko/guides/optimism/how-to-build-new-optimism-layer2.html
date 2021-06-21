@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>새로운 옵티미즘 레이어2 구축 · Tokamak Network Documents</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="이 문서는 L2 솔루션의 옵티미스틱 롤업인 옵티미즘을 링키비(Rinkeby) 테스트넷에 배포하는 과정을 담고 있다."/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="새로운 옵티미즘 레이어2 구축 · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="이 문서는 L2 솔루션의 옵티미스틱 롤업인 옵티미즘을 링키비(Rinkeby) 테스트넷에 배포하는 과정을 담고 있다."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive siteNavItemActive"><a href="/docs/ko/guides/optimism/how-to-build-new-optimism-layer2" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/guides/optimism/how-to-build-new-optimism-layer2">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>토카막 옵티미즘</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">General<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">기초</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/tokamak-network">토카막 네트워크</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Optimistic Rollup<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">토카막 옵티미즘</h4><ul><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ko/guides/optimism/how-to-build-new-optimism-layer2">새로운 옵티미즘 레이어2 구축</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/optimism/test-and-deploy-optimism-erc20">옵티미즘-ERC20 배포 &amp; 테스트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/optimism/test-and-deploy-optimism-erc721">옵티미즘-ERC721 배포 &amp; 테스트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/optimism/porting-contract-l1-to-optimism">옵티미즘으로 컨트랙트 포팅</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">DAO &amp; Staking<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">TON 스테이킹</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/guides/ton-staking/how-to-set-candidate">캔디데이트 세팅하기</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/ton-staking/private-testnet-staking">프라이빗 테스트넷에 스테이킹하기</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/ton-staking/rinkeby-testnet-staking">링키비 테스트넷에 스테이킹하기</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/ton-staking/how-to-commit">커밋 방법</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Token Economics<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">토큰경제</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/child-chain">자식체인과 스테이킹</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/token-supply">토큰 공급과 분배</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/powerton">파워톤</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/tx-fee">트랜잭션 수수료 정책</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/challenge">챌린지</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/glossary">파라미터 정리</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Another Layer2<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Plasma EVM</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/enter-and-exit">상호운용성: 진입 &amp; 퇴장</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/transaction-fee">편의성: 계정, 트랜잭션 수수료, 개발도구</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/layer-2-solutions">비교: 다른 확장성 솔루션</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/design-rationale">디자인 원칙</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/plasma-evm-architecture">Plasma EVM 아키텍처</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/root-chain">루트체인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/child-chain">자식체인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/plasma-evm-smart-contracts">Plasma EVM 스마트 컨트랙트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/examples-and-best-practices">요청 가능한 컨트랙트 예제</a></li></ul></div></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/optimism/how-to-build-new-optimism-layer2.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">새로운 옵티미즘 레이어2 구축</h1></header><article><div><span><p>이 문서는 L2 솔루션의 옵티미스틱 롤업인 옵티미즘을 링키비(Rinkeby) 테스트넷에 배포하는 과정을 담고 있다.</p>
+<h2><a class="anchor" aria-hidden="true" id="준비사항"></a><a href="#준비사항" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>준비사항</h2>
+<h3><a class="anchor" aria-hidden="true" id="링키비-엔드포인트"></a><a href="#링키비-엔드포인트" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>링키비 엔드포인트</h3>
+<p>링키비(Rinkeby) 테스트넷의 노드를 연결하기 위해서 <a href="https://infura.io">infura.io</a>를 이용한다.
+Infura 엔드포인트를 생성하기 위해서는 이 <a href="https://infura.io/docs">문서</a>를 참조한다.</p>
+<p>엔드포인트: <code>https://rinkeby.infura.io/v3/&lt;API KEY&gt;</code></p>
+<h3><a class="anchor" aria-hidden="true" id="링키비-account-privatekey"></a><a href="#링키비-account-privatekey" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>링키비 Account Privatekey</h3>
+<p>옵티미즘을 구동시키기 위해서는 3개의 Account가 필요하다. 잔액이 충분한 Account의 프라이빗키를 준비한다.</p>
+<h3><a class="anchor" aria-hidden="true" id="aws-ec2-인스턴스"></a><a href="#aws-ec2-인스턴스" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>AWS EC2 인스턴스</h3>
+<p>L2 체인을 <code>AWS EC2</code>에 구동시킨다. 본 문서는 <a href="https://aws.amazon.com/ko/about-aws/whats-new/2017/12/introducing-amazon-linux-2/">Amazon Linux 2</a> 운영체제를 사용한다.
+<a href="https://aws.amazon.com/ko/ec2/getting-started/">이 문서</a>를 참조해 AWS EC2 인스턴스를 생성할 수가 있다.</p>
+<h2><a class="anchor" aria-hidden="true" id="설치"></a><a href="#설치" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>설치</h2>
+<h3><a class="anchor" aria-hidden="true" id="aws-ec2에-접속"></a><a href="#aws-ec2에-접속" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>AWS EC2에 접속</h3>
+<p><code>AWS EC2</code>에 접속하여 설치를 시작한다. 자신의 <code>SSH 키</code>와 <code>EC2 주소</code>를 입력한다.
+<code>Amazon Linux 2</code>의 SSH 접속 사용자는 <code>ec2-user</code> 이다.</p>
+<pre><code class="hljs css language-bash">ssh -i &lt;ssh key&gt; ec2-user@ec2-xx-xx-xx-xx.ap-northeast-2.compute.amazonaws.com
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="docker-설치"></a><a href="#docker-설치" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Docker 설치</h3>
+<p>EC2에 <code>docker</code>를 설치하고 <code>ec2-user</code> 계정에 실행권한을 부여한다. 시작시 자동으로 docker 서비스가 실행되도록 한다.</p>
+<pre><code class="hljs css language-bash">sudo amazon-linux-extras install -y docker
+
+sudo service docker start
+
+sudo usermod -a -G docker ec2-user
+
+sudo chkconfig docker on
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="docker-compose-설치"></a><a href="#docker-compose-설치" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Docker Compose 설치</h3>
+<p>docker compose를 다운 받아서 실행할 수 있도록 한다.</p>
+<pre><code class="hljs css language-bash">sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/<span class="hljs-built_in">local</span>/bin/docker-compose
+
+sudo chmod +x /usr/<span class="hljs-built_in">local</span>/bin/docker-compose
+</code></pre>
+<p>설치가 모두 완료되었으면 직접 실행하여 정상적으로 구동되는지 테스트 한다.</p>
+<pre><code class="hljs css language-bash">docker version
+
+docker-compose version
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="optimism-deploy-레파지토리-복제"></a><a href="#optimism-deploy-레파지토리-복제" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>optimism-deploy 레파지토리 복제</h3>
+<p>optimism을 쉽고 빠르게 구동시킬 수 있는 <a href="https://github.com/Onther-Tech/optimism-deploy">optimism-deploy</a> 레파지토리를 복제한다.</p>
+<pre><code class="hljs css language-bash">git <span class="hljs-built_in">clone</span> https://github.com/Onther-Tech/optimism-deploy
+
+<span class="hljs-built_in">cd</span> optimism-deploy
+</code></pre>
+<p>디렉토리의 구조는 다음과 같다.</p>
+<pre>
+.
+├── README.md
+├── data
+├── docker-compose-local.yml
+├── docker-compose.yml
+├── envs
+│   ├── batches.env
+│   ├── dtl.env
+│   └── geth.env
+└── optimism.sh
+</pre>
+<ul>
+<li><code>data</code>: 옵티미즘에 구동되면서 생성되는 데이터가 저장</li>
+<li><code>docker-compose-local.yml</code>: Local L1 Chain에 옵티미즘을 구동</li>
+<li><code>docker-compose.yml</code>: Remote Chain에 옵티미즘을 구동</li>
+<li><code>env</code>: 옵티미즘 패키지들의 환경변수 파일</li>
+<li><code>optimism.sh</code>: 옵티미즘 구동을 쉽게 할 수 있는 쉘스크립트</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="환경변수-파일-생성"></a><a href="#환경변수-파일-생성" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>환경변수 파일 생성</h3>
+<p>옵티미즘 구동에 필요한 환경변수 파일을 작성한다. <code>.env.example</code> 파일을 복사하여 사용한다.</p>
+<pre><code class="hljs css language-bash">cp .env.example .env
+</code></pre>
+<p><code>.env</code>에 앞서 준비했던 내용으로 변경한다. <code>링키비(Rinkeby) 테스트넷 엔드포인트</code> 와 <code>3개 계정의 프라이빗키</code>를 입력한다.</p>
+<p><strong>.env</strong></p>
+<pre><code class="hljs"><span class="hljs-attribute">L1_NODE_WEB3_URL</span>=https://rinkeby.infura.io/v3/&lt;API KEY&gt;
+
+<span class="hljs-built_in">..</span>.
+
+<span class="hljs-attribute">DEPLOYER_PRIVATE_KEY</span>=&lt;private key&gt;
+<span class="hljs-attribute">SEQUENCER_PRIVATE_KEY</span>=&lt;private key&gt;
+<span class="hljs-attribute">RELAYER_PRIVATE_KEY</span>=&lt;private key&gt;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="옵티미즘-스마트-컨트렉트-배포"></a><a href="#옵티미즘-스마트-컨트렉트-배포" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>옵티미즘 스마트 컨트렉트 배포</h3>
+<p><code>.env</code> 파일을 모두 수정했으면 옵티미즘 구동에 필요한 컨트렉트를  배포한다.</p>
+<pre><code class="hljs css language-bash">docker run --name deploy_contract --env-file .env onthertech/optimism.deployer
+</code></pre>
+<p>실행 후 링키비(Rinkeby) 테스트넷에 모든 스마트 컨트렉트를 배포하고 종료된다.
+종료후에는 <code>addresses.json</code>과 <code>state-dump.latest.json</code> 파일을 가져온다.</p>
+<pre><code class="hljs css language-bash">mkdir -p data/contract_dumps
+
+docker cp deploy_contract:/opt/optimism/packages/contracts/dist/dumps/addresses.json data/contract_dumps/
+
+docker cp deploy_contract:/opt/optimism/packages/contracts/dist/dumps/state-dump.latest.json data/contract_dumps/
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="옵티미즘-실행"></a><a href="#옵티미즘-실행" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>옵티미즘 실행</h3>
+<p>스마트 컨트렉트가 모두 배포되고 컨트렉트 주소파일이 생성되면 옵티미즘의 패키지들을 구동시킨다.</p>
+<pre><code class="hljs css language-bash">docker-compose  up -d
+
+docker-compose logs -f
+</code></pre>
+<p>Log를 통해서 정상적으로 동작되는 것을 확인 할 수가 있다.</p>
+<h3><a class="anchor" aria-hidden="true" id="optimismsh-이용"></a><a href="#optimismsh-이용" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>optimism.sh</code> 이용</h3>
+<p><code>optimism.sh</code> 를 사용하면 편리하게 옵티미즘을 구동시킬 수가 있다.
+<code>.env</code> 파일을 생성후에 <code>optimism.sh</code>를 이용한다.</p>
+<p>사용법은 다음과 같다.</p>
+<pre><code class="hljs">$ ./optimism.sh <span class="hljs-keyword">help</span>
+
+Usage:
+  ./optimism.sh [Flags]
+     [Flags]
+        up
+        down
+        logs
+        <span class="hljs-keyword">help</span>
+        --<span class="hljs-keyword">env</span>-<span class="hljs-keyword">file</span> &lt;environment <span class="hljs-keyword">file</span>&gt; (<span class="hljs-keyword">default</span>: .<span class="hljs-keyword">env</span>)
+        --<span class="hljs-keyword">clear</span>, -c: <span class="hljs-keyword">clear</span> data
+        --datadir &lt;data path&gt;
+</code></pre>
+<p><strong>옵티미즘 시작</strong></p>
+<pre><code class="hljs">./optimism.<span class="hljs-keyword">sh</span> <span class="hljs-keyword">up</span>
+</code></pre>
+<p><strong>옵티미즘 종료</strong></p>
+<pre><code class="hljs"><span class="hljs-string">./optimism.sh</span> down
+</code></pre>
+<p><strong>로그확인</strong></p>
+<pre><code class="hljs"><span class="hljs-string">./optimism.sh</span> logs
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/learn/basic/tokamak-network"><span class="arrow-prev">← </span><span>토카막 네트워크</span></a><a class="docs-next button" href="/docs/ko/guides/optimism/test-and-deploy-optimism-erc20"><span>옵티미즘-ERC20 배포 &amp; 테스트</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#준비사항">준비사항</a><ul class="toc-headings"><li><a href="#링키비-엔드포인트">링키비 엔드포인트</a></li><li><a href="#링키비-account-privatekey">링키비 Account Privatekey</a></li><li><a href="#aws-ec2-인스턴스">AWS EC2 인스턴스</a></li></ul></li><li><a href="#설치">설치</a><ul class="toc-headings"><li><a href="#aws-ec2에-접속">AWS EC2에 접속</a></li><li><a href="#docker-설치">Docker 설치</a></li><li><a href="#docker-compose-설치">Docker Compose 설치</a></li><li><a href="#optimism-deploy-레파지토리-복제">optimism-deploy 레파지토리 복제</a></li><li><a href="#환경변수-파일-생성">환경변수 파일 생성</a></li><li><a href="#옵티미즘-스마트-컨트렉트-배포">옵티미즘 스마트 컨트렉트 배포</a></li><li><a href="#옵티미즘-실행">옵티미즘 실행</a></li><li><a href="#optimismsh-이용"><code>optimism.sh</code> 이용</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/getting-started/how-to-open-private-testnet-rootchain">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a></div><div><h5>Family site</h5><a href="https://tokamak.network">Tokamak Network</a><a href="https://staking.tokamak.network">Original Staking</a><a href="https://simple.staking.tokamak.network">Simple Staking</a><a href="https://staking-simulator.tokamak.network">Staking Simulator</a><a href="https://price.tokamak.network">Price Dashboard</a><a href="https://vesting.tokamak.network">Vesting Dashboard</a><a href="https://wton-swapper.tokamak.network">TON-WTON Swapper</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2021 Onther Inc.</section></footer></div></body></html>
