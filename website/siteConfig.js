@@ -15,7 +15,7 @@ const siteConfig = {
       label: 'Docs'
     },
     {
-      doc: 'guides/optimism/how-to-connect-optimism-to-public-testnet',
+      doc: 'guides/optimism/how-to-build-new-optimism-layer2',
       label: 'Getting Started'
     },
     { languages: true },

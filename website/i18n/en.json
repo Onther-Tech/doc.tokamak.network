@@ -40,21 +40,21 @@
         "title": "How to manage STAMINA",
         "sidebar_label": "How to manage STAMINA"
       },
-      "guides/optimism/how-to-connect-optimism-to-public-testnet": {
-        "title": "How to connect Optimistic Rollup to public testnet",
-        "sidebar_label": "Connect Optimistic Rollup"
+      "guides/optimism/how-to-build-new-optimism-layer2": {
+        "title": "Build new Optimism layer2",
+        "sidebar_label": "Build new Optimism layer2"
       },
-      "guides/optimism/how-to-deploy-erc20-to-optimism": {
-        "title": "How to deploy ERC20 to Optimistic Rollup",
-        "sidebar_label": "Deploy ERC20 to Optimistic Rollup"
+      "guides/optimism/test-and-deploy-optimism-erc20": {
+        "title": "Test and deploy Optimism-ERC20",
+        "sidebar_label": "Test and deploy Optimism-ERC20"
       },
-      "guides/optimism/how-to-deploy-erc721-to-optimism": {
-        "title": "How to deploy ERC721 to Optimistic Rollup",
-        "sidebar_label": "Deploy ERC721 to Optimistic Rollup"
+      "guides/optimism/test-and-deploy-optimism-erc721": {
+        "title": "Test and deploy Optimism-ERC721",
+        "sidebar_label": "Test and deploy Optimism-ERC721"
       },
-      "guides/optimism/how-to-deploy-uniswapv2-to-optimism": {
-        "title": "How to deploy Uniswap V2 to Optimistic Rollup",
-        "sidebar_label": "Deploy Uniswap V2 to Optimistic Rollup"
+      "guides/optimism/porting-contract-l1-to-optimism": {
+        "title": "Porting smart contract L1 to Optimism",
+        "sidebar_label": "Porting smart contract L1 to Optimism"
       },
       "guides/public-testnets": {
         "title": "Tokamak Public Testnet Information",

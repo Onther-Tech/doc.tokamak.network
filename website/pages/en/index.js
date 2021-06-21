@@ -106,11 +106,11 @@ class Index extends React.Component {
                   content: `[${basic_content}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/learn/basic/tokamak-network.html)`,
                 },
                 {
-                  title: `[${advanced_title}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/guides/optimism/how-to-connect-optimism-to-public-testnet)`,
+                  title: `[${advanced_title}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/guides/optimism/how-to-build-new-optimism-layer2)`,
                   image: "/img/index_advance.png",
-                  imageLink: `/docs/${language}/guides/optimism/how-to-connect-optimism-to-public-testnet`,
+                  imageLink: `/docs/${language}/guides/optimism/how-to-build-new-optimism-layer2`,
                   // imageAlign	: 'center',
-                  content: `[${advanced_content}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/guides/optimism/how-to-connect-optimism-to-public-testnet)`,
+                  content: `[${advanced_content}](${siteConfig.baseUrl}${siteConfig.docsUrl}/${language}/guides/optimism/how-to-build-new-optimism-layer2)`,
                 },
               ]}
             />

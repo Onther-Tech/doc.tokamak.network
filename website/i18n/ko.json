@@ -5,21 +5,21 @@
     "previous": "Previous",
     "tagline": "plasma evm documents",
     "docs": {
-      "guides/optimism/how-to-connect-optimism-to-public-testnet": {
-        "title": "테스트 넷에 옵티미스틱 올업 연결하기",
-        "sidebar_label": "옵티미스틱 롤업 연결하기"
+      "guides/optimism/how-to-build-new-optimism-layer2": {
+        "title": "새로운 옵티미즘 레이어2 구축",
+        "sidebar_label": "새로운 옵티미즘 레이어2 구축"
       },
-      "guides/optimism/how-to-deploy-erc20-to-optimism": {
-        "title": "옵티미스틱 롤업에 ERC20 배포하가",
-        "sidebar_label": "ERC20 배포"
+      "guides/optimism/test-and-deploy-optimism-erc20": {
+        "title": "옵티미즘 ERC20 배포 & 테스트",
+        "sidebar_label": "옵티미즘-ERC20 배포 & 테스트"
       },
-      "guides/optimism/how-to-deploy-erc721-to-optimism": {
-        "title": "옵티미스틱 롤업에 ERC721 배포하기",
-        "sidebar_label": "ERC721 배포"
+      "guides/optimism/test-and-deploy-optimism-erc721": {
+        "title": "옵티미즘 ERC721 배포 & 테스트",
+        "sidebar_label": "옵티미즘-ERC721 배포 & 테스트"
       },
-      "guides/optimism/how-to-deploy-uniswapv2-to-optimism": {
-        "title": "옵티미스틱 롤업에 기존 컨트랙트 포팅하기",
-        "sidebar_label": "기존 컨트랙트 포팅"
+      "guides/optimism/porting-contract-l1-to-optimism": {
+        "title": "옵티미즘으로 컨트랙트 포팅하기",
+        "sidebar_label": "옵티미즘으로 컨트랙트 포팅"
       },
       "guides/ton-staking/how-to-commit": {
         "title": "스크립트를 이용한 커밋 방법",

@@ -14,10 +14,10 @@
         "type": "subcategory",
         "label": "Tokamak Optimism",
         "ids": [
-          "guides/optimism/how-to-connect-optimism-to-public-testnet",
-          "guides/optimism/how-to-deploy-erc20-to-optimism",
-          "guides/optimism/how-to-deploy-erc721-to-optimism",
-          "guides/optimism/how-to-deploy-uniswapv2-to-optimism"
+          "guides/optimism/how-to-build-new-optimism-layer2",
+          "guides/optimism/test-and-deploy-optimism-erc20",
+          "guides/optimism/test-and-deploy-optimism-erc721",
+          "guides/optimism/porting-contract-l1-to-optimism"
         ]
       }
     ],
