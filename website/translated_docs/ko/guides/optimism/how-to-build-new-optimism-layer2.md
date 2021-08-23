@@ -67,6 +67,14 @@ docker version
 docker-compose version
 ```
 
+### Develop Tools 설치
+
+Amazon Linux2 OS에 Development Tool을 설치한다.
+
+```
+sudo yum groupinstall -y "Development Tools"
+```
+
 ### optimism-deploy 레파지토리 복제
 
 optimism을 쉽고 빠르게 구동시킬 수 있는 [optimism-deploy](https://github.com/Onther-Tech/optimism-deploy) 레파지토리를 복제한다.
@@ -83,19 +91,41 @@ cd optimism-deploy
 .
 ├── README.md
 ├── data
+├── docker-compose-l1chain.yml
 ├── docker-compose-local.yml
+├── docker-compose-metrics.yml
+├── docker-compose-rpc-proxy.yml
 ├── docker-compose.yml
 ├── envs
 │   ├── batches.env
 │   ├── dtl.env
-│   └── geth.env
+│   ├── geth.env
+│   └── metrics.env
+├── garafana-l2geth.json
+├── metrics
+│   ├── grafana
+│   │   └── provisioning
+│   │       ├── dashboards
+│   │       │   └── config.yml
+│   │       └── datasources
+│   │           ├── influxdb.yml
+│   │           └── prometheus.yml
+│   ├── prometheus
+│   │   └── prometheus.yml
+│   └── scripts
+│       └── dashboard-sync.py
 └── optimism.sh
 </pre>
 
 * `data`: 옵티미즘에 구동되면서 생성되는 데이터가 저장
-* `docker-compose-local.yml`: Local L1 Chain에 옵티미즘을 구동
+* `docker-compose-l1chain.yml`: optimism을 구동시키기 위한 l1chain 구동
+* `docker-compose-local.yml`: Local 환경에서 L1 Chain과 옵티미즘을 구동
+*  `docker-compose-metrics.yml`: geth metrics 구동
+*  `docker-compose-rpc-proxy.yml`: RPC Proxy 구동
 * `docker-compose.yml`: Remote Chain에 옵티미즘을 구동
 * `env`: 옵티미즘 패키지들의 환경변수 파일
+* `garafana-l2geth.json`: Garafana Dashboard 설정 파일`
+* `metrics`: metrics를 위한 설정
 * `optimism.sh`: 옵티미즘 구동을 쉽게 할 수 있는 쉘스크립트
 
 ### 환경변수 파일 생성
@@ -168,8 +198,10 @@ Usage:
         logs
         help
         --env-file <environment file> (default: .env)
+        --tag, -t: <TAG> (default: latest)
         --clear, -c: clear data
         --datadir <data path>
+        --metrics, -m: with metrics
 ```
 
 **옵티미즘 시작**
