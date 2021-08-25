@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Optimism Introduction · Tokamak Network Documents</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This document contains informations about Tokamak optimism testnets."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Optimism Introduction · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="This document contains informations about Tokamak optimism testnets."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/en/guides/optimism/how-to-build-new-optimism-layer2" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ko/guides/optimism/optimism-introduction">한국어</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Tokamak Optimism</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">General<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Basic</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/tokamak-network">Tokamak Network</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Optimistic Rollup<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Tokamak Optimism</h4><ul><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/guides/optimism/optimism-introduction">Optimism Introduction</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/optimism-build-environment">Build Optimism Environment</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/how-to-build-new-optimism-layer2">Build new Optimism layer2</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/test-and-deploy-optimism-erc20">Test and deploy Optimism-ERC20</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/test-and-deploy-optimism-erc721">Test and deploy Optimism-ERC721</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/optimism/porting-contract-l1-to-optimism">Porting smart contract L1 to Optimism</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">DAO &amp; Staking<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">TON Staking</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/how-to-set-candidate">How to Set Candidate</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/private-testnet-staking">Private Testnet Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/rinkeby-testnet-staking">Rinkeby Testnet Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/guides/ton-staking/how-to-commit">How to Commit</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Token Economics<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Token Economy</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/child-chain">Child Chain and Staking</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/token-supply">Token Supply and Distribution</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/powerton">PowerTON</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/tx-fee">Transaction Fee</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/challenge">Challenge</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/economics/glossary">Parameters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Another Layer2<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Plasma EVM</h4><ul><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/enter-and-exit">Interoperability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/transaction-fee">Convenience</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/basic/layer-2-solutions">Comparison with Other Solutions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/design-rationale">Design Rationale</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-architecture">Plasma EVM Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/root-chain">RootChain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/child-chain">Child Chain</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/plasma-evm-smart-contracts">Plasma EVM Smart Contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/en/learn/advanced/examples-and-best-practices">Examples and Best Practices</a></li></ul></div></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/optimism/optimism-introduction.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Optimism Introduction</h1></header><article><div><span><p>This document contains informations about Tokamak optimism testnets.</p>
+<h2><a class="anchor" aria-hidden="true" id="tokamak-optimism-gabriel-testnet"></a><a href="#tokamak-optimism-gabriel-testnet" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tokamak Optimism Gabriel Testnet</h2>
+<p>Gabriel testnet is a rollup solution in the same way as <a href="https://github.com/ethereum-optimism/optimism">Optimism</a> of <a href="https://github.com/ethereum-optimism">OptimismPBC</a> team.</p>
+<ul>
+<li>Ethereum Testnet: Rinkeby</li>
+<li>L2 endpoint: <a href="https://testnet1.optimism.tokamak.network">https://testnet1.optimism.tokamak.network</a></li>
+<li>L1 Contracts: <a href="http://testnet1.optimism.tokamak.network:8080/addresses.json">http://testnet1.optimism.tokamak.network:8080/addresses.json</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="tokamak-optimism-natasha-testnet"></a><a href="#tokamak-optimism-natasha-testnet" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tokamak Optimism Natasha Testnet</h2>
+<p>Natasha test is a rollup solution based on <a href="https://github.com/ethereum-optimism/optimism">Optimism</a>, but has changed the Layer2 fee charging method to ERC20 token. Layer2 operator can specify ERC20 token to be used as transaction fee when deploying Layer2. And users pay fee in the specific ERC20 token when sending a transaction in Layer2.</p>
+<ul>
+<li>Ethereum Testnet: Rinkeby</li>
+<li>L2 endpoint:</li>
+<li>L1 Contracts:</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="tokamak-optimism-gateway"></a><a href="#tokamak-optimism-gateway" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tokamak Optimism Gateway</h2>
+<p>A web interface for moving user's assets between L1 and L2. user can deposit/withdraw ETH and ERC20 tokens by connecting with Metamask.</p>
+<ul>
+<li>Gateway: <a href="https://rinkeby.gateway.tokamak.network/">https://rinkeby.gateway.tokamak.network/</a></li>
+</ul>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 8/25/2021 by modagi</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/learn/basic/tokamak-network"><span class="arrow-prev">← </span><span>Tokamak Network</span></a><a class="docs-next button" href="/docs/en/guides/optimism/optimism-build-environment"><span>Build Optimism Environment</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tokamak-optimism-gabriel-testnet">Tokamak Optimism Gabriel Testnet</a></li><li><a href="#tokamak-optimism-natasha-testnet">Tokamak Optimism Natasha Testnet</a></li><li><a href="#tokamak-optimism-gateway">Tokamak Optimism Gateway</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/learn/basic/tokamak-network">Learn</a><a href="/docs/en/guides/optimism/how-to-build-new-optimism-layer2">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a></div><div><h5>Family site</h5><a href="https://tokamak.network">Tokamak Network</a><a href="https://staking.tokamak.network">Original Staking</a><a href="https://simple.staking.tokamak.network">Simple Staking</a><a href="https://staking-simulator.tokamak.network">Staking Simulator</a><a href="https://price.tokamak.network">Price Dashboard</a><a href="https://vesting.tokamak.network">Vesting Dashboard</a><a href="https://wton-swapper.tokamak.network">TON-WTON Swapper</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2021 Onther Inc.</section></footer></div></body></html>

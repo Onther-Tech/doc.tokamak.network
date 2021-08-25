@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>개발 환경 준비 · Tokamak Network Documents</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="해당 문서는 옵티미즘 레이어2를 위한 스마트 컨트랙트 개발 환경을 구성하는 방법을 담고 있다."/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="개발 환경 준비 · Tokamak Network Documents"/><meta property="og:type" content="website"/><meta property="og:url" content="https://onther-tech.github.io/"/><meta property="og:description" content="해당 문서는 옵티미즘 레이어2를 위한 스마트 컨트랙트 개발 환경을 구성하는 방법을 담고 있다."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/tokamak_favicon.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/tokamak_white.png" alt="Tokamak Network Documents"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/learn/basic/tokamak-network" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/ko/guides/optimism/how-to-build-new-optimism-layer2" target="_self">Getting Started</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/guides/optimism/optimism-build-environment">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>토카막 옵티미즘</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">General<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">기초</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/tokamak-network">토카막 네트워크</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Optimistic Rollup<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">토카막 옵티미즘</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/guides/optimism/optimism-introduction">토카막 옵티미즘 테스트넷</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ko/guides/optimism/optimism-build-environment">개발 환경 준비</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/optimism/how-to-build-new-optimism-layer2">새로운 옵티미즘 레이어2 구축</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/optimism/test-and-deploy-optimism-erc20">옵티미즘-ERC20 배포 &amp; 테스트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/optimism/test-and-deploy-optimism-erc721">옵티미즘-ERC721 배포 &amp; 테스트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/optimism/porting-contract-l1-to-optimism">옵티미즘으로 컨트랙트 포팅</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">DAO &amp; Staking<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">TON 스테이킹</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/guides/ton-staking/how-to-set-candidate">캔디데이트 세팅하기</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/ton-staking/private-testnet-staking">프라이빗 테스트넷에 스테이킹하기</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/ton-staking/rinkeby-testnet-staking">링키비 테스트넷에 스테이킹하기</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/guides/ton-staking/how-to-commit">커밋 방법</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Token Economics<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">토큰경제</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/ton">TON</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/child-chain">자식체인과 스테이킹</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/token-supply">토큰 공급과 분배</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/powerton">파워톤</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/tx-fee">트랜잭션 수수료 정책</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/challenge">챌린지</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/economics/glossary">파라미터 정리</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Another Layer2<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Plasma EVM</h4><ul><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/enter-and-exit">상호운용성: 진입 &amp; 퇴장</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/transaction-fee">편의성: 계정, 트랜잭션 수수료, 개발도구</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/basic/layer-2-solutions">비교: 다른 확장성 솔루션</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/design-rationale">디자인 원칙</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/plasma-evm-architecture">Plasma EVM 아키텍처</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/root-chain">루트체인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/child-chain">자식체인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/continuous-rebase">Continuous Rebase</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/plasma-evm-smart-contracts">Plasma EVM 스마트 컨트랙트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/learn/advanced/examples-and-best-practices">요청 가능한 컨트랙트 예제</a></li></ul></div></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/onther-tech/docs.tokamak.network/edit/master/docs/guides/optimism/optimism-build-environment.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">개발 환경 준비</h1></header><article><div><span><p>해당 문서는 옵티미즘 레이어2를 위한 스마트 컨트랙트 개발 환경을 구성하는 방법을 담고 있다.</p>
+<h2><a class="anchor" aria-hidden="true" id="들어가기-전에"></a><a href="#들어가기-전에" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>들어가기 전에</h2>
+<p>옵티미즘 레이어2 솔루션은 EVM과 호환되는 스마트 컨트랙트 실행 환경을 갖추고 있기 때문에, 레이어1의 스마트 컨트랙트 개발 환경과 거의 동일한 환경으로 레이어2 스마트 컨트랙트를 개발하고 배포할 수 있다. 아래에서는 레이어2 스마트 컨트랙트 개발을 위해 필요한 환경 구성 방법을 설명한다.</p>
+<p>옵티미즘 레이어2를 활용하는 아주 간단한 <a href="https://github.com/Onther-Tech/optimism-example">예제</a>를 참고할 수 있다.</p>
+<h2><a class="anchor" aria-hidden="true" id="layer12-environment"></a><a href="#layer12-environment" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Layer1/2 Environment</h2>
+<p>옵티미즘 레이어2를 위한 스마트 컨트랙트 개발을 위해서는 레이어1, 레이어2 뿐만 아니라 각 레이어를 연결시키는 서비스들이 필요하다. 필요한 구성 요소들은 docker를 활용해 사용할 수 있으며, 아래와 같은 명령으로 개발 환경을 빌드하고 실행할 수 있다.</p>
+<pre><code class="hljs css language-bash">git <span class="hljs-built_in">clone</span> https://github.com/Onther-Tech/optimism.git
+<span class="hljs-built_in">cd</span> optimism
+yarn install
+
+<span class="hljs-built_in">cd</span> ops
+<span class="hljs-built_in">export</span> COMPOSE_DOCKER_CLI_BUILD=1 <span class="hljs-comment"># these environment variables significantly speed up build time</span>
+<span class="hljs-built_in">export</span> DOCKER_BUILDKIT=1
+docker-compose build
+
+docker-compose up -d
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="packagejson"></a><a href="#packagejson" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>package.json</h2>
+<p>Solidity 코드를 레이어2용 스마트 컨트랙트로 컴파일하기 위해 optimism의 hardhat plugin을 사용해야 하며, 아래 방법 중 한 가지 방법으로 추가할 수 있다.</p>
+<h3><a class="anchor" aria-hidden="true" id="shell-script"></a><a href="#shell-script" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>shell script</h3>
+<pre><code class="hljs css language-bash">yarn add @eth-optimism/hardhat-ovm
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="add-dependency"></a><a href="#add-dependency" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>add dependency</h3>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">// package.json</span>
+
+...
+<span class="hljs-string">"devDependencies"</span>: {
+  <span class="hljs-string">"@eth-optimism/hardhat-ovm"</span>: <span class="hljs-string">"^0.2.2"</span>,
+  ...
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="hardhatconfigts"></a><a href="#hardhatconfigts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>hardhat.config.ts</h2>
+<p>옵티미즘 레이어2에 대한 정보를 hardhat 설정 파일에 등록하여, 네트워크 옵션에 따라 옵티미즘 레이어2를 위한 스마트 컨트랙트를 빌드할 수 있도록 아래 내용을 추가한다.</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">// hardhat.config.ts</span>
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">'@nomiclabs/hardhat-waffle'</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">'@eth-optimism/hardhat-ovm'</span>
+
+...
+
+module.exports = {
+  <span class="hljs-attr">solidity</span>: <span class="hljs-string">"0.7.6"</span>,
+  <span class="hljs-attr">networks</span>: {
+    <span class="hljs-comment">// Add this network to your config!</span>
+    <span class="hljs-attr">optimism</span>: {
+       <span class="hljs-attr">url</span>: <span class="hljs-string">'http://127.0.0.1:8545'</span>,
+       <span class="hljs-attr">accounts</span>: { <span class="hljs-attr">mnemonic</span>: <span class="hljs-string">'test test test test test test test test test test test junk'</span> },
+       <span class="hljs-attr">gasPrice</span>: <span class="hljs-number">15000000</span>,          
+       <span class="hljs-attr">ovm</span>: <span class="hljs-literal">true</span> <span class="hljs-comment">// This sets the network as using the ovm and ensure contract will be compiled against that.</span>
+    }
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="스마트-컨트랙트-컴파일"></a><a href="#스마트-컨트랙트-컴파일" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>스마트 컨트랙트 컴파일</h2>
+<p>아래와 같이 <code>optimism</code> 네트워크 옵션으로 컴파일 할 경우 옵티미즘 레이어2용 스마트 컨트랙트가 컴파일된다.</p>
+<pre><code class="hljs css language-bash">npx hardhat --network optimism compile
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="스마트-컨트랙트-테스트"></a><a href="#스마트-컨트랙트-테스트" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>스마트 컨트랙트 테스트</h2>
+<p>위와 같이 컴파일한 스마트 컨트랙트를 활용하여 레이어2 환경에서 스마트 컨트랙트를 테스트해볼 수 있다. 단, 테스트를 실행하기 전에 테스트를 위한 레이어1/2 환경이 실행되어 있어야 한다.</p>
+<pre><code class="hljs css language-bash">npx hardhat --network optimism <span class="hljs-built_in">test</span>
+</code></pre>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 8/25/2021 by modagi</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/guides/optimism/optimism-introduction"><span class="arrow-prev">← </span><span>토카막 옵티미즘 테스트넷</span></a><a class="docs-next button" href="/docs/ko/guides/optimism/how-to-build-new-optimism-layer2"><span>새로운 옵티미즘 레이어2 구축</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#들어가기-전에">들어가기 전에</a></li><li><a href="#layer12-environment">Layer1/2 Environment</a></li><li><a href="#packagejson">package.json</a><ul class="toc-headings"><li><a href="#shell-script">shell script</a></li><li><a href="#add-dependency">add dependency</a></li></ul></li><li><a href="#hardhatconfigts">hardhat.config.ts</a></li><li><a href="#스마트-컨트랙트-컴파일">스마트 컨트랙트 컴파일</a></li><li><a href="#스마트-컨트랙트-테스트">스마트 컨트랙트 테스트</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/ko/learn/basic/tokamak-network">Learn</a><a href="/docs/ko/guides/optimism/how-to-build-new-optimism-layer2">Guides</a></div><div><h5>Community</h5><a href="https://discord.gg/8wSpJKz">Discord</a><a href="https://t.me/tokamak_network">Telegram</a><a href="https://twitter.com/ontherinfo">Twitter</a><a href="https://www.facebook.com/OntherInc">Facebook</a></div><div><h5>More</h5><a href="http://blog.onther.io">Onther Blog</a><a href="https://github.com/onther-tech/">Onther GitHub</a></div><div><h5>Family site</h5><a href="https://tokamak.network">Tokamak Network</a><a href="https://staking.tokamak.network">Original Staking</a><a href="https://simple.staking.tokamak.network">Simple Staking</a><a href="https://staking-simulator.tokamak.network">Staking Simulator</a><a href="https://price.tokamak.network">Price Dashboard</a><a href="https://vesting.tokamak.network">Vesting Dashboard</a><a href="https://wton-swapper.tokamak.network">TON-WTON Swapper</a></div></section><a href="https://tokamak.network" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/tokamak_white.png" alt="Tokamak Network" width="200%" height="200%"/></a><section class="copyright">Copyright © 2021 Onther Inc.</section></footer></div></body></html>
