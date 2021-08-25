@@ -3,7 +3,7 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "Plasma evm documents",
+    "tagline": "Tokamak network documents",
     "docs": {
       "guides/getting-started/how-to-bridging-erc20-between-l1-l2": {
         "title": "guides/getting-started/how-to-bridging-erc20-between-l1-l2"
@@ -43,6 +43,14 @@
       "guides/optimism/how-to-build-new-optimism-layer2": {
         "title": "Build new Optimism layer2",
         "sidebar_label": "Build new Optimism layer2"
+      },
+      "guides/optimism/optimism-build-environment": {
+        "title": "Build Optimism Environment",
+        "sidebar_label": "Build Optimism Environment"
+      },
+      "guides/optimism/optimism-introduction": {
+        "title": "Optimism Introduction",
+        "sidebar_label": "Optimism Introduction"
       },
       "guides/optimism/porting-contract-l1-to-optimism": {
         "title": "Porting smart contract L1 to Optimism",
@@ -171,7 +179,7 @@
   },
   "pages-strings": {
     "Tokamak Network Documents|no description given": "Tokamak Network Documents",
-    "Plasma EVM Doc|no description given": "On-Demand Layer2 Platform",
+    "Plasma EVM Doc|no description given": "Plasma EVM Doc",
     "Getting Started|no description given": "Getting Started",
     "General|no description given": "General",
     "Learn basics of Tokamak Network|no description given": "Learn basics of Tokamak Network",

@@ -1,7 +1,7 @@
 const siteConfig = {
   title: 'Tokamak Network Documents',
   disableHeaderTitle: true,
-  tagline: 'Plasma evm documents',
+  tagline: 'Tokamak network documents',
   url: 'https://onther-tech.github.io',
   baseUrl: '/',
   projectName: 'docs.tokamak.network',

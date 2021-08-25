@@ -3,8 +3,16 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "plasma evm documents",
+    "tagline": "Tokamak network documents",
     "docs": {
+      "guides/optimism/optimism-introduction": {
+        "title": "토카막 옵티미즘 테스트넷",
+        "sidebar_label": "토카막 옵티미즘 테스트넷"
+      },
+      "guides/optimism/optimism-build-environment": {
+        "title": "개발 환경 준비",
+        "sidebar_label": "개발 환경 준비"
+      },
       "guides/optimism/how-to-build-new-optimism-layer2": {
         "title": "새로운 옵티미즘 레이어2 구축",
         "sidebar_label": "새로운 옵티미즘 레이어2 구축"
