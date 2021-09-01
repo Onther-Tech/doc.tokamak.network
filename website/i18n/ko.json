@@ -13,6 +13,10 @@
         "title": "개발 환경 준비",
         "sidebar_label": "개발 환경 준비"
       },
+      "guides/optimism/natasha-faucet": {
+        "title": "나타샤 Faucet",
+        "sidebar_label": "나타샤 Faucet"
+      },
       "guides/optimism/how-to-build-new-optimism-layer2": {
         "title": "새로운 옵티미즘 레이어2 구축",
         "sidebar_label": "새로운 옵티미즘 레이어2 구축"

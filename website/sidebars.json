@@ -15,6 +15,7 @@
         "label": "Tokamak Optimism",
         "ids": [
           "guides/optimism/optimism-introduction",
+          "guides/optimism/natasha-faucet",
           "guides/optimism/optimism-build-environment",
           "guides/optimism/how-to-build-new-optimism-layer2",
           "guides/optimism/test-and-deploy-optimism-erc20",

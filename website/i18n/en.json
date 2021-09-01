@@ -44,6 +44,10 @@
         "title": "Build new Optimism layer2",
         "sidebar_label": "Build new Optimism layer2"
       },
+      "guides/optimism/natasha-faucet": {
+        "title": "Natasha faucet",
+        "sidebar_label": "Natasha faucet"
+      },
       "guides/optimism/optimism-build-environment": {
         "title": "Build Optimism Environment",
         "sidebar_label": "Build Optimism Environment"
