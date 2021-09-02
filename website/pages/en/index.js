@@ -36,7 +36,7 @@ class HomeSplash extends React.Component {
     const ProjectTitle = () => (
       <h2 className="projectTitle">
         <translate>Tokamak Network Documents</translate>
-        <small><translate>Plasma EVM Doc</translate></small>
+        <small><translate>On-Demand Layer2 Platform</translate></small>
       </h2>
     );
 
