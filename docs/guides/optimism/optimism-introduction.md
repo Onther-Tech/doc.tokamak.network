@@ -19,8 +19,8 @@ Gabriel testnet is a rollup solution in the same way as [Optimism](https://githu
 Natasha test is a rollup solution based on [Optimism](https://github.com/ethereum-optimism/optimism), but has changed the Layer2 fee charging method to ERC20 token. Layer2 operator can specify ERC20 token to be used as transaction fee when deploying Layer2. And users pay fee in the specific ERC20 token when sending a transaction in Layer2.
 
 * Ethereum Testnet: Rinkeby
-* L2 endpoint: 
-* L1 Contracts: 
+* L2 endpoint: https://testnet2.optimism.tokamak.network
+* L1 Contracts: http://testnet2.optimism.tokamak.network:8080/addresses.json
 
 ## Tokamak Optimism Gateway
 
