@@ -14,7 +14,7 @@ All policies related to the supply of TON are based on the following principles:
 
 1. A fixed amount is issued every year.
 2. The amount of new TONs issued is proportional to the amount of staked TON and its period. If the staked TON is less than the total amount of TON in the chain, or the staking period is shorter than the maximum value, there will be less TONs issued than the amount in #1.
-3. The unissued amount in #2 will be used as prize money for the PowerTON game (check details in [PowerTON])
+3. The unissued amount in #2 will be used as prize money for the PowerTON game (check details in [PowerTON](./powerton))
 
 ### Supply
 Initial issued amount is $IS$ and maximum commit reward every year is denoted to $S_{y} = IS*IR_{y}$. However, depending on the amount and duration of the staked TONs, as specified in principle 2, the actual amount issued annually, $s_{y}$, may vary. $s_{y}$ is calculated as follows:
@@ -41,7 +41,7 @@ Note that the criterion for calculating duration is not the actual time but the 
 $s_{y}$ is distributed according to the following principles:
 
 1. Commit reward will be given to participants who contributed to the Tokamak Network.
-2. A typical way to contribute to Tokamak Network is commiting blocks by becoming operator through stkaing.
+2. A typical way to contribute to Tokamak Network is commiting blocks by becoming operator through staking.
 
 
 ### Distribution of Commit Reward
