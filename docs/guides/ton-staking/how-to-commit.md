@@ -1,6 +1,6 @@
 ---
 id: how-to-commit
-title: Commit to Roochain
+title: Commit to Rootchain
 sidebar_label: How to Commit
 ---
 
@@ -8,7 +8,7 @@ This document contains the process of operating an operator by using `Staking-sc
 
 This script provide `commit`, `stake`, `unstake`, `restake`, `withdrawal` function.
 
-> In order to carry out this process, you must own an operator in the process of steaking.
+> In order to carry out this process, you must own an operator in the process of staking.
 
 ## Prepare Script
 
