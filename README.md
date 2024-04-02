@@ -1,3 +1,6 @@
+# Warning! 
+This repository is not maintained anymore. Please checkout https://docs.tokamak.network/ for updated contents.
+
 # Tokamak Documentation
 [![Discord](https://img.shields.io/badge/discord-join%20chat-blue.svg)](https://discord.gg/8wSpJKz)
 
